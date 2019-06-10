@@ -1,31 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="resources/css/index.css">
+<script type="text/javascript" src="resources/js/jQuery.js"></script>
 <title>테스트 페이지</title>
 </head>
 <body>
 	<div class="wrap">
-		<div class="header">
-			제목 라인
+
+		<div class="sidenav">
+			<button class="dropdown-btn">
+				Dropdown <i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container">
+				<a href="#">Link 1</a> <a href="#">Link 2</a> <a href="#">Link 3</a>
+			</div>
+			<a href="#contact">Search</a>
 		</div>
-		<div class="nav">
-			네이버게이션
+
+		<div class="main">
+			<div class="header">헤더라인</div>
+			<div class="content">
+				<form action="">
+					<label>ID</label><input> <label>Password</label><input>
+					<button>등록</button>
+				</form>
+			</div>
+			<div class="footer">푸터라인</div>
 		</div>
-		<div class="content">
-			<form action="">
-				<label>ID</label><input>
-				<label>Password</label><input>
-				<button>등록</button>
-			</form>	
-		</div>
-		<div class="footer">
-			푸터라인
-		</div>
+
 	</div>
-	
+
 </body>
 </html>
