@@ -14,8 +14,6 @@ public class EmpServiceImpl implements EmpService{
 	
 	@Override
 	public Emp getEmpById(String empId) {
-		Emp test1 = empDao.getEmpById(empId);
-		System.out.println(test1.getId());
 		return empDao.getEmpById(empId);
 	}
 }
