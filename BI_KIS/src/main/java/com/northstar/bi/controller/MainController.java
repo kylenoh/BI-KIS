@@ -24,15 +24,15 @@ public class MainController {
 		return "main";
 	}
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(String empId, String pwd, HttpSession session, Model model) {
+	public String login(String id, String password, HttpSession session, Model model) {
 		Emp emp = new Emp();
-		emp.setId(empId);
+		emp.setId(id);
 		emp = empService.getEmpById(emp);
 		
 		if (emp == null ) {
 			return "fail";
 		}
-		if (!emp.getPassword().equals(pwd)) {
+		if (!emp.getPassword().equals(password)) {
 			return "fail";
 		}
 		session.setAttribute("LOGIN_EMP", emp);

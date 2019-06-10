@@ -4,96 +4,72 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 *{
-	font-family: 'Nanum Gothic';
+   font-family: 'Nanum Gothic';
 }
 h5{
-	font-family: 'Noto Sans KR';
-	font-size:15px;
+   font-family: 'Noto Sans KR';
+   font-size:15px;
 }
 h4{
-	font-family: 'Noto Sans KR';
+   font-family: 'Noto Sans KR';
 }
 h3,h2,h1{
-	font-family: 'Hanna';
+   font-family: 'Hanna';
 }
 
-
-body {
-	margin: 0;
-}
-/*랩퍼 영역*/
-.wrap {
-	min-width: 800px;
-}
-
-/*네비게이션 영역*/
 .sidenav {
-	height: 100%;
-	width: 200px;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	background-color: #111;
-	overflow-x: hidden;
-	padding-top: 20px;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
 .sidenav a, .dropdown-btn {
-	padding: 6px 8px 6px 16px;
-	text-decoration: none;
-	font-size: 20px;
-	color: #818181;
-	display: block;
-	border: none;
-	background: none;
-	width: 100%;
-	text-align: left;
-	cursor: pointer;
-	outline: none;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
 }
 
 .sidenav a:hover, .dropdown-btn:hover {
-	color: #f1f1f1;
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 200px;
+  font-size: 20px; 
+  padding: 0px 10px;
 }
 
 .active {
-	background-color: green;
-	color: white;
+  background-color: green;
+  color: white;
 }
 
 .dropdown-container {
-	display: none;
-	background-color: #262626;
-	padding-left: 8px;
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
 }
 
 .fa-caret-down {
-	float: right;
-	padding-right: 8px;
+  float: right;
+  padding-right: 8px;
 }
 
 @media screen and (max-height: 450px) {
-	.sidenav {
-		padding-top: 15px;
-	}
-	.sidenav a {
-		font-size: 18px;
-	}
-}
-/*메인 영역*/
-.main {
-	margin-left: 200px;
-	font-size: 20px;
-	padding: 0px 10px;
-}
-/*헤더 영역*/
-
-/*컨텐츠 영역*/
-.content {
-	
-}
-/*푸터 영역*/
-.footer {
-	
-}
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}}
