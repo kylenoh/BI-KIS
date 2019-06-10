@@ -32,7 +32,18 @@
 			</div>
 			<div class="footer">푸터라인</div>
 		</div>
-
+		<div class="content">
+			<form action="login" method="post">
+					<label>ID</label>
+					<input type="text" name="empId">
+					<label>Password</label>
+					<input type="password" name="pwd">
+				<button type="submit" >등록</button>
+			</form>
+		</div>
+		<div class="footer">
+			푸터라인
+		</div>
 	</div>
 
 </body>

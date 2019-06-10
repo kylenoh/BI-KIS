@@ -11,9 +11,11 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias alias="Emp" type="com.northstar.bi.dto.Emp"/>
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="META-INF/mybatis/mappers/emp.xml"/>
 	</mappers>
 	
 </configuration>
