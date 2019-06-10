@@ -22,7 +22,7 @@
 					<label>Password</label>
 					<input type="password" name="pwd">
 				<button type="submit" >등록</button>
-			</form>	
+			</form>
 		</div>
 		<div class="footer">
 			푸터라인
