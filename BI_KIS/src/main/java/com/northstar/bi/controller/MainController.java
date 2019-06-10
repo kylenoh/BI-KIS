@@ -25,7 +25,9 @@ public class MainController {
 	}
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String empId, String pwd, HttpSession session, Model model) {
-		Emp emp = empService.getEmpById(empId);
+		Emp emp = new Emp();
+		emp.setId(empId);
+		emp = empService.getEmpById(emp);
 		
 		if (emp == null ) {
 			return "fail";
