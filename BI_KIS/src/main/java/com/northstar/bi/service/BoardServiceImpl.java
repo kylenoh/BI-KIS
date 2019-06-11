@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -15,8 +14,8 @@ import com.northstar.bi.dao.BoardDao;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-	@Resource(name = "fileUtils")
-	private FileUtils fileUtils;
+//	@Resource(name = "fileUtils")
+//	private FileUtils fileUtils;
 
 	@Resource(name = "boardDao")
 	private BoardDao boardDao;
