@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="resources/css/index.css">
+<link rel="stylesheet" href="resources/css/ym.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Insert title here</title>
@@ -18,10 +19,22 @@ function myPage(){
 		$('.dropdown-content').css("display","none");
 	}
 }
+$(document).ready(function(){
+    $(".sidenav").on('click','[class^=dropdown-div]',function(){
+        $(this).find("span").toggleClass("active");
+        if($(this).find("span").hasClass("active")){
+            $(".dropdown-div > div").css("display","none");
+            $(this).children().css("display","block");
+            $(this).siblings().find("span").removeClass("active");    
+        }else{    
+            $(".dropdown-div > div").css("display","none");
+        }
+   });
+});
 </script>
 </head>
 <body>
-
+<%@ include file="sidenav.jsp" %>
 <div class="wrap">
 	<div class="header">
 		<div class="header-left">
@@ -43,10 +56,6 @@ function myPage(){
                 <a href="#contact">Contact</a>
             </div>
 		</div>
-	</div>
-	
-	<div class="sidenav">
-	
 	</div>
 	
 	<div class="main">
