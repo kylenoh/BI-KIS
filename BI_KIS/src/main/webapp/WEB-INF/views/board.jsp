@@ -14,12 +14,26 @@
 
 <div class="wrap">
 	<div class="header">
-		<ul class="breadcrumb">
-		  <li><a href="#">Home</a></li>
-		  <li><a href="#">Pictures</a></li>
-		  <li><a href="#">Summer 15</a></li>
-		  <li>Italy</li>
-		</ul>
+		<div class="header-left">
+			<ul class="breadcrumb">
+			  <li><a href="#">BI 기술 정보</a></li>
+			  <li><a href="#">문서</a></li>
+			</ul>
+		</div>
+		<div class="header-right">
+			<ul class="userInterface">
+				<li>
+					<span id="myPage" onclick="myPage();" class="dropbtn"><i class="fas fa-cog">마이페이지</i></span>
+                     <div id="myDropdown" class="dropdown-content">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                      </div>
+				</li>
+				<li><span><i class="fas fa-sign-in-alt">로그아웃</i></span></li>
+			</ul>
+             
+		</div>
 	</div>
 	
 	<div class="sidenav">
@@ -34,7 +48,7 @@
 			<button>Search</button>
 		</fieldset>
 		
-		<button>글쓰기</button>
+		<button class="write">글쓰기</button>
 		
 		<table border="1">
 			<thead>
@@ -49,6 +63,34 @@
 			<tbody>
 				<tr>
 					<td>3</td>
+					<td>문서게시글<span><i class="fas fa-file-alt"></i></span></td>
+					<td>노수혁</td>
+					<td>2019-06-11</td>
+					<td>3</td>
+				</tr>
+                <tr>
+					<td>3</td>
+					<td>문서게시글</td>
+					<td>노수혁</td>
+					<td>2019-06-11</td>
+					<td>3</td>
+				</tr>
+                <tr>
+					<td>3</td>
+					<td>문서게시글</td>
+					<td>노수혁</td>
+					<td>2019-06-11</td>
+					<td>3</td>
+				</tr>
+                <tr>
+					<td>3</td>
+					<td>문서게시글</td>
+					<td>노수혁</td>
+					<td>2019-06-11</td>
+					<td>3</td>
+				</tr>
+                <tr>
+					<td>3</td>
 					<td>문서게시글</td>
 					<td>노수혁</td>
 					<td>2019-06-11</td>
@@ -56,7 +98,16 @@
 				</tr>
 			</tbody>
 			<tfoot>
-			
+               <div class="pagination">
+                  <a href="#">&laquo;</a>
+                  <a href="#">1</a>
+                  <a href="#" class="active">2</a>
+                  <a href="#">3</a>
+                  <a href="#">4</a>
+                  <a href="#">5</a>
+                  <a href="#">6</a>
+                  <a href="#">&raquo;</a>
+                </div>
 			</tfoot>
 		</table>
 	</div>
