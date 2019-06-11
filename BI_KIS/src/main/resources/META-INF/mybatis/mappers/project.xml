@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.northstar.bi.dao.ProjectDao">
+
+	<select id="getProjectList" resultType="Project">
+		select
+			P.pjt_no				as no,
+			C.com_no				as "company.no",
+			C.com_name				as "company.name",
+			P.pjt_title				as title,
+			P.pjt_start_date		as startDate,
+			P.pjt_end_date			as endDate,
+			P.pjt_content			as content,
+			P.pjt_remark			as remark,
+			P.pjt_flag				as flag,
+			P.pjt_msg				as msg
+		from
+			bi_project P, bi_company C	
+	</select>
+</mapper>

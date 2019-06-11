@@ -5,7 +5,7 @@
 
 .sidenav {
   height: 100%;
-  width: 200px;
+  width: 20%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -59,8 +59,27 @@
   float: right;
   padding-right: 40px;
 }
-
+#pjtForm div{
+    display: inline-block;
+    width:49%;
+}
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
-}}
+}
+#addPjtForm, #addPjtForm div {
+	display: block;
+	width:100% !important;
+}
+#addPjtForm button{
+	float: right;
+}
+textarea {
+	width: 100%;
+    resize: none;
+    overflow-y: hidden;
+    padding: 1.1em; 
+    padding-bottom: 0.2em;
+    line-height: 1.6;
+}
+}
