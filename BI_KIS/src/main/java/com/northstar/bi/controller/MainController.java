@@ -38,10 +38,6 @@ public class MainController {
 		session.setAttribute("LOGIN_EMP", emp);
 		return "redirect:/";
 	}
-	
-	@RequestMapping(value="/board", method=RequestMethod.GET)
-	public String Board(Model model) {
-		return "board";
-	}
+
 	
 }

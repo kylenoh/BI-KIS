@@ -16,9 +16,9 @@
         BI 기술정보 <i class="fa fa-caret-down"></i>
         </span>
         <div class="dropdown-container">
-            <a href="document">문서</a>
-            <a href="#">교육</a>
-            <a href="#">영어</a>
+            <a href="board">문서</a>
+            <a href="board">교육</a>
+            <a href="board">영어</a>
         </div>
     </div>
     <div class="dropdown-div">

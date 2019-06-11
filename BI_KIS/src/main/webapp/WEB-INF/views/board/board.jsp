@@ -19,6 +19,10 @@ function myPage(){
 		$('.dropdown-content').css("display","none");
 	}
 }
+function moveWrite(){
+	location.href = "boardWrite";
+}
+
 $(document).ready(function(){
     $(".sidenav").on('click','[class^=dropdown-div]',function(){
         $(this).find("span").toggleClass("active");
@@ -34,7 +38,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<%@ include file="sidenav.jsp" %>
+<%@ include file="../sidenav.jsp" %>
 <div class="wrap">
 	<div class="header">
 		<div class="header-left">
@@ -66,7 +70,7 @@ $(document).ready(function(){
 			<button>Search</button>
 		</fieldset>
 		
-		<button class="write">글쓰기</button>
+		<button class="write" onclick="moveWrite()">글쓰기</button>
 		
 		<table border="1">
 			<thead>

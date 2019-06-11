@@ -1,1 +1,69 @@
 @charset "UTF-8";
+
+.container {
+	padding: 16px;
+	display: block;
+}
+.boardTitle {
+	width: 100%;
+	padding: 12px 20px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	margin: 5px 0 22px 0;
+	display:block;
+	border: none;
+}
+
+.boardContent {
+	width: 100%;
+	height: 400px;
+	padding: 12px 20px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	font-size: 16px;
+	resize: none;
+	margin: 5px 0 22px 0;
+	display: block;
+}
+.boardFile {
+    overflow: hidden;
+    position: relative;
+    
+}
+
+.boardFile [type=file] {
+    cursor: inherit;
+    display: block;
+    font-size: 999px;
+    filter: alpha(opacity=0);
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+}
+
+.writebtn {
+	width: 20%;
+	float:right;
+	background-color: DodgerBlue;
+	border: none;
+	color: white;
+	padding: 12px 30px;
+	cursor: pointer;
+	font-size: 20px;
+	background-color: DodgerBlue;
+}
+.writebtn::after {
+	dispaly: block;
+	content: '';
+	clear: both;
+}
+
+.writebtn:hover {
+	background-color: RoyalBlue;
+}
