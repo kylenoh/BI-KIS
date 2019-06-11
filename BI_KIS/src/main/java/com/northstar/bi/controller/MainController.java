@@ -19,8 +19,6 @@ public class MainController {
 	
 	@RequestMapping(value="/")
 	public String main(HttpSession session, Model model) {
-		String test = "테스트";
-		model.addAttribute("test",test);
 		return "main";
 	}
 	@RequestMapping(value="/login", method=RequestMethod.POST)

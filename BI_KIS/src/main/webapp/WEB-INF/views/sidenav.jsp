@@ -6,7 +6,7 @@
 		BI 기술 지원 <i class="fa fa-caret-down"></i>
         </span>    
         <div class="dropdown-container">
-        	<a href="#">프로젝트 관리</a>
+        	<a href="project">프로젝트 관리</a>
             <a href="#">고객사 관리</a>
             <a href="#">기술지원이력</a>
         </div>

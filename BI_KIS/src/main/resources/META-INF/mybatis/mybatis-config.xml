@@ -11,11 +11,13 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias alias="Emp" type="com.northstar.bi.dto.Emp"/>
+		<typeAlias type="com.northstar.bi.dto.Emp" alias="Emp" />
+		<typeAlias type="com.northstar.bi.dto.Project" alias="Project"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="META-INF/mybatis/mappers/emp.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/project.xml"/>
 	</mappers>
 	
 </configuration>
