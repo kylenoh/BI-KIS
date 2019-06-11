@@ -9,6 +9,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Insert title here</title>
+<script type="text/javascript">
+function myPage(){
+	var condition = $('#myPage').toggleClass("show");
+	if (condition.hasClass("show")) {
+		$('.dropdown-content').css("display","block");
+	}else{
+		$('.dropdown-content').css("display","none");
+	}
+}
+</script>
 </head>
 <body>
 
@@ -24,15 +34,14 @@
 			<ul class="userInterface">
 				<li>
 					<span id="myPage" onclick="myPage();" class="dropbtn"><i class="fas fa-cog">마이페이지</i></span>
-                     <div id="myDropdown" class="dropdown-content">
-                        <a href="#home">Home</a>
-                        <a href="#about">About</a>
-                        <a href="#contact">Contact</a>
-                      </div>
 				</li>
 				<li><span><i class="fas fa-sign-in-alt">로그아웃</i></span></li>
 			</ul>
-             
+            <div id="myDropdown" class="dropdown-content">
+            	<a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
 		</div>
 	</div>
 	
@@ -97,8 +106,11 @@
 					<td>3</td>
 				</tr>
 			</tbody>
-			<tfoot>
-               <div class="pagination">
+		</table>
+	</div>
+	
+	<div class="footer">
+		<div class="pagination">
                   <a href="#">&laquo;</a>
                   <a href="#">1</a>
                   <a href="#" class="active">2</a>
@@ -108,12 +120,6 @@
                   <a href="#">6</a>
                   <a href="#">&raquo;</a>
                 </div>
-			</tfoot>
-		</table>
-	</div>
-	
-	<div class="footer">
-	
 	</div>
 </div>
 	
