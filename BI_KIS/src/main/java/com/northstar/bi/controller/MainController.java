@@ -39,4 +39,9 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/board", method=RequestMethod.GET)
+	public String Board(Model model) {
+		return "board";
+	}
+	
 }
