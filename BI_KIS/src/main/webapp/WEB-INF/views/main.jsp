@@ -11,27 +11,7 @@
 <title>테스트 페이지</title>
 </head>
 <body>
-   <div class="sidenav">
-      <button class="dropdown-btn">
-         BI 기술 지원 <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-container">
-         <a href="#">프로젝트 관리</a> <a href="#">고객사 관리</a> <a href="#">기술지원이력</a>
-      </div>
-      <button class="dropdown-btn">
-         BI 기술정보 <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-container">
-         <a href="#">문서</a> <a href="#">교육</a> <a href="#">영어</a>
-      </div>
-      <button class="dropdown-btn">
-         환경설정 <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-container">
-         <a href="#">사용자 관리</a> <a href="#">자산관리</a>
-      </div>
-   </div>
-
+   <%@ include file="sidenav.jsp" %>
    <div class="main">
       <h2>North Star</h2>
       <form method="post" action="login">
@@ -44,10 +24,15 @@
    </div>
 <script>
 $(document).ready(function(){
-   $(".dropdown-btn").click(function(){
-      $(this).toggleClass("active");
-         $(".dropdown-container").css("display","none");
-         $(".dropdown-container").css("display","block");   
+    $(".sidenav").on('click','[class^=dropdown-div]',function(){
+        $(this).find("span").toggleClass("active");
+        if($(this).find("span").hasClass("active")){
+            $(".dropdown-div > div").css("display","none");
+            $(this).children().css("display","block");
+            $(this).siblings().find("span").removeClass("active");    
+        }else{    
+            $(".dropdown-div > div").css("display","none");
+        }
    });
 });
 
