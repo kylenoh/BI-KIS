@@ -15,8 +15,8 @@ import com.northstar.bi.dao.BoardDao;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-	@Resource(name = "fileUtils")
-	private FileUtils fileUtils;
+//	@Resource(name = "fileUtils")
+//	private FileUtils fileUtils;
 
 	@Resource(name = "boardDao")
 	private BoardDao boardDao;
