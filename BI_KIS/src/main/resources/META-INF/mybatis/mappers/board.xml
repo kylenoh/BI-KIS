@@ -4,10 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.northstar.bi.dao.BoardDao">
-	<insert id="insertBoardList" parameterType="Board">
+	<insert id="insertBoard" parameterType="Board">
 		insert into BI_BOARD
 		(BOARD_NO,CATE_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_COUNT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
 		values
-		(BOARD_SEQ.nextval, '1', 'kyle', #{BOARD_TITLE}, sysdate, #{BOARD_CONTENT},0,'Y',NULL,NULL)
+		(BOARD_SEQ.nextval, #{CATE_NO}, 'kyle', #{BOARD_TITLE}, sysdate, #{BOARD_CONTENT},0,'Y',NULL,NULL)
 	</insert>
 </mapper>

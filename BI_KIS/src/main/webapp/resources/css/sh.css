@@ -12,7 +12,15 @@
 	background-color: #f8f8f8;
 	margin: 5px 0 22px 0;
 	display:block;
-	border: none;
+}
+.boardType {
+	width: 100%;
+	padding: 12px 20px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	margin: 5px 0 22px 0;
+	display:block;
 }
 
 .boardContent {
