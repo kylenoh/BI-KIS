@@ -1,10 +1,10 @@
 package com.northstar.bi.service;
 
-import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
+import com.northstar.bi.dto.Board;
 
 public interface BoardService {
-	void insertBoard(Map<String, Object> map, HttpServletRequest request) throws Exception;
+	void insertBoardList(Board board,MultipartFile uploadfile);
 
 }

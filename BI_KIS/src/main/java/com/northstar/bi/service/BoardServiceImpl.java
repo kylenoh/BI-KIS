@@ -1,41 +1,38 @@
 package com.northstar.bi.service;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.northstar.bi.dao.BoardDao;
+import com.northstar.bi.dto.Board;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-//	@Resource(name = "fileUtils")
-//	private FileUtils fileUtils;
-
-	@Resource(name = "boardDao")
-	private BoardDao boardDao;
-
+	@Autowired BoardDao boardDao;
+	
 	@Override
-	public void insertBoard(Map<String, Object> map, HttpServletRequest request) throws Exception {
-//		sampleDAO.insertBoard(map);
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-		Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-		MultipartFile multipartFile = null;
-		while (iterator.hasNext()) {
-			multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-			if (multipartFile.isEmpty() == false) {
-//				log.debug("------------- file start -------------");
-//				log.debug("name : " + multipartFile.getName());
-//				log.debug("filename : " + multipartFile.getOriginalFilename());
-//				log.debug("size : " + multipartFile.getSize());
-//				log.debug("-------------- file end --------------\n");
+	public void insertBoardList(Board board, MultipartFile uploadfile) {
+		String upload = uploadfile.getOriginalFilename();
+		try {
+			FileOutputStream fos = new FileOutputStream("D:/BIFile/" + upload);	//파일 내용 작성
+			InputStream is = uploadfile.getInputStream();
+			
+			int readCount = 0;
+			byte[]buffer = new byte[1024];
+			while ((readCount = is.read(buffer))!= -1) {
+				fos.write(buffer,0,readCount);
 			}
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			boardDao.insertBoardList(board);
 		}
+		
 	}
 
 }

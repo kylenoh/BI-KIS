@@ -13,11 +13,13 @@
 	<typeAliases>
 		<typeAlias type="com.northstar.bi.dto.Emp" alias="Emp" />
 		<typeAlias type="com.northstar.bi.dto.Project" alias="Project"/>
+		<typeAlias type="com.northstar.bi.dto.Board" alias="Board"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="META-INF/mybatis/mappers/emp.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/project.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/board.xml"/>
 	</mappers>
 	
 </configuration>

@@ -43,13 +43,13 @@
 		  <div class="container">
 		  	<div class="container-header">
 			    <label for="title"><b>제목</b></label>
-			    <input type="text" name="title" class="boardTitle" required>
+			    <input type="text" name="uploadtitle" class="boardTitle" required>
 			</div>
 			<div class="container-content">
 			    <label for="content"><b>내용</b></label>
-			    <textarea rows="" cols="" name="content" class="boardContent"></textarea>
+			    <textarea name="uploadcontent" class="boardContent"></textarea>
 			    <label for="boardFile"><b>첨부파일</b></label>
-			    <input type="file" name="file" multiple>
+			    <input type="file" name="uploadfile" multiple="multiple">
 			</div>
 			<div class="container-footer">
 		    	<button type="submit" class="writebtn">등록</button>
