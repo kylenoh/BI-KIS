@@ -21,4 +21,22 @@
 		where
 			emp_id = #{id}
 	</select>
+	<select id="getEmpByProNo" parameterType="int" resultType="Emp">
+		select
+			 E.emp_id		as id,
+			 E.auth_no		as authNo,
+			 E.emp_pass		as password,
+			 E.emp_name		as name,
+			 E.emp_rank		as rank,
+			 E.emp_tel		as tel,
+			 E.emp_addr		as addr,
+			 E.emp_email	as email,
+			 E.emp_flag		as flag
+		from
+			bi_emp E , bi_con_pro CP
+		where
+			CP.pjt_no = #{value}
+		and	
+			E.emp_id = CP.emp_id
+	</select>
 </mapper>

@@ -5,4 +5,5 @@ import com.northstar.bi.dto.Emp;
 public interface EmpDao {
 
 	Emp getEmpById(Emp empId);
+	Emp getEmpByProNo(int proNo);
 }

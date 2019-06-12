@@ -1,6 +1,7 @@
 package com.northstar.bi.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class Project {
 	
@@ -13,6 +14,7 @@ public class Project {
 	private String remark;
 	private String flag;
 	private String msg;
+	private List<Emp> emps;
 	
 	public Project() {}
 
@@ -87,7 +89,13 @@ public class Project {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	
-	
+
+	public List<Emp> getEmps() {
+		return emps;
+	}
+
+	public void setEmps(List<Emp> emps) {
+		this.emps = emps;
+	}
 	
 }

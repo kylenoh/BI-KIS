@@ -13,8 +13,13 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Autowired
 	ProjectDao projectDao;
+	
 	@Override
 	public List<Project> getProjectList() {
 		return projectDao.getProjectList();
+	}
+	@Override
+	public Project getProjectByNo(int pjtNo) {
+		return projectDao.getProjectByNo(pjtNo);
 	}
 }

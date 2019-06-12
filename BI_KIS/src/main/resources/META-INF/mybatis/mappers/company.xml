@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.northstar.bi.dao.CompanyDao">
+	<select id="getCompanyByComNo" parameterType="int" resultType="Company">
+		select
+			com_no			as no,
+			com_name		as name,
+			com_owner		as owner,
+			com_tel			as tel,
+			com_addr		as addr,
+			com_remark		as remark
+		from
+			bi_company
+		where
+			com_no = #{value}
+	</select>
+</mapper>

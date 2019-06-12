@@ -59,7 +59,7 @@ $(document).ready(function(){
 		</div>
 	</div>
 	<div class="main">
-	    <form method="post" action="pjtSearch" id="pjtForm">
+	    <form method="post" action="pjtadd" id="pjtForm">
             <fieldset>
                 <legend>프로젝트 등록</legend>
                 <div id="addPjtForm">
@@ -75,11 +75,11 @@ $(document).ready(function(){
 	                </div>
 	                <div>
 	                    <label for="content">내용</label>
-	                    <textarea></textarea>
+	                    <textarea id="content"></textarea>
 	                </div>
 	                <div>
 	                	<label for="remark">비고</label>
-	                	<textarea></textarea>
+	                	<textarea id="remark"></textarea>
 	                </div>
 	                <button type="submit">등록</button>
                 </div>

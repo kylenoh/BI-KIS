@@ -19,7 +19,18 @@ function myPage(){
 		$('.dropdown-content').css("display","none");
 	}
 }
-
+$(document).ready(function(){
+    $(".sidenav").on('click','[class^=dropdown-div]',function(){
+        $(this).find("span").toggleClass("active");
+        if($(this).find("span").hasClass("active")){
+            $(".dropdown-div > div").css("display","none");
+            $(this).children().css("display","block");
+            $(this).siblings().find("span").removeClass("active");    
+        }else{    
+            $(".dropdown-div > div").css("display","none");
+        }
+   });
+});
 </script>
 </head>
 <body>
@@ -87,7 +98,7 @@ function myPage(){
 			<tbody>
 				<c:forEach var="project" items="${pjtList }">
 				<tr>
-					<td>${project.title }</td>
+					<td><a href="pjtdetail?pjtNo=${project.no }">${project.title }</a></td>
 					<td>${project.company.name }</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${project.startDate }"/>
 					  ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${project.endDate }"/></td>

@@ -7,4 +7,5 @@ import com.northstar.bi.dto.Project;
 public interface ProjectDao {
 
 	List<Project> getProjectList();
+	Project getProjectByNo(int pjtNo);
 }
