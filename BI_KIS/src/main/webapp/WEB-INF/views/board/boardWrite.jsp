@@ -42,14 +42,20 @@
 		<form method="post" action="upload" enctype="multipart/form-data">
 		  <div class="container">
 		  	<div class="container-header">
-			    <label for="title"><b>제목</b></label>
-			    <input type="text" name="title" class="boardTitle" required>
+			    <label for="uploadtitle"><b>제목</b></label>
+			    <input type="text" name="uploadtitle" class="boardTitle" required>
+			    <label for="uploadtype"><b>분류</b></label>
+			    <select class="boardType" name="uploadtype">
+			    	<option selected value="문서">문서</option>
+			    	<option value="교육">교육</option>
+			    	<option value="영어">영어</option>
+			    </select>
 			</div>
 			<div class="container-content">
 			    <label for="content"><b>내용</b></label>
-			    <textarea rows="" cols="" name="content" class="boardContent"></textarea>
+			    <textarea name="uploadcontent" class="boardContent"></textarea>
 			    <label for="boardFile"><b>첨부파일</b></label>
-			    <input type="file" name="file" multiple>
+			    <input type="file" name="uploadfile" multiple="multiple">
 			</div>
 			<div class="container-footer">
 		    	<button type="submit" class="writebtn">등록</button>

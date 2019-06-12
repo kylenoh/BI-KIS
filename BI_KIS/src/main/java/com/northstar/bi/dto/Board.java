@@ -112,7 +112,6 @@ public class Board {
 	public void setBOARD_UPDATE_DATE(String bOARD_UPDATE_DATE) {
 		BOARD_UPDATE_DATE = bOARD_UPDATE_DATE;
 	}
-	
-	
+
 	
 }
