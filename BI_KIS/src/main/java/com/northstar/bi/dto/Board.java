@@ -30,6 +30,8 @@ public class Board {
 		BOARD_UPDATER = bOARD_UPDATER;
 		BOARD_UPDATE_DATE = bOARD_UPDATE_DATE;
 	}
+	
+	
 
 	public String getBOARD_NO() {
 		return BOARD_NO;
