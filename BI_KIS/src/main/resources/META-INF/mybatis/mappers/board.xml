@@ -8,6 +8,37 @@
 		insert into BI_BOARD
 		(BOARD_NO,CATE_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_COUNT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
 		values
-		(BOARD_SEQ.nextval, #{CATE_NO}, 'kyle', #{BOARD_TITLE}, sysdate, #{BOARD_CONTENT},0,'Y',NULL,NULL)
+		(BOARD_SEQ.nextval, #{CATE_NO}, #{EMP_ID}, #{BOARD_TITLE}, sysdate, #{BOARD_CONTENT},0,'Y',NULL,NULL)
 	</insert>
+	
+	<select id="getTotalRows" resultType="int">
+		select count(*)	from BI_BOARD order by BOARD_NO desc
+	</select>
+	
+	<select id="getBoardList" parameterType="BoardCriteria" resultType="Board">
+		select 
+				BOARD_NO,
+				CATE_NO,
+				EMP_ID,
+				BOARD_TITLE,
+				BOARD_CREATE_DATE,
+				BOARD_CONTENT,
+				BOARD_COUNT,
+				BOARD_FLAG,
+				BOARD_UPDATER,
+				BOARD_UPDATE_DATE
+		from 
+			(
+				select
+					A.*,
+					row_number() over (order by BOARD_NO desc) rn
+				from
+					BI_BOARD A
+				
+			)
+		where
+			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	
+		order by
+			BOARD_NO desc	
+	</select>
 </mapper>

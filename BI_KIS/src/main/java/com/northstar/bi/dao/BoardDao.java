@@ -1,10 +1,16 @@
 package com.northstar.bi.dao;
 
-import com.northstar.bi.dto.BI_File;
+import java.util.List;
+
 import com.northstar.bi.dto.Board;
+import com.northstar.bi.dto.BoardCriteria;
+import com.northstar.bi.dto.BoardFile;
 
 
 public interface BoardDao {
 	void insertBoard(Board board);
-	void insertBoardtoFile(BI_File biFile);
+	void insertBoardtoFile(BoardFile boardFile);
+	
+	int getTotalRows (BoardCriteria criteria);
+	List<Board> getBoardList (BoardCriteria criteria);
 }

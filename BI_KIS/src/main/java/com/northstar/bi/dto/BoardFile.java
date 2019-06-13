@@ -1,6 +1,6 @@
 package com.northstar.bi.dto;
 
-public class BI_File {
+public class BoardFile {
 
 	private int FILE_NO;
 	private int BOARD_NO;
@@ -8,11 +8,11 @@ public class BI_File {
 	private String FILE_DUAL;
 	private String FILE_NAME;
 
-	public BI_File() {
+	public BoardFile() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public BI_File(int fILE_NO, int bOARD_NO, String eMP_ID, String fILE_DUAL, String fILE_NAME) {
+	public BoardFile(int fILE_NO, int bOARD_NO, String eMP_ID, String fILE_DUAL, String fILE_NAME) {
 		super();
 		FILE_NO = fILE_NO;
 		BOARD_NO = bOARD_NO;

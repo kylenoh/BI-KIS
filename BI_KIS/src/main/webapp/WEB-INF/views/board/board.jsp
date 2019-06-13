@@ -90,34 +90,11 @@ $(document).ready(function(){
 					<td>2019-06-11</td>
 					<td>3</td>
 				</tr>
-                <tr>
-					<td>3</td>
-					<td>문서게시글</td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
+                <c:forEach var="boards" items="${boards }">
+				<tr>
+					<td>${boards.boards_no }</td>
 				</tr>
-                <tr>
-					<td>3</td>
-					<td>문서게시글</td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
-				</tr>
-                <tr>
-					<td>3</td>
-					<td>문서게시글</td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
-				</tr>
-                <tr>
-					<td>3</td>
-					<td>문서게시글</td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
-				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
