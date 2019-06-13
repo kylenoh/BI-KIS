@@ -87,4 +87,8 @@ public class BoardServiceImpl implements BoardService {
 		
 		return Boards;
 	}
+	@Override
+	public Board getBoardByNo(int no) {
+		return boardDao.getBoardByNo(no);
+	}
 }

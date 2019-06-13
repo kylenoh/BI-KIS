@@ -41,6 +41,24 @@ public class BoardController {
 	public String BoardWrite(Model model) {
 		return "board/boardWrite";
 	}
+	
+	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
+	public String BoardDetail(@RequestParam("NO") int no,
+							  Model model) {
+		Board board = boardService.getBoardByNo(no);
+		System.out.println(board.getTITLE());
+		model.addAttribute("Board",board);
+		return "board/boardDetail";
+	}
+	
+	@RequestMapping(value = "/boardUpdate", method = RequestMethod.POST)
+	public String BoardUpdate(@RequestParam("NO") int no,
+							  Model model) {
+		Board board = boardService.getBoardByNo(no);
+		System.out.println(board.getTITLE());
+		model.addAttribute("Board",board);
+		return "board/boardModify";
+	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String Upload(@RequestParam("uploadtitle") String title,
@@ -65,12 +83,4 @@ public class BoardController {
 		}
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test( Model model) {
-		return "board/test";
-	}
-	
-
-
-
 }
