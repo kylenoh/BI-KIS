@@ -71,15 +71,15 @@ $(document).ready(function(){
 	                <input type="text" id="company" value="${pjt.company.name }" disabled="disabled">    
 	            </div>
 	            <div id="PjtDate">
-	                <label for="startDate">시작일</label><input type="date" id="startDate" value="${pjt.startDate }">    
-	                <label for="endDate">종료 예정일</label><input type="date" id="endDate" value="${pjt.endDate }">
+	                <label for="startDate">시작일</label><input type="date" id="startDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${pjt.startDate }"/>" disabled="disabled">    
+	                <label for="endDate">종료 예정일</label><input type="date" id="endDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${pjt.endDate }"/>" disabled="disabled">
 	            </div>
 	            <div>
 	            	<label for="flag">진행상태</label>
 	            	<c:if test="${pjt.flag eq 'Y' }">
 	            		<input type="text" id="flag" value="진행예정" disabled="disabled">
 	            	</c:if>
-	            	<c:if test="${pjt.flag eq 'Q' }">
+	            	<c:if test="${pjt.flag eq 'P' }">
 	            		<input type="text" id="flag" value="진행중" disabled="disabled">
 	            	</c:if>
 	            	<c:if test="${pjt.flag eq 'N' }">
@@ -101,14 +101,29 @@ $(document).ready(function(){
 	              	<textarea id="remark" disabled="disabled">${pjt.remark }</textarea>
 	            </div>
 	            <div style="float:right;">
-	            	<button type="button">수정</button>
-	            	<button type="button">삭제</button>
-	            	<button type="button">목록</button>
+	            	<button type="button" class="btn-modify-pjt" value="${pjt.no }">수정</button>
+	            	<button type="button" class="btn-del-pjt" value="${pjt.no }">삭제</button>
+	            	<button type="button" onclick="location.href='project'">목록</button>
 	            </div>
             </div>
         </fieldset>
 	</div>
 </div>
-	
 </body>
+<script type="text/javascript">
+	$(function(){
+		$('.btn-del-pjt').click(function(){
+			var pjtNo = $(this).val();
+			if (confirm("정말 삭제하시겠습니까?")) {
+				location.href="pjtdelete?pjtNo=" + pjtNo;
+			}
+		});
+		$('.btn-modify-pjt').click(function(){
+			var pjtNo = $(this).val();
+			if (confirm("수정 페이지로 이동하시겠습니까?")){
+				location.href="pjtmodify?pjtNo=" + pjtNo;
+			}
+		});
+	});
+</script>	
 </html>

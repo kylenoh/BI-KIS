@@ -84,7 +84,7 @@ $(document).ready(function(){
                 </div>
             </fieldset>
 		</form>
-		<button type="button" onclick="location.href='addproject' " class="write">프로젝트 등록</button>
+		<button type="button" onclick="location.href='addproject'" class="write">프로젝트 등록</button>
 		
 		<table border="1">
 			<thead>

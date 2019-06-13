@@ -22,4 +22,16 @@ public class ProjectServiceImpl implements ProjectService{
 	public Project getProjectByNo(int pjtNo) {
 		return projectDao.getProjectByNo(pjtNo);
 	}
+	@Override
+	public void addProject(Project project) {
+		projectDao.addProject(project);
+	}
+	@Override
+	public void updateProject(Project project) {
+		projectDao.updateProject(project);
+	}
+	@Override
+	public void deleteProject(int pjtNo) {
+		projectDao.deleteProject(pjtNo);
+	}
 }

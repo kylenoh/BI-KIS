@@ -8,4 +8,7 @@ public interface ProjectService {
 
 	List<Project> getProjectList ();
 	Project getProjectByNo(int pjtNo);
+	void addProject(Project project);
+	void updateProject(Project project);
+	void deleteProject(int pjtNo);
 }

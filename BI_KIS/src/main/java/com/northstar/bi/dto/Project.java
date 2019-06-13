@@ -3,12 +3,16 @@ package com.northstar.bi.dto;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Project {
 	
 	private int no;
 	private Company company;
 	private String title;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date startDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 	private String content;
 	private String remark;

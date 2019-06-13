@@ -64,22 +64,28 @@ $(document).ready(function(){
                 <legend>프로젝트 등록</legend>
                 <div id="addPjtForm">
 	                <div>
-	                    <label for="title">프로젝트 명</label><input type="text" id="title">
+	                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
 	                </div>
 	                <div>
-	                    <label for="company">고객사 명</label><input type="text" id="company">    
+	                    <label for="company">고객사 명</label>
+	                    <select id="company" name="companyNo">
+	                        <option value="all"></option>
+	                        <c:forEach var="comList" items="${companyList }">
+	                        	<option value="${comList.no }">${comList.name }</option>
+	                        </c:forEach>
+                    	</select>    
 	                </div>
 	                <div id="PjtDate">
-	                    <label for="startDate">시작일</label><input type="date" id="startDate">    
-	                    <label for="endDate">종료 예정일</label><input type="date" id="endDate">
+	                    <label for="startDate">시작일</label><input type="date" id="startDate" name="startDate">    
+	                    <label for="endDate">종료 예정일</label><input type="date" id="endDate" name="endDate">
 	                </div>
 	                <div>
 	                    <label for="content">내용</label>
-	                    <textarea id="content"></textarea>
+	                    <textarea id="content" name="content"></textarea>
 	                </div>
 	                <div>
 	                	<label for="remark">비고</label>
-	                	<textarea id="remark"></textarea>
+	                	<textarea id="remark" name="remark"></textarea>
 	                </div>
 	                <button type="submit">등록</button>
                 </div>
