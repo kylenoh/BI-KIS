@@ -34,7 +34,7 @@ public class MainController {
 			return "fail";
 		}
 		session.setAttribute("LOGIN_EMP", emp);
-		return "redirect:/";
+		return "redirect:/project";
 	}
 
 	

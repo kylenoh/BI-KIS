@@ -15,7 +15,9 @@
 		<typeAlias type="com.northstar.bi.dto.Project" alias="Project"/>
 		<typeAlias type="com.northstar.bi.dto.Company" alias="Company"/>
 		<typeAlias type="com.northstar.bi.dto.Board" alias="Board"/>
-		<typeAlias type="com.northstar.bi.dto.BI_File" alias="BiFile"/>
+		<typeAlias type="com.northstar.bi.dto.BoardFile" alias="BoardFile"/>
+		<typeAlias type="com.northstar.bi.dto.BoardPagination" alias="BoardPagination"/>
+		<typeAlias type="com.northstar.bi.dto.BoardCriteria" alias="BoardCriteria"/>
 	</typeAliases>
 	
 	<mappers>
@@ -23,7 +25,6 @@
 		<mapper resource="META-INF/mybatis/mappers/project.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/company.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/board.xml"/>
-		<mapper resource="META-INF/mybatis/mappers/file.xml"/>
 	</mappers>
 	
 </configuration>

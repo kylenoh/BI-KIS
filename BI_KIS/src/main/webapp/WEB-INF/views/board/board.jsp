@@ -83,41 +83,15 @@ $(document).ready(function(){
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>3</td>
-					<td>문서게시글<span><i class="fas fa-file-alt"></i></span></td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
-				</tr>
-                <tr>
-					<td>3</td>
-					<td>문서게시글</td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
-				</tr>
-                <tr>
-					<td>3</td>
-					<td>문서게시글</td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
-				</tr>
-                <tr>
-					<td>3</td>
-					<td>문서게시글</td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
-				</tr>
-                <tr>
-					<td>3</td>
-					<td>문서게시글</td>
-					<td>노수혁</td>
-					<td>2019-06-11</td>
-					<td>3</td>
-				</tr>
+                <c:forEach var="boards" items="${boards }">
+					<tr>
+						<td>${boards.NO }</td>
+						<td>${boards.TITLE }</td>
+						<td>${boards.ID }</td>
+						<td>${boards.CREATE_DATE }</td>
+						<td>${boards.COUNT }</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -132,7 +106,24 @@ $(document).ready(function(){
                   <a href="#">5</a>
                   <a href="#">6</a>
                   <a href="#">&raquo;</a>
-                </div>
+        </div>
+        <div>
+        		<ul class="pagination">
+					<li value=${pagination.cp-1 }><a>&laquo;</a></li>
+						<c:forEach var="num" begin="${pagination.beginPageIndex lt 0 ? 1: pagination.beginPageIndex}"
+												end="${pagination.endPageIndex eq 0? 1 : pagination.endPageIndex}">
+							<c:choose>
+								<c:when test="${pagination.cp eq num }">
+									<li value="${num }" class="active"><a>${num }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li value="${num }"><a>${num }</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					<li value=${pagination.cp+1 }><a>&raquo;</a></li>
+				</ul>
+        </div>
 	</div>
 </div>
 	
