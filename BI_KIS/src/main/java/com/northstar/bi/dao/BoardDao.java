@@ -8,9 +8,11 @@ import com.northstar.bi.dto.BoardFile;
 
 
 public interface BoardDao {
+//	Insert
 	void insertBoard(Board board);
 	void insertBoardtoFile(BoardFile boardFile);
-	
+//	Select
 	int getTotalRows (BoardCriteria criteria);
 	List<Board> getBoardList (BoardCriteria criteria);
+	Board getBoardByNo (int no);
 }

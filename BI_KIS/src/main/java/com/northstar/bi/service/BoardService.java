@@ -6,9 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.northstar.bi.dto.BoardFile;
 import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
+import com.northstar.bi.dto.BoardFile;
 
 public interface BoardService {
 //	Insert
@@ -17,4 +17,5 @@ public interface BoardService {
 //	Select
 	int getTotalRows (BoardCriteria criteria);
 	List<Board> getBoardList (BoardCriteria criteria, int cp);
+	Board getBoardByNo (int no);
 }

@@ -48,4 +48,22 @@
 		order by
 			BOARD_NO desc	
 	</select>
+	<select id="getBoardByNo" parameterType="int" resultType="Board">
+		select 
+			BOARD_NO as NO,
+			CATE_NO as CATE,
+			EMP_ID as ID,
+			BOARD_TITLE as TITLE,
+			BOARD_CREATE_DATE as CREATE_DATE,
+			BOARD_CONTENT as CONTENT,
+			BOARD_COUNT as COUNT,
+			BOARD_FLAG as FLAG,
+			BOARD_UPDATER as UPDATER,
+			BOARD_UPDATE_DATE as UPDATE_DATE
+		from
+			BI_BOARD
+				 
+		where
+			BOARD_NO = #{NO}		
+	</select>
 </mapper>

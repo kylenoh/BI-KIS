@@ -22,6 +22,9 @@ function myPage(){
 function moveWrite(){
 	location.href = "boardWrite";
 }
+function getBoardDetail(NO){
+	location.href = "boardDetail?NO="+NO;
+}
 
 $(document).ready(function(){
     $(".sidenav").on('click','[class^=dropdown-div]',function(){
@@ -84,7 +87,7 @@ $(document).ready(function(){
 			</thead>
 			<tbody>
                 <c:forEach var="boards" items="${boards }">
-					<tr>
+					<tr onclick="getBoardDetail(${boards.NO })">
 						<td>${boards.NO }</td>
 						<td>${boards.TITLE }</td>
 						<td>${boards.ID }</td>
