@@ -2,31 +2,31 @@ package com.northstar.bi.dto;
 
 public class BoardFile {
 
-	private int FILE_NO;
+	private int NO;
 	private int BOARD_NO;
-	private String EMP_ID;
-	private String FILE_DUAL;
-	private String FILE_NAME;
+	private String ID;
+	private String DUAL;
+	private String NAME;
 
 	public BoardFile() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public BoardFile(int fILE_NO, int bOARD_NO, String eMP_ID, String fILE_DUAL, String fILE_NAME) {
+
+	public BoardFile(int nO, int bOARD_NO, String iD, String dUAL, String nAME) {
 		super();
-		FILE_NO = fILE_NO;
+		NO = nO;
 		BOARD_NO = bOARD_NO;
-		EMP_ID = eMP_ID;
-		FILE_DUAL = fILE_DUAL;
-		FILE_NAME = fILE_NAME;
+		ID = iD;
+		DUAL = dUAL;
+		NAME = nAME;
 	}
 
-	public int getFILE_NO() {
-		return FILE_NO;
+	public int getNO() {
+		return NO;
 	}
 
-	public void setFILE_NO(int fILE_NO) {
-		FILE_NO = fILE_NO;
+	public void setNO(int nO) {
+		NO = nO;
 	}
 
 	public int getBOARD_NO() {
@@ -37,29 +37,31 @@ public class BoardFile {
 		BOARD_NO = bOARD_NO;
 	}
 
-	public String getEMP_ID() {
-		return EMP_ID;
+	public String getID() {
+		return ID;
 	}
 
-	public void setEMP_ID(String eMP_ID) {
-		EMP_ID = eMP_ID;
+	public void setID(String iD) {
+		ID = iD;
 	}
 
-	public String getFILE_DUAL() {
-		return FILE_DUAL;
+	public String getDUAL() {
+		return DUAL;
 	}
 
-	public void setFILE_DUAL(String fILE_DUAL) {
-		FILE_DUAL = fILE_DUAL;
+	public void setDUAL(String dUAL) {
+		DUAL = dUAL;
 	}
 
-	public String getFILE_NAME() {
-		return FILE_NAME;
+	public String getNAME() {
+		return NAME;
 	}
 
-	public void setFILE_NAME(String fILE_NAME) {
-		FILE_NAME = fILE_NAME;
+	public void setNAME(String nAME) {
+		NAME = nAME;
 	}
+	
+	
 	
 	
 }

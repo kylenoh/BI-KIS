@@ -55,7 +55,7 @@
 			    <label for="content"><b>내용</b></label>
 			    <textarea name="uploadcontent" class="boardContent"></textarea>
 			    <label for="boardFile"><b>첨부파일</b></label>
-			    <input type="file" name="uploadfile" multiple="multiple">
+			    <input type="file" name="file" multiple="multiple">
 			</div>
 			<div class="container-footer">
 		    	<button type="submit" class="writebtn">등록</button>

@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -17,13 +19,15 @@ import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
 import com.northstar.bi.dto.BoardFile;
 import com.northstar.bi.dto.BoardPagination;
+import com.northstar.bi.dto.Emp;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 	@Autowired	BoardDao boardDao;
 
 	@Override
-	public void insertBoardtoFile(Board board,BoardFile boardFile, MultipartFile file) {
+	public void insertBoardtoFile(Board board,BoardFile boardFile, MultipartFile file, HttpSession session) {
+		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
 		boardDao.insertBoard(board);
 		String saveName = file.getOriginalFilename();
 		try {
@@ -37,8 +41,9 @@ public class BoardServiceImpl implements BoardService {
 				fos.write(buffer, 0, readCount);
 			}
 			fos.close();
-			boardFile.setFILE_DUAL(saveName);
-			boardFile.setFILE_NAME(file.getOriginalFilename());
+			boardFile.setID(User.getId());
+			boardFile.setDUAL(saveName);
+			boardFile.setNAME(file.getOriginalFilename());
 			boardDao.insertBoardtoFile(boardFile);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,13 +71,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public List<Board> getBoardList(BoardCriteria criteria, int cp) {
-		if("성별".equals(criteria.getOpt())) {
-			criteria.setOpt(null);
-		}
-		if("정지여부".equals(criteria.getStatus())) {
-			criteria.setStatus(null);
-		}
-		
 		int totalRows = getTotalRows(criteria);
 		
 		BoardPagination pagination = new BoardPagination(totalRows, cp, 20);

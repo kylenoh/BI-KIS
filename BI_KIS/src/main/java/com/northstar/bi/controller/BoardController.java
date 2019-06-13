@@ -16,6 +16,7 @@ import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
 import com.northstar.bi.dto.BoardFile;
 import com.northstar.bi.dto.BoardPagination;
+import com.northstar.bi.dto.Emp;
 import com.northstar.bi.service.BoardService;
 
 
@@ -47,20 +48,19 @@ public class BoardController {
 						 @RequestParam("uploadtype") String type,
 						 Board board, BoardFile boardFile, HttpSession session, MultipartFile file) {
 		
-		String User = (String) session.getAttribute("id");
+		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
 		
-		board.setEMP_ID(User);
-		board.setBOARD_TITLE(title);
-		board.setBOARD_CONTENT(content);
-		board.setCATE_NO(type);
-		
+		board.setID(User.getId());
+		board.setTITLE(title);
+		board.setCONTENT(content);
+		board.setCATE(type);
 		if (file.getOriginalFilename().isEmpty()) {
 			System.out.println("유첨파일이 없다면");
 			boardService.insertBoard(board);
 			return "board/board";
 		}else {
 			System.out.println("유첨파일이 있다면");
-			boardService.insertBoardtoFile(board,boardFile,file);
+			boardService.insertBoardtoFile(board,boardFile,file,session);
 			return "board/board";
 		}
 	}
