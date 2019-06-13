@@ -25,4 +25,13 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/login"/>
+			<beans:bean class="com.northstar.bi.interceptor.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

@@ -31,3 +31,17 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		$(".sidenav").on('click','[class^=dropdown-div]',function(){
+	        $(this).find("span").toggleClass("active");
+	        if($(this).find("span").hasClass("active")){
+	            $(".dropdown-div > div").css("display","none");
+	            $(this).children().css("display","block");
+	            $(this).siblings().find("span").removeClass("active");    
+	        }else{    
+	            $(".dropdown-div > div").css("display","none");
+	        }
+	   });
+	});
+</script>
