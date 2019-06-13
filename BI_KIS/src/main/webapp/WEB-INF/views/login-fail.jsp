@@ -22,15 +22,23 @@
 	})
 </script>
 <body>
-   <div class="main">
-      <h2>North Star</h2>
-      <form method="post" action="login">
-         <label>아이디</label>
-         <input type="text" name="id">
-         <label>비밀번호</label>
-         <input type="password" name="password">
-         <button type="submit">로그인</button>
-      </form>
-   </div>
+	<div class="main">
+    	<h2>North Star</h2>
+    	<form method="post" action="login">
+        <label>아이디</label>
+        <input type="text" name="id" id="id">
+        <label>비밀번호</label>
+        <input type="password" name="password" id="password">
+        <button type="submit" id="login-btn">로그인</button>
+		</form>
+	</div>
+	<div>
+		<c:if test="${param.login eq 'fail' }">
+	   		<p style="color:red; font-size:14px;">사용자 정보가 일치하지 않습니다.</p> 
+		</c:if>
+		<c:if test="${param.login eq 'expire' }">
+	   		<p style="color:red; font-size:14px;">로그인이 필요한 페이지 입니다.</p> 
+		</c:if>
+	</div>
 </body>
 </html>

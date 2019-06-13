@@ -16,7 +16,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		Object obj = session.getAttribute("LOGIN_EMP");
 		
 		if (obj == null) {
-			response.sendRedirect("/bi/login?login=fail");
+			response.sendRedirect("/bi/login?login=expire");
 			return false;
 		}
 		
