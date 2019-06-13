@@ -3,6 +3,41 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+.login {
+   position: absolute;
+   display: table;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%
+}
+.login .login_inner {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle
+}
+.login .login_form {
+   display: inline-block;
+}
+.login_textForm{
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	float:right;
+}
+.login_form input {
+	margin-bottom:10px;
+	height:30px;
+	text-indent: 10px;
+}
+.login_form button {
+	border-radius: 5px;
+	border: 2px solid lightgray;
+	cursor: pointer;
+	padding: 10px 25px 10px 25px;
+	font-weight: bold;
+	transition: 0.3s;
+	width:100%;
+}
 .sidenav {
   height: 100%;
   width: 20%;
