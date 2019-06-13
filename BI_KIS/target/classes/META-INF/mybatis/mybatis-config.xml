@@ -25,6 +25,7 @@
 		<mapper resource="META-INF/mybatis/mappers/project.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/company.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/board.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/file.xml"/>
 	</mappers>
 	
 </configuration>

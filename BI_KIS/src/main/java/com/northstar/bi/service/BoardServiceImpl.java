@@ -25,6 +25,7 @@ import com.northstar.bi.dto.Emp;
 public class BoardServiceImpl implements BoardService {
 	@Autowired	BoardDao boardDao;
 
+//	유첨 파일 추가
 	@Override
 	public void insertBoardtoFile(Board board,BoardFile boardFile, MultipartFile file, HttpSession session) {
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
@@ -50,6 +51,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
+//	무첨 파일 추가
 	@Override
 	public void insertBoard(Board board) {
 		boardDao.insertBoard(board);
@@ -64,16 +66,18 @@ public class BoardServiceImpl implements BoardService {
 		return saveName;
 	}
 	
+//	페이지 전체 카운트
 	@Override
 	public int getTotalRows(BoardCriteria criteria) {
 		return boardDao.getTotalRows(criteria);
 	}
-	
+
+//	페이지 된 게시판 출력
 	@Override
 	public List<Board> getBoardList(BoardCriteria criteria, int cp) {
 		int totalRows = getTotalRows(criteria);
 		
-		BoardPagination pagination = new BoardPagination(totalRows, cp, 20);
+		BoardPagination pagination = new BoardPagination(totalRows, cp, 5);
 		
 		if (pagination.getBeginIndex() <= 0 ) {
 			criteria.setBeginIndex(1);
@@ -87,8 +91,23 @@ public class BoardServiceImpl implements BoardService {
 		
 		return Boards;
 	}
+	
+//	특정 게시판 출력
 	@Override
 	public Board getBoardByNo(int no) {
 		return boardDao.getBoardByNo(no);
+	}
+	
+//	유첨 파일 업데이트
+
+//	무첨 파일 업데이트
+	@Override
+	public void updateBoard(Board board) {
+		boardDao.updateBoard(board);
+	}
+//	게시글 삭제
+	@Override
+	public void deleteBoard(int no) {
+		boardDao.deleteBoard(no);
 	}
 }

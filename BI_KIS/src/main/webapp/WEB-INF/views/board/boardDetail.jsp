@@ -39,12 +39,16 @@
 	
 	<div class="main">
 		<div class="main-inner">
+				
 			<form method="post" action="boardUpdate">
 			  <div class="container">
 			  	<div class="container-header">
 			  		<input type="hidden" name="NO" value="${Board.NO }">
 				    <label for="uploadtitle"><b>제목</b></label>
 				    <input type="text" name="uploadtitle" class="boardTitle" value="${Board.TITLE }" required>
+				    <b>작성자</b><p>${Board.ID }</p>
+				    <b>작성일자</b><p>${Board.CREATE_DATE }</p>
+				    <b>조회수</b><p>${Board.COUNT }</p>
 				    <label for="uploadtype"><b>분류</b></label>
 				    <select class="boardType" name="uploadtype">
 				    	<option selected value="문서">문서</option>
@@ -56,11 +60,13 @@
 				    <label for="content"><b>내용</b></label>
 				    <textarea name="uploadcontent" class="boardContent">${Board.CONTENT }</textarea>
 				    <label for="boardFile"><b>첨부파일</b></label>
-				    <input type="file" name="file" multiple="multiple">
+				    <c:forEach var="file" items="${Board.FILES }">
+						${file.NAME }
+					</c:forEach>
 				</div>
 				<div class="container-footer">
 			    	<button type="submit" class="writebtn">수정</button>
-			    	<button type="button" class="writebtn">삭제</button>
+			    	<button type="button" class="writebtn" onclick="DELETE(${Board.NO })">삭제</button>
 			    	<button type="button" class="writebtn">목록</button>
 			    </div>
 			  </div>
@@ -71,6 +77,12 @@
 	<div class="footer">
 	</div>
 </div>
-	
+<script type="text/javascript">
+function DELETE(no){
+	if (confirm("정말 삭제하시겠습니까?")) {
+		location.href = "delete?no="+no;
+	}
+}
+</script>
 </body>
 </html>

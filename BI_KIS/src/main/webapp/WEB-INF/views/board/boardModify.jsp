@@ -19,7 +19,7 @@
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li><a href="#">BI 기술 정보</a></li>
-			  <li><a href="#">등록</a></li>
+			  <li><a href="#">수정</a></li>
 			</ul>
 		</div>
 		<div class="header-right">
@@ -39,9 +39,10 @@
 	
 	<div class="main">
 		
-		<form method="post" action="upload" enctype="multipart/form-data">
+		<form method="post" action="modify" enctype="multipart/form-data">
 		  <div class="container">
 		  	<div class="container-header">
+		 	 	<input type="hidden" name="NO" value="${Board.NO }">
 			    <label for="uploadtitle"><b>제목</b></label>
 			    <input type="text" name="uploadtitle" class="boardTitle" value="${Board.TITLE }" required>
 			    <label for="uploadtype"><b>분류</b></label>
@@ -53,12 +54,15 @@
 			</div>
 			<div class="container-content">
 			    <label for="content"><b>내용</b></label>
-			    <textarea name="uploadcontent" class="boardContent"></textarea>
+			    <textarea name="uploadcontent" class="boardContent">${Board.CONTENT }</textarea>
 			    <label for="boardFile"><b>첨부파일</b></label>
 			    <input type="file" name="file" multiple="multiple">
+			    <c:forEach var="file" items="${Board.FILES }">
+						${file.NAME }
+				</c:forEach>
 			</div>
 			<div class="container-footer">
-		    	<button type="submit" class="writebtn">등록</button>
+		    	<button type="submit" class="writebtn">수정</button>
 		    </div>
 		  </div>
 		</form>

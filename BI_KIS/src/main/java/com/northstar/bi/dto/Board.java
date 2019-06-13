@@ -1,5 +1,7 @@
 package com.northstar.bi.dto;
 
+import java.util.List;
+
 public class Board {
 	private String NO;
 	private String CATE;
@@ -12,12 +14,16 @@ public class Board {
 	private String UPDATER;
 	private String UPDATE_DATE;
 	
+//	외부 데이터
+	private List<BoardFile>FILES;
+	
+	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Board(String nO, String cATE, String iD, String tITLE, String cREATE_DATE, String cONTENT, int cOUNT,
-			String fLAG, String uPDATER, String uPDATE_DATE) {
+			String fLAG, String uPDATER, String uPDATE_DATE, List<BoardFile> fILES) {
 		super();
 		NO = nO;
 		CATE = cATE;
@@ -29,6 +35,7 @@ public class Board {
 		FLAG = fLAG;
 		UPDATER = uPDATER;
 		UPDATE_DATE = uPDATE_DATE;
+		FILES = fILES;
 	}
 
 	public String getNO() {
@@ -109,6 +116,14 @@ public class Board {
 
 	public void setUPDATE_DATE(String uPDATE_DATE) {
 		UPDATE_DATE = uPDATE_DATE;
+	}
+
+	public List<BoardFile> getFILES() {
+		return FILES;
+	}
+
+	public void setFILES(List<BoardFile> fILES) {
+		FILES = fILES;
 	}
 
 }

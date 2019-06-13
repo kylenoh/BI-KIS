@@ -4,6 +4,23 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.northstar.bi.dao.BoardDao">
+	
+	<resultMap type="Board" id="BoardResultMap">
+		<id column="BOARD_NO" property="NO"/>
+		<result column="CATE_NO" property="CATE"/>
+		<result column="EMP_ID" property="ID"/>
+		<result column="BOARD_TITLE" property="TITLE"/>
+		<result column="BOARD_CREATE_DATE" property="CREATE_DATE"/>
+		<result column="BOARD_CONTENT" property="CONTENT"/>
+		<result column="BOARD_COUNT" property="COUNT"/>
+		<result column="BOARD_FLAG" property="FLAG"/>
+		<result column="BOARD_UPDATER" property="UPDATER"/>
+		<result column="BOARD_UPDATE_DATE" property="UPDATE_DATE"/>
+		<collection property="FILES" column="BOARD_NO" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.FileDao.getFileByNo"/>
+	</resultMap>
+	
+	
+	
 	<insert id="insertBoard" parameterType="Board">
 		insert into BI_BOARD
 		(BOARD_NO,CATE_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_COUNT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
@@ -48,22 +65,32 @@
 		order by
 			BOARD_NO desc	
 	</select>
-	<select id="getBoardByNo" parameterType="int" resultType="Board">
+	<select id="getBoardByNo" parameterType="int" resultMap="BoardResultMap">
 		select 
-			BOARD_NO as NO,
-			CATE_NO as CATE,
-			EMP_ID as ID,
-			BOARD_TITLE as TITLE,
-			BOARD_CREATE_DATE as CREATE_DATE,
-			BOARD_CONTENT as CONTENT,
-			BOARD_COUNT as COUNT,
-			BOARD_FLAG as FLAG,
-			BOARD_UPDATER as UPDATER,
-			BOARD_UPDATE_DATE as UPDATE_DATE
+			BOARD_NO,
+			CATE_NO,
+			EMP_ID,
+			BOARD_TITLE,
+			BOARD_CREATE_DATE,
+			BOARD_CONTENT,
+			BOARD_COUNT,
+			BOARD_FLAG,
+			BOARD_UPDATER,
+			BOARD_UPDATE_DATE
 		from
 			BI_BOARD
 				 
 		where
-			BOARD_NO = #{NO}		
+			BOARD_NO = #{value}	
 	</select>
+	
+	
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete
+		from
+			BI_BOARD
+		where
+			BOARD_NO = #{value}
+	</delete>
 </mapper>

@@ -18,4 +18,8 @@ public interface BoardService {
 	int getTotalRows (BoardCriteria criteria);
 	List<Board> getBoardList (BoardCriteria criteria, int cp);
 	Board getBoardByNo (int no);
+//	Update
+	void updateBoard(Board board);
+//	Delete
+	void deleteBoard(int no);
 }
