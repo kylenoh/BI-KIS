@@ -25,20 +25,6 @@ function moveWrite(){
 function getBoardDetail(NO){
 	location.href = "boardDetail?NO="+NO;
 }
-$(function(){
-	$(".pagination li a").on('click', function() {
-			if ( ${pagination.cp} == 1) {
-				location.href = 'http://localhost:8080/bi/board/?cp='+${pagination.cp +1};
-					
-			} else {
-				location.href = 'http://localhost:8080/bi/board/?cp='+${pagination.cp -1};
-			}
-			
-			return false;
-	
-		$("#criteria_form").submit();
-	})
-});
 </script>
 </head>
 <body>
@@ -101,33 +87,17 @@ $(function(){
 	</div>
 	
 	<div class="footer">
-		<div class="pagination">
-                  <a href="#">&laquo;</a>
-                  <a href="#">1</a>
-                  <a href="#" class="active">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#">6</a>
-                  <a href="#">&raquo;</a>
-        </div>
-        <div>
-        		<ul class="pagination">
-					<li value=${pagination.cp-1 }><a>&laquo;</a></li>
-						<c:forEach var="num" begin="${pagination.beginPageIndex lt 0 ? 1: pagination.beginPageIndex}"
-												end="${pagination.endPageIndex eq 0? 1 : pagination.endPageIndex}">
-							<c:choose>
-								<c:when test="${pagination.cp eq num }">
-									<li value="${num }" class="active"><a>${num }</a></li>
-								</c:when>
-								<c:otherwise>
-									<li value="${num }"><a>${num }</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					<li value=${pagination.cp+1 }><a>&raquo;</a></li>
-				</ul>
-        </div>
+		<div align="center">
+			<c:if test="${pagination.cb gt 1 }">
+				<a href="board?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+			</c:if>
+			<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
+				<a href="board?cp=${num}">${num }</a>
+			</c:forEach>
+			<c:if test="${pagination.cb lt pagination.totalBlocks }">
+				<a href="board?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+			</c:if>
+	</div>
 	</div>
 </div>
 	
