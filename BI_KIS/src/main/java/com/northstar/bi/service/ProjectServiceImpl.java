@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.northstar.bi.dao.ProjectDao;
+import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Project;
 
 @Service
@@ -15,8 +16,8 @@ public class ProjectServiceImpl implements ProjectService{
 	ProjectDao projectDao;
 	
 	@Override
-	public List<Project> getProjectList() {
-		return projectDao.getProjectList();
+	public List<Project> getProjectByCriteria(Criteria criteria) {
+		return projectDao.getProjectByCriteria(criteria);
 	}
 	@Override
 	public Project getProjectByNo(int pjtNo) {
@@ -33,5 +34,9 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public void deleteProject(int pjtNo) {
 		projectDao.deleteProject(pjtNo);
+	}
+	@Override
+	public int getProjectCount(Criteria criteria) {
+		return projectDao.getProjectCount(criteria);
 	}
 }

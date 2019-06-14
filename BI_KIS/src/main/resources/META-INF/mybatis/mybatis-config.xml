@@ -18,6 +18,7 @@
 		<typeAlias type="com.northstar.bi.dto.BoardFile" alias="BoardFile"/>
 		<typeAlias type="com.northstar.bi.dto.BoardPagination" alias="BoardPagination"/>
 		<typeAlias type="com.northstar.bi.dto.BoardCriteria" alias="BoardCriteria"/>
+		<typeAlias type="com.northstar.bi.dto.Criteria" alias="Criteria"/>
 	</typeAliases>
 	
 	<mappers>

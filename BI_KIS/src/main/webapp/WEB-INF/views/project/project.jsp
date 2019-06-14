@@ -47,25 +47,31 @@ function myPage(){
 	</div>
 	
 	<div class="main">
-	    <form method="post" action="pjtSearch" id="pjtForm">
+	    <form method="post" action="project" id="pjtForm">
             <fieldset>
                 <legend>검색라인</legend>
                 <div>
-                    <label for="title">프로젝트 명</label><input type="text" id="title">
+                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
                 </div>
                 <div>
-                    <label for="startDate"></label><input type="date" id="startDate">    
-                    <label for="endDate"></label><input type="date" id="endDate">
+                    <label for="startDate"></label><input type="date" id="startDate" name="startDate">    
+                    <label for="endDate"></label><input type="date" id="endDate" name="endDate">
                 </div>
                 <div>
-                    <label for="company">고객사 명</label><input type="text" id="company">    
+                    <label for="company">고객사 명</label>
+	                    <select id="company" name="companyNo">
+		                        <option value="0"></option>
+		                        <c:forEach var="comList" items="${companyList }">
+		                        	<option value="${comList.no }">${comList.name }</option>
+		                        </c:forEach>
+	                    </select>      
                 </div>
                 <div>
-                    <select id="project-flag" name="pjtFlag">
+                    <select id="project-flag" name="flag">
                         <option value="all">All</option>
-                        <option value="expected">Expected</option>
-                        <option value="processing">Processing</option>
-                        <option value="end">End</option>
+                        <option value="Y">Expected</option>
+                        <option value="P">Processing</option>
+                        <option value="N">End</option>
                     </select>
 
                     <button type="submit">Search</button>
@@ -108,15 +114,17 @@ function myPage(){
 	</div>
 	
 	<div class="footer">
-		<div class="pagination">
-                  <a href="#">&laquo;</a>
-                  <a href="#">1</a>
-                  <a href="#" class="active">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>  
-                  <a href="#">&raquo;</a>
-                </div>
+		<div align="center">
+			<c:if test="${pagination.cb gt 1 }">
+				<a href="project?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+			</c:if>
+			<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
+				<a href="project?cp=${num}">${num }</a>
+			</c:forEach>
+			<c:if test="${pagination.cb lt pagination.totalBlocks }">
+				<a href="project?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+			</c:if>
+	</div>
 	</div>
 </div>
 	
