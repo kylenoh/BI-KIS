@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,48 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/index.css">
-<link rel="stylesheet" href="resources/css/ym.css">
+<link rel="stylesheet" href="resources/css/index.css?ver=<%=new Date()%>">
+<link rel="stylesheet" href="resources/css/ym.css?ver=<%=new Date()%>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>테스트 페이지</title>
-<style type="text/css">
-.login {
-   position: absolute;
-   display: table;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%
-}
-.login .login_inner {
-   display: table-cell;
-   text-align: center;
-   vertical-align: middle
-}
-.login .login_form {
-   display: inline-block;
-}
-.login_textForm{
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	float:right;
-}
-.login_form input {
-	margin-bottom:10px;
-	height:30px;
-	text-indent: 10px;
-}
-.login_form button {
-	border-radius: 5px;
-	border: 2px solid lightgray;
-	cursor: pointer;
-	padding: 10px 25px 10px 25px;
-	font-weight: bold;
-	transition: 0.3s;
-	width:100%;
-}
-</style>
+
 </head>
 <script type="text/javascript">
 	$(function(){

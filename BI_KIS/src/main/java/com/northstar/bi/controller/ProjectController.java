@@ -9,11 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.northstar.bi.dto.Company;
+import com.northstar.bi.dto.Criteria;
+import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.dto.Project;
 import com.northstar.bi.service.CompanyService;
 import com.northstar.bi.service.ProjectService;
@@ -28,10 +31,41 @@ public class ProjectController {
 	
 	
 	@RequestMapping(value="/project")
-	public String project(HttpSession session, Model model) {
-		List<Project> pjtList = projectService.getProjectList();
+	public String project(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
+						@RequestParam(name="title", required=false)String title,
+						@RequestParam(name="companyNo", required=false,defaultValue="0")int companyNo,
+						@RequestParam(name="startDate", required=false)String startDate,
+						@RequestParam(name="endDate", required=false)String endDate,
+						@RequestParam(name="flag", required=false)String flag,
+							HttpSession session, Model model, Criteria criteria) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		int rows = 10;
+		System.out.println("////////////////");
+		System.out.println(title);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		System.out.println(flag);
+		System.out.println("////////////////");
+		criteria.setBeginIndex((cp-1) * rows + 1);
+		criteria.setEndIndex(cp * rows);
+		criteria.setTitle(title);
+		criteria.setCompanyNo(companyNo);
+		if( !StringUtils.isEmpty(startDate) && !StringUtils.isEmpty(endDate)) {
+			criteria.setStartDate(formatter.parse(startDate));
+			criteria.setEndDate(formatter.parse(endDate));
+		}
+		criteria.setFlag(flag);
 		
+		int totalRows = projectService.getProjectCount(criteria);
+		Pagination pagination = new Pagination(totalRows, cp, rows);
+		
+		List<Project> pjtList = projectService.getProjectByCriteria(criteria);
+		List<Company> companyList = companyService.getCompanyList();
+		
+		model.addAttribute("companyList",companyList);
 		model.addAttribute("pjtList",pjtList);
+		model.addAttribute("pagination",pagination);
+		
 		return "project/project";
 	}
 	@RequestMapping(value="/addproject", method=RequestMethod.GET)

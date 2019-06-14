@@ -47,15 +47,10 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<mime-mapping>
-		<extension>css</extension>
-		<mime-type>text/css</mime-type>
-	</mime-mapping>
-	<mime-mapping>
-		<extension>xml</extension>
-		<mime-type>text/xml</mime-type>
-	</mime-mapping>
-
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
 	<jsp-config>
   		<jsp-property-group>
   			<url-pattern>*.jsp</url-pattern>
