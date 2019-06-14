@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/ym.css">
+<link rel="stylesheet" href="resources/css/sh.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Insert title here</title>
@@ -25,6 +25,20 @@ function moveWrite(){
 function getBoardDetail(NO){
 	location.href = "boardDetail?NO="+NO;
 }
+$(function(){
+	$(".pagination li a").on('click', function() {
+			if ( ${pagination.cp} == 1) {
+				location.href = 'http://localhost:8080/bi/board/?cp='+${pagination.cp +1};
+					
+			} else {
+				location.href = 'http://localhost:8080/bi/board/?cp='+${pagination.cp -1};
+			}
+			
+			return false;
+	
+		$("#criteria_form").submit();
+	})
+});
 </script>
 </head>
 <body>

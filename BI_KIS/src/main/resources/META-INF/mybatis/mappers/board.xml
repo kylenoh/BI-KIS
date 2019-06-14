@@ -84,7 +84,19 @@
 			BOARD_NO = #{value}	
 	</select>
 	
-	
+	<update id="updateBoard" parameterType="Board">
+		update
+			BI_BOARD
+		set
+			CATE_NO				= #{CATE},
+			EMP_ID				= #{ID},
+			BOARD_TITLE			= #{TITLE},
+			BOARD_CONTENT		= #{CONTENT},
+			BOARD_UPDATER		= #{UPDATER},
+			BOARD_UPDATE_DATE	= SYSDATE
+		where
+			BOARD_NO = #{NO}
+	</update>
 	
 	<delete id="deleteBoard" parameterType="int">
 		delete

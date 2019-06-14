@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/ym.css">
 <link rel="stylesheet" href="resources/css/sh.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -45,23 +44,21 @@
 			  	<div class="container-header">
 			  		<input type="hidden" name="NO" value="${Board.NO }">
 				    <label for="uploadtitle"><b>제목</b></label>
-				    <input type="text" name="uploadtitle" class="boardTitle" value="${Board.TITLE }" required>
+				    <p>${Board.TITLE }</p>
 				    <b>작성자</b><p>${Board.ID }</p>
 				    <b>작성일자</b><p>${Board.CREATE_DATE }</p>
 				    <b>조회수</b><p>${Board.COUNT }</p>
 				    <label for="uploadtype"><b>분류</b></label>
-				    <select class="boardType" name="uploadtype">
-				    	<option selected value="문서">문서</option>
-				    	<option value="교육">교육</option>
-				    	<option value="영어">영어</option>
-				    </select>
+				    <p>${Board.CATE }</p>
 				</div>
 				<div class="container-content">
 				    <label for="content"><b>내용</b></label>
-				    <textarea name="uploadcontent" class="boardContent">${Board.CONTENT }</textarea>
+				    <p>${Board.CONTENT }</p>
 				    <label for="boardFile"><b>첨부파일</b></label>
 				    <c:forEach var="file" items="${Board.FILES }">
-						${file.NAME }
+						<div class="fileSection">
+							${file.NAME }<br>
+						</div>
 					</c:forEach>
 				</div>
 				<div class="container-footer">

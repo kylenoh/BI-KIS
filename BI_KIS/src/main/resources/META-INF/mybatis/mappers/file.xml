@@ -14,7 +14,19 @@
 		from
 			BI_FILE
 		where
-			BOARD_NO = #{NO}
+			BOARD_NO = #{value}
+	</select>
+	<select id="getFile" parameterType="int" resultType="BoardFile">
+		select
+			FILE_NO as NO,
+			BOARD_NO,
+			EMP_ID as ID,
+			FILE_DUAL as DUAL,
+			FILE_NAME as NAME
+		from
+			BI_FILE
+		where
+			FILE_NO = #{value}
 	</select>
 	<select id="getFileList" resultType="BoardFile">
 		select
@@ -26,4 +38,11 @@
 		from
 			BI_FILE
 	</select>
+	<delete id="deleteFile" parameterType="int">
+		delete
+		from
+			BI_FILE
+		where
+			FILE_NO = #{value}
+	</delete>
 </mapper>
