@@ -272,6 +272,9 @@ tr:nth-child(even) {
 	font-size: 20px;
 	background-color: DodgerBlue;
 }
+button.writebtn{
+	margin: 10px;
+}
 
 .writebtn::after {
 	dispaly: block;

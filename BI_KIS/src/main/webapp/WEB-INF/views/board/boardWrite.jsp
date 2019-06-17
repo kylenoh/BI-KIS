@@ -13,113 +13,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
-<script type="text/javascript">
-$(function () {
-
-	$(".fileDrop").on("dragenter dragover", function(event){
-		event.preventDefault();
-	});
-	
-	$(".fileDrop").on("drop", function(event){
-		event.preventDefault();
-		
-		var files = event.originalEvent.dataTransfer.files;
-		
-		var file = files[0];
-		
-		//console.log(file);
-		
-		var formData = new FormData(); // HTML5
-		formData.append("file", file);
-		
-		$.ajax({
-			url: '/sample/upload/uploadAjax',
-			data: formData,
-			dataType: 'text',
-			processData: false,
-			contentType: false,
-			type: 'POST',
-			success: function(data){
-				//alert(data);
-				//서버로 파일을 전송한 다음에 그 파일을 다시 받아온다.?
-				
-				//이미지 인경우 썸네일을 보여준다.
-				if(checkImageType(data)){
-					str = "<div>"
-						+ "<a href='/sample/upload/displayFile?fileName=" + getImageLink(data) + "'>"
-						+ "<img src='/sample/upload/displayFile?fileName=" + data + "'/>"
-						+ "</a>"
-						+ "<small data-src='" + data + "'>X</small></div>";
-				}else {
-					str = "<div>"
-						+ "<a href='/sample/upload/displayFile?fileName=" + data + "'>"
-						+ getOriginalName(data) + "</a>"
-						+ "<small data-src='" + data + "'>X</small></div>";
-				}//else
-					
-				$(".uploadedList").append(str);	
-			},
-		});// ajax
-		
-	});
-	
-	
-	/* 컨트롤러로 부터 전송받은 파일이 이미지 파일인지 확인하는 함수 */
-	function checkImageType(fileName){
-		var pattern = /jpg$|gif$|png$|jpeg$/i;
-		return fileName.match(pattern);
-	}//checkImageType
-	
-	//파일 이름 처리 : UUID 가짜 이름 제거
-	function getOriginalName(fileName){
-		if(checkImageType(fileName)){
-			return;
-	}
-		
-		var idx = fileName.indexOf("_") + 1;
-		return fileName.substr(idx);
-			
-	}//getOriginalName
-	
-	//이미지 원본 링크 제공
-	function getImageLink(fileName){
-		
-		if(!checkImageType(fileName)){
-			return;
-		}//if
-		
-		var front = fileName.substr(0, 12);
-		var end = fileName.substr(14);
-		
-		return front + end;
-		
-	}//getImageLink
-	
-	
-	//업로드 파일 삭제 처리
-	$(".uploadedList").on("click", "small", function(event){
-		
-		var that = $(this);
-		
-		alert($(this).attr("data-src"));
-		
-		$.ajax({
-			url: "/sample/upload/deleteFile",
-			type: "post",
-			data: {fileName:$(this).attr("data-src")},
-			dataType: "text",
-			success : function(result){
-				if(result == 'deleted'){
-					//alert("deleted");
-					that.parent("div").remove();
-				}//
-			},
-		});
-		
-	});//uploadedList
-	
-});
-</script>
 <body>
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
@@ -163,42 +56,46 @@ $(function () {
 			    <label for="content"><b>내용</b></label>
 			    <textarea name="uploadcontent" class="boardContent"></textarea>
 			    <label for="file"><b>첨부파일</b></label>
-			    <input type="file" name="file" multiple="multiple" id="boardFile">
+			    <div id="fileDiv">
+			    	<p>
+					    <input type="file" name="file_0" id="boardFile">
+					    <a href="#this" class="btn" id="delete" name="delete">삭제</a>
+					</p>
+				</div>
+				
 			</div>
 			<div class="container-footer">
+		    	<button type="button" class="writebtn" id="addFile">파일추가</button>
 		    	<button type="submit" class="writebtn">등록</button>
+		    	<button type="button" class="writebtn" onclick="getList()">목록으로</button>
 		    </div>
 		  </div>
 		</form>
-		<!-- 여기 -->
-		 <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Ajax File Upload</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <!-- <form id="form1" action="/sample/upload/uploadForm" method="post" enctype="multipart/form-data"> -->
-            <form id="form" action="/sample/upload/uploadForm" method="post" enctype="multipart/form-data">
-              <div class="box-body">
-                <div class="form-group">
-				  <div class="fileDrop"></div>	
-                </div>
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer">
-                <!-- <button type="submit" class="btn btn-warning">제출</button> -->
-                <div class="uploadedList"></div>
-              </div>
-            </form>
-          </div>
-		
-		
 	</div>
 	
 	<div class="footer">
 	</div>
 </div>
-	
+<script type="text/javascript">
+function getList(){
+	location.href="board";
+}
+</script>
+<script type="text/javascript">
+var file_count=1;
+$(function(){
+
+	$("#addFile").on("click",function(e){
+		e.preventDefault();
+		
+		var str = "<p><input type='file' name='file_"+(file_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
+		$("#fileDiv").append(str);
+		$("a[name='delete']").on("click",function(e){
+			e.preventDefault();
+			$(this).parent().remove();
+		});
+	});
+});
+</script>
 </body>
 </html>

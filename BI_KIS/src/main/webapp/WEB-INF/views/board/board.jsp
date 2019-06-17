@@ -63,25 +63,44 @@ function getBoardDetail(NO){
 		<button class="write" onclick="moveWrite()">글쓰기</button>
 		
 		<table border="1">
+			<colgroup>
+				<col width="10%">
+				<col width="*">
+				<col width="15%">
+				<col width="20%">
+				<col width="10%">
+			</colgroup>
 			<thead>
 				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th scope="col">글번호</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성자</th>
+					<th scope="col">작성일</th>
+					<th scope="col">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-                <c:forEach var="boards" items="${boards }">
-					<tr onclick="getBoardDetail(${boards.NO })">
-						<td>${boards.NO }</td>
-						<td>${boards.TITLE }</td>
-						<td>${boards.ID }</td>
-						<td>${boards.CREATE_DATE }</td>
-						<td>${boards.COUNT }</td>
-					</tr>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${fn:length(boards)>0 }">
+		                <c:forEach var="boards" items="${boards }">
+							<tr onclick="getBoardDetail(${boards.NO })">
+								<td>${boards.NO }</td>
+								<td>${boards.TITLE }</td>
+								<td>${boards.ID }</td>
+								<td>${boards.CREATE_DATE } </td>
+								<td>${boards.COUNT }</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5">조회된 결과가 없습니다.</td>
+						</tr>					
+					</c:otherwise>
+				</c:choose>
+
+					
+					
 			</tbody>
 		</table>
 	</div>

@@ -12,8 +12,7 @@ import com.northstar.bi.dto.BoardFile;
 
 public interface BoardService {
 //	Insert
-	void insertBoardtoFile(Board board,BoardFile boardFile,MultipartHttpServletRequest files, HttpSession session);
-	void insertBoard(Board board);
+	void insertBoard(Board board,BoardFile boardfile,MultipartHttpServletRequest files,HttpSession session);
 //	Select
 	int getTotalRows (BoardCriteria criteria);
 	List<Board> getBoardList (BoardCriteria criteria, int cp);
@@ -25,4 +24,6 @@ public interface BoardService {
 	void deleteBoard(int no);
 //	DeleteFile
 	BoardFile deleteFile (int no);
+
+
 }

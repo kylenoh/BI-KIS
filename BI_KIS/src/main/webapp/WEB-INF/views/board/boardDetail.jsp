@@ -9,8 +9,17 @@
 <link rel="stylesheet" href="resources/css/sh.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/common.js"></script>
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+$(function(){
+	$("a[id='file']").on("click",function(e){
+		e.preventDefault();
+		downloadFile($(this));
+	});
+});
+</script>
 <body>
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
@@ -42,29 +51,45 @@
 			<form method="post" action="boardUpdate">
 			  <div class="container">
 			  	<div class="container-header">
+			  		<table border="1">
+			  			<thead>
+			  				<tr>
+			  					<th><label for="uploadtitle"><b>제목</b></label></th>
+			  					<th><b>작성자</b></th>
+			  					<th><b>작성일자</b></th>
+			  					<th><b>조회수</b></th>
+			  					<th><b>분류</b></th>
+			  				</tr>
+			  			</thead>
+			  			<tbody>
+				  			<tr>
+				  				<td>${Board.TITLE }</td>
+				  				<td>${Board.ID }</td>
+				  				<td>${Board.CREATE_DATE }</td>
+				  				<td>${Board.COUNT }</td>
+				  				<td>${Board.CATE }</td>
+				  			</tr>
+							<tr>
+								<td colspan="5">${Board.CONTENT }</td>
+							</tr>
+							<tr>
+								<td colspan="5">
+									<c:forEach var="file" items="${Board.FILES }">
+										<div class="fileSection">
+											<input type="hidden" id="IDX" value="${file.NO }">
+											<a href="#" id="file">${file.NAME }</a>
+										</div>
+									</c:forEach>
+								</td>
+							</tr>			  			
+			  			</tbody>
+			  		</table>
 			  		<input type="hidden" name="NO" value="${Board.NO }">
-				    <label for="uploadtitle"><b>제목</b></label>
-				    <p>${Board.TITLE }</p>
-				    <b>작성자</b><p>${Board.ID }</p>
-				    <b>작성일자</b><p>${Board.CREATE_DATE }</p>
-				    <b>조회수</b><p>${Board.COUNT }</p>
-				    <label for="uploadtype"><b>분류</b></label>
-				    <p>${Board.CATE }</p>
-				</div>
-				<div class="container-content">
-				    <label for="content"><b>내용</b></label>
-				    <p>${Board.CONTENT }</p>
-				    <label for="boardFile"><b>첨부파일</b></label>
-				    <c:forEach var="file" items="${Board.FILES }">
-						<div class="fileSection">
-							${file.NAME }<br>
-						</div>
-					</c:forEach>
 				</div>
 				<div class="container-footer">
 			    	<button type="submit" class="writebtn">수정</button>
 			    	<button type="button" class="writebtn" onclick="DELETE(${Board.NO })">삭제</button>
-			    	<button type="button" class="writebtn">목록</button>
+			    	<button type="button" class="writebtn" onclick="getList()">목록</button>
 			    </div>
 			  </div>
 			</form>
@@ -79,6 +104,13 @@ function DELETE(no){
 	if (confirm("정말 삭제하시겠습니까?")) {
 		location.href = "delete?no="+no;
 	}
+}
+function getList(){
+	location.href="board";
+}
+function downloadFile(obj){
+	var idx = obj.parent().find("#IDX").val();
+	location.href = "download?idx="+idx;
 }
 </script>
 </body>

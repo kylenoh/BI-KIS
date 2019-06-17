@@ -22,18 +22,14 @@
 	
 	
 	<insert id="insertBoard" parameterType="Board">
+		<selectKey keyProperty="NO" resultType="int" order="AFTER">
+			SELECT BOARD_SEQ.currval FROM DUAL
+		</selectKey>
 		insert into BI_BOARD
 		(BOARD_NO,CATE_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_COUNT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
 		values
 		(BOARD_SEQ.nextval, #{CATE}, #{ID}, #{TITLE}, sysdate, #{CONTENT},0,'Y',NULL,NULL)
 	</insert>
-	<insert id="insertBoardtoFile" parameterType="BoardFile">
-		insert into BI_FILE
-		(FILE_NO,BOARD_NO,EMP_ID,FILE_DUAL,FILE_NAME)
-		values
-		(FILE_NO_SEQ.nextval, board_seq.currval, #{ID}, #{DUAL}, #{NAME})
-	</insert>
-	
 	
 	<select id="getTotalRows" resultType="int">
 		select count(*)	from BI_BOARD order by BOARD_NO desc
@@ -61,7 +57,7 @@
 				
 			)
 		where
-			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	
+			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	and BOARD_FLAG = 'Y'
 		order by
 			BOARD_NO desc	
 	</select>
@@ -98,11 +94,25 @@
 			BOARD_NO = #{NO}
 	</update>
 	
-	<delete id="deleteBoard" parameterType="int">
-		delete
-		from
+	<delete id="deleteBoard" parameterType="Board">
+		update
 			BI_BOARD
+		set
+			BOARD_FLAG = 'N'
 		where
 			BOARD_NO = #{value}
 	</delete>
+	
+	<update id="updateCnt" parameterType="int">
+		update 
+			BI_BOARD
+		set
+			BOARD_COUNT = NVL(BOARD_COUNT, 0) + 1
+		where
+            BOARD_NO = #{value}
+
+	</update>
+
+
+
 </mapper>

@@ -2,6 +2,7 @@ package com.northstar.bi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class BoardController {
 //	게시글 쓰기 진입
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String BoardWrite(Model model) {
-		return "board/boardWrite2";
+		return "board/boardWrite";
 	}
 //	게시글 디테일 진입
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
@@ -73,12 +74,12 @@ public class BoardController {
 		board.setTITLE(title);
 		board.setCONTENT(content);
 		board.setCATE(type);
-		boardService.insertBoardtoFile(board,boardFile,files,session);
+		boardService.insertBoard(board,boardFile,files,session);
 		return "redirect:/board";
 	}
 //	수정 서비스 진입
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String Modify(@RequestParam("NO") String no,
+	public String Modify(@RequestParam("NO") int no,
 						 @RequestParam("TITLE") String title,
 						 @RequestParam("CONTENT") String content,
 						 @RequestParam("TYPE") String type,
@@ -108,8 +109,11 @@ public class BoardController {
 		return boardService.deleteFile(no);
 	}
 	
-	@RequestMapping(value = "/boardFile", method = RequestMethod.GET)
-	public String BoardFile(Model model) {
-		return "board/boardFileTest";
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	public void download(@RequestParam("idx")int no,
+						BoardFile boardfile,
+						 HttpServletResponse response) {
+		boardfile.setNO(no);
+		fileService.selectFileInfo(boardfile,no,response);
 	}
 }

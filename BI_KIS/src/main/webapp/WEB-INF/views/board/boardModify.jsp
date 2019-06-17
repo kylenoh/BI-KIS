@@ -15,15 +15,9 @@
 $(function() {
 	$(".container-content").on('click','[id^=getFile_]',function(){
 		var id = $(this).attr('id').substring(8,20);
-		$.ajax({
-			type:"POST",
-			url:"deleteFile",
-			data:{no:id},
-			success:function(data){
-				alert('삭제완료');
-				$(this).closet(".fileSection").remove();
-			}
-		});
+		var flag = 'N';
+		$(this).parent().css("display","none");
+		location.href = "modify?flag="+flag;
 	});
 });
 </script>
@@ -71,14 +65,21 @@ $(function() {
 			    <label for="CONTENT"><b>내용</b></label>
 			    <textarea name="CONTENT" class="boardContent">${Board.CONTENT }</textarea>
 			    <label for="boardFile"><b>첨부파일</b></label>
-			    <input type="file" name="file" multiple="multiple">
+			    <div id="fileDiv">
+			    	<p>
+					    <input type="file" name="file_0" id="boardFile">
+					    <a href="#this" class="btn" id="delete" name="delete">삭제</a>
+					</p>
+				</div>
 			    <c:forEach var="file" items="${Board.FILES }">
 					<div class="fileSection">
-						${file.NAME }&nbsp;&nbsp;<a id="getFile_${file.NO }">삭제</a><br>
+						${file.NAME }&nbsp;&nbsp;<a id="getFile_${file.NO }" >삭제</a><br>
 					</div>
 				</c:forEach>
 			</div>
 			<div class="container-footer">
+				<button type="button" class="writebtn" id="addFile">파일추가</button>
+		    	<button type="button" class="writebtn" onclick="getList()">목록으로</button>
 		    	<button type="submit" class="writebtn">수정</button>
 		    </div>
 		  </div>
@@ -89,6 +90,26 @@ $(function() {
 	<div class="footer">
 	</div>
 </div>
-	
+	<script type="text/javascript">
+function getList(){
+	location.href="board";
+}
+</script>
+<script type="text/javascript">
+var file_count=1;
+$(function(){
+
+	$("#addFile").on("click",function(e){
+		e.preventDefault();
+		
+		var str = "<p><input type='file' name='file_"+(file_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
+		$("#fileDiv").append(str);
+		$("a[name='delete']").on("click",function(e){
+			e.preventDefault();
+			$(this).parent().remove();
+		});
+	});
+});
+</script>
 </body>
 </html>
