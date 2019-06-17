@@ -107,6 +107,7 @@ function getBoardDetail(NO){
 	
 	<div class="footer">
 		<div align="center">
+		<c:if test="${!empty board }">
 			<c:if test="${pagination.cb gt 1 }">
 				<a href="board?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 			</c:if>
@@ -116,6 +117,7 @@ function getBoardDetail(NO){
 			<c:if test="${pagination.cb lt pagination.totalBlocks }">
 				<a href="board?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 			</c:if>
+		</c:if>
 	</div>
 	</div>
 </div>
