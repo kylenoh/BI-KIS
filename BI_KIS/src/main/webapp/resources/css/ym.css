@@ -94,7 +94,7 @@
   float: right;
   padding-right: 40px;
 }
-#pjtForm div{
+#pjtForm div, #companyForm div, #customerForm div{
     display: inline-block;
     width:49%;
 }
@@ -102,11 +102,11 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-#addPjtForm, #addPjtForm div {
+#addForm, #addForm div {
 	display: block;
 	width:100% !important;
 }
-#addPjtForm button{
+#addForm button{
 	float: right;
 }
 #content, #remark {

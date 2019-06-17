@@ -10,7 +10,7 @@ public interface ProjectDao {
 	List<Project> getProjectByCriteria(Criteria criteria);
 	Project getProjectByNo(int pjtNo);
 	void addProject(Project project);
-	void updateProject(Project project);
+	void modifyProject(Project project);
 	void deleteProject(int pjtNo);
 	int getProjectCount(Criteria criteria);
 }

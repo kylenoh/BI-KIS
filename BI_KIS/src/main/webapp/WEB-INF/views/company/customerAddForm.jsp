@@ -28,8 +28,8 @@ function myPage(){
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li>BI 기술 지원</li>
-			  <li>프로젝트 관리</li>
-			  <li>프로젝트 등록</li>
+			  <li>고객사 관리</li>
+			  <li>고객사 등록</li>
 			</ul>
 		</div>
 		<div class="header-right">
@@ -47,12 +47,25 @@ function myPage(){
 		</div>
 	</div>
 	<div class="main">
-	    <form method="post" action="pjtadd" id="pjtForm">
+	    <form method="post" action="addCustomer" id="CustomerForm">
             <fieldset>
-                <legend>프로젝트 등록</legend>
+                <legend>담당자 등록</legend>
                 <div id="addForm">
 	                <div>
-	                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
+	                    <label for="name">담당자 명</label><input type="text" id="name" name="name">
+	                </div>
+	                <div>
+	                    <label for="rank">직급</label><input type="text" id="rank" name="rank">
+	                </div>
+	                <div>
+	                    <label for="dept">부서명</label><input type="text" id="dept" name="dept">
+	                </div>
+	                <div>
+	                    <label for="tel1">연락처1</label><input type="text" id="tel1" name="tel1">
+	                    <label for="tel2">연락처2</label><input type="text" id="tel2" name="tel2">
+	                </div>
+	                <div>
+	                    <label for="email">이메일</label><input type="text" id="email" name="email">
 	                </div>
 	                <div>
 	                    <label for="company">고객사 명</label>
@@ -62,14 +75,6 @@ function myPage(){
 	                        	<option value="${comList.no }">${comList.name }</option>
 	                        </c:forEach>
                     	</select>    
-	                </div>
-	                <div id="PjtDate">
-	                    <label for="startDate">시작일</label><input type="date" id="startDate" name="startDate">    
-	                    <label for="endDate">종료 예정일</label><input type="date" id="endDate" name="endDate">
-	                </div>
-	                <div>
-	                    <label for="content">내용</label>
-	                    <textarea id="content" name="content"></textarea>
 	                </div>
 	                <div>
 	                	<label for="remark">비고</label>

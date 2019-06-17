@@ -4,6 +4,200 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.northstar.bi.dao.CompanyDao">
+	
+	<resultMap type="Customer" id="getCustomerResultMap">
+		<id column="cus_no" property="no"/>
+		<result column="cus_name" property="name"/>
+		<result column="cus_tel1" property="tel1"/>
+		<result column="cus_tel2" property="tel2"/>
+		<result column="cus_email" property="email"/>
+		<result column="cus_rank" property="rank"/>
+		<result column="cus_dept" property="dept"/>
+		<result column="cus_remark" property="remark"/>
+		<association property="company" column="com_no" javaType="Company" select="getCompanyByComNo"/>
+	</resultMap>
+	<update id="modifyCompany" parameterType="Company">
+		update
+			bi_company
+		set
+			com_name = #{name},
+			com_owner = #{owner},
+			com_tel = #{tel},
+			com_addr = #{addr},
+			com_remark = #{remark}
+		where
+			com_no = #{no}
+	</update>
+	<update id="modifyCustomer" parameterType="Customer">
+		update
+			bi_customer
+		set
+			cus_name = #{name},
+			cus_tel1 = #{tel1},
+			cus_tel2 = #{tel2},
+			cus_email = #{email},
+			cus_rank = #{rank},
+			cus_dept = #{dept},
+			cus_remark = #{remark}
+		where
+			cus_no = #{customer.no}
+	</update>
+	<delete id="deleteCompany" parameterType="int">
+		delete
+			from bi_company
+		where
+			com_no = #{value}
+	</delete>
+	<delete id="deleteCustomerByCompanyNo" parameterType="int">
+		delete
+			from bi_customer
+		where
+			com_no = #{value}
+	</delete>
+	<delete id="deleteCustomer" parameterType="int">
+		delete
+			from bi_customer
+		where
+			cus_no = #{value}
+	</delete>
+	<insert id="addCustomer" parameterType="Customer">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select bi_customer_seq.nextval from dual
+		</selectKey>
+			insert into bi_customer
+				(cus_no, com_no, cus_name, cus_tel1, cus_tel2, cus_email, cus_rank, cus_dept, cus_remark)
+			values
+				(#{no}, #{company.no}, #{name}, #{tel1}, #{tel2}, #{email}, #{rank}, #{dept}, #{remark})
+	</insert>
+	<insert id="addCompany" parameterType="Company">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select bi_company_seq.nextval from dual
+		</selectKey>
+			insert into bi_company
+				(com_no, com_name, com_owner, com_tel, com_addr, com_remark)
+			values
+				(#{no}, #{name}, #{owner}, #{tel}, #{addr}, #{remark})
+	</insert>
+	<select id="getCompanyByCriteria" parameterType="Criteria" resultType="Company">
+		select
+			company_no		as no,
+			com_name		as name,
+			com_owner		as owner,
+			com_tel			as tel,
+			com_addr		as addr,
+			com_remark		as remark,
+			cus_no			as "customer.no",	
+			com_no			as "customer.company.no",
+			cus_name		as "customer.name",
+			cus_tel1		as "customer.tel1",
+			cus_tel2		as "customer.tel2",
+			cus_email		as "customer.email",
+			cus_rank		as "customer.rank",
+			cus_dept		as "customer.dept",
+			cus_remark		as "customer.remark"
+		from (
+			select
+				CO.com_no			as company_no,
+				CO.com_name,
+				CO.com_owner,
+				CO.com_tel,
+				CO.com_addr,
+				CO.com_remark,
+				CU.cus_no,
+				CU.com_no,
+				CU.cus_name,
+				CU.cus_tel1,
+				CU.cus_tel2,
+				CU.cus_email,
+				CU.cus_rank,
+				CU.cus_dept,
+				CU.cus_remark,
+				row_number() over (order by cus_no desc) rn
+			from
+				bi_company CO, bi_customer CU
+			where
+				CU.com_no(+) = CO.com_no  
+				<if test="name != null &amp;&amp; name != ''">
+					and CO.com_name like '%' || #{name} || '%'
+				</if>
+				<if test="customerName != null &amp;&amp; customerName != ''">
+					and CU.cus_name = #{customerName}
+				</if>
+				<if test="email != null &amp;&amp; email != ''">
+					and CU.cus_email = #{email}
+				</if>
+				<if test="dept != null &amp;&amp; dept != ''">
+					and CU.cus_dept = #{dept}
+				</if>
+			)
+		where
+			rn >= #{beginIndex} and rn &lt;= #{endIndex}
+		order by
+			cus_no desc
+	</select>
+	<select id="getCompanyDetail" parameterType="customer" resultType="Company">
+		select
+			CO.com_no			as no,
+			CO.com_name			as name,
+			CO.com_owner		as owner,
+			CO.com_tel			as tel,
+			CO.com_addr			as addr,
+			CO.com_remark		as remark,
+			CU.cus_no			as "customer.no",	
+			CU.com_no			as "customer.company.no",
+			CU.cus_name			as "customer.name",
+			CU.cus_tel1			as "customer.tel1",
+			CU.cus_tel2			as "customer.tel2",
+			CU.cus_email		as "customer.email",
+			CU.cus_rank			as "customer.rank",
+			CU.cus_dept			as "customer.dept",
+			CU.cus_remark		as "customer.remark"
+		from
+			bi_company CO, bi_customer CU
+		where
+			CU.com_no(+) = CO.com_no
+		and
+			CO.com_no = #{company.no}
+			<if test="no != 0">
+				and CU.cus_no = #{no}
+			</if>
+	</select>
+	<select id="getCustomerByNo" parameterType="int" resultMap="getCustomerResultMap">
+		select
+			cus_no,
+			com_no,
+			cus_name,
+			cus_tel1,
+			cus_tel2,
+			cus_email,
+			cus_rank,
+			cus_dept,
+			cus_remark
+		from
+			bi_customer
+		where
+			cus_no = #{value}
+	</select>
+	<select id="getCompanyCount" parameterType="Criteria" resultType="int">
+		select
+			count(*)
+		from
+			bi_company CO, bi_customer CU
+		where
+			CO.com_no = CU.com_no
+			<if test="name != null &amp;&amp; name != ''">
+				and CO.com_name like '%' || #{name} || '%'
+			</if>
+			<if test="customerName != null &amp;&amp; customerName != ''">
+				and CU.cus_name = #{customerName}
+			</if>
+			<if test="email != null &amp;&amp; email != ''">
+				and CU.cus_email = #{email}
+			</if>
+			<if test="dept != null &amp;&amp; dept != ''">
+				and CU.cus_dept = #{dept}
+			</if>
+	</select>
 	<select id="getCompanyByComNo" parameterType="int" resultType="Company">
 		select
 			com_no			as no,

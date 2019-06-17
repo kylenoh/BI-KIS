@@ -28,7 +28,7 @@ function myPage(){
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li>BI 기술 지원</li>
-			  <li>프로젝트 관리</li>
+			  <li>고객사 관리</li>
 			</ul>
 		</div>
 		<div class="header-right">
@@ -47,67 +47,48 @@ function myPage(){
 	</div>
 	
 	<div class="main">
-	    <form method="post" action="project" id="pjtForm">
+	    <form method="post" action="company" id="companyForm">
             <fieldset>
                 <legend>검색라인</legend>
                 <div>
-                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
+                    <label for="title">고객사 명</label><input type="text" id="name" name="name">
                 </div>
                 <div>
-                    <label for="startDate"></label><input type="date" id="startDate" name="startDate">    
-                    <label for="endDate"></label><input type="date" id="endDate" name="endDate">
+                    <label for="email">이메일</label><input type="text" id="email" name="email">
                 </div>
                 <div>
-                    <label for="company">고객사 명</label>
-	                    <select id="company" name="companyNo">
-		                        <option value="0"></option>
-		                        <c:forEach var="comList" items="${companyList }">
-		                        	<option value="${comList.no }">${comList.name }</option>
-		                        </c:forEach>
-	                    </select>      
+                    <label for="customerName">담당자 명</label><input type="text" id="customerName" name="customerName">
                 </div>
                 <div>
-                    <select id="project-flag" name="flag">
-                        <option value="all">All</option>
-                        <option value="Y">Expected</option>
-                        <option value="P">Processing</option>
-                        <option value="N">End</option>
-                    </select>
-
+                    <div>
+                    	<label for="dept">부서</label><input type="text" id="dept" name="dept">
+                	</div>
                     <button type="submit">Search</button>
                 </div>
             </fieldset>
 		</form>
-		<button type="button" onclick="location.href='addproject'" class="write">프로젝트 등록</button>
+		<button type="button" onclick="location.href='addCompany'" class="write">고객사 등록</button>
+		<button type="button" onclick="location.href='addCustomer'" class="write">담당자 등록</button>
 		
 		<table border="1">
 			<thead>
 				<tr>
-					<th>프로젝트 명</th>
 					<th>고객사 명</th>
-					<th>진행일자</th>
-					<th>진행상태</th>
+					<th>담당자</th>
+					<th>담당자연락처</th>
+					<th>이메일</th>
+					<th>비고</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="project" items="${pjtList }">
-				<tr>
-					<td><a href="pjtdetail?pjtNo=${project.no }">${project.title }</a></td>
-					<td>${project.company.name }</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${project.startDate }"/>
-					  ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${project.endDate }"/></td>
-					<td>
-						<c:if test="${project.flag eq 'Y' }">
-	                    	진행예정
-	                    </c:if>
-	                    <c:if test="${project.flag eq 'P' }">
-	                    	진행중
-	                    </c:if>
-	                    <c:if test="${project.flag eq 'N' }">
-	                    	종료
-	                    </c:if>
-					</td>
-				</tr>
+				<c:forEach var="company" items="${companyList }">
+					<tr>
+						<td><a href="companyDetail?companyNo=${company.no}&customerNo=${company.customer.no}">${company.name}</a></td>
+						<td>${company.customer.name }</td>
+						<td>${company.customer.tel1 }</td>
+						<td>${company.customer.email }</td>
+						<td>${company.customer.remark }</td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
@@ -115,15 +96,15 @@ function myPage(){
 	
 	<div class="footer">
 		<div align="center">
-			<c:if test="${!empty project }">
+			<c:if test="${!empty company}">
 				<c:if test="${pagination.cb gt 1 }">
-					<a href="project?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+					<a href="company?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 				</c:if>
 				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-					<a href="project?cp=${num}">${num }</a>
+					<a href="company?cp=${num}">${num }</a>
 				</c:forEach>
 				<c:if test="${pagination.cb lt pagination.totalBlocks }">
-					<a href="project?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+					<a href="company?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 				</c:if>
 			</c:if>
 		</div>

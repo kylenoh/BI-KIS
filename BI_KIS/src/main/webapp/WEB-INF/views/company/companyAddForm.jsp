@@ -28,8 +28,8 @@ function myPage(){
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li>BI 기술 지원</li>
-			  <li>프로젝트 관리</li>
-			  <li>프로젝트 등록</li>
+			  <li>고객사 관리</li>
+			  <li>고객사 등록</li>
 			</ul>
 		</div>
 		<div class="header-right">
@@ -47,29 +47,21 @@ function myPage(){
 		</div>
 	</div>
 	<div class="main">
-	    <form method="post" action="pjtadd" id="pjtForm">
+	    <form method="post" action="addCompany" id="companyForm">
             <fieldset>
-                <legend>프로젝트 등록</legend>
+                <legend>고객사 등록</legend>
                 <div id="addForm">
 	                <div>
-	                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
+	                    <label for="title">고객사 명</label><input type="text" id="name" name="name">
 	                </div>
 	                <div>
-	                    <label for="company">고객사 명</label>
-	                    <select id="company" name="companyNo">
-	                        <option value="all"></option>
-	                        <c:forEach var="comList" items="${companyList }">
-	                        	<option value="${comList.no }">${comList.name }</option>
-	                        </c:forEach>
-                    	</select>    
-	                </div>
-	                <div id="PjtDate">
-	                    <label for="startDate">시작일</label><input type="date" id="startDate" name="startDate">    
-	                    <label for="endDate">종료 예정일</label><input type="date" id="endDate" name="endDate">
+	                    <label for="owner">대표자</label><input type="text" id="owner" name="owner">
 	                </div>
 	                <div>
-	                    <label for="content">내용</label>
-	                    <textarea id="content" name="content"></textarea>
+	                    <label for="tel">연락처</label><input type="text" id="tel" name="tel">
+	                </div>
+	                <div>
+	                    <label for="addr">주소</label><input type="text" id="addr" name="addr">
 	                </div>
 	                <div>
 	                	<label for="remark">비고</label>

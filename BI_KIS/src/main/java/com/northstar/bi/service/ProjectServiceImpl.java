@@ -28,8 +28,8 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDao.addProject(project);
 	}
 	@Override
-	public void updateProject(Project project) {
-		projectDao.updateProject(project);
+	public void modifyProject(Project project) {
+		projectDao.modifyProject(project);
 	}
 	@Override
 	public void deleteProject(int pjtNo) {
