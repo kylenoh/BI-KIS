@@ -38,22 +38,16 @@ public class ProjectController {
 						@RequestParam(name="endDate", required=false)String endDate,
 						@RequestParam(name="flag", required=false)String flag,
 							HttpSession session, Model model, Criteria criteria) throws ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		int rows = 10;
-		System.out.println("////////////////");
-		System.out.println(title);
-		System.out.println(startDate);
-		System.out.println(endDate);
-		System.out.println(flag);
-		System.out.println("////////////////");
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
 		criteria.setTitle(title);
 		criteria.setCompanyNo(companyNo);
-		if( !StringUtils.isEmpty(startDate) && !StringUtils.isEmpty(endDate)) {
-			criteria.setStartDate(formatter.parse(startDate));
-			criteria.setEndDate(formatter.parse(endDate));
-		}
+		System.out.println("//////////////////");
+		System.out.println(startDate);
+		System.out.println(endDate);
+		criteria.setStartDate(startDate);
+		criteria.setEndDate(endDate);
 		criteria.setFlag(flag);
 		
 		int totalRows = projectService.getProjectCount(criteria);
@@ -111,7 +105,7 @@ public class ProjectController {
 		return "redirect:/project";
 	}
 	@RequestMapping(value="pjtmodify", method=RequestMethod.GET)	
-	public String pjtupdateForm(HttpSession session, Model model,int pjtNo) {
+	public String pjtmodifyForm(HttpSession session, Model model,int pjtNo) {
 		Project pjt = projectService.getProjectByNo(pjtNo);
 		List<Company> companyList = companyService.getCompanyList();
 		model.addAttribute("pjt",pjt);
@@ -119,7 +113,7 @@ public class ProjectController {
 		return "project/pjtModifyForm";
 	}
 	@RequestMapping(value="pjtmodify", method=RequestMethod.POST)
-	public String pjtupdate(@RequestParam("pjtNo") int pjtNo,
+	public String pjtmodify(@RequestParam("pjtNo") int pjtNo,
 							@RequestParam("title") String title,
 							@RequestParam("companyNo") int compnayNo,
 							@RequestParam("startDate") String startDate,
@@ -147,7 +141,7 @@ public class ProjectController {
 		} else {
 			pjt.setMsg("종료");
 		}
-		projectService.updateProject(pjt);
+		projectService.modifyProject(pjt);
 		return "redirect:/pjtdetail?pjtNo=" + pjtNo;
 	}
 }

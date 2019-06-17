@@ -33,26 +33,22 @@
 			<if test="flag != null &amp;&amp; flag != '' &amp;&amp; flag !='all'">
 				and P.pjt_flag = #{flag}
 			</if>
-			<if test="startDate != null || endDate != null">
 				<choose>
-					<when test="startDate != null &amp;&amp; endDate == null &amp;&amp; endDate != ''">
+					<when test="startDate != null &amp;&amp; endDate == null || endDate == ''">
 						and 
-							P.pjt_start_date >= date #{startDate}
+							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
 					</when>
-					<when test="startDate == null &amp;&amp; startDate != '' &amp;&amp; endDate != null">
+					<when test="endDate != null &amp;&amp; startDate == null || startDate == '' ">
 						and 
-							P.pjt_end_date &lt;= date #{endDate}
+							P.pjt_end_date &lt;= to_date(#{endDate},'yyyy-mm-dd')
 					</when>
 					<when test="startDate != null &amp;&amp; startDate != ''&amp;&amp; endDate != null &amp;&amp; endDate != ''">
 						and
-							P.pjt_start_date >= date #{startDate}
+							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
 						and 
-							P.pjt_end_date &lt;= date #{endDate}
+							P.pjt_end_date &lt;= to_date (#{endDate},'yyyy-mm-dd')
 					</when>
 				</choose>
-			</if>
-		order by
-			pjt_no desc
 	</select>
 	<delete id="deleteProject" parameterType="int">
 		delete
@@ -61,7 +57,7 @@
 		where
 			pjt_no = #{value}
 	</delete>
-	<update id="updateProject" parameterType="Project">
+	<update id="modifyProject" parameterType="Project">
 		update
 			bi_project
 		set
@@ -123,24 +119,22 @@
 			<if test="flag != null &amp;&amp; flag != 'all'">
 				and P.pjt_flag = #{flag}
 			</if>
-			<if test="startDate != null || endDate != null">
 				<choose>
-					<when test="startDate != null &amp;&amp; endDate == null &amp;&amp; endDate != ''">
-						and
-							P.pjt_start_date >= date #{startDate}
-					</when>
-					<when test="startDate == null &amp;&amp; startDate != '' &amp;&amp; endDate != null">
-						and
-							P.pjt_end_date &lt;= date #{endDate}
-					</when>
-					<when test="startDate != null &amp;&amp; startDate != ''  &amp;&amp; endDate != null &amp;&amp; endDate != ''">
-						and
-							P.pjt_start_date >= date #{startDate}
+					<when test="startDate != null &amp;&amp; endDate == null || endDate == ''">
 						and 
-							P.pjt_end_date &lt;= date #{endDate}
+							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
+					</when>
+					<when test="endDate != null &amp;&amp; startDate == null || startDate == '' ">
+						and 
+							P.pjt_end_date &lt;= to_date(#{endDate},'yyyy-mm-dd')
+					</when>
+					<when test="startDate != null &amp;&amp; startDate != ''&amp;&amp; endDate != null &amp;&amp; endDate != ''">
+						and
+							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
+						and 
+							P.pjt_end_date &lt;= to_date (#{endDate},'yyyy-mm-dd')
 					</when>
 				</choose>
-			</if>	
 			)
 		where
 			rn >= #{beginIndex} and rn &lt;= #{endIndex}

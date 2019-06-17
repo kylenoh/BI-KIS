@@ -1,5 +1,7 @@
 package com.northstar.bi.dto;
 
+import java.util.List;
+
 public class Company {
 
 	private int no;
@@ -8,6 +10,8 @@ public class Company {
 	private String tel;
 	private String addr;
 	private String remark;
+	private List<Customer> customers;
+	private Customer customer;
 	
 	public Company() {}
 
@@ -58,6 +62,22 @@ public class Company {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
+
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 	
 }

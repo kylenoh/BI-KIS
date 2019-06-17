@@ -1,5 +1,7 @@
 package com.northstar.bi.dto;
 
+
+
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,11 +12,13 @@ public class Criteria {
 	private int endIndex;
 	private String title;
 	private int companyNo;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date startDate;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	private String flag;
+	private String name;
+	private String customerName;
+	private String email;
+	private String dept;
 	
 	public Criteria() {}
 
@@ -49,20 +53,20 @@ public class Criteria {
 	public void setCompanyNo(int companyNo) {
 		this.companyNo = companyNo;
 	}
-
-	public Date getStartDate() {
+	
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -73,5 +77,38 @@ public class Criteria {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	
 	
 }
