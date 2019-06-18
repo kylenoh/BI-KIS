@@ -60,7 +60,7 @@ function myPage(){
 	                        </c:forEach>
                     	</select>  
 	                </div>
-	                <div>
+	                <div id="dropdownArea">
 	                    <label for="pjtNo">프로젝트 명</label>
 	                    <input type="text" id="pjtNo" name="pjtNo" placeholder="프로젝트를 입력해주세요">
 	                </div>
@@ -105,7 +105,26 @@ function myPage(){
 $(function(){
 	$("#addForm").on('focus','#pjtNo',function(){
 		$(this).attr('aria-autocomplete','list').attr('aria-expanded','false').attr('role','combobox').attr('autocomplete','off').attr('autocorrect','off');
-	})
+	});
+	$('#addForm').on('keyup','#pjtNo',function(){
+		$.ajax({
+			url: "searchProject",
+			data: {keyword:$('#pjtNo').val()},
+			dataType: 'json',
+			success: function(projects){
+				var row ="";
+				row += '<ul class="dropdown-menu" style="top:auto; left:auto">';
+				$.each(projects, function(index, project){
+					row += '<li id="project-drop-' + project.no + '">';
+					row += '<a href="javascript:void(0)">';
+					row += project.title + '</a></li>';
+				})
+				row += '</ul>';
+				$('#dropdownArea').children('ul').remove();
+				$('#dropdownArea').append(row);
+			}
+		});
+	});
 })
 </script>
 </html>

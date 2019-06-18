@@ -2,6 +2,7 @@ package com.northstar.bi.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.northstar.bi.dto.Company;
 import com.northstar.bi.dto.Criteria;
@@ -26,6 +28,11 @@ public class ProjectController {
 	@Autowired
 	CompanyService companyService;
 	
+	@RequestMapping(value="searchProject")
+	public @ResponseBody List<Project> searchProject(){
+		List<Project> p = new ArrayList<Project>();
+		return p;
+	}
 	
 	@RequestMapping(value="/project")
 	public String project(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
