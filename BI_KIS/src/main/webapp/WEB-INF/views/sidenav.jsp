@@ -8,7 +8,7 @@
         <div class="dropdown-container">
         	<a href="project">프로젝트 관리</a>
             <a href="company">고객사 관리</a>
-            <a href="#">기술지원이력</a>
+            <a href="request">기술지원이력</a>
         </div>
     </div>
     <div class="dropdown-div">

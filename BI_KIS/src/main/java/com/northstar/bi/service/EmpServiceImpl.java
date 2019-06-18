@@ -13,7 +13,7 @@ public class EmpServiceImpl implements EmpService{
 	EmpDao empDao;
 	
 	@Override
-	public Emp getEmpById(Emp empId) {
+	public Emp getEmpById(String empId) {
 		return empDao.getEmpById(empId);
 	}
 }

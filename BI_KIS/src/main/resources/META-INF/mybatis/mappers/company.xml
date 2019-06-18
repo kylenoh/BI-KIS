@@ -16,6 +16,22 @@
 		<result column="cus_remark" property="remark"/>
 		<association property="company" column="com_no" javaType="Company" select="getCompanyByComNo"/>
 	</resultMap>
+	<select id="getCustomerListByCompanyNo" parameterType="int" resultMap="getCustomerResultMap">
+		select
+			cus_no,
+			com_no,
+			cus_name,
+			cus_tel1,
+			cus_tel2,
+			cus_email,
+			cus_rank,
+			cus_dept,
+			cus_remark
+		from
+			bi_customer
+		where
+			com_no = #{value}
+	</select>
 	<update id="modifyCompany" parameterType="Company">
 		update
 			bi_company

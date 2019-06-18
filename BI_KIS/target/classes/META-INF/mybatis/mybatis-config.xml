@@ -20,6 +20,8 @@
 		<typeAlias type="com.northstar.bi.dto.BoardCriteria" alias="BoardCriteria"/>
 		<typeAlias type="com.northstar.bi.dto.Criteria" alias="Criteria"/>
 		<typeAlias type="com.northstar.bi.dto.Customer" alias="Customer"/>
+		<typeAlias type="com.northstar.bi.dto.Category" alias="Category"/>
+		<typeAlias type="com.northstar.bi.dto.Request" alias="Request"/>
 	</typeAliases>
 	
 	<mappers>
@@ -28,6 +30,8 @@
 		<mapper resource="META-INF/mybatis/mappers/company.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/board.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/file.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/category.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/request.xml"/>
 	</mappers>
 	
 </configuration>

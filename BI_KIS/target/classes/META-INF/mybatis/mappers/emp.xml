@@ -5,7 +5,7 @@
 
 <mapper namespace="com.northstar.bi.dao.EmpDao">
 
-	<select id="getEmpById" parameterType="Emp" resultType="Emp">
+	<select id="getEmpById" parameterType="String" resultType="Emp">
 		select
 			 emp_id			as id,
 			 auth_no		as authNo,
@@ -19,7 +19,7 @@
 		from
 			bi_emp
 		where
-			emp_id = #{id}
+			emp_id = #{value}
 	</select>
 	<select id="getEmpByProNo" parameterType="int" resultType="Emp">
 		select

@@ -59,7 +59,6 @@ function myPage(){
 		            <div>
 		                <label for="company">고객사 명</label>
 	                    <select id="company" name="companyNo">
-	                        <option value="all"></option>
 	                        <c:forEach var="comList" items="${companyList }">
 	                        	<option value="${comList.no }" <c:if test="${pjt.company.no eq comList.no }">selected</c:if>>${comList.name }</option>
 	                        </c:forEach>
@@ -68,11 +67,11 @@ function myPage(){
 		            <div id="PjtDate">
 		                <label for="startDate">시작일</label>
 		                <input type="date" id="startDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${pjt.startDate }"/>" name="startDate">    
-		                <label for="endDate">종료 예정일</label>
+		                <label for="endDate">종료일</label>
 		                <input type="date" id="endDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${pjt.endDate }"/>" name="endDate">
 		            </div>
 		            <div>
-		            	<label for="flag">진행상태</label>
+		            	<label for="flag">진행상황</label>
 		            	<select id="flag" name="flag">
 		            		<option value="Y" <c:if test="${pjt.flag eq 'Y' }">selected</c:if>>진행예정</option>
 		            		<option value="P" <c:if test="${pjt.flag eq 'P' }">selected</c:if>>진 행 중</option>

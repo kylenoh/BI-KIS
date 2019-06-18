@@ -96,7 +96,7 @@ function myPage(){
 	
 	<div class="footer">
 		<div align="center">
-			<c:if test="${!empty company}">
+			<c:if test="${!empty companyList}">
 				<c:if test="${pagination.cb gt 1 }">
 					<a href="company?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 				</c:if>
