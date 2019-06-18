@@ -1,17 +1,12 @@
 package com.northstar.bi.dto;
 
-
-
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class Criteria {
 
 	private int beginIndex;
 	private int endIndex;
 	private String title;
 	private int companyNo;
+	private String companyName;
 	private String startDate;
 	private String endDate;
 	private String flag;
@@ -19,6 +14,8 @@ public class Criteria {
 	private String customerName;
 	private String email;
 	private String dept;
+	private String suggest;
+	private int cateNo;
 	
 	public Criteria() {}
 
@@ -53,7 +50,15 @@ public class Criteria {
 	public void setCompanyNo(int companyNo) {
 		this.companyNo = companyNo;
 	}
-	
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	public String getStartDate() {
 		return startDate;
 	}
@@ -109,6 +114,21 @@ public class Criteria {
 	public void setDept(String dept) {
 		this.dept = dept;
 	}
-	
+
+	public String getSuggest() {
+		return suggest;
+	}
+
+	public void setSuggest(String suggest) {
+		this.suggest = suggest;
+	}
+
+	public int getCateNo() {
+		return cateNo;
+	}
+
+	public void setCateNo(int cateNo) {
+		this.cateNo = cateNo;
+	}
 	
 }

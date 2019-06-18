@@ -28,7 +28,7 @@ function myPage(){
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li>BI 기술 지원</li>
-			  <li>프로젝트 관리</li>
+			  <li>기술지원이력</li>
 			</ul>
 		</div>
 		<div class="header-right">
@@ -47,57 +47,71 @@ function myPage(){
 	</div>
 	
 	<div class="main">
-	    <form method="post" action="project" id="pjtForm">
+	    <form method="post" action="request" id="requestForm">
             <fieldset>
                 <legend>검색라인</legend>
                 <div>
-                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
+                    <label for="category">분류 명</label>
+	                <select id="category" name="cateNo">
+		                <option value="0"></option>
+		                <c:forEach var="cateList" items="${categoryList }">
+		                 	<option value="${cateList.no }">${cateList.name }</option>
+		                </c:forEach>
+	                </select>      
                 </div>
                 <div>
-                    <label for="startDate"></label><input type="date" id="startDate" name="startDate">    
-                    <label for="endDate"></label><input type="date" id="endDate" name="endDate">
+                	<label for="flag">진행상황</label>
+                	<select id="request-flag" name="flag">
+                        <option value="all">All</option>
+                        <option value="Y">진행예정</option>
+                        <option value="P">진행중</option>
+                        <option value="N">종료</option>
+                    </select>
                 </div>
                 <div>
                     <label for="companyName">고객사 명</label><input type="text" id="companyName" name="companyName">
                 </div>
                 <div>
-                    <select id="project-flag" name="flag">
-                        <option value="all">All</option>
-                        <option value="Y">Expected</option>
-                        <option value="P">Processing</option>
-                        <option value="N">End</option>
-                    </select>
-
+                    <label for="companyName">요청내용</label><input type="text" id="suggest" name="suggest">
                     <button type="submit">Search</button>
                 </div>
             </fieldset>
 		</form>
-		<button type="button" onclick="location.href='addproject'" class="write">프로젝트 등록</button>
+		<button type="button" onclick="location.href='addRequest'" class="write">기술지원 등록</button>
 		
 		<table border="1">
 			<thead>
 				<tr>
-					<th>프로젝트 명</th>
+					<th>분류 명</th>
+					<th>요청내용</th>
 					<th>고객사 명</th>
-					<th>진행일자</th>
-					<th>진행상태</th>
+					<th>프로젝트 명</th>
+					<th>담당자 명</th>
+					<th>지원담당자</th>
+					<th>접수일</th>
+					<th>마감일</th>
+					<th>진행상황</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="project" items="${pjtList }">
+				<c:forEach var="request" items="${requestList }">
 				<tr>
-					<td><a href="pjtdetail?pjtNo=${project.no }">${project.title }</a></td>
-					<td>${project.company.name }</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${project.startDate }"/>
-					  ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${project.endDate }"/></td>
+					<td>${request.category.name }</td>
+					<td><a href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
+					<td>${request.project.company.name }</td>
+					<td>${request.project.title }</td>
+					<td>${request.customer.name }</td>
+					<td>${request.emp.name }</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.startDate }"/></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.endDate }"/></td>
 					<td>
-						<c:if test="${project.flag eq 'Y' }">
+						<c:if test="${request.flag eq 'Y' }">
 	                    	진행예정
 	                    </c:if>
-	                    <c:if test="${project.flag eq 'P' }">
+	                    <c:if test="${request.flag eq 'P' }">
 	                    	진행중
 	                    </c:if>
-	                    <c:if test="${project.flag eq 'N' }">
+	                    <c:if test="${request.flag eq 'N' }">
 	                    	종료
 	                    </c:if>
 					</td>
@@ -109,7 +123,7 @@ function myPage(){
 	
 	<div class="footer">
 		<div align="center"> 
-			<c:if test="${!empty pjtList}">
+			<c:if test="${!empty requestList}">
 				<c:if test="${pagination.cb gt 1 }">
 					<a href="project?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 				</c:if>

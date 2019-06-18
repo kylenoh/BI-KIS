@@ -27,22 +27,22 @@
 			<if test="title != null &amp;&amp; title != ''" >
 				and P.pjt_title like '%' || #{title} || '%'
 			</if>
-			<if test="companyNo != 0">
-				and C.com_no = #{companyNo}
+			<if test="companyName != null &amp;&amp; companyName != ''">
+				and C.com_name like '%' || #{companyName} || '%'
 			</if>
 			<if test="flag != null &amp;&amp; flag != '' &amp;&amp; flag !='all'">
 				and P.pjt_flag = #{flag}
 			</if>
 				<choose>
-					<when test="startDate != null &amp;&amp; endDate == null || endDate == ''">
+					<when test="startDate != 'nodate' &amp;&amp; endDate == 'nodate'">
 						and 
 							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
 					</when>
-					<when test="endDate != null &amp;&amp; startDate == null || startDate == '' ">
+					<when test="endDate != 'nodate' &amp;&amp; startDate == 'nodate' ">
 						and 
 							P.pjt_end_date &lt;= to_date(#{endDate},'yyyy-mm-dd')
 					</when>
-					<when test="startDate != null &amp;&amp; startDate != ''&amp;&amp; endDate != null &amp;&amp; endDate != ''">
+					<when test="startDate != 'nodate' &amp;&amp; endDate != 'nodate'">
 						and
 							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
 						and 
@@ -113,22 +113,22 @@
 			<if test="title != null &amp;&amp; title != ''">
 				and P.pjt_title like '%' || #{title} || '%'
 			</if>
-			<if test="companyNo != 0">
-				and C.com_no = #{companyNo}
+			<if test="companyName != null &amp;&amp; companyName != ''">
+				and C.com_name like '%' || #{companyName} || '%'
 			</if>
 			<if test="flag != null &amp;&amp; flag != 'all'">
 				and P.pjt_flag = #{flag}
 			</if>
 				<choose>
-					<when test="startDate != null &amp;&amp; endDate == null || endDate == ''">
+					<when test="startDate != 'nodate' &amp;&amp; endDate == 'nodate'">
 						and 
 							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
 					</when>
-					<when test="endDate != null &amp;&amp; startDate == null || startDate == '' ">
+					<when test="endDate != 'nodate' &amp;&amp; startDate == 'nodate' ">
 						and 
 							P.pjt_end_date &lt;= to_date(#{endDate},'yyyy-mm-dd')
 					</when>
-					<when test="startDate != null &amp;&amp; startDate != ''&amp;&amp; endDate != null &amp;&amp; endDate != ''">
+					<when test="startDate != 'nodate' &amp;&amp; endDate != 'nodate'">
 						and
 							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
 						and 

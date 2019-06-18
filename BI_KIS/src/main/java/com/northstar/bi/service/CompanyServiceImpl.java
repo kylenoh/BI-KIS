@@ -16,6 +16,10 @@ public class CompanyServiceImpl implements CompanyService{
 	CompanyDao companyDao;
 	
 	@Override
+	public List<Customer> getCustomerListByCompanyNo(int companyNo) {
+		return companyDao.getCustomerListByCompanyNo(companyNo);
+	}
+	@Override
 	public List<Company> getCompanyList() {
 		return companyDao.getCompanyList();
 	}

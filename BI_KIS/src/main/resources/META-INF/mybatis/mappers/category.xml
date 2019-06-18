@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.northstar.bi.dao.CategoryDao">
+	<select id="getCategoryByCategoryNo" parameterType="int" resultType="Category">
+		select
+			cate_no			as no,
+			cate_type		as type,
+			cate_name		as name
+		from
+			bi_category
+		where
+			cate_no = #{value}
+	</select>
+	<select id="getRequestCategoryList" resultType="Category">
+		select
+			cate_no			as no,
+			cate_type		as type,
+			cate_name		as name
+		from
+			bi_category
+		where
+			cate_no between 101 and 200
+	</select>
+</mapper>

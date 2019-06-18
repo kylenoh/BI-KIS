@@ -28,8 +28,8 @@ function myPage(){
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li>BI 기술 지원</li>
-			  <li>프로젝트 관리</li>
-			  <li>프로젝트 등록</li>
+			  <li>기술 지원 이력</li>
+			  <li>기술 지원 등록</li>
 			</ul>
 		</div>
 		<div class="header-right">
@@ -47,33 +47,51 @@ function myPage(){
 		</div>
 	</div>
 	<div class="main">
-	    <form method="post" action="pjtadd" id="pjtForm">
+	    <form method="post" action="addRequest" id="requestForm">
             <fieldset>
-                <legend>프로젝트 등록</legend>
+                <legend>기술 지원 등록</legend>
                 <div id="addForm">
 	                <div>
-	                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
+	                    <label for="category">분류 명</label>
+	                    <select id="category" name="categoryNo">
+	                        <option value="all"></option>
+	                        <c:forEach var="category" items="${categoryList }">
+	                        	<option value="${category.no }">${category.name }</option>
+	                        </c:forEach>
+                    	</select>  
 	                </div>
 	                <div>
-	                    <label for="company">고객사 명</label>
-	                    <select id="company" name="companyNo">
-	                        <option value="all"></option>
-	                        <c:forEach var="comList" items="${companyList }">
-	                        	<option value="${comList.no }">${comList.name }</option>
-	                        </c:forEach>
-                    	</select>    
+	                    <label for="pjtNo">프로젝트 명</label>
+	                    <input type="text" id="pjtNo" name="pjtNo" placeholder="프로젝트를 입력해주세요">
 	                </div>
-	                <div id="PjtDate">
+	                <div>
+	                    <label for="companyName">고객사 명</label><input type="text" id="companyName" name="companyName" readonly="readonly">
+	                </div>
+	                <div>
+	                    <label for="customer">담당자 명</label>
+						<select id="customer" name="customerNo">
+	                        <option value="all">담당자 선택</option>
+                    	</select>
+	                </div>
+	                <div id="requestDate">
 	                    <label for="startDate">시작일</label><input type="date" id="startDate" name="startDate">    
 	                    <label for="endDate">종료일</label><input type="date" id="endDate" name="endDate">
 	                </div>
 	                <div>
-	                    <label for="content">내용</label>
-	                    <textarea id="content" name="content"></textarea>
+	                	<label for="flag">진행상황</label>
+		            	<select id="flag" name="flag">
+		            		<option value="Y">진행예정</option>
+		            		<option value="P">진 행 중</option>
+		            		<option value="N">종     료</option>
+		            	</select>
 	                </div>
 	                <div>
-	                	<label for="remark">비고</label>
-	                	<textarea id="remark" name="remark"></textarea>
+	                	<label for="suggest">요청 내용</label>
+	                	<textarea id="suggest" name="suggest"></textarea>
+	                </div>
+	                <div>
+	                	<label for="handle">처리 내용</label>
+	                	<textarea id="handle" name="handle"></textarea>
 	                </div>
 	                <button type="submit">등록</button>
                 </div>
@@ -83,4 +101,11 @@ function myPage(){
 </div>
 	
 </body>
+<script type="text/javascript">
+$(function(){
+	$("#addForm").on('focus','#pjtNo',function(){
+		$(this).attr('aria-autocomplete','list').attr('aria-expanded','false').attr('role','combobox').attr('autocomplete','off').attr('autocorrect','off');
+	})
+})
+</script>
 </html>

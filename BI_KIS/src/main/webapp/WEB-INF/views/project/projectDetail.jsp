@@ -60,7 +60,7 @@ function myPage(){
 	            </div>
 	            <div id="PjtDate">
 	                <label for="startDate">시작일</label><input type="date" id="startDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${pjt.startDate }"/>" disabled="disabled">    
-	                <label for="endDate">종료 예정일</label><input type="date" id="endDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${pjt.endDate }"/>" disabled="disabled">
+	                <label for="endDate">종료일</label><input type="date" id="endDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${pjt.endDate }"/>" disabled="disabled">
 	            </div>
 	            <div>
 	            	<label for="flag">진행상태</label>

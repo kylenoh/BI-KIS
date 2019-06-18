@@ -4,5 +4,5 @@ import com.northstar.bi.dto.Emp;
 
 public interface EmpService {
 
-	Emp getEmpById(Emp emp);
+	Emp getEmpById(String emp);
 }

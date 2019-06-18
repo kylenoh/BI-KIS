@@ -4,12 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,19 +30,16 @@ public class ProjectController {
 	@RequestMapping(value="/project")
 	public String project(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
 						@RequestParam(name="title", required=false)String title,
-						@RequestParam(name="companyNo", required=false,defaultValue="0")int companyNo,
-						@RequestParam(name="startDate", required=false)String startDate,
-						@RequestParam(name="endDate", required=false)String endDate,
+						@RequestParam(name="companyName", required=false)String companyName,
+						@RequestParam(name="startDate", required=false,defaultValue="nodate")String startDate,
+						@RequestParam(name="endDate", required=false,defaultValue="nodate")String endDate,
 						@RequestParam(name="flag", required=false)String flag,
-							HttpSession session, Model model, Criteria criteria) throws ParseException {
+							Model model, Criteria criteria) throws ParseException {
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
 		criteria.setTitle(title);
-		criteria.setCompanyNo(companyNo);
-		System.out.println("//////////////////");
-		System.out.println(startDate);
-		System.out.println(endDate);
+		criteria.setCompanyName(companyName);
 		criteria.setStartDate(startDate);
 		criteria.setEndDate(endDate);
 		criteria.setFlag(flag);
@@ -54,22 +48,20 @@ public class ProjectController {
 		Pagination pagination = new Pagination(totalRows, cp, rows);
 		
 		List<Project> pjtList = projectService.getProjectByCriteria(criteria);
-		List<Company> companyList = companyService.getCompanyList();
 		
-		model.addAttribute("companyList",companyList);
 		model.addAttribute("pjtList",pjtList);
 		model.addAttribute("pagination",pagination);
 		
 		return "project/project";
 	}
 	@RequestMapping(value="/addproject", method=RequestMethod.GET)
-	public String addProjectForm(HttpSession session, Model model) {
+	public String addProjectForm(Model model) {
 		List<Company> companyList = companyService.getCompanyList();
 		model.addAttribute("companyList",companyList);
 		return "project/pjtAddForm";
 	}
 	@RequestMapping(value="/pjtdetail")
-	public String pjtDetail(HttpSession session, Model model, int pjtNo) {
+	public String pjtDetail(Model model, int pjtNo) {
 		Project pjt = projectService.getProjectByNo(pjtNo);
 		
 		model.addAttribute("pjt",pjt);
@@ -81,8 +73,7 @@ public class ProjectController {
 							@RequestParam("startDate") String startDate,
 							@RequestParam(value="endDate",required=false) String endDate,
 							@RequestParam(value="content") String content,
-							@RequestParam(value="remark",required=false) String remark,
-							HttpSession session) throws ParseException {
+							@RequestParam(value="remark",required=false) String remark) throws ParseException {
 		Project project = new Project();
 		Company company = companyService.getCompanyByComNo(compnayNo);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -100,12 +91,12 @@ public class ProjectController {
 		return "redirect:/project";
 	}
 	@RequestMapping(value="/pjtdelete")
-	public String pjtdelete(HttpSession session, Model model,int pjtNo) {
+	public String pjtdelete(int pjtNo) {
 		projectService.deleteProject(pjtNo);
 		return "redirect:/project";
 	}
 	@RequestMapping(value="pjtmodify", method=RequestMethod.GET)	
-	public String pjtmodifyForm(HttpSession session, Model model,int pjtNo) {
+	public String pjtmodifyForm(Model model,int pjtNo) {
 		Project pjt = projectService.getProjectByNo(pjtNo);
 		List<Company> companyList = companyService.getCompanyList();
 		model.addAttribute("pjt",pjt);
@@ -120,8 +111,7 @@ public class ProjectController {
 							@RequestParam(value="endDate",required=false) String endDate,
 							@RequestParam(value="content") String content,
 							@RequestParam(value="remark",required=false) String remark,
-							@RequestParam("flag") String flag,
-							HttpSession session, Model model) throws ParseException {
+							@RequestParam("flag") String flag) throws ParseException {
 		Project pjt = projectService.getProjectByNo(pjtNo); 
 		Company company = companyService.getCompanyByComNo(compnayNo);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -136,9 +126,11 @@ public class ProjectController {
 		pjt.setFlag(flag);
 		if ("Y".equals(flag)) {
 			pjt.setMsg("진행예정");
-		} else if ("P".equals(flag)) {
+		}
+		if ("P".equals(flag)) {
 			pjt.setMsg("진행중");
-		} else {
+		}
+		if ("N".equals(flag)) {
 			pjt.setMsg("종료");
 		}
 		projectService.modifyProject(pjt);
