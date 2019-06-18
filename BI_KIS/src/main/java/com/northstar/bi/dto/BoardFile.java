@@ -7,18 +7,20 @@ public class BoardFile {
 	private String ID;
 	private String DUAL;
 	private String NAME;
+	private String FLAG;
 
 	public BoardFile() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardFile(int nO, int bOARD_NO, String iD, String dUAL, String nAME) {
+	public BoardFile(int nO, int bOARD_NO, String iD, String dUAL, String nAME, String fLAG) {
 		super();
 		NO = nO;
 		BOARD_NO = bOARD_NO;
 		ID = iD;
 		DUAL = dUAL;
 		NAME = nAME;
+		FLAG = fLAG;
 	}
 
 	public int getNO() {
@@ -60,8 +62,15 @@ public class BoardFile {
 	public void setNAME(String nAME) {
 		NAME = nAME;
 	}
-	
-	
+
+	public String getFLAG() {
+		return FLAG;
+	}
+
+	public void setFLAG(String fLAG) {
+		FLAG = fLAG;
+	}
+
 	
 	
 }

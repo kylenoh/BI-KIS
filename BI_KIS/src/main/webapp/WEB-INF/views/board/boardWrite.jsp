@@ -80,6 +80,9 @@
 function getList(){
 	location.href="board";
 }
+function deleteFile(obj){
+	obj.parent().remove();
+}
 </script>
 <script type="text/javascript">
 var file_count=1;
@@ -87,14 +90,15 @@ $(function(){
 
 	$("#addFile").on("click",function(e){
 		e.preventDefault();
-		
 		var str = "<p><input type='file' name='file_"+(file_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
-		$("#fileDiv").append(str);
-		$("a[name='delete']").on("click",function(e){
+		$("#fileDiv").append(str);	
+		$("a[name='delete']").on("click", function(e){
 			e.preventDefault();
-			$(this).parent().remove();
+			deleteFile($(this));
 		});
 	});
+	
+
 });
 </script>
 </body>

@@ -1,7 +1,9 @@
 package com.northstar.bi.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -83,7 +85,8 @@ public class BoardController {
 						 @RequestParam("TITLE") String title,
 						 @RequestParam("CONTENT") String content,
 						 @RequestParam("TYPE") String type,
-						 Board board, BoardFile boardFile, HttpSession session, MultipartHttpServletRequest files) {
+						 @RequestParam Map<String, String>map,
+						 Board board, BoardFile boardFile, HttpSession session, MultipartHttpServletRequest files,HttpServletRequest request) {
 		
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
 		
@@ -92,8 +95,9 @@ public class BoardController {
 		board.setID(User.getName());
 		board.setTITLE(title);
 		board.setCONTENT(content);
-		board.setUPDATER(User.getName());
-		boardService.updateBoardtoFile(board,boardFile,files,session);
+		board.setUPDATER(User.getName()); 
+		
+		boardService.updateBoard(board,boardFile,files,session,request);
 		return "redirect:/board";
 	}
 //	삭제 서비스 진입

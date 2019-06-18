@@ -6,9 +6,9 @@
 <mapper namespace="com.northstar.bi.dao.FileDao">
 	<insert id="insertFile" parameterType="BoardFile">
 		insert into BI_FILE
-		(FILE_NO,BOARD_NO,EMP_ID,FILE_DUAL,FILE_NAME)
+		(FILE_NO,BOARD_NO,EMP_ID,FILE_DUAL,FILE_NAME,FILE_FLAG)
 		values
-		(FILE_NO_SEQ.nextval, #{BOARD_NO}, #{ID}, #{DUAL}, #{NAME})
+		(FILE_NO_SEQ.nextval, #{BOARD_NO}, #{ID}, #{DUAL}, #{NAME}, #{FLAG})
 	</insert>
 	<select id="getFileByNo" parameterType="int" resultType="BoardFile">
 		select
@@ -16,11 +16,12 @@
 			BOARD_NO,
 			EMP_ID as ID,
 			FILE_DUAL as DUAL,
-			FILE_NAME as NAME
+			FILE_NAME as NAME,
+			FILE_FLAG as FLAG
 		from
 			BI_FILE
 		where
-			BOARD_NO = #{value}
+			BOARD_NO = #{value} and FILE_FLAG = 'N'
 	</select>
 	<select id="getFile" parameterType="int" resultType="BoardFile">
 		select
@@ -61,19 +62,19 @@
 		where
 			FILE_NO = #{value}
 	</delete>
-	<update id="deleteFileList" parameterType="BoardFile">
+	<update id="deleteFileList" parameterType="int">
 		UPDATE 
 			BI_FILE 
 		SET
-			DEL_GB = 'Y' 
-		WHERE BOARD_IDX = #{IDX}
+			FILE_FLAG = 'Y' 
+		WHERE BOARD_NO = #{value}
 	</update>
-	<update id="updateFile" parameterType="BoardFile"> 
+	<update id="updateFile" parameterType="int"> 
 		UPDATE 
 			BI_FILE 
 		SET 
-			DEL_GB = 'N' 
-		WHERE IDX = #{FILE_IDX}
+			FILE_FLAG = 'N' 
+		WHERE FILE_NO = #{value}
 	</update>
 
 </mapper>

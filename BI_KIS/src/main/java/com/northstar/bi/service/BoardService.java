@@ -2,6 +2,7 @@ package com.northstar.bi.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,8 +19,7 @@ public interface BoardService {
 	List<Board> getBoardList (BoardCriteria criteria, int cp);
 	Board getBoardByNo (int no);
 //	Update
-	void updateBoard(Board board);
-	void updateBoardtoFile(Board board,BoardFile boardFile,MultipartHttpServletRequest files, HttpSession session);
+	void updateBoard(Board board,BoardFile boardFile,MultipartHttpServletRequest files, HttpSession session,HttpServletRequest request);
 //	Delete
 	void deleteBoard(int no);
 //	DeleteFile

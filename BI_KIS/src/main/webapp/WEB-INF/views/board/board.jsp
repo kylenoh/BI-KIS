@@ -107,7 +107,7 @@ function getBoardDetail(NO){
 	
 	<div class="footer">
 		<div align="center">
-		<c:if test="${!empty board }">
+		<c:if test="${!empty boards }">
 			<c:if test="${pagination.cb gt 1 }">
 				<a href="board?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 			</c:if>
