@@ -67,6 +67,15 @@ function myPage(){
 	                    <label for="startDate">시작일</label><input type="date" id="startDate" name="startDate">    
 	                    <label for="endDate">종료일</label><input type="date" id="endDate" name="endDate">
 	                </div>
+	                <div id="emp-area">
+	                	<label>담당자</label>
+	                	<select id="emp">
+	                		<option></option>
+	                		<c:forEach var="emp" items="${empList }">
+	                			<option id="emp-id-${emp.id }" value="${emp.id }">${emp.name }</option>
+	                		</c:forEach>
+	                	</select>
+	                </div>
 	                <div>
 	                    <label for="content">내용</label>
 	                    <textarea id="content" name="content"></textarea>
@@ -83,4 +92,32 @@ function myPage(){
 </div>
 	
 </body>
+<script type="text/javascript">
+	$(function(){
+		$('#emp').on('change',function(){
+			var empId = $(this).val();
+			var row ="";
+			var hidden = "";
+			$.ajax({
+				url: "getEmpByEmpIdInfo",
+				data: {empId:empId},
+				dataType: 'json',
+				success:function(result){
+					row += '<div style="display:inline-block; width: auto !important;">';
+					row += '<span>' + result.name + '</span>';
+					row += '<a id="emp-info-' + result.id +'" class="close" href="javascript:void(0)"> x </a>';
+					row += '<input type="hidden" name="emp-info" value="' + result.id + '">';
+					row += '</div>';
+					
+					$('#emp').find('option:first').prop('selected', 'selected');
+					$('#emp-area').append(row);
+				}
+			});
+			
+		});
+		$('#emp-area').on('click','[id^=emp-info-]',function(){
+			$(this).parent().remove();
+		})
+	});
+</script>
 </html>

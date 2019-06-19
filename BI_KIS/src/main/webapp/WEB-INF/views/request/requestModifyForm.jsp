@@ -105,4 +105,27 @@ function myPage(){
 </div>
 	
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#pjtNo').on('change',function(){
+		var projectNo = $(this).val();
+		$.ajax({
+			url: "getCustomerByProjectInfo",
+			data: {projectNo:projectNo},
+			dataType: 'json',
+			success:function(results){
+				var rows = "";
+				rows += '<option value="all">담당자 선택</option>';
+				$.each(results, function(index, result){
+					rows += '<option value="' + result.no + '" >';
+					rows += result.name + '</option>';
+				});
+				$('#companyName').val(results[0].company.name);
+				$('#customer').children().remove();
+				$('#customer').append(rows);
+			}
+		})
+	});
+})
+</script>
 </html>

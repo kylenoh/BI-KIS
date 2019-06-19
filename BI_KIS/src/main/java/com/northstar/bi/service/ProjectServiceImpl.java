@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.northstar.bi.dao.ProjectDao;
+import com.northstar.bi.dto.ConPro;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Project;
 
@@ -15,6 +16,18 @@ public class ProjectServiceImpl implements ProjectService{
 	@Autowired
 	ProjectDao projectDao;
 	
+	@Override
+	public void addEmpPro(List<String> empIds) {
+		for (String empId : empIds) {
+			ConPro conPro = new ConPro();
+			conPro.setEmpId(empId);
+			projectDao.addEmpPro(conPro);
+		}
+	}
+	@Override
+	public List<Project> getProjectList() {
+		return projectDao.getProjectList();
+	}
 	@Override
 	public List<Project> getProjectByCriteria(Criteria criteria) {
 		return projectDao.getProjectByCriteria(criteria);

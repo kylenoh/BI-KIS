@@ -75,14 +75,14 @@ function myPage(){
 	            	</c:if>
 	            </div>
 	            <div>
-	                <label for="content">내용</label>
-	                <textarea id="content" disabled="disabled">${pjt.content }</textarea>
-	            </div>
-	            <div>
 	            	<label for="customer">담당자</label>
 	            	<c:forEach var="emp" items="${pjt.emps }">
 	            		<input type="text" value="${emp.name}" disabled="disabled">
 	            	</c:forEach>
+	            </div>
+	            <div>
+	                <label for="content">내용</label>
+	                <textarea id="content" disabled="disabled">${pjt.content }</textarea>
 	            </div>
 	            <div>
 	            	<label for="remark">비고</label>

@@ -16,6 +16,21 @@
 		<result column="cus_remark" property="remark"/>
 		<association property="company" column="com_no" javaType="Company" select="getCompanyByComNo"/>
 	</resultMap>
+	<select id="getCompanyByProjectNo" parameterType="int" resultType="Company">
+		select
+			C.com_no			as no,
+			C.com_name			as name,
+			C.com_owner			as owner,
+			C.com_tel			as tel,
+			C.com_addr			as addr,
+			C.com_remark		as remark
+		from
+			bi_project P , bi_company C
+		where
+			P.com_no = C.com_no
+		and
+			P.pjt_no = #{value} 
+	</select>
 	<select id="getCustomerListByCompanyNo" parameterType="int" resultMap="getCustomerResultMap">
 		select
 			cus_no,

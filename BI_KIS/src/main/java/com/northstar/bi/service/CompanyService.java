@@ -8,6 +8,7 @@ import com.northstar.bi.dto.Customer;
 
 public interface CompanyService {
 
+	Company getCompanyByProjectNo(int projectNo);
 	List<Customer> getCustomerListByCompanyNo(int companyNo);
 	List<Company> getCompanyList();
 	List<Company> getCompanyByCriteria(Criteria criteria);

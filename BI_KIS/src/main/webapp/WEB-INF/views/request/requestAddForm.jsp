@@ -60,9 +60,14 @@ function myPage(){
 	                        </c:forEach>
                     	</select>  
 	                </div>
-	                <div id="dropdownArea">
+	                <div>
 	                    <label for="pjtNo">프로젝트 명</label>
-	                    <input type="text" id="pjtNo" name="pjtNo" placeholder="프로젝트를 입력해주세요">
+	                    <select id="pjtNo" name="pjtNo">
+	                    	<option value="all"></option>
+	                    	<c:forEach var="project" items="${projectList }">
+	                    		<option value="${project.no }">${project.title }</option>
+	                    	</c:forEach>
+	                    </select>
 	                </div>
 	                <div>
 	                    <label for="companyName">고객사 명</label><input type="text" id="companyName" name="companyName" readonly="readonly">
@@ -79,7 +84,7 @@ function myPage(){
 	                </div>
 	                <div>
 	                	<label for="flag">진행상황</label>
-		            	<select id="flag" name="flag">
+		            	<select id="flag" name="flag">  
 		            		<option value="Y">진행예정</option>
 		            		<option value="P">진 행 중</option>
 		            		<option value="N">종     료</option>
@@ -103,27 +108,24 @@ function myPage(){
 </body>
 <script type="text/javascript">
 $(function(){
-	$("#addForm").on('focus','#pjtNo',function(){
-		$(this).attr('aria-autocomplete','list').attr('aria-expanded','false').attr('role','combobox').attr('autocomplete','off').attr('autocorrect','off');
-	});
-	$('#addForm').on('keyup','#pjtNo',function(){
+	$('#pjtNo').on('change',function(){
+		var projectNo = $(this).val();
 		$.ajax({
-			url: "searchProject",
-			data: {keyword:$('#pjtNo').val()},
+			url: "getCustomerByProjectInfo",
+			data: {projectNo:projectNo},
 			dataType: 'json',
-			success: function(projects){
-				var row ="";
-				row += '<ul class="dropdown-menu" style="top:auto; left:auto">';
-				$.each(projects, function(index, project){
-					row += '<li id="project-drop-' + project.no + '">';
-					row += '<a href="javascript:void(0)">';
-					row += project.title + '</a></li>';
-				})
-				row += '</ul>';
-				$('#dropdownArea').children('ul').remove();
-				$('#dropdownArea').append(row);
+			success:function(results){
+				var rows = "";
+				rows += '<option value="all">담당자 선택</option>';
+				$.each(results, function(index, result){
+					rows += '<option value="' + result.no + '" >';
+					rows += result.name + '</option>';
+				});
+				$('#companyName').val(results[0].company.name);
+				$('#customer').children().remove();
+				$('#customer').append(rows);
 			}
-		});
+		})
 	});
 })
 </script>

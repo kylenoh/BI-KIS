@@ -7,6 +7,8 @@ import com.northstar.bi.dto.Project;
 
 public interface ProjectService {
 
+	void addEmpPro(List<String> empId);
+	List<Project> getProjectList();
 	List<Project> getProjectByCriteria (Criteria criteria);
 	Project getProjectByNo(int pjtNo);
 	void addProject(Project project);
