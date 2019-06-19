@@ -17,6 +17,32 @@
 		<association property="company" column="com_no" javaType="Company" select="com.northstar.bi.dao.CompanyDao.getCompanyByComNo"/>
 		<collection property="emps" column="pjt_no" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
 	</resultMap>
+	<insert id="addEmpPro" parameterType="ConPro">
+		<selectKey keyProperty="pjtNo" resultType="int" order="BEFORE">
+			select bi_project_seq.currval from dual
+		</selectKey>
+		insert into bi_con_pro
+			(emp_id, pjt_no)
+		values
+			(#{empId}, #{pjtNo})
+	</insert>
+	<select id="getProjectList" resultType="Project">
+		select
+			P.pjt_no				as no,
+			C.com_no				as "company.no",
+			C.com_name				as "company.name",
+			P.pjt_title				as title,
+			P.pjt_start_date		as startDate,
+			P.pjt_end_date			as endDate,
+			P.pjt_content			as content,
+			P.pjt_remark			as remark,
+			P.pjt_flag				as flag,
+			P.pjt_msg				as msg
+		from
+			bi_project P, bi_company C
+		where
+			P.com_no = C.com_no
+	</select>
 	<select id="getProjectCount" parameterType="Criteria" resultType="int">
 		select
 			count(*)

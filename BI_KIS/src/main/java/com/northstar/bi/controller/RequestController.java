@@ -70,8 +70,10 @@ public class RequestController {
 	@RequestMapping(value="addRequest", method=RequestMethod.GET)
 	public String addRequestForm(Model model) {
 		List<Category> categoryList = categoryService.getRequestCategoryList();
+		List<Project> projectList = projectservice.getProjectList();
 		
 		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("projectList",projectList);
 		return "request/requestAddForm";
 	}
 	@RequestMapping(value="requestDetail")
