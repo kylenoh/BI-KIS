@@ -22,8 +22,8 @@ function myPage(){
 function moveWrite(){
 	location.href = "boardWrite";
 }
-function getBoardDetail(NO){
-	location.href = "boardDetail?NO="+NO;
+function getBoardDetail(no){
+	location.href = "boardDetail?no="+no;
 }
 </script>
 </head>
@@ -34,7 +34,13 @@ function getBoardDetail(NO){
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li><a href="#">BI 기술 정보</a></li>
-			  <li><a href="#">문서</a></li>
+			  <li>
+			  	<a href="#">
+				  	<c:if test="${category eq 1}">문서</c:if>
+				  	<c:if test="${category eq 2}">교육</c:if>
+				  	<c:if test="${category eq 3}">영어</c:if>
+			  	</a>
+			  </li>
 			</ul>
 		</div>
 		<div class="header-right">
@@ -53,14 +59,15 @@ function getBoardDetail(NO){
 	</div>
 	
 	<div class="main">
-		<fieldset>
-			<legend>검색라인</legend>
-			<label for="title">제목</label><input type="text" id="title">
-			<label for="writer">작성자</label><input type="text" id="writer">
-			<button>Search</button>
-		</fieldset>
-		
-		<button class="write" onclick="moveWrite()">글쓰기</button>
+		<form action="board" method="POST" >
+			<fieldset>
+				<legend>검색라인</legend>
+				<label for="title">제목</label><input type="text" id="title" name="title">
+				<label for="writer">작성자</label><input type="text" id="writer" name="writer">
+				<button type="submit">Search</button>
+			</fieldset>
+		</form>
+		<button class="write" onclick="moveWrite(${category})">글쓰기</button>
 		
 		<table border="1">
 			<colgroup>
@@ -98,9 +105,6 @@ function getBoardDetail(NO){
 						</tr>					
 					</c:otherwise>
 				</c:choose>
-
-					
-					
 			</tbody>
 		</table>
 	</div>

@@ -16,7 +16,7 @@ public interface BoardService {
 	void insertBoard(Board board,BoardFile boardfile,MultipartHttpServletRequest files,HttpSession session);
 //	Select
 	int getTotalRows (BoardCriteria criteria);
-	List<Board> getBoardList (BoardCriteria criteria, int cp);
+	List<Board> getBoardList (BoardCriteria criteria);
 	Board getBoardByNo (int no);
 //	Update
 	void updateBoard(Board board,BoardFile boardFile,MultipartHttpServletRequest files, HttpSession session,HttpServletRequest request);

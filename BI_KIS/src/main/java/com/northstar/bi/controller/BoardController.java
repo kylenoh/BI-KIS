@@ -20,7 +20,9 @@ import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
 import com.northstar.bi.dto.BoardFile;
 import com.northstar.bi.dto.BoardPagination;
+import com.northstar.bi.dto.BoardReply;
 import com.northstar.bi.dto.Emp;
+import com.northstar.bi.service.BoardReplyService;
 import com.northstar.bi.service.BoardService;
 import com.northstar.bi.service.FileService;
 
@@ -29,16 +31,55 @@ import com.northstar.bi.service.FileService;
 public class BoardController {
 
 	@Autowired BoardService boardService;
+	@Autowired BoardReplyService replyService;
 	@Autowired FileService fileService;
 //	게시판 진입 시, 페이지
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public String Board(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
+						@RequestParam(name="title", required=false) String title,
+						@RequestParam(name="writer", required=false) String writer,
+						@RequestParam(name="CATE", required=false,defaultValue = "0") String cate,
 						Model model,BoardCriteria criteria) {
-		List<Board> boards = boardService.getBoardList(criteria, cp);
+		
+		int rows = 10;
+		criteria.setBeginIndex((cp-1) * rows + 1);
+		criteria.setEndIndex(cp * rows);
+		criteria.setTITLE(title);
+		criteria.setID(writer);
+		criteria.setCATE(cate);
+	
 		int totalRows = boardService.getTotalRows(criteria);
-		BoardPagination pagination = new BoardPagination(totalRows, cp, 5);
+		BoardPagination pagination = new BoardPagination(totalRows, cp, rows);
+
+		List<Board> boards = boardService.getBoardList(criteria);
+		System.out.println(criteria.getCATE());
+		model.addAttribute("boards", boards);
+		model.addAttribute("category",cate);
+		model.addAttribute("pagination", pagination);
+		return "board/board";
+	}
+	
+	@RequestMapping(value = "/board", method = RequestMethod.POST)
+	public String PostBoard(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
+						@RequestParam(name="title", required=false) String title,
+						@RequestParam(name="writer", required=false) String writer,
+						@RequestParam(name="CATE", required=false,defaultValue = "0") String cate,
+						Model model,BoardCriteria criteria) {
+		
+		int rows = 10;
+		criteria.setBeginIndex((cp-1) * rows + 1);
+		criteria.setEndIndex(cp * rows);
+		criteria.setTITLE(title);
+		criteria.setID(writer);
+		criteria.setCATE(cate);
+		
+		int totalRows = boardService.getTotalRows(criteria);
+		BoardPagination pagination = new BoardPagination(totalRows, cp, rows);
+
+		List<Board> boards = boardService.getBoardList(criteria);
 		
 		model.addAttribute("boards", boards);
+		model.addAttribute("category",cate);
 		model.addAttribute("pagination", pagination);
 		return "board/board";
 	}
@@ -49,10 +90,12 @@ public class BoardController {
 	}
 //	게시글 디테일 진입
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
-	public String BoardDetail(@RequestParam("NO") int no,
-							  Model model) {
+	public String BoardDetail(@RequestParam("no") int no,
+							  BoardReply reply,Model model) {
 		Board board = boardService.getBoardByNo(no);
+		List<BoardReply>replys = replyService.getReplyList(no);
 		model.addAttribute("Board",board);
+		model.addAttribute("replys",replys);
 		return "board/boardDetail";
 	}
 //	게시글 업데이트 진입
@@ -109,10 +152,9 @@ public class BoardController {
 //	파일 삭제
 	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
 	public @ResponseBody BoardFile repUserAjax(@RequestParam("no") int no) {
-		System.out.println("컨트롤러 호출");
 		return boardService.deleteFile(no);
 	}
-	
+//	파일 다운로드
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
 	public void download(@RequestParam("idx")int no,
 						BoardFile boardfile,
@@ -120,4 +162,25 @@ public class BoardController {
 		boardfile.setNO(no);
 		fileService.selectFileInfo(boardfile,no,response);
 	}
+//	댓글 작성
+	@RequestMapping(value = "/replyWrite", method = RequestMethod.GET)
+	public @ResponseBody String ReplyWrite(@RequestParam("no")int no,
+										   @RequestParam("name")String name,
+										   @RequestParam("content")String content,
+										   BoardReply reply,Model model,HttpSession session) {
+		System.out.println("삽입왔어요");
+		reply.setBOARD_NO(no);
+		reply.setCONTENT(content);
+		reply.setID(name);
+		replyService.insertBoardReply(reply);
+		return "board/boardDetail";
+	}
+//	댓글 삭제
+	@RequestMapping(value = "/deleteReply", method = RequestMethod.GET)
+	public @ResponseBody String deleteReply(@RequestParam("no")int no) {
+		System.out.println("여기왔어요");
+		replyService.deleteBoardReply(no);
+		return "board/boardDetail";
+	}
+	
 }

@@ -16,7 +16,8 @@
 		<result column="BOARD_FLAG" property="FLAG"/>
 		<result column="BOARD_UPDATER" property="UPDATER"/>
 		<result column="BOARD_UPDATE_DATE" property="UPDATE_DATE"/>
-		<collection property="FILES" column="BOARD_NO" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.FileDao.getFileByNo"/>
+		<collection property="FILES" column="BOARD_NO" javaType="java.util.ArrayList" ofType="BoardFile" select="com.northstar.bi.dao.FileDao.getFileByNo"/>
+		<collection property="REPLYS" column="BOARD_NO" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.BoardReplyDao.getReplybyNo"/>
 	</resultMap>
 	
 	
@@ -32,13 +33,39 @@
 	</insert>
 	
 	<select id="getTotalRows" resultType="int">
-		select count(*)	from BI_BOARD order by BOARD_NO desc
+		select 
+			count(*)
+		from
+			BI_BOARD A, BI_CATEGORY B 
+		where
+			A.CATE_NO = B.CATE_NAME
+			<if test="TITLE != null &amp;&amp; TITLE !=''">
+				and A.BOARD_TITLE like '%' || #{TITLE} || '%'
+			</if>
+			<if test="ID != null &amp;&amp; ID !=''">
+				and A.EMP_ID like '%' || #{ID} || '%'
+			</if>
+			<if test="CATE != 0">
+			<choose>
+					<when test="CATE == 1">
+						and B.CATE_NAME = '문서'
+					</when>
+					<when test="CATE == 2">
+						and B.CATE_NAME = '교육'
+					</when>
+					<when test="CATE == 3">
+						and B.CATE_NAME = '영어'
+					</when>
+				</choose>
+			</if>
+		order by BOARD_NO desc
 	</select>
 	
 	<select id="getBoardList" parameterType="BoardCriteria" resultType="Board">
 		select 
 				BOARD_NO as NO,
 				CATE_NO as CATE,
+				CATE_NAME,
 				EMP_ID as ID,
 				BOARD_TITLE as TITLE,
 				BOARD_CREATE_DATE as CREATE_DATE,
@@ -50,11 +77,41 @@
 		from 
 			(
 				select
-					A.*,
+					A.BOARD_NO,
+					B.CATE_NO,
+					B.CATE_NAME,
+					A.EMP_ID,
+					A.BOARD_TITLE,
+					A.BOARD_CREATE_DATE,
+					A.BOARD_CONTENT,
+					A.BOARD_COUNT,
+					A.BOARD_FLAG,
+					A.BOARD_UPDATER,
+					A.BOARD_UPDATE_DATE,
 					row_number() over (order by BOARD_NO desc) rn
 				from
-					BI_BOARD A
-				
+					BI_BOARD A, BI_CATEGORY B
+				where
+					A.CATE_NO = B.CATE_NAME
+					<if test="TITLE != null &amp;&amp; TITLE !=''">
+						and A.BOARD_TITLE like '%' || #{TITLE} || '%'
+					</if>
+					<if test="ID != null &amp;&amp; ID !=''">
+						and A.EMP_ID like '%' || #{ID} || '%'
+					</if>
+					<if test="CATE != 0">
+						<choose>
+							<when test="CATE == 1">
+								and CATE_NAME = '문서'
+							</when>
+							<when test="CATE == 2">
+								and CATE_NAME = '교육'
+							</when>
+							<when test="CATE == 3">
+								and CATE_NAME = '영어'
+							</when>
+						</choose>
+						</if>	
 			)
 		where
 			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	and BOARD_FLAG = 'Y'

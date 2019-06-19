@@ -15,8 +15,12 @@ public class Board {
 	private String UPDATE_DATE;
 	
 	
+	
 //	외부 데이터
+	private String CATE_NAME;
+	
 	private List<BoardFile>FILES;
+	private List<BoardReply>REPLYS;
 	
 	
 	public Board() {
@@ -25,7 +29,8 @@ public class Board {
 
 
 	public Board(int nO, String cATE, String iD, String tITLE, String cREATE_DATE, String cONTENT, int cOUNT,
-			String fLAG, String uPDATER, String uPDATE_DATE, List<BoardFile> fILES) {
+			String fLAG, String uPDATER, String uPDATE_DATE, String cATE_NAME, List<BoardFile> fILES,
+			List<BoardReply> rEPLYS) {
 		super();
 		NO = nO;
 		CATE = cATE;
@@ -37,7 +42,9 @@ public class Board {
 		FLAG = fLAG;
 		UPDATER = uPDATER;
 		UPDATE_DATE = uPDATE_DATE;
+		CATE_NAME = cATE_NAME;
 		FILES = fILES;
+		REPLYS = rEPLYS;
 	}
 
 
@@ -141,6 +148,16 @@ public class Board {
 	}
 
 
+	public String getCATE_NAME() {
+		return CATE_NAME;
+	}
+
+
+	public void setCATE_NAME(String cATE_NAME) {
+		CATE_NAME = cATE_NAME;
+	}
+
+
 	public List<BoardFile> getFILES() {
 		return FILES;
 	}
@@ -150,6 +167,16 @@ public class Board {
 		FILES = fILES;
 	}
 
-	
 
+	public List<BoardReply> getREPLYS() {
+		return REPLYS;
+	}
+
+
+	public void setREPLYS(List<BoardReply> rEPLYS) {
+		REPLYS = rEPLYS;
+	}
+
+
+	
 }

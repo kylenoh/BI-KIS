@@ -7,6 +7,7 @@ public class BoardPagination {
 	private int cp;					// 현재 페이지번호
 	private int cb;					// 현재 블록번호
 	private int totalRows;			// 전체 데이터갯수
+	private String cate;			// 현재 페이지 명
 	
 	private int totalPages;			// 전체 페이지 갯수
 	private int totalBlocks;		// 전체 블록 갯수
@@ -67,6 +68,14 @@ public class BoardPagination {
 		
 	}
 	
+
+	public String getCate() {
+		return cate;
+	}
+
+	public void setCate(String cate) {
+		this.cate = cate;
+	}
 
 	public int getPages() {
 		return pages;
