@@ -6,7 +6,7 @@
 			<span id="myPage" onclick="myPage();" class="dropbtn"><i class="fas fa-cog">마이페이지</i></span>
 		</li>
 		<li>
-			<span><i class="fas fa-sign-in-alt">로그아웃</i></span>
+			<span><i class="fas fa-sign-in-alt"><a href="logout" class="no-link">로그아웃</a></i></span>
 		</li>
 	</ul>
     <div id="myDropdown" class="dropdown-content">

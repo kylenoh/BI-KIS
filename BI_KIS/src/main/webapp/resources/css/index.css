@@ -55,7 +55,7 @@ h3, h2, h1 {
 }
 
 .userInterface li {
-	display: inline;
+	display: inline-block;
 	padding: 10px 10px;
 }
 

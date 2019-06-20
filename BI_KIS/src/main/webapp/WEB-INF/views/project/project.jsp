@@ -61,7 +61,7 @@
 			<tbody>
 				<c:forEach var="project" items="${pjtList }">
 				<tr>
-					<td><a href="pjtdetail?pjtNo=${project.no }">${project.title }</a></td>
+					<td><a class="no-link" href="pjtdetail?pjtNo=${project.no }">${project.title }</a></td>
 					<td>${project.company.name }</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${project.startDate }"/>
 					  ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${project.endDate }"/></td>

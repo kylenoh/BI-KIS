@@ -58,7 +58,7 @@
 			<tbody>
 				<c:forEach var="company" items="${companyList }">
 					<tr>
-						<td><a href="companyDetail?companyNo=${company.no}&customerNo=${company.customer.no}">${company.name}</a></td>
+						<td><a class="no-link" href="companyDetail?companyNo=${company.no}&customerNo=${company.customer.no}">${company.name}</a></td>
 						<td>${company.customer.name }</td>
 						<td>${company.customer.tel1 }</td>
 						<td>${company.customer.email }</td>

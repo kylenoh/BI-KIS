@@ -72,7 +72,7 @@
 				<c:forEach var="request" items="${requestList }">
 				<tr>
 					<td>${request.category.name }</td>
-					<td><a href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
+					<td><a class="no-link" href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
 					<td>${request.project.company.name }</td>
 					<td>${request.project.title }</td>
 					<td>${request.customer.name }</td>
