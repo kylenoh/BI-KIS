@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.northstar.bi.dao.PropertyDao">
+	<insert id="register" parameterType="Property">
+		insert into BI_PROP
+		(PROP_NO,EMP_ID,PROP_NAME,PROP_CODE,PROP_DATE,PROP_REMARK,PROP_BUY_DATE)
+		values
+		(BI_PROPERTY_SEQ.nextval, #{ID}, #{PROP_NAME}, #{CODE}, #{DATE}, #{REMARK}, #{BUY_DATE})
+	</insert>
+	<select id="getTotalRows">
+		select 
+			count(*)
+		from
+			BI_PROP
+	</select>
+	<select id="getPropertyList">
+	select 
+				PROP_NO as NO,
+				EMP_ID as ID,
+				PROP_NAME as PROP_NAME,
+				PROP_CODE as CODE,
+				PROP_DATE as DATE,
+				PROP_REMARK as REMARK,
+				PROP_BUY_DATE as BUY_DATE
+		from 
+			(
+				select
+					PROP_NO,
+					EMP_ID,
+					PROP_NAME,
+					PROP_CODE,
+					PROP_DATE,
+					PROP_REMARK,
+					PROP_BUY_DATE,
+					row_number() over (order by PROP_NO desc) rn
+				from
+					BI_PROP
+				
+			)
+		where
+			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}
+		order by
+			DATE desc	
+	</select>
+</mapper>
+
+

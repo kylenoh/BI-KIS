@@ -49,6 +49,7 @@ $(function(){
 		<div class="main-inner">
 				
 			<form method="post" action="boardUpdate">
+			<input type="hidden" name="cate" value="${category }">
 				<input type="hidden" name="NO" value="${Board.NO }">
 			  <div class="container">
 			  	<div class="container-header">
@@ -89,7 +90,7 @@ $(function(){
 				</div>
 				<div class="container-footer">
 			    	<button type="submit" class="writebtn">수정</button>
-			    	<button type="button" class="writebtn" onclick="DELETE(${Board.NO })">삭제</button>
+			    	<button type="button" class="writebtn" onclick="DELETE(${Board.NO },${category })">삭제</button>
 			    	<button type="button" class="writebtn" onclick="getList()">목록</button>
 			    </div>
 			  </div>
@@ -101,10 +102,9 @@ $(function(){
 						<button onclick="replyWrite('${Board.NO }','${sessionScope.LOGIN_EMP.name}')">등록</button>
 				</c:if>
 				<c:forEach var="reply" items="${Board.REPLYS }">
-					<div id="reply_${reply.NO }">
-							<p id="seperate">
-								<span>${reply.CONTENT }</span>
-								${reply.ID }&nbsp;&nbsp;${reply.CREATE_DATE }
+					<div id="replyList">
+							<p>
+								<span name="reply_0">${reply.CONTENT }${reply.ID }&nbsp;&nbsp;${reply.CREATE_DATE }</span>
 								<button onclick="deleteReply(${reply.NO })">삭제</button>
 							</p>
 					</div>
@@ -116,6 +116,12 @@ $(function(){
 	</div>
 </div>
 <script type="text/javascript">
+$(function(){
+	var reply_count=1;
+	
+	
+});
+
 function replyWrite(boardNo,id){
 	var content = $("#content").val();
 	var name = id;
@@ -126,9 +132,8 @@ function replyWrite(boardNo,id){
 		url: "replyWrite",
 		data:{no:no,name:name,content:content},
 		success: function(result){
-			$("#content").empty();
-			var row = "<span>"+content+"</span>"+name+"&nbsp;&nbsp;"+"<button onclick='deleteReply()'>삭제</button>";
-			$("#seperate").append(row);		
+			var row = "<p><span name='reply_"+(reply_count++)+"'>"+content+"</span>"+name+"&nbsp;&nbsp;"+"<button onclick='deleteReply()'>삭제</button></p>";
+			$("#replyList").append(row);
 		}
 	});
 }
@@ -138,13 +143,13 @@ function deleteReply(value){
 		url: "deleteReply",
 		data:{no:value},
 		success: function(result){
-			$("#reply_"+value).remove();
+			$(this).parent().remove();
 		}
 	});
 }
-function DELETE(no){
+function DELETE(no,cate){
 	if (confirm("정말 삭제하시겠습니까?")) {
-		location.href = "delete?no="+no;
+		location.href = "delete?no="+no+"&cate="+cate;
 	}
 }
 function getList(){

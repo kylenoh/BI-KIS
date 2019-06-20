@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
+import com.northstar.bi.dto.BoardReply;
 
 
 public interface BoardDao {
@@ -18,4 +19,13 @@ public interface BoardDao {
 	void updateCnt(int no);
 //	Delete
 	void deleteBoard(int no);
+	
+//	Reply
+//	Insert
+	void insertBoardReply(BoardReply reply);
+//	Select
+	List<BoardReply> getReplybyNo (int no);
+//	Delete
+	void deleteBoardReply(int no);
+	
 }
