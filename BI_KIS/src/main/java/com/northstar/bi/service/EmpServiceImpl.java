@@ -16,6 +16,10 @@ public class EmpServiceImpl implements EmpService{
 	@Autowired
 	EmpDao empDao;
 	@Override
+	public void updateEmp(Emp emp) {
+		empDao.updateEmp(emp);
+	}
+	@Override
 	public List<Auth> getAuthList() {
 		return empDao.getAuthList();
 	}

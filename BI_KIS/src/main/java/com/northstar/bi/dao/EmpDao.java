@@ -8,6 +8,7 @@ import com.northstar.bi.dto.Emp;
 
 public interface EmpDao {
 
+	void updateEmp(Emp emp);
 	List<Auth> getAuthList();
 	int getEmpCount(Criteria criteria);
 	List<Emp> getEmpByCriteria(Criteria criteria);
