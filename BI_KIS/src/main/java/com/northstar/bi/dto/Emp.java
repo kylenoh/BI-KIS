@@ -3,7 +3,7 @@ package com.northstar.bi.dto;
 public class Emp {
 
 	private String id;
-	private int authNo;
+	private Auth auth;
 	private String password;
 	private String name;
 	private String rank;
@@ -22,12 +22,12 @@ public class Emp {
 		this.id = id;
 	}
 
-	public int getAuthNo() {
-		return authNo;
+	public Auth getAuth() {
+		return auth;
 	}
 
-	public void setAuthNo(int authNo) {
-		this.authNo = authNo;
+	public void setAuth(Auth auth) {
+		this.auth = auth;
 	}
 
 	public String getPassword() {

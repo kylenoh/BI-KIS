@@ -23,6 +23,7 @@
 		<typeAlias type="com.northstar.bi.dto.Category" alias="Category"/>
 		<typeAlias type="com.northstar.bi.dto.Request" alias="Request"/>
 		<typeAlias type="com.northstar.bi.dto.ConPro" alias="ConPro"/>
+		<typeAlias type="com.northstar.bi.dto.Auth" alias="Auth"/>
 	</typeAliases>
 	
 	<mappers>

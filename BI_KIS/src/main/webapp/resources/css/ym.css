@@ -40,7 +40,7 @@
 }
 .sidenav {
   height: 100%;
-  width: 20%;
+  width: 15%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -94,7 +94,7 @@
   float: right;
   padding-right: 40px;
 }
-#pjtForm div, #companyForm div, #customerForm div, #requestForm div{
+#searchForm div{
     display: inline-block;
     width:49%;
 }

@@ -23,7 +23,7 @@ public class CompanyController {
 	CompanyService companyService;
 	
 	@RequestMapping(value="/company")
-	public String project(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
+	public String company(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
 						@RequestParam(name="name", required=false)String name,
 						@RequestParam(name="customerName", required=false)String customerName,
 						@RequestParam(name="email", required=false)String email,

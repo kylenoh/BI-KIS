@@ -39,6 +39,10 @@ public class MainController {
 		session.setAttribute("LOGIN_EMP", emp);
 		return "redirect:/project";
 	}
-
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("LOGIN_EMP");
+		return "main";
+	}
 	
 }
