@@ -5,25 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/ym.css">
-<link rel="stylesheet" href="resources/css/sh.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<%@include file="../style.jsp" %>
 <title>Insert title here</title>
 <script type="text/javascript">
-function myPage(){
-	var condition = $('#myPage').toggleClass("show");
-	if (condition.hasClass("show")) {
-		$('.dropdown-content').css("display","block");
-	}else{
-		$('.dropdown-content').css("display","none");
-	}
-}
 function propertyWrite(){
 	location.href = "propertyWrite";
 }
-function getBoardDetail(no,cate){
-	location.href = "boardDetail?no="+no+"&cate="+cate;
+function propertyModify(no){
+	location.href = "propertyModify?no="+no;
+}
+function propertyDelete(no,flag){
+	location.href = "propertyDelete?no="+no+"&flag="+flag;
 }
 </script>
 </head>
@@ -41,19 +33,7 @@ function getBoardDetail(no,cate){
 			  </li>
 			</ul>
 		</div>
-		<div class="header-right">
-			<ul class="userInterface">
-				<li>
-					<span id="myPage" onclick="myPage();" class="dropbtn"><i class="fas fa-cog">마이페이지</i></span>
-				</li>
-				<li><span><i class="fas fa-sign-in-alt">로그아웃</i></span></li>
-			</ul>
-            <div id="myDropdown" class="dropdown-content">
-            	<a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-		</div>
+		<%@include file="../emp-interface.jsp" %>
 	</div>
 	
 	<div class="main">
@@ -80,10 +60,9 @@ function getBoardDetail(no,cate){
 				<col width="10%">
 				<col width="10%">
 				<col width="10%">
-				<col width="10%">
 				<col width="20%">
-				<col width="5%">
-				<col width="5%">
+				<col width="10%">
+				<col width="10%">
 			</colgroup>
 			<thead>
 				<tr>
@@ -91,32 +70,48 @@ function getBoardDetail(no,cate){
 					<th scope="col">자산번호</th>
 					<th scope="col">구입일자</th>
 					<th scope="col">사용자</th>
-					<th scope="col">직급</th>
 					<th scope="col">지급일</th>
 					<th scope="col">비고</th>
 					<th scope="col">수정</th>
-					<th scope="col">삭제</th>
+					<th scope="col">사용여부</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><button onclick="propertyWrite()">수정</button></td>
-					<td><button>삭제</button></td>
-				</tr>
+				<c:choose>
+						<c:when test="${fn:length(props)>0 }">
+							<c:forEach var="props" items="${props }">
+								<tr>
+									<td>${props.PROP_NAME }</td>
+									<td>${props.CODE }</td>
+									<td>${props.BUY_DATE }</td>
+									<td>${props.ID } </td>
+									<td>${props.PROP_DATE }</td>
+									<td>${props.REMARK }</td>
+									<td><button onclick="propertyModify(${props.NO })">수정</button></td>
+									<td>
+										<c:if test="${props.FLAG eq 'Y'}">
+											<button onclick="propertyDelete(${props.NO },${props.FLAG })">사용</button>
+										</c:if>
+										<c:if test="${props.FLAG eq 'N'}">
+											<button onclick="propertyDelete(${props.NO },${props.FLAG })">미 사용</button>
+										</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td colspan="8">조회된 결과가 없습니다.</td>
+							</tr>					
+						</c:otherwise>
+					</c:choose>
 			</tbody>
 		</table>
 	</div>
 	
 	<div class="footer">
 		<div align="center">
-		<c:if test="${!empty boards }">
+		<c:if test="${!empty props }">
 			<c:if test="${pagination.cb gt 1 }">
 				<a href="board?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 			</c:if>

@@ -1,29 +1,30 @@
 package com.northstar.bi.dto;
 
-import java.sql.Date;
-
 public class Property {
 	private int NO;
 	private String ID;
 	private String PROP_NAME;
 	private String CODE;
-	private Date DATE;
+	private String PROP_DATE;
 	private String REMARK;
-	private Date BUY_DATE;
-	
+	private String BUY_DATE;
+	private String FLAG;
+
 	public Property() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Property(int nO, String iD, String pROP_NAME, String cODE, Date dATE, String rEMARK, Date bUY_DATE) {
+	public Property(int nO, String iD, String pROP_NAME, String cODE, String pROP_DATE, String rEMARK, String bUY_DATE,
+			String fLAG) {
 		super();
 		NO = nO;
 		ID = iD;
 		PROP_NAME = pROP_NAME;
 		CODE = cODE;
-		DATE = dATE;
+		PROP_DATE = pROP_DATE;
 		REMARK = rEMARK;
 		BUY_DATE = bUY_DATE;
+		FLAG = fLAG;
 	}
 
 	public int getNO() {
@@ -58,12 +59,12 @@ public class Property {
 		CODE = cODE;
 	}
 
-	public Date getDATE() {
-		return DATE;
+	public String getPROP_DATE() {
+		return PROP_DATE;
 	}
 
-	public void setDATE(Date dATE) {
-		DATE = dATE;
+	public void setPROP_DATE(String pROP_DATE) {
+		PROP_DATE = pROP_DATE;
 	}
 
 	public String getREMARK() {
@@ -74,13 +75,22 @@ public class Property {
 		REMARK = rEMARK;
 	}
 
-	public Date getBUY_DATE() {
+	public String getBUY_DATE() {
 		return BUY_DATE;
 	}
 
-	public void setBUY_DATE(Date bUY_DATE) {
+	public void setBUY_DATE(String bUY_DATE) {
 		BUY_DATE = bUY_DATE;
 	}
 
+	public String getFLAG() {
+		return FLAG;
+	}
+
+	public void setFLAG(String fLAG) {
+		FLAG = fLAG;
+	}
+
 	
+
 }

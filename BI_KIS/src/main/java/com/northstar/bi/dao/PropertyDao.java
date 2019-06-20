@@ -12,5 +12,8 @@ public interface PropertyDao {
 //	Select
 	int getTotalRows (PropertyCriteria criteria);
 	List<Property> getPropertyList (PropertyCriteria criteria);
-	
+	Property getPropertyByNo(int no);
+//	Update
+	void  Modify(Property prop);
+	void Delete(Property prop);
 }
