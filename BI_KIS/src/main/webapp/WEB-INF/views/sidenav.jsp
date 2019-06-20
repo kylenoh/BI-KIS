@@ -16,9 +16,9 @@
         BI 기술정보 <i class="fa fa-caret-down"></i>
         </span>
         <div class="dropdown-container">
-            <a href="board">문서</a>
-            <a href="board">교육</a>
-            <a href="board">영어</a>
+            <a href="board?CATE=1">문서</a>
+            <a href="board?CATE=2">교육</a>
+            <a href="board?CATE=3">영어</a>
         </div>
     </div>
     <c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2}">

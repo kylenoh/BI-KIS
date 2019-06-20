@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.northstar.bi.dao.BoardReplyDao">
+	<insert id="insertBoardReply" parameterType="BoardReply">
+		insert into BI_BOARD_REPLY
+			(REPLY_NO,BOARD_NO,EMP_ID,REPLY_CREATE_DATE,REPLY_CONTENT)
+		values
+			(REP_BOARD_SEQ.nextval,#{BOARD_NO},#{ID},sysdate,#{CONTENT})
+	</insert>
+	<select id="getReplybyNo" parameterType="int" resultType="BoardReply">
+		select 
+			REPLY_NO as NO,
+			BOARD_NO,
+			EMP_ID as ID,
+			REPLY_CREATE_DATE as CREATE_DATE,
+			REPLY_CONTENT as CONTENT
+		from
+			BI_BOARD_REPLY
+		where
+			BOARD_NO = #{value}
+	</select>
+	<delete id="deleteBoardReply" parameterType="int">
+		delete from
+			BI_BOARD_REPLY
+		where
+			REPLY_NO = #{value}
+	</delete>
+</mapper>

@@ -18,6 +18,7 @@
 		<typeAlias type="com.northstar.bi.dto.BoardFile" alias="BoardFile"/>
 		<typeAlias type="com.northstar.bi.dto.BoardPagination" alias="BoardPagination"/>
 		<typeAlias type="com.northstar.bi.dto.BoardCriteria" alias="BoardCriteria"/>
+		<typeAlias type="com.northstar.bi.dto.BoardReply" alias="BoardReply"/>
 		<typeAlias type="com.northstar.bi.dto.Criteria" alias="Criteria"/>
 		<typeAlias type="com.northstar.bi.dto.Customer" alias="Customer"/>
 		<typeAlias type="com.northstar.bi.dto.Category" alias="Category"/>
@@ -31,6 +32,7 @@
 		<mapper resource="META-INF/mybatis/mappers/project.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/company.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/board.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/boardReply.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/file.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/category.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/request.xml"/>

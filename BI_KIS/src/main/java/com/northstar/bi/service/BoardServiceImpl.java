@@ -22,7 +22,6 @@ import com.northstar.bi.dao.FileDao;
 import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
 import com.northstar.bi.dto.BoardFile;
-import com.northstar.bi.dto.BoardPagination;
 import com.northstar.bi.dto.Emp;
 
 @Service
@@ -47,22 +46,9 @@ public class BoardServiceImpl implements BoardService {
 
 //	페이지 된 게시판 출력
 	@Override
-	public List<Board> getBoardList(BoardCriteria criteria, int cp) {
-		int totalRows = getTotalRows(criteria);
+	public List<Board> getBoardList(BoardCriteria criteria) {
+		return boardDao.getBoardList(criteria);
 
-		BoardPagination pagination = new BoardPagination(totalRows, cp, 5);
-
-		if (pagination.getBeginIndex() <= 0) {
-			criteria.setBeginIndex(1);
-			criteria.setEndIndex(1);
-		} else {
-			criteria.setBeginIndex(pagination.getBeginIndex());
-			criteria.setEndIndex(pagination.getEndIndex());
-		}
-
-		List<Board> Boards = boardDao.getBoardList(criteria);
-
-		return Boards;
 	}
 
 //	특정 게시판 출력
@@ -87,9 +73,9 @@ public class BoardServiceImpl implements BoardService {
 			temp = list.get(i);
 			if (temp.get("FILE_FLAG").equals("Y")) {	//	전부 Y로 INSERT하고
 				System.out.println("기존존재하던 파일");
-				fileDao.insertFile(boardfile);			
-			}else {										//	INSERT할것이 없으면 N으로 변경
 				fileDao.updateFile(boardfile.getNO());
+			}else {										//	INSERT할것이 없으면 N으로 변경
+				fileDao.insertFile(boardfile);			
 			}
 		}
 

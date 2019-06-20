@@ -49,6 +49,7 @@ $(function(){
 		<div class="main-inner">
 				
 			<form method="post" action="boardUpdate">
+				<input type="hidden" name="NO" value="${Board.NO }">
 			  <div class="container">
 			  	<div class="container-header">
 			  		<table border="1">
@@ -84,7 +85,7 @@ $(function(){
 							</tr>			  			
 			  			</tbody>
 			  		</table>
-			  		<input type="hidden" name="NO" value="${Board.NO }">
+			  		
 				</div>
 				<div class="container-footer">
 			    	<button type="submit" class="writebtn">수정</button>
@@ -93,6 +94,21 @@ $(function(){
 			    </div>
 			  </div>
 			</form>
+				<c:if test="${sessionScope.LOGIN_EMP.id!=null}"> 
+						<input type="hidden" name="BOARD_NO" value="${Board.NO }">
+						<input type="hidden" name="ID" value="${sessionScope.LOGIN_EMP.name}">
+						<textarea style="width:100%; height:200px; resize:none;" name="CONTENT" id="content"></textarea>
+						<button onclick="replyWrite('${Board.NO }','${sessionScope.LOGIN_EMP.name}')">등록</button>
+				</c:if>
+				<c:forEach var="reply" items="${Board.REPLYS }">
+					<div id="reply_${reply.NO }">
+							<p id="seperate">
+								<span>${reply.CONTENT }</span>
+								${reply.ID }&nbsp;&nbsp;${reply.CREATE_DATE }
+								<button onclick="deleteReply(${reply.NO })">삭제</button>
+							</p>
+					</div>
+				</c:forEach>
 		</div>
 	</div>
 	
@@ -100,6 +116,32 @@ $(function(){
 	</div>
 </div>
 <script type="text/javascript">
+function replyWrite(boardNo,id){
+	var content = $("#content").val();
+	var name = id;
+	var no = boardNo;
+	
+	$.ajax({
+		type:"GET",
+		url: "replyWrite",
+		data:{no:no,name:name,content:content},
+		success: function(result){
+			$("#content").empty();
+			var row = "<span>"+content+"</span>"+name+"&nbsp;&nbsp;"+"<button onclick='deleteReply()'>삭제</button>";
+			$("#seperate").append(row);		
+		}
+	});
+}
+function deleteReply(value){
+	$.ajax({
+		type:"GET",
+		url: "deleteReply",
+		data:{no:value},
+		success: function(result){
+			$("#reply_"+value).remove();
+		}
+	});
+}
 function DELETE(no){
 	if (confirm("정말 삭제하시겠습니까?")) {
 		location.href = "delete?no="+no;
