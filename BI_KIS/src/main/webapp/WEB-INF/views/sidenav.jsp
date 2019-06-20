@@ -27,8 +27,8 @@
 	         	환경설정 <i class="fa fa-caret-down"></i>
 	        </span>
 	        <div class="dropdown-container">
-	            <a href="#">사용자 관리</a>
-	            <a href="#">자산관리</a>
+	            <a href="empAdmin">사용자 관리</a>
+	            <a href="property">자산관리</a>
 	        </div>
 	    </div>
     </c:if>

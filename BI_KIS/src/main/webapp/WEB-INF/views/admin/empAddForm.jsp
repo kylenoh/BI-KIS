@@ -42,7 +42,7 @@
 					<th>이메일</th>
 					<th>권한</th>
 					<th>수정</th>
-					<th>사용여부</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,7 +61,7 @@
 							</select>
 						</td>
 						<td><button type="button" id="btn-modify-emp-${emp.id }" value="${emp.id }">수정</button></td>
-						<td><span>${emp.flag eq 'Y' ? '사용중' : '사용안함'}</span><button type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">${emp.flag eq 'Y' ? '미사용' : '사용' }</button></td>
+						<td><button type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -88,12 +88,15 @@
 	$(function(){
 		$('[id^=btn-delete-emp-]').click(function(){
 			var empId = $(this).val();
-			var flagCheck = $(this).text();
-			location.href="empDelete?empId=" + empId + "&flagCheck=" + flagCheck;
+			if (confirm("정말 삭제하시겠습니까?")) {
+				location.href="empDelete?empId=" + empId;
+			}
 		});
 		$('[id^=btn-modify-emp-]').click(function(){
 			var empId = $(this).val();
-			location.href="empModify?empId=" + empId;
+			if (confirm("수정 페이지로 이동하시겠습니까?")){
+				location.href="empModify?empId=" + empId;
+			}
 		});
 	});
 </script>	

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.northstar.bi.dto.Auth;
@@ -39,5 +40,39 @@ public class AdminController {
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("authList", authList);
 		return "admin/empAdmin";
+	}
+	@RequestMapping(value="empModify", method=RequestMethod.GET)
+	public String empModifyForm(String empId, Model model) {
+		Emp emp = empService.getEmpById(empId);
+		
+		model.addAttribute("emp",emp);
+		return "admin/empModifyForm";
+	}
+	@RequestMapping(value="empModify", method=RequestMethod.POST)
+	public String empModify (@RequestParam(name="empId")String empId,
+							@RequestParam(name="name")String name,
+							@RequestParam(name="rank")String rank,
+							@RequestParam(name="tel")String tel,
+							@RequestParam(name="email")String email) {
+		Emp emp = empService.getEmpById(empId);
+		emp.setName(name);
+		emp.setRank(rank);
+		emp.setTel(tel);
+		emp.setEmail(email);
+		empService.updateEmp(emp);
+		return "redirect:/empAdmin";
+	}
+	@RequestMapping(value="empDelete")
+	public String empDelete (@RequestParam(name="empId")String empId,
+							@RequestParam(name="flagCheck")String flagCheck) {
+		Emp emp = empService.getEmpById(empId);
+		if("사용".equals(flagCheck)) {
+			emp.setFlag("Y");
+		}
+		if("미사용".equals(flagCheck)) {
+			emp.setFlag("N");
+		}
+		empService.updateEmp(emp);
+		return "redirect:/empAdmin";
 	}
 }

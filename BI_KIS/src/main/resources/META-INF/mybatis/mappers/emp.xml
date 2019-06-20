@@ -5,6 +5,21 @@
 
 <mapper namespace="com.northstar.bi.dao.EmpDao">
 
+	<update id="updateEmp" parameterType="Emp">
+		update
+			bi_emp
+		set
+			auth_no = #{auth.no},
+			emp_pass = #{password},
+			emp_name = #{name},
+			emp_rank = #{rank},
+			emp_tel = #{tel},
+			emp_addr = #{addr},
+			emp_email = #{email},
+			emp_flag = #{flag}
+		where
+			emp_id = #{id}
+	</update>
 	<select id="getAuthList" resultType="Auth">
 		select 
 			auth_no			as no,
