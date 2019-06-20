@@ -21,15 +21,17 @@
             <a href="board?CATE=3">영어</a>
         </div>
     </div>
-    <div class="dropdown-div">
-        <span class="dropdown-span">
-         	환경설정 <i class="fa fa-caret-down"></i>
-        </span>
-        <div class="dropdown-container">
-            <a href="#">사용자 관리</a>
-            <a href="#">자산관리</a>
-        </div>
-    </div>
+    <c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2}">
+	    <div class="dropdown-div">
+	        <span class="dropdown-span">
+	         	환경설정 <i class="fa fa-caret-down"></i>
+	        </span>
+	        <div class="dropdown-container">
+	            <a href="#">사용자 관리</a>
+	            <a href="#">자산관리</a>
+	        </div>
+	    </div>
+    </c:if>
 </div>
 <script type="text/javascript">
 	$(function(){

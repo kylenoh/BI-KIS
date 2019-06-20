@@ -24,8 +24,7 @@ function myPage(){
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
-			  <li>고객사 관리</li>
+			  <li>사용자 관리</li>
 			</ul>
 		</div>
 		<div class="header-right">
@@ -44,47 +43,47 @@ function myPage(){
 	</div>
 	
 	<div class="main">
-	    <form method="post" action="company" id="searchForm">
+	    <form method="post" action="empAdmin" id="searchForm">
             <fieldset>
                 <legend>검색라인</legend>
                 <div>
-                    <label for="title">고객사 명</label><input type="text" id="name" name="name">
+                    <label for="name">사원 명</label><input type="text" id="name" name="name">
                 </div>
                 <div>
-                    <label for="email">이메일</label><input type="text" id="email" name="email">
-                </div>
-                <div>
-                    <label for="customerName">담당자 명</label><input type="text" id="customerName" name="customerName">
-                </div>
-                <div>
-                    <div>
-                    	<label for="dept">부서</label><input type="text" id="dept" name="dept">
-                	</div>
                     <button type="submit">Search</button>
                 </div>
             </fieldset>
 		</form>
-		<button type="button" onclick="location.href='addCompany'" class="write">고객사 등록</button>
-		<button type="button" onclick="location.href='addCustomer'" class="write">담당자 등록</button>
-		
 		<table border="1">
 			<thead>
 				<tr>
-					<th>고객사 명</th>
-					<th>담당자</th>
-					<th>담당자연락처</th>
+					<th>아이디</th>
+					<th>사원명</th>
+					<th>직책</th>
+					<th>연락처</th>
 					<th>이메일</th>
-					<th>비고</th>
+					<th>권한</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="company" items="${companyList }">
+				<c:forEach var="emp" items="${empList }">
 					<tr>
-						<td><a href="companyDetail?companyNo=${company.no}&customerNo=${company.customer.no}">${company.name}</a></td>
-						<td>${company.customer.name }</td>
-						<td>${company.customer.tel1 }</td>
-						<td>${company.customer.email }</td>
-						<td>${company.customer.remark }</td>
+						<td><a href="empDetail?empId=${emp.id}">${emp.id}</a></td>
+						<td>${emp.name}</td>
+						<td>${emp.rank}</td>
+						<td>${emp.tel}</td>
+						<td>${emp.email}</td>
+						<td>
+							<select id="empAuth" name="empAuth">
+								<c:forEach var="listAuth" items="${authList }">
+									<option value="${listAuth.no }" <c:if test="${emp.auth.no eq listAuth.no }">selected</c:if>>${listAuth.name}</option>
+								</c:forEach>
+							</select>
+						</td>
+						<td><button type="button" id="btn-modify-emp-${emp.id }" value="${emp.id }">수정</button></td>
+						<td><button type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -93,20 +92,36 @@ function myPage(){
 	
 	<div class="footer">
 		<div align="center">
-			<c:if test="${!empty companyList}">
+			<c:if test="${!empty empList}">
 				<c:if test="${pagination.cb gt 1 }">
-					<a href="company?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+					<a href="empAdmin?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 				</c:if>
 				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-					<a href="company?cp=${num}">${num }</a>
+					<a href="empAdmin?cp=${num}">${num }</a>
 				</c:forEach>
 				<c:if test="${pagination.cb lt pagination.totalBlocks }">
-					<a href="company?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+					<a href="empAdmin?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 				</c:if>
 			</c:if>
 		</div>
 	</div>
 </div>
-	
+<script type="text/javascript">
+	$(function(){
+		$('[id^=btn-delete-emp-]').click(function(){
+			var empId = $(this).val();
+			if (confirm("정말 삭제하시겠습니까?")) {
+				location.href="empDelete?empId=" + empId;
+			}
+		});
+		$('[id^=btn-modify-emp-]').click(function(){
+			var empId = $(this).val();
+			if (confirm("수정 페이지로 이동하시겠습니까?")){
+				location.href="empModify?empId=" + empId;
+			}
+		});
+	});
+</script>	
 </body>
+
 </html>

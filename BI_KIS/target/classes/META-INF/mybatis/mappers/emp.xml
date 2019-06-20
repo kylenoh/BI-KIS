@@ -5,40 +5,67 @@
 
 <mapper namespace="com.northstar.bi.dao.EmpDao">
 
+	<select id="getAuthList" resultType="Auth">
+		select 
+			auth_no			as no,
+			auth_name		as name
+		from
+			bi_auth
+	</select>
+	<select id="getEmpByCriteria" parameterType="Criteria" resultType="Emp">
+		select
+			 emp_id			as id,
+			 auth_no		as "auth.no",
+			 auth_name		as "auth.name",
+			 emp_pass		as password,
+			 emp_name		as name,
+			 emp_rank		as rank,
+			 emp_tel		as tel,
+			 emp_addr		as addr,
+			 emp_email		as email,
+			 emp_flag		as flag
+		from (
+			select
+				 E.emp_id,
+				 E.auth_no,
+				 A.auth_name,
+				 E.emp_pass,
+				 E.emp_name,
+				 E.emp_rank,
+				 E.emp_tel,
+				 E.emp_addr,
+				 E.emp_email,
+				 E.emp_flag,
+				 row_number() over (order by emp_name) rn
+			from
+				bi_emp E, bi_auth A
+			where
+				E.auth_no = A.auth_no
+				<if test="name != null &amp;&amp; name != ''">
+					and emp_name like '%' || #{name} || '%'
+				</if>
+			)
+		where
+			rn >= #{beginIndex} and rn &lt;= #{endIndex}
+		order by
+			emp_name
+	</select>
+	<select id="getEmpCount" parameterType="Criteria" resultType="int">
+		select
+			count(*)
+		from
+			bi_emp
+		<where>
+			<if test="name != null &amp;&amp; name != ''">
+				emp_name like '%' || #{name} || '%'
+			</if>
+		</where>
+	</select>
 	<select id="getEmpList" resultType="Emp">
 		select
-			 emp_id			as id,
-			 auth_no		as authNo,
-			 emp_pass		as password,
-			 emp_name		as name,
-			 emp_rank		as rank,
-			 emp_tel		as tel,
-			 emp_addr		as addr,
-			 emp_email		as email,
-			 emp_flag		as flag
-		from
-			bi_emp
-	</select>
-	<select id="getEmpById" parameterType="String" resultType="Emp">
-		select
-			 emp_id			as id,
-			 auth_no		as authNo,
-			 emp_pass		as password,
-			 emp_name		as name,
-			 emp_rank		as rank,
-			 emp_tel		as tel,
-			 emp_addr		as addr,
-			 emp_email		as email,
-			 emp_flag		as flag
-		from
-			bi_emp
-		where
-			emp_id = #{value}
-	</select>
-	<select id="getEmpByProNo" parameterType="int" resultType="Emp">
-		select
 			 E.emp_id		as id,
-			 E.auth_no		as authNo,
+			 E.auth_no		as "auth.no",
+			 A.auth_name	as "auth.name",
 			 E.emp_pass		as password,
 			 E.emp_name		as name,
 			 E.emp_rank		as rank,
@@ -47,10 +74,48 @@
 			 E.emp_email	as email,
 			 E.emp_flag		as flag
 		from
-			bi_emp E , bi_con_pro CP
+			bi_emp E, bi_auth A
+		where
+			E.auth_no = A.auth_no
+	</select>
+	<select id="getEmpById" parameterType="String" resultType="Emp">
+		select
+			 E.emp_id		as id,
+			 E.auth_no		as "auth.no",
+			 A.auth_name	as "auth.name",
+			 E.emp_pass		as password,
+			 E.emp_name		as name,
+			 E.emp_rank		as rank,
+			 E.emp_tel		as tel,
+			 E.emp_addr		as addr,
+			 E.emp_email	as email,
+			 E.emp_flag		as flag
+		from
+			bi_emp E, bi_auth A
+		where
+			A.auth_no = E.auth_no
+		and
+			emp_id = #{value}
+	</select>
+	<select id="getEmpByProNo" parameterType="int" resultType="Emp">
+		select
+			 E.emp_id		as id,
+			 E.auth_no		as "auth.no",
+			 A.auth_name	as "auth.name",
+			 E.emp_pass		as password,
+			 E.emp_name		as name,
+			 E.emp_rank		as rank,
+			 E.emp_tel		as tel,
+			 E.emp_addr		as addr,
+			 E.emp_email	as email,
+			 E.emp_flag		as flag
+		from
+			bi_emp E , bi_con_pro CP , bi_auth A
 		where
 			CP.pjt_no = #{value}
 		and	
 			E.emp_id = CP.emp_id
+		and
+			A.auth_no = E.auth_no
 	</select>
 </mapper>

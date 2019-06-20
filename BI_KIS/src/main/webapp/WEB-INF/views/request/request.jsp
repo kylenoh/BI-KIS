@@ -5,10 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/index.css">
-<link rel="stylesheet" href="resources/css/ym.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<%@include file="../style.jsp" %>
 <title>Insert title here</title>
 <script type="text/javascript">
 function myPage(){
@@ -47,7 +44,7 @@ function myPage(){
 	</div>
 	
 	<div class="main">
-	    <form method="post" action="request" id="requestForm">
+	    <form method="post" action="request" id="searchForm">
             <fieldset>
                 <legend>검색라인</legend>
                 <div>
@@ -125,13 +122,13 @@ function myPage(){
 		<div align="center"> 
 			<c:if test="${!empty requestList}">
 				<c:if test="${pagination.cb gt 1 }">
-					<a href="project?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+					<a href="request?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 				</c:if>
 				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-					<a href="project?cp=${num}">${num }</a>
+					<a href="request?cp=${num}">${num }</a>
 				</c:forEach>
 				<c:if test="${pagination.cb lt pagination.totalBlocks }">
-					<a href="project?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+					<a href="request?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 				</c:if>
 			</c:if>
 		</div>

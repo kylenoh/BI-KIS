@@ -27,7 +27,7 @@ h3, h2, h1 {
 }
 /* 헤더 영역 */
 .header {
-	margin-left: 20%;
+	margin-left: 15%;
 	padding: 10px 10px;
 	border-bottom: 1px solid #ddd;
 	overflow: hidden;
@@ -121,9 +121,9 @@ h3, h2, h1 {
 }
 /*컨텐츠영역*/
 .main {
-	margin-left: 20%;
-	width: 80%;
-	font-size: 20px;
+	margin-left: 15%;
+	width: 75%;
+	font-size: 15px;
 	padding: 0px 10px;
 }
 
