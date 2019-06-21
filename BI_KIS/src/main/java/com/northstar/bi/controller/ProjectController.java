@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,8 +97,10 @@ public class ProjectController {
 							@RequestParam(value="endDate",required=false,defaultValue="nodate") String endDate,
 							@RequestParam(value="content") String content,
 							@RequestParam(value="remark",required=false) String remark,
-							@RequestParam(value="emp-info",required=false)List<String> empId) throws ParseException {
+							@RequestParam(value="emp-info",required=false)List<String> empId,
+							HttpSession session) throws ParseException {
 		Project project = new Project();
+		Emp loginEmp = (Emp) session.getAttribute("LOGIN_EMP");
 		Company company = companyService.getCompanyByComNo(compnayNo);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		int pjtNo = projectService.getProjectNo();
@@ -111,6 +115,7 @@ public class ProjectController {
 		project.setRemark(remark);
 		project.setFlag("Y");
 		project.setMsg("진행예정");
+		project.setRegistrant(loginEmp);
 		
 		projectService.addProject(project);
 		

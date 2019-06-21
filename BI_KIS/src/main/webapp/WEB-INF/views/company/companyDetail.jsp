@@ -64,8 +64,10 @@
 	               	<textarea id="remark" name="remark" disabled="disabled">${company.customer.remark }</textarea>
 	            </div>
 	            <div style="float:right;">
-	            	<button type="button" class="btn-modify-company" value="${company.customer.no }">수정</button>
-	            	<button type="button" class="btn-del-customer" value="${company.customer.no }">삭제</button>
+	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq company.registrant}">
+	            		<button type="button" class="btn-modify-company" value="${company.customer.no }">수정</button>
+	            		<button type="button" class="btn-del-customer" value="${company.customer.no }">삭제</button>
+	            	</c:if>
 	            	<button type="button" onclick="location.href='project'">목록</button>
 	            </div>
             </div>

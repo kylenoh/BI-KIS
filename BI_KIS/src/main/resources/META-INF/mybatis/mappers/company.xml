@@ -15,15 +15,25 @@
 		<result column="cus_dept" property="dept"/>
 		<result column="cus_remark" property="remark"/>
 		<association property="company" column="com_no" javaType="Company" select="getCompanyByComNo"/>
+		<association property="registrant" column="cus_registrant" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
 	</resultMap>
-	<select id="getCompanyByProjectNo" parameterType="int" resultType="Company">
+	<resultMap type="Company" id="getCompanyResultMap">
+		<id column="com_no" property="no"/>
+		<result column="com_name" property="name"/>
+		<result column="com_owner" property="owner"/>
+		<result column="com_tel" property="tel"/>
+		<result column="com_addr" property="addr"/>
+		<result column="com_remark" property="remark"/>
+		<association property="registrant" column="com_registrant" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
+	</resultMap>
+	<select id="getCompanyByProjectNo" parameterType="int" resultType="getCompanyResultMap">
 		select
-			C.com_no			as no,
-			C.com_name			as name,
-			C.com_owner			as owner,
-			C.com_tel			as tel,
-			C.com_addr			as addr,
-			C.com_remark		as remark
+			C.com_no,
+			C.com_name,
+			C.com_owner,
+			C.com_tel,
+			C.com_addr,
+			C.com_remark
 		from
 			bi_project P , bi_company C
 		where
@@ -105,15 +115,15 @@
 	</select>
 	<insert id="addCustomer" parameterType="Customer">
 		insert into bi_customer
-			(cus_no, com_no, cus_name, cus_tel1, cus_tel2, cus_email, cus_rank, cus_dept, cus_remark)
+			(cus_no, com_no, cus_name, cus_tel1, cus_tel2, cus_email, cus_rank, cus_dept, cus_remark, cus_registrant)
 		values
-			(#{no}, #{company.no}, #{name}, #{tel1}, #{tel2}, #{email}, #{rank}, #{dept}, #{remark})
+			(#{no}, #{company.no}, #{name}, #{tel1}, #{tel2}, #{email}, #{rank}, #{dept}, #{remark}, #{registrant.id)
 	</insert>
 	<insert id="addCompany" parameterType="Company">
 		insert into bi_company
-			(com_no, com_name, com_owner, com_tel, com_addr, com_remark)
+			(com_no, com_name, com_owner, com_tel, com_addr, com_remark, com_registrant)
 		values
-			(#{no}, #{name}, #{owner}, #{tel}, #{addr}, #{remark})
+			(#{no}, #{name}, #{owner}, #{tel}, #{addr}, #{remark}, #{registrant.id})
 	</insert>
 	<select id="getCompanyByCriteria" parameterType="Criteria" resultType="Company">
 		select
@@ -235,27 +245,29 @@
 				and CU.cus_dept = #{dept}
 			</if>
 	</select>
-	<select id="getCompanyByComNo" parameterType="int" resultType="Company">
+	<select id="getCompanyByComNo" parameterType="int" resultType="getCompanyResultMap">
 		select
-			com_no			as no,
-			com_name		as name,
-			com_owner		as owner,
-			com_tel			as tel,
-			com_addr		as addr,
-			com_remark		as remark
+			com_no,
+			com_name,
+			com_owner,
+			com_tel,
+			com_addr,
+			com_remark,
+			com_registrant
 		from
 			bi_company
 		where
 			com_no = #{value}
 	</select>
-	<select id="getCompanyList" resultType="Company">
+	<select id="getCompanyList" resultType="getCompanyResultMap">
 		select
-			com_no			as no,
-			com_name		as name,
-			com_owner		as owner,
-			com_tel			as tel,
-			com_addr		as addr,
-			com_remark		as remark
+			com_no,
+			com_name,
+			com_owner,
+			com_tel,
+			com_addr,
+			com_remark,
+			com_registrant
 		from
 			bi_company
 	</select>

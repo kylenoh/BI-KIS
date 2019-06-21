@@ -12,6 +12,7 @@ public class Company {
 	private String remark;
 	private List<Customer> customers;
 	private Customer customer;
+	private Emp registrant;
 	
 	public Company() {}
 
@@ -77,6 +78,14 @@ public class Company {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public Emp getRegistrant() {
+		return registrant;
+	}
+
+	public void setRegistrant(Emp registrant) {
+		this.registrant = registrant;
 	}
 
 	

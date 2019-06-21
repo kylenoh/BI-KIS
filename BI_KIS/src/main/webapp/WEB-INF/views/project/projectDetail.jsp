@@ -64,7 +64,7 @@
 	              	<textarea id="remark" disabled="disabled">${pjt.remark }</textarea>
 	            </div>
 	            <div style="float:right;">
-	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2}">
+	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq pjt.registrant}">
 		            	<button type="button" class="btn-modify-pjt" value="${pjt.no }">수정</button>
 		            	<button type="button" class="btn-del-pjt" value="${pjt.no }">삭제</button>
 	            	</c:if>
