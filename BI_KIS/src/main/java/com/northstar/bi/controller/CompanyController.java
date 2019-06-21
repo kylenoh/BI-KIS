@@ -69,6 +69,8 @@ public class CompanyController {
 							@RequestParam(name="remark",required=false)String remark,
 							Model model) {
 		Company company = new Company();
+		int companyNo = companyService.getCompanyNo();
+		company.setNo(companyNo);
 		company.setName(name);
 		company.setOwner(owner);
 		company.setTel(tel);
@@ -96,7 +98,9 @@ public class CompanyController {
 							Model model) {
 		Customer customer = new Customer();
 		Company company = companyService.getCompanyByComNo(companyNo);
+		int customerNo = companyService.getCustomerNo();
 		
+		customer.setNo(customerNo);
 		customer.setName(name);
 		customer.setRank(rank);
 		customer.setDept(dept);

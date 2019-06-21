@@ -7,6 +7,7 @@ import com.northstar.bi.dto.Request;
 
 public interface RequestService {
 
+	int getRequestNo();
 	void modifyRequest(Request request);
 	void deleteRequest(int requestNo);
 	void addRequest(Request request);

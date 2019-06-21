@@ -56,15 +56,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="company" items="${companyList }">
-					<tr>
-						<td><a class="no-link" href="companyDetail?companyNo=${company.no}&customerNo=${company.customer.no}">${company.name}</a></td>
-						<td>${company.customer.name }</td>
-						<td>${company.customer.tel1 }</td>
-						<td>${company.customer.email }</td>
-						<td>${company.customer.remark }</td>
-					</tr>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${!empty companyList }">
+						<c:forEach var="company" items="${companyList }">
+							<tr>
+								<td><a class="no-link" href="companyDetail?companyNo=${company.no}&customerNo=${company.customer.no}">${company.name}</a></td>
+								<td>${company.customer.name }</td>
+								<td>${company.customer.tel1 }</td>
+								<td>${company.customer.email }</td>
+								<td>${company.customer.remark }</td>
+							</tr>
+						</c:forEach>			
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5">조회된 결과가 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				
 			</tbody>
 		</table>
 	</div>

@@ -15,6 +15,10 @@ public class RequestServiceImpl implements RequestService{
 	@Autowired
 	RequestDao requestDao;
 	@Override
+	public int getRequestNo() {
+		return requestDao.getRequestNo();
+	}
+	@Override
 	public void modifyRequest(Request request) {
 		requestDao.modifyRequest(request);
 	}

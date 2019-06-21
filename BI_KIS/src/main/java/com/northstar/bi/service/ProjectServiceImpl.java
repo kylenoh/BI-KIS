@@ -17,10 +17,24 @@ public class ProjectServiceImpl implements ProjectService{
 	ProjectDao projectDao;
 	
 	@Override
-	public void addEmpPro(List<String> empIds) {
+	public int getProjectNo() {
+		return projectDao.getProjectNo();
+	}
+	@Override
+	public void deleteEmpPro(List<String> empIds, int pjtNo) {
 		for (String empId : empIds) {
 			ConPro conPro = new ConPro();
 			conPro.setEmpId(empId);
+			conPro.setPjtNo(pjtNo);
+			projectDao.deleteEmpPro(conPro);
+		}
+	}
+	@Override
+	public void addEmpPro(List<String> empIds, int pjtNo) {
+		for (String empId : empIds) {
+			ConPro conPro = new ConPro();
+			conPro.setEmpId(empId);
+			conPro.setPjtNo(pjtNo);
 			projectDao.addEmpPro(conPro);
 		}
 	}
