@@ -3,7 +3,6 @@
 html, body {
 	margin: 0;
 	padding: 20px;
-	background: #f1f1f1;
 }
 
 @charset "UTF-8";
@@ -163,7 +162,6 @@ table {
 
 th, td {
 	text-align: left;
-	padding: 16px;
 }
 
 tr:nth-child(even) {

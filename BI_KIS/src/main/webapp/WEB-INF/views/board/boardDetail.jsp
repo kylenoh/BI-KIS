@@ -24,6 +24,7 @@ $(function(){
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li><a href="#">BI 기술 정보</a></li>
+			  <li><a href="#">${Board.CATE_NAME }</a></li>
 			  <li><a href="#">상세내역</a></li>
 			</ul>
 		</div>
@@ -45,16 +46,14 @@ $(function(){
 			  					<th><b>작성자</b></th>
 			  					<th><b>작성일자</b></th>
 			  					<th><b>조회수</b></th>
-			  					<th><b>분류</b></th>
 			  				</tr>
 			  			</thead>
 			  			<tbody>
 				  			<tr>
 				  				<td>${Board.TITLE }</td>
-				  				<td>${Board.ID }</td>
+				  				<td>${Board.EMP_NAME }</td>
 				  				<td>${Board.CREATE_DATE }</td>
 				  				<td>${Board.COUNT }</td>
-				  				<td>${Board.CATE }</td>
 				  			</tr>
 							<tr>
 								<td colspan="5">${Board.CONTENT }</td>
@@ -76,7 +75,7 @@ $(function(){
 				<div class="container-footer">
 			    	<button type="submit" class="writebtn">수정</button>
 			    	<button type="button" class="writebtn" onclick="DELETE(${Board.NO },${category })">삭제</button>
-			    	<button type="button" class="writebtn" onclick="getList()">목록</button>
+			    	<button type="button" class="writebtn" onclick="getList(${category })">목록</button>
 			    </div>
 			  </div>
 			</form>
@@ -84,7 +83,7 @@ $(function(){
 						<input type="hidden" name="BOARD_NO" value="${Board.NO }">
 						<input type="hidden" name="ID" value="${sessionScope.LOGIN_EMP.name}">
 						<textarea style="width:100%; height:200px; resize:none;" name="CONTENT" id="content"></textarea>
-						<button onclick="replyWrite('${Board.NO }','${sessionScope.LOGIN_EMP.name}')">등록</button>
+						<button onclick="replyWrite(${Board.NO },'${sessionScope.LOGIN_EMP.id}')">등록</button>
 				</c:if>
 				<c:forEach var="reply" items="${Board.REPLYS }">
 					<div id="replyList">
@@ -112,6 +111,11 @@ function replyWrite(boardNo,id){
 	var name = id;
 	var no = boardNo;
 	
+	alert(no);
+	alert(content);
+	alert(name);
+	
+	
 	$.ajax({
 		type:"GET",
 		url: "replyWrite",
@@ -137,8 +141,8 @@ function DELETE(no,cate){
 		location.href = "delete?no="+no+"&cate="+cate;
 	}
 }
-function getList(){
-	location.href="board";
+function getList(cate){
+	location.href="board?CATE="+cate;
 }
 function downloadFile(obj){
 	var idx = obj.parent().find("#IDX").val();

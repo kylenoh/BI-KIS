@@ -20,9 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
 import com.northstar.bi.dto.BoardFile;
-import com.northstar.bi.dto.BoardPagination;
 import com.northstar.bi.dto.BoardReply;
 import com.northstar.bi.dto.Emp;
+import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.service.BoardReplyService;
 import com.northstar.bi.service.BoardService;
 import com.northstar.bi.service.FileService;
@@ -49,7 +49,7 @@ public class BoardController {
 		criteria.setID(writer);
 		criteria.setCATE(cate);
 		int totalRows = boardService.getTotalRows(criteria);
-		BoardPagination pagination = new BoardPagination(totalRows, cp, rows);
+		Pagination pagination = new Pagination(totalRows, cp, rows);
 
 		List<Board> boards = boardService.getBoardList(criteria);
 		model.addAttribute("boards", boards);
@@ -62,7 +62,7 @@ public class BoardController {
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String BoardWrite(@RequestParam(name="cate")String cate,
 							 Model model) {
-		model.addAttribute("cate",cate);
+		model.addAttribute("category",cate);
 		return "board/boardWrite";
 	}
 //	게시글 디테일 진입
@@ -70,9 +70,10 @@ public class BoardController {
 	public String BoardDetail(@RequestParam("no") int no,
 							  @RequestParam("cate") String cate,
 							  BoardReply reply,Model model) {
+		System.out.println(no);
+		System.out.println(cate);
 		Board board = boardService.getBoardByNo(no);
 		List<BoardReply>replys = replyService.getReplyList(no);
-		System.out.println(cate);
 		model.addAttribute("Board",board);
 		model.addAttribute("category",cate);
 		model.addAttribute("replys",replys);
@@ -99,10 +100,10 @@ public class BoardController {
 		
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
 		
-		board.setID(User.getName());
+		board.setEMP_ID(User.getId());
 		board.setTITLE(title);
 		board.setCONTENT(content);
-		board.setCATE(type);
+		board.setCATE_NO(type);
 		boardService.insertBoard(board,boardFile,files,session);
 		redirectAttr.addAttribute("CATE", CATE);
 		return "redirect:/board";
@@ -112,23 +113,21 @@ public class BoardController {
 	public String Modify(@RequestParam("NO") int no,
 						 @RequestParam("TITLE") String title,
 						 @RequestParam("CONTENT") String content,
-						 @RequestParam("TYPE") String type,
+						 @RequestParam("CATE_NO") String cateNo,
 						 @RequestParam Map<String, String>map,
-						 @RequestParam(name="cate", required=false,defaultValue = "0") String CATE,
 						 RedirectAttributes redirectAttr,
 						 Board board, BoardFile boardFile, HttpSession session, MultipartHttpServletRequest files,HttpServletRequest request) {
 		
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
 		
 		board.setNO(no);
-		board.setCATE(type);
-		board.setID(User.getName());
+		board.setCATE_NO(cateNo);
 		board.setTITLE(title);
 		board.setCONTENT(content);
-		board.setUPDATER(User.getName()); 
+		board.setUPDATER(User.getId()); 
+		System.out.println(board.toString());
 		
 		boardService.updateBoard(board,boardFile,files,session,request);
-		redirectAttr.addAttribute("CATE", CATE);
 		return "redirect:/board";
 	}
 //	삭제 서비스 진입

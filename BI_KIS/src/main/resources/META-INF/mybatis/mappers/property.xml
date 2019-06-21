@@ -15,6 +15,20 @@
 			count(*)
 		from
 			BI_PROP
+		<where>
+			<if test="EMP_ID != null &amp;&amp; EMP_ID != ''">
+				EMP_ID like '%' || #{EMP_ID} || '%'
+			</if>
+			<if test="PROP_NO != null &amp;&amp; PROP_NO != ''">
+				and PROP_NO like '%' || #{PROP_NO} || '%'
+			</if>
+			<if test="PROP_NAME != null &amp;&amp; PROP_NAME != ''">
+				and PROP_NAME like '%' || #{PROP_NAME} || '%'
+			</if>
+			<if test="PROP_FLAG != null &amp;&amp; PROP_FLAG != '' &amp;&amp; PROP_FLAG !='ALL'">
+				and PROP_FLAG = #{PROP_FLAG}
+			</if>
+		</where>
 	</select>
 	<select id="getPropertyList" parameterType="PropertyCriteria" resultType="Property">
 	select 
@@ -40,6 +54,20 @@
 					row_number() over (order by PROP_NO desc) rn
 				from
 					BI_PROP
+						<where>
+							<if test="EMP_ID != null &amp;&amp; EMP_ID != ''">
+								EMP_ID like '%' || #{EMP_ID} || '%'
+							</if>
+							<if test="PROP_NO != null &amp;&amp; PROP_NO != ''">
+								and PROP_NO like '%' || #{PROP_NO} || '%'
+							</if>
+							<if test="PROP_NAME != null &amp;&amp; PROP_NAME != ''">
+								and PROP_NAME like '%' || #{PROP_NAME} || '%'
+							</if>
+							<if test="PROP_FLAG != null &amp;&amp; PROP_FLAG != '' &amp;&amp; PROP_FLAG !='ALL'">
+								and PROP_FLAG = #{PROP_FLAG}
+							</if>
+						</where>
 			)
 		where
 			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}
@@ -77,16 +105,8 @@
 	<update id="Delete" parameterType="Property">
 		update
 			BI_PROP
-		set
-			<choose>
-				<when test="FLAG == Y">
-					PROP_FLAG 	= 'N'
-				</when>
-				<when test="FLAG == N">
-					PROP_FLAG 	= 'Y'
-				</when>
-			</choose>
-			
+		set	
+			PROP_FLAG = #{FLAG}
 		where
 			PROP_NO = #{NO}
 	</update>
