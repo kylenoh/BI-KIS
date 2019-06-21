@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.northstar.bi.dao.ProjectDao;
 import com.northstar.bi.dto.Company;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Customer;
@@ -98,7 +99,8 @@ public class ProjectController {
 		Project project = new Project();
 		Company company = companyService.getCompanyByComNo(compnayNo);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
+		int pjtNo = projectService.getProjectNo();
+		project.setNo(pjtNo);
 		project.setTitle(title);
 		project.setCompany(company);
 		project.setStartDate(formatter.parse(startDate));
@@ -113,7 +115,7 @@ public class ProjectController {
 		projectService.addProject(project);
 		
 		if(null != empId) {
-			projectService.addEmpPro(empId);
+			projectService.addEmpPro(empId, pjtNo);
 		}
 		return "redirect:/project";
 	}
@@ -141,7 +143,8 @@ public class ProjectController {
 							@RequestParam(value="endDate",required=false,defaultValue="nodate") String endDate,
 							@RequestParam(value="content") String content,
 							@RequestParam(value="remark",required=false) String remark,
-							@RequestParam("flag") String flag) throws ParseException {
+							@RequestParam("flag") String flag,
+							@RequestParam(value="emp-info",required=false)List<String> empId) throws ParseException {
 		Project pjt = projectService.getProjectByNo(pjtNo); 
 		Company company = companyService.getCompanyByComNo(compnayNo);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -164,6 +167,11 @@ public class ProjectController {
 		}
 		if ("N".equals(flag)) {
 			pjt.setMsg("종료");
+		}
+		
+		if(null != empId) {
+			projectService.deleteEmpPro(empId,pjtNo);
+			projectService.addEmpPro(empId,pjtNo);
 		}
 		projectService.modifyProject(pjt);
 		return "redirect:/pjtdetail?pjtNo=" + pjtNo;

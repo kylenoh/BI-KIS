@@ -8,6 +8,8 @@ import com.northstar.bi.dto.Project;
 
 public interface ProjectDao {
 
+	int getProjectNo();
+	void deleteEmpPro(ConPro conpro);
 	void addEmpPro(ConPro conpro);
 	List<Project> getProjectList();
 	List<Project> getProjectByCriteria(Criteria criteria);

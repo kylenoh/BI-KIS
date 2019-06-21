@@ -94,11 +94,13 @@ public class RequestController {
 								HttpSession session)throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Request request = new Request();
+		int requestNo = requestService.getRequestNo();
 		Category category = categoryService.getCategoryByCategoryNo(categoryNo);
 		Project project = projectservice.getProjectByNo(pjtNo);
 		Customer customer = companyService.getCustomerByNo(customerNo);
 		Emp emp = (Emp) session.getAttribute("LOGIN_EMP");
 		
+		request.setNo(requestNo);
 		request.setCustomer(customer);
 		request.setProject(project);
 		request.setEmp(emp);

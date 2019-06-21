@@ -10,6 +10,7 @@
 </head>
 <body>
 <%@ include file="../sidenav.jsp" %>
+<input type="hidden" id="login-auth" value="${LOGIN_EMP.auth.no }">
 <div class="wrap">
 	<div class="header">
 		<div class="header-left">
@@ -54,11 +55,12 @@
 						<td>${emp.tel}</td>
 						<td>${emp.email}</td>
 						<td>
-							<select id="empAuth" name="empAuth">
+							<select class="empAuth" name="empAuth" id="td-emp-${emp.id }">
 								<c:forEach var="listAuth" items="${authList }">
 									<option value="${listAuth.no }" <c:if test="${emp.auth.no eq listAuth.no }">selected</c:if>>${listAuth.name}</option>
 								</c:forEach>
 							</select>
+							<input type="hidden" id="bef-auth-${emp.id }" value="${emp.auth.no }">
 						</td>
 						<td><button type="button" id="btn-modify-emp-${emp.id }" value="${emp.id }">수정</button></td>
 						<td><span>${emp.flag eq 'Y' ? '사용중' : '사용안함'}</span><button type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">${emp.flag eq 'Y' ? '미사용' : '사용' }</button></td>
@@ -95,7 +97,40 @@
 			var empId = $(this).val();
 			location.href="empModify?empId=" + empId;
 		});
+		$('.empAuth').on('change',function(){
+			var new_authNo = $(this).val();
+			var empId = $(this).attr('id').replace('td-emp-','');
+			
+			var bef_authNo = $('#bef-auth-'+empId).val();
+			var login_authNo = $('#login-auth').val();
+			
+			var result = accessPossible(bef_authNo, new_authNo, login_authNo);
+			if(result){
+				$.ajax({
+					url: "empAuthUpdate",
+					data: {authNo:new_authNo,empId:empId},
+					success:function(){
+						alert("권한이 수정되었습니다.")
+						$('#bef-auth-'+empId).val(new_authNo);
+					}			
+				})
+			}
+		});
+		
 	});
+var accessPossible = function (bef_authNo, new_authNo, login_authNo){
+	if(login_authNo > new_authNo){
+		alert("자기 권한 보다 높은 권한은 부여할 수 없습니다.")
+		return false;
+	}
+	if(bef_authNo < login_authNo){
+		alert("상위 권한자의 권한을 변경할 수 없습니다.")
+		return false;
+	}
+	if(login_authNo <= new_authNo){
+		return true;
+	}
+};
 </script>	
 </body>
 

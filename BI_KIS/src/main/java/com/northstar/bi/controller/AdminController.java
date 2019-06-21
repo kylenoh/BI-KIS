@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.northstar.bi.dto.Auth;
 import com.northstar.bi.dto.Criteria;
@@ -41,6 +42,18 @@ public class AdminController {
 		model.addAttribute("authList", authList);
 		return "admin/empAdmin";
 	}
+	@RequestMapping(value="empAuthUpdate")
+	public @ResponseBody String empAuthUpdate(@RequestParam(name="authNo")int authNo,
+							@RequestParam(name="empId")String empId) {
+		Emp emp = empService.getEmpById(empId);
+		Auth auth = new Auth();
+		auth.setNo(authNo);
+		emp.setAuth(auth);
+		emp.setId(empId);
+		empService.updateEmp(emp);
+		return "";
+	}
+	
 	@RequestMapping(value="empModify", method=RequestMethod.GET)
 	public String empModifyForm(String empId, Model model) {
 		Emp emp = empService.getEmpById(empId);

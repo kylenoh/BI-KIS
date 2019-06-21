@@ -17,10 +17,16 @@
 		<association property="company" column="com_no" javaType="Company" select="com.northstar.bi.dao.CompanyDao.getCompanyByComNo"/>
 		<collection property="emps" column="pjt_no" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
 	</resultMap>
+	<delete id="deleteEmpPro" parameterType="Conpro">
+		delete
+			from
+				bi_con_pro
+			where
+				pjt_no = #{pjtNo}
+			and
+				emp_id = #{empId}
+	</delete>
 	<insert id="addEmpPro" parameterType="ConPro">
-		<selectKey keyProperty="pjtNo" resultType="int" order="BEFORE">
-			select bi_project_seq.currval from dual
-		</selectKey>
 		insert into bi_con_pro
 			(emp_id, pjt_no)
 		values
@@ -98,10 +104,13 @@
 		where
 			pjt_no = #{no}
 	</update>
+	<select id="getProjectNo" resultType="int">
+		select 
+			bi_project_seq.nextval
+		from 
+			dual
+	</select>
 	<insert id="addProject" parameterType="Project">
-		<selectKey keyProperty="no" resultType="int" order="BEFORE">
-			select bi_project_seq.nextval from dual
-		</selectKey>
 		insert into bi_project
 			(pjt_no, com_no, pjt_title, pjt_start_date, pjt_end_date, pjt_content, pjt_remark, pjt_flag, pjt_msg)
 		values

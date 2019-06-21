@@ -91,23 +91,29 @@
 		where
 			cus_no = #{value}
 	</delete>
+	<select id="getCompanyNo" resultType="int">
+		select 
+			bi_company_seq.nextval 
+		from 
+			dual
+	</select>
+	<select id="getCustomerNo" resultType="int">
+		select
+			bi_customer_seq.nextval
+		from
+			dual
+	</select>
 	<insert id="addCustomer" parameterType="Customer">
-		<selectKey keyProperty="no" resultType="int" order="BEFORE">
-			select bi_customer_seq.nextval from dual
-		</selectKey>
-			insert into bi_customer
-				(cus_no, com_no, cus_name, cus_tel1, cus_tel2, cus_email, cus_rank, cus_dept, cus_remark)
-			values
-				(#{no}, #{company.no}, #{name}, #{tel1}, #{tel2}, #{email}, #{rank}, #{dept}, #{remark})
+		insert into bi_customer
+			(cus_no, com_no, cus_name, cus_tel1, cus_tel2, cus_email, cus_rank, cus_dept, cus_remark)
+		values
+			(#{no}, #{company.no}, #{name}, #{tel1}, #{tel2}, #{email}, #{rank}, #{dept}, #{remark})
 	</insert>
 	<insert id="addCompany" parameterType="Company">
-		<selectKey keyProperty="no" resultType="int" order="BEFORE">
-			select bi_company_seq.nextval from dual
-		</selectKey>
-			insert into bi_company
-				(com_no, com_name, com_owner, com_tel, com_addr, com_remark)
-			values
-				(#{no}, #{name}, #{owner}, #{tel}, #{addr}, #{remark})
+		insert into bi_company
+			(com_no, com_name, com_owner, com_tel, com_addr, com_remark)
+		values
+			(#{no}, #{name}, #{owner}, #{tel}, #{addr}, #{remark})
 	</insert>
 	<select id="getCompanyByCriteria" parameterType="Criteria" resultType="Company">
 		select
@@ -215,7 +221,7 @@
 		from
 			bi_company CO, bi_customer CU
 		where
-			CO.com_no = CU.com_no
+			CU.com_no(+) = CO.com_no
 			<if test="name != null &amp;&amp; name != ''">
 				and CO.com_name like '%' || #{name} || '%'
 			</if>

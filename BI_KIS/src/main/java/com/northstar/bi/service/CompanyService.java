@@ -8,6 +8,8 @@ import com.northstar.bi.dto.Customer;
 
 public interface CompanyService {
 
+	int getCustomerNo ();
+	int getCompanyNo();
 	Company getCompanyByProjectNo(int projectNo);
 	List<Customer> getCustomerListByCompanyNo(int companyNo);
 	List<Company> getCompanyList();

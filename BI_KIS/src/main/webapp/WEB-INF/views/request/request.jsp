@@ -69,29 +69,38 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="request" items="${requestList }">
-				<tr>
-					<td>${request.category.name }</td>
-					<td><a class="no-link" href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
-					<td>${request.project.company.name }</td>
-					<td>${request.project.title }</td>
-					<td>${request.customer.name }</td>
-					<td>${request.emp.name }</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.startDate }"/></td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.endDate }"/></td>
-					<td>
-						<c:if test="${request.flag eq 'Y' }">
-	                    	진행예정
-	                    </c:if>
-	                    <c:if test="${request.flag eq 'P' }">
-	                    	진행중
-	                    </c:if>
-	                    <c:if test="${request.flag eq 'N' }">
-	                    	종료
-	                    </c:if>
-					</td>
-				</tr>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${!empty requestList }">
+						<c:forEach var="request" items="${requestList }">
+						<tr>
+							<td>${request.category.name }</td>
+							<td><a class="no-link" href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
+							<td>${request.project.company.name }</td>
+							<td>${request.project.title }</td>
+							<td>${request.customer.name }</td>
+							<td>${request.emp.name }</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.startDate }"/></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.endDate }"/></td>
+							<td>
+								<c:if test="${request.flag eq 'Y' }">
+			                    	진행예정
+			                    </c:if>
+			                    <c:if test="${request.flag eq 'P' }">
+			                    	진행중
+			                    </c:if>
+			                    <c:if test="${request.flag eq 'N' }">
+			                    	종료
+			                    </c:if>
+							</td>
+						</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="9">조회된 결과가 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 			</tbody>
 		</table>
 	</div>
