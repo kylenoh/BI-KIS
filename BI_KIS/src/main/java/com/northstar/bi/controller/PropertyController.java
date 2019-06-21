@@ -42,10 +42,33 @@ public class PropertyController {
 	public String BoardWrite() {
 		return "property/propertyWrite";
 	}
+//	자산 수정 게시판 진입
+	@RequestMapping(value = "/propertyModify", method = RequestMethod.GET)
+	public String BoardWrite(@RequestParam("no")int no, Model model) {
+		Property prop = propService.getPropertyByNo(no);
+		model.addAttribute("prop", prop);
+		return "property/propertyModify";
+	}
+//	게시글 사용 여부 변경
+	@RequestMapping(value = "/propertyDelete", method = RequestMethod.GET)
+	public String Delete(@RequestParam("no")int no,
+						 @RequestParam("flag")String flag,Property prop) {
+		prop.setNO(no);
+		prop.setFLAG(flag);
+		propService.Delete(prop);
+		return "redirect:/property";
+	}
 //	품목 등록
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/regProperty", method = RequestMethod.POST)
 	public String Register(Property prop) {
 		propService.register(prop);
 		return "redirect:/property";
 	}
+//	품목 수정
+	@RequestMapping(value = "/Modify", method = RequestMethod.POST)
+	public String Modify(Property prop) {
+		propService.Modify(prop);
+		return "redirect:/property";
+	}
+
 }

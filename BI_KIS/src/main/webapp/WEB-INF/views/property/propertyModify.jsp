@@ -7,10 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/ym.css">
-<link rel="stylesheet" href="resources/css/sh.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<%@include file="../style.jsp" %>
 <title>Insert title here</title>
 </head>
 <body>
@@ -22,48 +19,37 @@
 			  <li><a href="#">자산등록</a></li>
 			</ul>
 		</div>
-		<div class="header-right">
-			<ul class="userInterface">
-				<li>
-					<span id="myPage" onclick="myPage();" class="dropbtn"><i class="fas fa-cog">마이페이지</i></span>
-				</li>
-				<li><span><i class="fas fa-sign-in-alt">로그아웃</i></span></li>
-			</ul>
-            <div id="myDropdown" class="dropdown-content">
-            	<a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-		</div>
+		<%@include file="../emp-interface.jsp" %>
 	</div>
 	
 	<div class="main">
 		
-		<form method="post" action="register">
+		<form method="POST" action="Modify">
 		  <div class="container">
 		  	<div class="container-header">
+		  		<input type="hidden" name="NO" value="${prop.NO }">
 			    <label for="uploadtitle"><b>품명</b></label>
-			    <input type="text" name="PROP_NAME" class="boardTitle" required>
+			    <input type="text" name="PROP_NAME" class="boardTitle" value="${prop.PROP_NAME }" required>
    			    
    			    <label for="uploadtitle"><b>자산번호</b></label>
-			    <input type="text" name="CODE" class="boardTitle" required>
+			    <input type="text" name="CODE" class="boardTitle" value="${prop.CODE }" required>
    			    
    			    <label for="uploadtitle"><b>구입일자</b></label>
-			    <input type="date" name="BUY_DATE" class="boardTitle" required>
+			    <input type="date" name="BUY_DATE" class="boardTitle" value="${prop.BUY_DATE }" required>
 			    
 			    <label for="uploadtitle"><b>사용자</b></label>
-			    <input type="text" name="ID" class="boardTitle">
+			    <input type="text" name="ID" value="${prop.ID }" class="boardTitle">
 			    
 			    <label for="uploadtitle"><b>지급일자</b></label>
-			    <input type="date" name="DATE" class="boardTitle">
+			    <input type="date" name="PROP_DATE" value="${prop.PROP_DATE }" class="boardTitle">
 			</div>
 			<div class="container-content">
 			    <label for="content"><b>내용</b></label>
-			    <textarea name="REMARK" class="boardContent"></textarea>
+			    <textarea name="REMARK" class="boardContent">${prop.REMARK }</textarea>
 				
 			</div>
 			<div class="container-footer">
-		    	<button type="submit" class="writebtn">등록</button>
+		    	<button type="submit" class="writebtn">수정</button>
 		    	<button type="button" class="writebtn" onclick="getList()">목록으로</button>
 		    </div>
 		  </div>

@@ -27,6 +27,19 @@ public class PropertyServiceImpl implements PropertyService{
 	public int getTotalRows(PropertyCriteria criteria) {
 		return propDao.getTotalRows(criteria);
 	}
+	
+	@Override
+	public Property getPropertyByNo(int no) {
+		return propDao.getPropertyByNo(no);
+	}
+	@Override
+	public void Modify(Property prop) {
+		propDao.Modify(prop);
+	}
+	@Override
+	public void Delete(Property prop) {
+		propDao.Delete(prop);
+	}
 }
 
 

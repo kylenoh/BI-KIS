@@ -6,25 +6,26 @@
 <mapper namespace="com.northstar.bi.dao.PropertyDao">
 	<insert id="register" parameterType="Property">
 		insert into BI_PROP
-		(PROP_NO,EMP_ID,PROP_NAME,PROP_CODE,PROP_DATE,PROP_REMARK,PROP_BUY_DATE)
+		(PROP_NO,EMP_ID,PROP_NAME,PROP_CODE,PROP_DATE,PROP_REMARK,PROP_BUY_DATE,PROP_FLAG)
 		values
-		(BI_PROPERTY_SEQ.nextval, #{ID}, #{PROP_NAME}, #{CODE}, #{DATE}, #{REMARK}, #{BUY_DATE})
+		(BI_PROPERTY_SEQ.nextval, #{ID}, #{PROP_NAME}, #{CODE}, #{PROP_DATE}, #{REMARK}, #{BUY_DATE},'N')
 	</insert>
-	<select id="getTotalRows">
+	<select id="getTotalRows" resultType="int">
 		select 
 			count(*)
 		from
 			BI_PROP
 	</select>
-	<select id="getPropertyList">
+	<select id="getPropertyList" parameterType="PropertyCriteria" resultType="Property">
 	select 
 				PROP_NO as NO,
 				EMP_ID as ID,
-				PROP_NAME as PROP_NAME,
+				PROP_NAME,
 				PROP_CODE as CODE,
-				PROP_DATE as DATE,
+				PROP_DATE,
 				PROP_REMARK as REMARK,
-				PROP_BUY_DATE as BUY_DATE
+				PROP_BUY_DATE as BUY_DATE,
+				PROP_FLAG as FLAG
 		from 
 			(
 				select
@@ -35,16 +36,60 @@
 					PROP_DATE,
 					PROP_REMARK,
 					PROP_BUY_DATE,
+					PROP_FLAG,
 					row_number() over (order by PROP_NO desc) rn
 				from
 					BI_PROP
-				
 			)
 		where
 			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}
 		order by
-			DATE desc	
+			PROP_DATE desc	
 	</select>
+	<select id="getPropertyByNo" parameterType="int" resultType="Property">
+		select
+				PROP_NO as NO,
+				EMP_ID as ID,
+				PROP_NAME,
+				PROP_CODE as CODE,
+				PROP_DATE,
+				PROP_REMARK as REMARK,
+				PROP_BUY_DATE as BUY_DATE,
+				PROP_FLAG as FLAG
+			from
+				BI_PROP
+			where
+				PROP_NO = #{value}
+	</select>
+	<update id="Modify" parameterType="Property">
+		update
+			BI_PROP
+		set
+			EMP_ID			= #{ID},
+			PROP_NAME 		= #{PROP_NAME},
+			PROP_CODE 		= #{CODE},
+			PROP_DATE 		= #{PROP_DATE},
+			PROP_REMARK 	= #{REMARK},
+			PROP_BUY_DATE 	= #{BUY_DATE}
+		where
+			PROP_NO = #{NO}
+	</update>
+	<update id="Delete" parameterType="Property">
+		update
+			BI_PROP
+		set
+			<choose>
+				<when test="FLAG == Y">
+					PROP_FLAG 	= 'N'
+				</when>
+				<when test="FLAG == N">
+					PROP_FLAG 	= 'Y'
+				</when>
+			</choose>
+			
+		where
+			PROP_NO = #{NO}
+	</update>
 </mapper>
 
 

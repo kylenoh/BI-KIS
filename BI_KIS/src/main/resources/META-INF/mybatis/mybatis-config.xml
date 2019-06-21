@@ -20,6 +20,7 @@
 		<typeAlias type="com.northstar.bi.dto.BoardCriteria" alias="BoardCriteria"/>
 		<typeAlias type="com.northstar.bi.dto.BoardReply" alias="BoardReply"/>
 		<typeAlias type="com.northstar.bi.dto.Property" alias="Property"/>
+		<typeAlias type="com.northstar.bi.dto.PropertyCriteria" alias="PropertyCriteria"/>
 		<typeAlias type="com.northstar.bi.dto.Criteria" alias="Criteria"/>
 		<typeAlias type="com.northstar.bi.dto.Customer" alias="Customer"/>
 		<typeAlias type="com.northstar.bi.dto.Category" alias="Category"/>

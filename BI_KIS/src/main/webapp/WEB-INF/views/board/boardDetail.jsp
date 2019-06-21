@@ -5,10 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/ym.css">
-<link rel="stylesheet" href="resources/css/sh.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<%@include file="../style.jsp" %>
 <script type="text/javascript" src="resources/js/common.js"></script>
 <title>Insert title here</title>
 </head>
@@ -30,19 +27,7 @@ $(function(){
 			  <li><a href="#">상세내역</a></li>
 			</ul>
 		</div>
-		<div class="header-right">
-			<ul class="userInterface">
-				<li>
-					<span id="myPage" onclick="myPage();" class="dropbtn"><i class="fas fa-cog">마이페이지</i></span>
-				</li>
-				<li><span><i class="fas fa-sign-in-alt">로그아웃</i></span></li>
-			</ul>
-            <div id="myDropdown" class="dropdown-content">
-            	<a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-		</div>
+		<%@include file="../emp-interface.jsp" %>
 	</div>
 	
 	<div class="main">

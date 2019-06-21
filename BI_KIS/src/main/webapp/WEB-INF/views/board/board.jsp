@@ -5,21 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resource
-s/css/ym.css">
-<link rel="stylesheet" href="resources/css/sh.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<%@include file="../style.jsp" %>
 <title>Insert title here</title>
 <script type="text/javascript">
-function myPage(){
-	var condition = $('#myPage').toggleClass("show");
-	if (condition.hasClass("show")) {
-		$('.dropdown-content').css("display","block");
-	}else{
-		$('.dropdown-content').css("display","none");
-	}
-}
 function moveWrite(cate){
 	location.href = "boardWrite?cate="+cate;
 }
@@ -44,19 +32,7 @@ function getBoardDetail(no,cate){
 			  </li>
 			</ul>
 		</div>
-		<div class="header-right">
-			<ul class="userInterface">
-				<li>
-					<span id="myPage" onclick="myPage();" class="dropbtn"><i class="fas fa-cog">마이페이지</i></span>
-				</li>
-				<li><span><i class="fas fa-sign-in-alt">로그아웃</i></span></li>
-			</ul>
-            <div id="myDropdown" class="dropdown-content">
-            	<a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-		</div>
+		<%@include file="../emp-interface.jsp" %>
 	</div>
 	
 	<div class="main">
