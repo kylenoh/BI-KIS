@@ -24,18 +24,17 @@
 	</div>
 	
 	<div class="main">
-		
 		<form method="post" action="upload" enctype="multipart/form-data">
 		  <div class="container">
 		  	<div class="container-header">
-		  		<input type="hidden" name="CATE" value="${cate }">
+		  		<input type="hidden" name="CATE" value="${category }">
 			    <label for="uploadtitle"><b>제목</b></label>
 			    <input type="text" name="uploadtitle" class="boardTitle" required>
 			    <label for="uploadtype"><b>분류</b></label>
 			    <select class="boardType" name="uploadtype">
-			    	<option ${cate eq '1' ? 'selected' : '' } value="문서">문서</option>
-			    	<option ${cate eq '2' ? 'selected' : '' } value="교육">교육</option>
-			    	<option ${cate eq '3' ? 'selected' : '' } value="영어">영어</option>
+			    	<option ${CATE_NO eq '1' ? 'selected' : '' } value="1">문서</option>
+			    	<option ${CATE_NO eq '2' ? 'selected' : '' } value="2">교육</option>
+			    	<option ${CATE_NO eq '3' ? 'selected' : '' } value="3">영어</option>
 			    </select>
 			</div>
 			<div class="container-content">
@@ -53,7 +52,7 @@
 			<div class="container-footer">
 		    	<button type="button" class="writebtn" id="addFile">파일추가</button>
 		    	<button type="submit" class="writebtn">등록</button>
-		    	<button type="button" class="writebtn" onclick="getList(${cate })">목록으로</button>
+		    	<button type="button" class="writebtn" onclick="getList(${category })">목록으로</button>
 		    </div>
 		  </div>
 		</form>

@@ -52,9 +52,15 @@ public class PropertyController {
 //	게시글 사용 여부 변경
 	@RequestMapping(value = "/propertyDelete", method = RequestMethod.GET)
 	public String Delete(@RequestParam("no")int no,
-						 @RequestParam("flag")String flag,Property prop) {
+						 @RequestParam("flag")String flag,
+						 Property prop) {
+		System.out.println(flag);
+		if (flag.equals("N")) {
+			prop.setFLAG("Y");
+		}else {
+			prop.setFLAG("N");
+		}
 		prop.setNO(no);
-		prop.setFLAG(flag);
 		propService.Delete(prop);
 		return "redirect:/property";
 	}

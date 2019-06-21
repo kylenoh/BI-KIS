@@ -13,7 +13,7 @@
     </div>
     <div class="dropdown-div">
     	<span class="dropdown-span">
-        BI 기술정보 <i class="fa fa-caret-down"></i>
+        BI 기술 정보 <i class="fa fa-caret-down"></i>
         </span>
         <div class="dropdown-container">
             <a href="board?CATE=1">문서</a>

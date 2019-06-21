@@ -37,16 +37,16 @@ function propertyDelete(no,flag){
 	</div>
 	
 	<div class="main">
-		<form action="board">
+		<form action="property">
 			<fieldset>
 				<legend>검색라인</legend>
-				<label for="title">품명</label><input type="text" id="title" name="title">
-				<label for="writer">자산번호</label><input type="text" id="writer" name="writer">
-				<label for="writer">사용자</label><input type="text" id="writer" name="writer">
-				<select>
-					<option>ALL</option>
-					<option>사용</option>
-					<option>미 사용</option>
+				<label for="title">품명</label><input type="text" id="title" name="PROP_NAME">
+				<label for="writer">자산번호</label><input type="text" id="writer" name="PROP_NO">
+				<label for="writer">사용자</label><input type="text" id="writer" name="EMP_ID">
+				<select name="PROP_FLAG">
+					<option value="ALL">ALL</option>
+					<option value="N">사용</option>
+					<option value="Y">미 사용</option>
 				</select>
 				<button type="submit">Search</button>
 			</fieldset>
@@ -78,51 +78,44 @@ function propertyDelete(no,flag){
 			</thead>
 			<tbody>
 				<c:choose>
-						<c:when test="${fn:length(props)>0 }">
-							<c:forEach var="props" items="${props }">
-								<tr>
-									<td>${props.PROP_NAME }</td>
-									<td>${props.CODE }</td>
-									<td>${props.BUY_DATE }</td>
-									<td>${props.ID } </td>
-									<td>${props.PROP_DATE }</td>
-									<td>${props.REMARK }</td>
-									<td><button onclick="propertyModify(${props.NO })">수정</button></td>
-									<td>
-										<c:if test="${props.FLAG eq 'Y'}">
-											<button onclick="propertyDelete(${props.NO },${props.FLAG })">사용</button>
-										</c:if>
-										<c:if test="${props.FLAG eq 'N'}">
-											<button onclick="propertyDelete(${props.NO },${props.FLAG })">미 사용</button>
-										</c:if>
-									</td>
-								</tr>
-							</c:forEach>
-						</c:when>
+					<c:when test="${fn:length(props)>0 }">
+						<c:forEach var="props" items="${props }">
+							<tr>
+								<td>${props.PROP_NAME }</td>
+								<td>${props.CODE }</td>
+								<td>${props.BUY_DATE }</td>
+								<td>${props.ID } </td>
+								<td>${props.PROP_DATE }</td>
+								<td>${props.REMARK }</td>
+								<td><button onclick="propertyModify(${props.NO })">수정</button></td>
+								<td><button onclick="propertyDelete(${props.NO },'${props.FLAG }')" value="${props.FLAG}">${props.FLAG eq 'N' ? '사용' : '미사용'}</button></td>
+							</tr>
+						</c:forEach>
+					</c:when>
 						<c:otherwise>
 							<tr>
 								<td colspan="8">조회된 결과가 없습니다.</td>
 							</tr>					
 						</c:otherwise>
-					</c:choose>
+				</c:choose>
 			</tbody>
 		</table>
 	</div>
 	
 	<div class="footer">
 		<div align="center">
-		<c:if test="${!empty props }">
-			<c:if test="${pagination.cb gt 1 }">
-				<a href="board?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+			<c:if test="${!empty props }">
+				<c:if test="${pagination.cb gt 1 }">
+					<a href="property?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+				</c:if>
+				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
+					<a href="property?cp=${num}">${num }</a>
+				</c:forEach>
+				<c:if test="${pagination.cb lt pagination.totalBlocks }">
+					<a href="property?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+				</c:if>
 			</c:if>
-			<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-				<a href="board?cp=${num}">${num }</a>
-			</c:forEach>
-			<c:if test="${pagination.cb lt pagination.totalBlocks }">
-				<a href="board?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
-			</c:if>
-		</c:if>
-	</div>
+		</div>
 	</div>
 </div>
 	

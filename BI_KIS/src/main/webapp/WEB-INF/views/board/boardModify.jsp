@@ -15,6 +15,7 @@
 		<div class="header-left">
 			<ul class="breadcrumb">
 			  <li><a href="#">BI 기술 정보</a></li>
+			  <li><a href="#">${Board.CATE_NAME }</a></li>
 			  <li><a href="#">수정</a></li>
 			</ul>
 		</div>
@@ -22,19 +23,17 @@
 	</div>
 	
 	<div class="main">
-		
 		<form method="post" action="modify" enctype="multipart/form-data">
 		  <div class="container">
 		  	<div class="container-header">
-			  	<input type="hidden" name="cate" value="${category }">
 		 	 	<input type="hidden" name="NO" value="${Board.NO }">
 			    <label for="TITLE"><b>제목</b></label>
 			    <input type="text" name="TITLE" class="boardTitle" value="${Board.TITLE }" required>
 			    <label for="TYPE"><b>분류</b></label>
-			    <select class="boardType" name="TYPE">
-			    	<option ${category eq '1' ? 'selected' : '' } value="문서">문서</option>
-			    	<option ${category eq '2' ? 'selected' : '' } value="교육">교육</option>
-			    	<option ${category eq '3' ? 'selected' : '' } value="영어">영어</option>
+			    <select class="boardType" name="CATE_NO">
+			    	<option ${Board.CATE_NO eq '1' ? 'selected' : '' } value="1">문서</option>
+			    	<option ${Board.CATE_NO eq '2' ? 'selected' : '' } value="2">교육</option>
+			    	<option ${Board.CATE_NO eq '3' ? 'selected' : '' } value="3">영어</option>
 			    </select>
 			</div>
 			<div class="container-content">
@@ -88,7 +87,7 @@ function addFile(){
 			"<a href='#this' class='btn' id='delete_"+(file_count)+"' name='delete_"+(file_count)+"'>삭제</a>" +
 		"</p>";
 	$("#fileDiv").append(str);
-	$("#delete_"+(gfv_count++)).on("click", function(e){ //삭제 버튼
+	$("#delete_"+(file_count++)).on("click", function(e){ //삭제 버튼
 		e.preventDefault();
 		deleteFile($(this));
 	});
