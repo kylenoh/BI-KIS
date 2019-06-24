@@ -22,7 +22,7 @@
     </div>
     <div class="dropdown-div">
     	<span class="dropdown-span">
-       게시판 <i class="fa fa-caret-down"></i>
+       <a href="board">게시판</a>
         </span>
     </div>
     <div class="dropdown-div">
@@ -31,7 +31,7 @@
         </span>
         <div class="dropdown-container">
             <a href="#">직원 정보</a>
-            <a href="#">자산 정보</a>
+            <a href="property">자산 정보</a>
         </div>
     </div>
     <c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2}">

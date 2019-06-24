@@ -39,7 +39,6 @@ public class BoardController {
 	public String Board(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
 						@RequestParam(name="title", required=false) String title,
 						@RequestParam(name="writer", required=false) String writer,
-						@RequestParam(name="CATE", required=false,defaultValue = "0") String cate,
 						Model model,BoardCriteria criteria) {
 		
 		int rows = 10;
@@ -47,95 +46,63 @@ public class BoardController {
 		criteria.setEndIndex(cp * rows);
 		criteria.setTITLE(title);
 		criteria.setID(writer);
-		criteria.setCATE(cate);
 		int totalRows = boardService.getTotalRows(criteria);
 		Pagination pagination = new Pagination(totalRows, cp, rows);
 
 		List<Board> boards = boardService.getBoardList(criteria);
 		model.addAttribute("boards", boards);
-		model.addAttribute("category",cate);
 		model.addAttribute("pagination", pagination);
 		return "board/board";
 	}
 
 //	게시글 쓰기 진입
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
-	public String BoardWrite(@RequestParam(name="cate")String cate,
-							 Model model) {
-		model.addAttribute("category",cate);
+	public String BoardWrite() {
 		return "board/boardWrite";
 	}
 //	게시글 디테일 진입
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
 	public String BoardDetail(@RequestParam("no") int no,
-							  @RequestParam("cate") String cate,
 							  BoardReply reply,Model model) {
-		System.out.println(no);
-		System.out.println(cate);
 		Board board = boardService.getBoardByNo(no);
 		List<BoardReply>replys = replyService.getReplyList(no);
 		model.addAttribute("Board",board);
-		model.addAttribute("category",cate);
 		model.addAttribute("replys",replys);
 		return "board/boardDetail";
 	}
 //	게시글 업데이트 진입
 	@RequestMapping(value = "/boardUpdate", method = RequestMethod.POST)
 	public String BoardUpdate(@RequestParam("NO") int no,
-							  @RequestParam("cate") String cate,
 							  Model model) {
 		Board board = boardService.getBoardByNo(no);
 		model.addAttribute("Board",board);
-		model.addAttribute("category",cate);
 		return "board/boardModify";
 	}
 //	추가 서비스 진입
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String Upload(@RequestParam("uploadtitle") String title,
-						 @RequestParam("uploadcontent") String content,
-						 @RequestParam("uploadtype") String type,
-						 @RequestParam(name="CATE", required=false,defaultValue = "0") String CATE,
-						 RedirectAttributes redirectAttr,
-						 Board board, BoardFile boardFile, HttpSession session, MultipartHttpServletRequest files) {
+	public String Upload(Board board, BoardFile boardFile, HttpSession session, MultipartHttpServletRequest files) {
 		
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
-		
 		board.setEMP_ID(User.getId());
-		board.setTITLE(title);
-		board.setCONTENT(content);
-		board.setCATE_NO(type);
 		boardService.insertBoard(board,boardFile,files,session);
-		redirectAttr.addAttribute("CATE", CATE);
 		return "redirect:/board";
 	}
 //	수정 서비스 진입
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String Modify(@RequestParam("NO") int no,
-						 @RequestParam("TITLE") String title,
-						 @RequestParam("CONTENT") String content,
-						 @RequestParam("CATE_NO") String cateNo,
-						 @RequestParam Map<String, String>map,
+	public String Modify(@RequestParam Map<String, String>map,
 						 RedirectAttributes redirectAttr,
-						 Board board, BoardFile boardFile, HttpSession session, MultipartHttpServletRequest files,HttpServletRequest request) {
+						 Board board, BoardFile boardFile, HttpSession session, MultipartHttpServletRequest files, HttpServletRequest request) {
 		
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
-		
-		board.setNO(no);
-		board.setCATE_NO(cateNo);
-		board.setTITLE(title);
-		board.setCONTENT(content);
 		board.setUPDATER(User.getId()); 
-		System.out.println(board.toString());
 		
 		boardService.updateBoard(board,boardFile,files,session,request);
 		return "redirect:/board";
 	}
 //	삭제 서비스 진입
 	@RequestMapping(value="/delete")
-	public String Delete(@RequestParam(name="cate", required=false,defaultValue = "0") String CATE,
-			 			RedirectAttributes redirectAttr,HttpSession session, Model model,int no) {
+	public String Delete(RedirectAttributes redirectAttr,HttpSession session, Model model,int no) {
 		boardService.deleteBoard(no);
-		redirectAttr.addAttribute("CATE", CATE);
 		return "redirect:/board";
 	}
 //	파일 삭제
@@ -152,22 +119,21 @@ public class BoardController {
 		fileService.selectFileInfo(boardfile,no,response);
 	}
 //	댓글 작성
-	@RequestMapping(value = "/replyWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
 	public @ResponseBody String ReplyWrite(@RequestParam("no")int no,
-										   @RequestParam("name")String name,
 										   @RequestParam("content")String content,
 										   BoardReply reply,Model model,HttpSession session) {
-		System.out.println("삽입왔어요");
+		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
 		reply.setBOARD_NO(no);
 		reply.setCONTENT(content);
-		reply.setID(name);
+		reply.setID(User.getId());
 		replyService.insertBoardReply(reply);
-		return "board/boardDetail";
+		String replyNo =Integer.toString(reply.getNO());
+		return replyNo;
 	}
 //	댓글 삭제
 	@RequestMapping(value = "/deleteReply", method = RequestMethod.GET)
 	public @ResponseBody String deleteReply(@RequestParam("no")int no) {
-		System.out.println("여기왔어요");
 		replyService.deleteBoardReply(no);
 		return "board/boardDetail";
 	}

@@ -35,7 +35,7 @@
 			    <div id="fileDiv">
 				    <c:forEach varStatus="var" var="file" items="${Board.FILES }">
 				    	<p>
-							<input type="text" id="IDX" name="IDX_${var.index }" value="${file.NO }"><!-- 숨김 상자 -->
+							<input type="hidden" id="IDX" name="IDX_${var.index }" value="${file.NO }"><!-- 숨김 상자 -->
 							<a href="#this" id="name_${var.index }" name="name_${var.index }">${file.NAME }</a><!-- 파일 명 -->
 							<input type="file" id="file_${var.index }" name="file_${var.index }"><!-- 파일 상자 -->
 							<a href="#this" class="btn" id="delete_${var.index }" name="delete_${var.index }">삭제</a><!-- 삭제 -->
