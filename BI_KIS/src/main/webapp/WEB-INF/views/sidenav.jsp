@@ -3,7 +3,7 @@
 <div class="sidenav">
 	<div class="dropdown-div">
 		<span class="dropdown-span">
-		BI 기술 지원 <i class="fa fa-caret-down"></i>
+		BI 사업부 <i class="fa fa-caret-down"></i>
         </span>    
         <div class="dropdown-container">
         	<a href="project">프로젝트 관리</a>
@@ -11,24 +11,37 @@
             <a href="request">기술지원이력</a>
         </div>
     </div>
-    <div class="dropdown-div">
+     <div class="dropdown-div">
     	<span class="dropdown-span">
-        BI 기술 정보 <i class="fa fa-caret-down"></i>
+        솔류션 <i class="fa fa-caret-down"></i>
         </span>
         <div class="dropdown-container">
-            <a href="board?CATE=1">문서</a>
-            <a href="board?CATE=2">교육</a>
-            <a href="board?CATE=3">영어</a>
+            <a href="#">WebMethods</a>
+            <a href="#">iChain</a>
+        </div>
+    </div>
+    <div class="dropdown-div">
+    	<span class="dropdown-span">
+       게시판 <i class="fa fa-caret-down"></i>
+        </span>
+    </div>
+    <div class="dropdown-div">
+    	<span class="dropdown-span">
+        직원관리 <i class="fa fa-caret-down"></i>
+        </span>
+        <div class="dropdown-container">
+            <a href="#">직원 정보</a>
+            <a href="#">자산 정보</a>
         </div>
     </div>
     <c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2}">
 	    <div class="dropdown-div">
 	        <span class="dropdown-span">
-	         	환경설정 <i class="fa fa-caret-down"></i>
+	         	환경설정 
 	        </span>
 	        <div class="dropdown-container">
-	            <a href="empAdmin">사용자 관리</a>
-	            <a href="property">자산관리</a>
+	            <a href="empAdmin">권한 관리</a>
+	            <a href="property">분류 관리</a>
 	        </div>
 	    </div>
     </c:if>
