@@ -15,7 +15,6 @@
 		<result column="pjt_flag" property="flag"/>
 		<result column="pjt_msg" property="msg"/>
 		<association property="company" column="com_no" javaType="Company" select="com.northstar.bi.dao.CompanyDao.getCompanyByComNo"/>
-		<association property="emp" column="pjt_registrant" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpById"/>
 		<collection property="emps" column="pjt_no" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
 	</resultMap>
 	<delete id="deleteEmpPro" parameterType="Conpro">

@@ -15,7 +15,7 @@
 		<result column="cus_dept" property="dept"/>
 		<result column="cus_remark" property="remark"/>
 		<association property="company" column="com_no" javaType="Company" select="getCompanyByComNo"/>
-		<association property="registrant" column="cus_registrant" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
+		<association property="registrant" column="cus_registrant" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpById"/>
 	</resultMap>
 	<resultMap type="Company" id="getCompanyResultMap">
 		<id column="com_no" property="no"/>
@@ -24,16 +24,17 @@
 		<result column="com_tel" property="tel"/>
 		<result column="com_addr" property="addr"/>
 		<result column="com_remark" property="remark"/>
-		<association property="registrant" column="com_registrant" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
+		<association property="registrant" column="com_registrant" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpById"/>
 	</resultMap>
-	<select id="getCompanyByProjectNo" parameterType="int" resultType="getCompanyResultMap">
+	<select id="getCompanyByProjectNo" parameterType="int" resultType="Company">
 		select
-			C.com_no,
-			C.com_name,
-			C.com_owner,
-			C.com_tel,
-			C.com_addr,
-			C.com_remark
+			C.com_no				as no,
+			C.com_name				as name,
+			C.com_owner				as owner,
+			C.com_tel				as tel,
+			C.com_addr				as addr,
+			C.com_remark			as remark,
+			C.com_registrant		as "registrant.id"
 		from
 			bi_project P , bi_company C
 		where
@@ -245,29 +246,29 @@
 				and CU.cus_dept = #{dept}
 			</if>
 	</select>
-	<select id="getCompanyByComNo" parameterType="int" resultType="getCompanyResultMap">
+	<select id="getCompanyByComNo" parameterType="int" resultType="Company">
 		select
-			com_no,
-			com_name,
-			com_owner,
-			com_tel,
-			com_addr,
-			com_remark,
-			com_registrant
+			com_no						as no,
+			com_name					as name,
+			com_owner					as owner,
+			com_tel						as tel,
+			com_addr					as 	addr,
+			com_remark					as remark,
+			com_registrant				as "registrant.id"
 		from
 			bi_company
 		where
 			com_no = #{value}
 	</select>
-	<select id="getCompanyList" resultType="getCompanyResultMap">
+	<select id="getCompanyList" resultType="Company">
 		select
-			com_no,
-			com_name,
-			com_owner,
-			com_tel,
-			com_addr,
-			com_remark,
-			com_registrant
+			com_no						as no,
+			com_name					as name,
+			com_owner					as owner,
+			com_tel						as tel,
+			com_addr					as 	addr,
+			com_remark					as remark,
+			com_registrant				as "registrant.id"
 		from
 			bi_company
 	</select>
