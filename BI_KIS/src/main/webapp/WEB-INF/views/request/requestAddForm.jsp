@@ -30,9 +30,8 @@
 	                    <label for="category">분류 명</label>
 	                    <select id="category" name="categoryNo">
 	                        <option value="all"></option>
-	                        <c:forEach var="category" items="${categoryList }">
-	                        	<option value="${category.no }">${category.name }</option>
-	                        </c:forEach>
+                        	<option value="error">에러</option>
+                        	<option value="정기점검">정기점검</option>
                     	</select>  
 	                </div>
 	                <div>

@@ -37,10 +37,10 @@
                 </div>
                 <div>
                     <select id="project-flag" name="flag">
-                        <option value="all">All</option>
-                        <option value="Y">Expected</option>
-                        <option value="P">Processing</option>
-                        <option value="N">End</option>
+                        <option value="all">전체</option>
+                        <option value="Y">진행예정</option>
+                        <option value="P">진행중</option>
+                        <option value="N">종료</option>
                     </select>
 
                     <button type="submit">Search</button>
@@ -48,7 +48,6 @@
             </fieldset>
 		</form>
 		<button type="button" onclick="location.href='addproject'" class="write">프로젝트 등록</button>
-		
 		<table border="1">
 			<thead>
 				<tr>
@@ -83,7 +82,7 @@
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td colspan="1">조회된 결과가 없습니다.</td>
+							<td colspan="4">조회된 결과가 없습니다.</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>

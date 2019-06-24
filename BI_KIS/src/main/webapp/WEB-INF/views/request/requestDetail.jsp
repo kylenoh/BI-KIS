@@ -27,7 +27,7 @@
             <div id="requestDetail">
 	            <div>
 	                <label for="category">분류 명</label>
-	                <input type="text" id="categoryName" name="categoryName" value="${request.category.name }" disabled="disabled">  
+	                <input type="text" id="categoryName" name="categoryName" value="${request.categoryName }" disabled="disabled">  
 	            </div>
 	            <div>
 	        	    <label for="pjtName">프로젝트 명</label><input type="text" id="pjtName" name="pjtName" value="${request.project.title }" disabled="disabled">

@@ -14,11 +14,11 @@ public class CategoryServiceImpl implements CategoryService{
 	@Autowired
 	CategoryDao categoryDao;
 	@Override
-	public Category getCategoryByCategoryNo(int categoryNo) {
-		return categoryDao.getCategoryByCategoryNo(categoryNo);
+	public List<Category> getCateSectionListByDivisionName(String divisionName) {
+		return categoryDao.getCateSectionListByDivisionName(divisionName);
 	}
 	@Override
-	public List<Category> getRequestCategoryList() {
-		return categoryDao.getRequestCategoryList();
+	public List<Category> getCategoryList() {
+		return categoryDao.getCategoryList();
 	}
 }

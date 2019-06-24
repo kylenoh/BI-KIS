@@ -6,6 +6,6 @@ import com.northstar.bi.dto.Category;
 
 public interface CategoryService {
 
-	Category getCategoryByCategoryNo(int categoryNo);
-	List<Category> getRequestCategoryList();
+	List<Category> getCategoryList();
+	List<Category> getCateSectionListByDivisionName(String divisionName);
 }

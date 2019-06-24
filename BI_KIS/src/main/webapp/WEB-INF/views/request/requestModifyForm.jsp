@@ -30,9 +30,8 @@
 		            <div>
 		                <label for="category">분류 명</label>
 		                <select id="category" name="categoryNo">
-	                        <c:forEach var="category" items="${categoryList }">
-	                        	<option value="${category.no }" <c:if test="${request.category.no eq category.no }">selected</c:if>>${category.name } </option>
-	                        </c:forEach>
+                        	<option value="error" <c:if test="${request.categoryName eq 'error' }">selected</c:if>>에러 </option>
+                        	<option value="정기점검" <c:if test="${request.categoryName eq '정기점검' }">selected</c:if>>정기점검 </option>
                     	</select>   
 		            </div>
 		            <div>

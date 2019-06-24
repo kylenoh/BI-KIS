@@ -6,6 +6,7 @@
 <mapper namespace="com.northstar.bi.dao.RequestDao">
 	<resultMap type="Request" id="getRequestResultMap">
 		<id column="req_no" property="no"/>
+		<result column="req_category_name" property="categoryName"/>
 		<result column="req_suggest" property="suggest"/>
 		<result column="req_handle" property="handle"/>
 		<result column="req_start_date" property="startDate"/>
@@ -15,7 +16,6 @@
 		<association property="customer" column="cus_no" javaType="Customer" select="com.northstar.bi.dao.CompanyDao.getCustomerByNo"/>
 		<association property="project" column="pjt_no" javaType="Project" select="com.northstar.bi.dao.ProjectDao.getProjectByNo"/>
 		<association property="emp" column="emp_id" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpById" />
-		<association property="category" column="cate_no" javaType="Category" select="com.northstar.bi.dao.CategoryDao.getCategoryByCategoryNo"></association>
 	</resultMap>
 	<select id="getRequestNo" resultType="int">
 		select
@@ -25,9 +25,9 @@
 	</select>
 	<insert id="addRequest" parameterType="Request">
 		insert into bi_request
-			(req_no, cus_no, pjt_no, emp_id, cate_no, req_suggest, req_handle, req_start_date, req_end_date, req_flag, req_msg)
+			(req_no, cus_no, pjt_no, emp_id, req_category_name, req_suggest, req_handle, req_start_date, req_end_date, req_flag, req_msg)
 		values
-			(#{no}, #{customer.no}, #{project.no}, #{emp.id}, #{category.no}, #{suggest}, #{handle}, #{startDate}, #{endDate}, #{flag}, #{msg})
+			(#{no}, #{customer.no}, #{project.no}, #{emp.id}, #{cateogryName}, #{suggest}, #{handle}, #{startDate}, #{endDate}, #{flag}, #{msg})
 	</insert>
 	<select id="getRequestByNo" parameterType="int" resultMap="getRequestResultMap">
 		select
@@ -35,7 +35,7 @@
 			cus_no,
 			pjt_no,
 			emp_id,
-			cate_no,
+			req_category_name,
 			req_suggest,
 			req_handle,
 			req_start_date,
@@ -56,8 +56,8 @@
 			R.pjt_no = P.pjt_no
 		and
 			P.com_no = C.com_no
-			<if test="cateNo != 0">
-				and R.cate_no = #{cateNo}
+			<if test="categoryName != 0">
+				and R.category_name = #{categoryName}
 			</if>
 			<if test="companyName != null &amp;&amp; companyName != ''">
 				and C.com_name like '%' || #{companyName} || '%'
@@ -75,7 +75,7 @@
 			cus_no,
 			pjt_no,
 			emp_id,
-			cate_no,
+			req_category_name,
 			req_suggest,
 			req_handle,
 			req_start_date,
@@ -88,7 +88,7 @@
 				R.cus_no,
 				R.pjt_no,
 				R.emp_id,
-				R.cate_no,
+				R.req_category_name,
 				R.req_suggest,
 				R.req_handle,
 				R.req_start_date,
@@ -102,8 +102,8 @@
 				R.pjt_no = P.pjt_no
 			and
 				P.com_no = C.com_no
-				<if test="cateNo != 0">
-					and R.cate_no = #{cateNo}
+				<if test="categoryName != 0">
+					and R.category_name = #{categoryName}
 				</if>
 				<if test="companyName != null &amp;&amp; companyName != ''">
 					and C.com_name like '%' || #{companyName} || '%'

@@ -1,62 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="sidenav">
-	<div class="dropdown-div">
-		<span class="dropdown-span">
-		BI 사업부 <i class="fa fa-caret-down"></i>
-        </span>    
-        <div class="dropdown-container">
-        	<a href="project">프로젝트 관리</a>
-            <a href="company">고객사 관리</a>
-            <a href="request">기술지원이력</a>
-        </div>
-    </div>
-     <div class="dropdown-div">
-    	<span class="dropdown-span">
-        솔류션 <i class="fa fa-caret-down"></i>
-        </span>
-        <div class="dropdown-container">
-            <a href="#">WebMethods</a>
-            <a href="#">iChain</a>
-        </div>
-    </div>
-    <div class="dropdown-div">
-    	<span class="dropdown-span">
-       게시판 <i class="fa fa-caret-down"></i>
-        </span>
-    </div>
-    <div class="dropdown-div">
-    	<span class="dropdown-span">
-        직원관리 <i class="fa fa-caret-down"></i>
-        </span>
-        <div class="dropdown-container">
-            <a href="#">직원 정보</a>
-            <a href="#">자산 정보</a>
-        </div>
-    </div>
-    <c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2}">
-	    <div class="dropdown-div">
-	        <span class="dropdown-span">
-	         	환경설정 
-	        </span>
-	        <div class="dropdown-container">
-	            <a href="empAdmin">권한 관리</a>
-	            <a href="property">분류 관리</a>
-	        </div>
+	<c:forEach var="categoryList" items="${CATEGORY_LIST}">
+		<div class="dropdown-div">
+			<span id="dropdown-span-${categoryList.CATE_DIVISION_LEVEL }" class="dropdown-span">${categoryList.CATE_DIVISION_NAME }<i class="fa fa-caret-down"></i></span>    
+	        <div id="dropdown-container-${categoryList.CATE_DIVISION_LEVEL }"class="dropdown-container"></div>
 	    </div>
-    </c:if>
+	</c:forEach>
 </div>
 <script type="text/javascript">
 	$(function(){
-		$(".sidenav").on('click','[class^=dropdown-div]',function(){
-	        $(this).find("span").toggleClass("active");
-	        if($(this).find("span").hasClass("active")){
-	            $(".dropdown-div > div").css("display","none");
-	            $(this).children().css("display","block");
-	            $(this).siblings().find("span").removeClass("active");    
-	        }else{    
-	            $(".dropdown-div > div").css("display","none");
+		$(".dropdown-div").on('click','[id^=dropdown-span-]',function(){
+			var divisionName = $(this).text().trim();
+			var divisionLevel = $(this).attr('id').replace('dropdown-span-','');
+	        $(this).toggleClass("active");
+	        if($(this).hasClass("active")){
+	            $(this).siblings().css("display","block");
+	        }else{
+	        	$(this).siblings().css("display","none");
 	        }
+	        $.ajax({
+	        	url: "getCateSectionListByDivisionName",
+	        	data:{divisionName:divisionName},
+	        	dataType: "json",
+	        	success:function(SectionList){
+	        		var rows = "";
+	        		$.each(SectionList, function(index, section){
+	        			if(section.cate_SECTION_NAME != null){
+		        			rows += '<a href="' + section.cate_VALUE + '"> ' + section.cate_SECTION_NAME + ' </a>';
+	        			}else {
+	        				location.href = section.cate_VALUE;
+	        			}
+	        		});
+	        		$('#dropdown-container-' + divisionLevel).empty();
+	        		$('#dropdown-container-' + divisionLevel).append(rows);
+	        	}
+	        })
 	   });
 	});
 </script>
