@@ -19,6 +19,7 @@ public class Project {
 	private String flag;
 	private String msg;
 	private List<Emp> emps;
+	private Emp registrant;
 	
 	public Project() {}
 
@@ -100,6 +101,14 @@ public class Project {
 
 	public void setEmps(List<Emp> emps) {
 		this.emps = emps;
+	}
+
+	public Emp getRegistrant() {
+		return registrant;
+	}
+
+	public void setRegistrant(Emp registrant) {
+		this.registrant = registrant;
 	}
 	
 }

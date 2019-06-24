@@ -11,6 +11,7 @@ public class Customer {
 	private String rank;
 	private String dept;
 	private String remark;
+	private Emp registrant;
 	
 	public Customer() {}
 
@@ -84,6 +85,14 @@ public class Customer {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Emp getRegistrant() {
+		return registrant;
+	}
+
+	public void setRegistrant(Emp registrant) {
+		this.registrant = registrant;
 	}
 	
 	

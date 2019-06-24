@@ -3,6 +3,8 @@ package com.northstar.bi.controller;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.northstar.bi.dto.Company;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Customer;
+import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.service.CompanyService;
+import com.northstar.bi.service.EmpService;
 
 @Controller
 public class CompanyController {
@@ -51,7 +55,6 @@ public class CompanyController {
 	public String companyDetail(@RequestParam(name="companyNo")int companyNo,
 								@RequestParam(name="customerNo",required=false,defaultValue="0")int customerNo,
 								Model model) {
-		
 		Company company = companyService.getCompanyDetail(companyNo, customerNo);
 		
 		model.addAttribute("company",company);
@@ -67,15 +70,18 @@ public class CompanyController {
 							@RequestParam(name="tel")String tel,
 							@RequestParam(name="addr")String addr,
 							@RequestParam(name="remark",required=false)String remark,
-							Model model) {
+							HttpSession session, Model model) {
 		Company company = new Company();
 		int companyNo = companyService.getCompanyNo();
+		Emp emp = (Emp)session.getAttribute("LOGIN_EMP");
+		
 		company.setNo(companyNo);
 		company.setName(name);
 		company.setOwner(owner);
 		company.setTel(tel);
 		company.setAddr(addr);
 		company.setRemark(remark);
+		company.setRegistrant(emp);
 		
 		companyService.addCompany(company);
 		return "redirect:/company";
@@ -95,10 +101,11 @@ public class CompanyController {
 							@RequestParam(name="email")String email,
 							@RequestParam(name="companyNo")int companyNo,
 							@RequestParam(name="remark",required=false)String remark,
-							Model model) {
+							HttpSession session, Model model) {
 		Customer customer = new Customer();
 		Company company = companyService.getCompanyByComNo(companyNo);
 		int customerNo = companyService.getCustomerNo();
+		Emp emp = (Emp)session.getAttribute("LOGIN_EMP");
 		
 		customer.setNo(customerNo);
 		customer.setName(name);
@@ -109,6 +116,7 @@ public class CompanyController {
 		customer.setEmail(email);
 		customer.setCompany(company);
 		customer.setRemark(remark);
+		customer.setRegistrant(emp);
 		
 		companyService.addCustomer(customer);
 		return "redirect:/company";
