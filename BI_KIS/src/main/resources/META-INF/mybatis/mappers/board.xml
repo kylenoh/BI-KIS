@@ -7,8 +7,6 @@
 	
 	<resultMap type="Board" id="BoardResultMap">
 		<id column="BOARD_NO" property="NO"/>
-		<result column="CATE_NO" property="CATE_NO"/>
-		<result column="CATE_NAME" property="CATE_NAME"/>
 		<result column="EMP_ID" property="EMP_ID"/>
 		<result column="EMP_NAME" property="EMP_NAME"/>
 		<result column="BOARD_TITLE" property="TITLE"/>
@@ -29,36 +27,23 @@
 			SELECT BI_BOARD_SEQ.currval FROM DUAL
 		</selectKey>
 		insert into BI_BOARD
-		(BOARD_NO,CATE_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_COUNT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
+		(BOARD_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_COUNT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
 		values
-		(BI_BOARD_SEQ.nextval, #{CATE}, #{ID}, #{TITLE}, sysdate, #{CONTENT},0,'Y',NULL,NULL)
+		(BI_BOARD_SEQ.nextval, #{EMP_ID}, #{TITLE}, sysdate, #{CONTENT},0,'Y',NULL,NULL)
 	</insert>
 	
 	<select id="getTotalRows" resultType="int">
 		select 
 			count(*)
 		from
-			BI_BOARD A, BI_CATEGORY B , BI_EMP C
+			BI_BOARD BOARD, BI_EMP EMP
 		where
-			A.CATE_NO = B.CATE_NO and A.EMP_ID = C.EMP_ID
+			BOARD.EMP_ID = EMP.EMP_ID
 			<if test="TITLE != null &amp;&amp; TITLE !=''">
-				and A.BOARD_TITLE like '%' || #{TITLE} || '%'
+				and BOARD.BOARD_TITLE like '%' || #{TITLE} || '%'
 			</if>
 			<if test="ID != null &amp;&amp; ID !=''">
-				and C.EMP_NAME like '%' || #{ID} || '%'
-			</if>
-			<if test="CATE != 0">
-			<choose>
-					<when test="CATE == 1">
-						and B.CATE_NO = '1'
-					</when>
-					<when test="CATE == 2">
-						and B.CATE_NO = '2'
-					</when>
-					<when test="CATE == 3">
-						and B.CATE_NO = '3'
-					</when>
-				</choose>
+				and EMP.EMP_NAME like '%' || #{ID} || '%'
 			</if>
 		order by BOARD_NO desc
 	</select>
@@ -66,8 +51,6 @@
 	<select id="getBoardList" parameterType="BoardCriteria" resultType="Board">
 		select 
 				BOARD_NO as NO,
-				CATE_NO,
-				CATE_NAME,
 				EMP_NAME,
 				BOARD_TITLE as TITLE,
 				BOARD_CREATE_DATE as CREATE_DATE,
@@ -79,42 +62,27 @@
 		from 
 			(
 				select
-					A.BOARD_NO,
-					B.CATE_NO,
-					B.CATE_NAME,
-					C.EMP_NAME,
-					A.EMP_ID,
-					A.BOARD_TITLE,
-					A.BOARD_CREATE_DATE,
-					A.BOARD_CONTENT,
-					A.BOARD_COUNT,
-					A.BOARD_FLAG,
-					A.BOARD_UPDATER,
-					A.BOARD_UPDATE_DATE,
+					BOARD.BOARD_NO,
+					EMP.EMP_NAME,
+					BOARD.EMP_ID,
+					BOARD.BOARD_TITLE,
+					BOARD.BOARD_CREATE_DATE,
+					BOARD.BOARD_CONTENT,
+					BOARD.BOARD_COUNT,
+					BOARD.BOARD_FLAG,
+					BOARD.BOARD_UPDATER,
+					BOARD.BOARD_UPDATE_DATE,
 					row_number() over (order by BOARD_NO desc) rn
 				from
-					BI_BOARD A, BI_CATEGORY B,BI_EMP C
+					BI_BOARD BOARD, BI_EMP EMP
 				where
-					A.CATE_NO = B.CATE_NO and A.EMP_ID = C.EMP_ID
+					BOARD.EMP_ID = EMP.EMP_ID
 					<if test="TITLE != null &amp;&amp; TITLE !=''">
-						and A.BOARD_TITLE like '%' || #{TITLE} || '%'
+						and BOARD.BOARD_TITLE like '%' || #{TITLE} || '%'
 					</if>
 					<if test="ID != null &amp;&amp; ID !=''">
-						and C.EMP_NAME like '%' || #{ID} || '%'
+						and EMP.EMP_NAME like '%' || #{ID} || '%'
 					</if>
-					<if test="CATE != 0">
-						<choose>
-							<when test="CATE == 1">
-								and CATE_NAME = '문서'
-							</when>
-							<when test="CATE == 2">
-								and CATE_NAME = '교육'
-							</when>
-							<when test="CATE == 3">
-								and CATE_NAME = '영어'
-							</when>
-						</choose>
-						</if>	
 			)
 		where
 			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	and BOARD_FLAG = 'Y'
@@ -122,10 +90,8 @@
 			BOARD_NO desc	
 	</select>
 	<select id="getBoardByNo" parameterType="int" resultMap="BoardResultMap">
-		select 
+		select
 			BOARD.BOARD_NO,
-			CATE.CATE_NO,
-			CATE.CATE_NAME,
 			EMP.EMP_NAME,
 			BOARD.EMP_ID,
 			BOARD.BOARD_TITLE,
@@ -137,11 +103,9 @@
 			BOARD.BOARD_UPDATE_DATE
 		from
 			BI_BOARD BOARD, 
-			BI_CATEGORY CATE,
 			BI_EMP EMP
 		where
-			BOARD.CATE_NO = CATE.CATE_NO 
-		and BOARD.EMP_ID = EMP.EMP_ID 
+			BOARD.EMP_ID = EMP.EMP_ID 
 		and BOARD.BOARD_NO = #{value}
 	</select>
 	
@@ -149,7 +113,6 @@
 		update
 			BI_BOARD
 		set
-			CATE_NO				= #{CATE_NO},
 			BOARD_TITLE			= #{TITLE},
 			BOARD_CONTENT		= #{CONTENT},
 			BOARD_UPDATER		= #{UPDATER},
@@ -178,10 +141,10 @@
 	</update>
 
 
-
-
-
 	<insert id="insertBoardReply" parameterType="BoardReply">
+		<selectKey resultType="int" keyProperty="NO" order="AFTER">
+			SELECT REP_BOARD_SEQ.currval FROM DUAL
+		</selectKey>
 		insert into BI_BOARD_REPLY
 			(REPLY_NO,BOARD_NO,EMP_ID,REPLY_CREATE_DATE,REPLY_CONTENT)
 		values
@@ -191,7 +154,7 @@
 		select 
 			REPLY_NO as NO,
 			BOARD_NO,
-			EMP_ID as ID,
+			EMP_ID,
 			REPLY_CREATE_DATE as CREATE_DATE,
 			REPLY_CONTENT as CONTENT
 		from

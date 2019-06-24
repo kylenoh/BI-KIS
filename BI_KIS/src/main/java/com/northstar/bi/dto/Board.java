@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Board {
 	private int NO;
-	private String CATE_NO;
 	private String EMP_ID;
 	private String TITLE;
 	private String CREATE_DATE;
@@ -26,12 +25,11 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int nO, String cATE_NO, String eMP_ID, String tITLE, String cREATE_DATE, String cONTENT, int cOUNT,
-			String fLAG, String uPDATER, String uPDATE_DATE, String cATE_NAME, String eMP_NAME, List<BoardFile> fILES,
+	public Board(int nO, String eMP_ID, String tITLE, String cREATE_DATE, String cONTENT, int cOUNT, String fLAG,
+			String uPDATER, String uPDATE_DATE, String cATE_NAME, String eMP_NAME, List<BoardFile> fILES,
 			List<BoardReply> rEPLYS) {
 		super();
 		NO = nO;
-		CATE_NO = cATE_NO;
 		EMP_ID = eMP_ID;
 		TITLE = tITLE;
 		CREATE_DATE = cREATE_DATE;
@@ -52,14 +50,6 @@ public class Board {
 
 	public void setNO(int nO) {
 		NO = nO;
-	}
-
-	public String getCATE_NO() {
-		return CATE_NO;
-	}
-
-	public void setCATE_NO(String cATE_NO) {
-		CATE_NO = cATE_NO;
 	}
 
 	public String getEMP_ID() {
@@ -160,8 +150,8 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [NO=" + NO + ", CATE_NO=" + CATE_NO + ", EMP_ID=" + EMP_ID + ", TITLE=" + TITLE + ", CREATE_DATE="
-				+ CREATE_DATE + ", CONTENT=" + CONTENT + ", COUNT=" + COUNT + ", FLAG=" + FLAG + ", UPDATER=" + UPDATER
+		return "Board [NO=" + NO + ", EMP_ID=" + EMP_ID + ", TITLE=" + TITLE + ", CREATE_DATE=" + CREATE_DATE
+				+ ", CONTENT=" + CONTENT + ", COUNT=" + COUNT + ", FLAG=" + FLAG + ", UPDATER=" + UPDATER
 				+ ", UPDATE_DATE=" + UPDATE_DATE + ", CATE_NAME=" + CATE_NAME + ", EMP_NAME=" + EMP_NAME + ", FILES="
 				+ FILES + ", REPLYS=" + REPLYS + "]";
 	}

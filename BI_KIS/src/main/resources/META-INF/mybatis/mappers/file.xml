@@ -14,7 +14,7 @@
 		select
 			FILE_NO as NO,
 			BOARD_NO,
-			EMP_ID as ID,
+			EMP_ID,
 			FILE_DUAL as DUAL,
 			FILE_NAME as NAME,
 			FILE_FLAG as FLAG
