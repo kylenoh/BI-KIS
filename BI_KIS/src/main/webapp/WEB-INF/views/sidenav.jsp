@@ -25,14 +25,23 @@
        게시판 <i class="fa fa-caret-down"></i>
         </span>
     </div>
+    <div class="dropdown-div">
+    	<span class="dropdown-span">
+        직원관리 <i class="fa fa-caret-down"></i>
+        </span>
+        <div class="dropdown-container">
+            <a href="#">직원 정보</a>
+            <a href="#">자산 정보</a>
+        </div>
+    </div>
     <c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2}">
 	    <div class="dropdown-div">
 	        <span class="dropdown-span">
 	         	환경설정 
 	        </span>
 	        <div class="dropdown-container">
-	            <a href="empAdmin">사용자 관리</a>
-	            <a href="property">자산관리</a>
+	            <a href="empAdmin">권한 관리</a>
+	            <a href="property">분류 관리</a>
 	        </div>
 	    </div>
     </c:if>
