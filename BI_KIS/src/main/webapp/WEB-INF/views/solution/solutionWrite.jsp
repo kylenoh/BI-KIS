@@ -7,24 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/sh.css">
-<script src="https://kit.fontawesome.com/50a7106242.js"></script>
-<script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<%@include file="../style.jsp" %>
 <title>Insert title here</title>
 </head>
 <body>
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
 
-	<div class="header">
-				<a href="#home">Home</a>
-			  	<a href="#" class="active">게시판</a>
-			  <div class="header-right">
-			  	<a href="#search">회원정보</a>
-  				<a href="#about">로그아웃</a>
-			  </div>
-			</div>
-	
+	<%@include file="../emp-interface.jsp" %>
 	<div class="main">
 			<form method="POST" action="solutionUpload" enctype="multipart/form-data">
 			  <div class="container">

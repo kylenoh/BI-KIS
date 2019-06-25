@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/sh.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<%@include file="../style.jsp" %>
 <title>Insert title here</title>
 <script type="text/javascript">
 function solutionWrite(){
@@ -21,15 +19,7 @@ function getBoardDetail(no){
 <body>
 	<%@ include file="../sidenav.jsp" %>
 		<div class="wrap">
-			<div class="header">
-				<a href="#home">솔루션</a>
-			  	<a href="#" class="active">WebMethods</a>
-			  <div class="header-right">
-			  	<a href="#search">회원정보</a>
-  				<a href="#about">로그아웃</a>
-			  </div>
-			</div>
-			
+			<%@include file="../emp-interface.jsp" %>
 			<div class="main">
 				<div class="container">
 					<form action="board">
