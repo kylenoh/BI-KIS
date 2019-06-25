@@ -12,7 +12,7 @@ import com.northstar.bi.dto.SolutionFile;
 
 public interface SolutionDao {
 //	Insert
-	void insertSolution(Solution solution, SolutionFile solutionFile, HttpSession session, MultipartHttpServletRequest files);
+	void insertSolution(Solution solution);
 //	Select
 	int getTotalRows (SolutionCriteria criteria);
 	List<Solution> getSolutionList (SolutionCriteria criteria);

@@ -20,15 +20,7 @@ $(function(){
 <body>
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
-	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li><a href="#">상세내역</a></li>
-			</ul>
-		</div>
 		<%@include file="../emp-interface.jsp" %>
-	</div>
-	
 	<div class="main">
 		<div class="main-inner">
 				

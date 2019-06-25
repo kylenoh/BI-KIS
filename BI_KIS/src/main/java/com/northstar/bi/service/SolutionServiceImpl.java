@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.northstar.bi.dao.SolutionDao;
+import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Solution;
 import com.northstar.bi.dto.SolutionCriteria;
 import com.northstar.bi.dto.SolutionFile;
@@ -30,6 +31,10 @@ public class SolutionServiceImpl implements SolutionService {
 	@Override
 	public void insertSolution(Solution solution, SolutionFile solutionFile, HttpSession session,
 			MultipartHttpServletRequest files) {
-		solutionDao.insertSolution(solution, solutionFile, session, files);	
+		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
+		String Category = (String) session.getAttribute("HEADER_VALUE");
+		solution.setEMP_ID(User.getId());
+		solution.setSOLUTION_CATE(Category);
+		solutionDao.insertSolution(solution);	
 	}
 }

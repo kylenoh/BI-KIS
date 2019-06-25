@@ -20,11 +20,11 @@
 			  <div class="container">
 			  	<div class="container-header">
 				    <label><b>제목</b></label>
-				    <input type="text" name="TITLE" class="inputTitle" required>
+				    <input type="text" name="SOLUTION_TITLE" class="inputTitle" required>
 				</div>
 				<div class="container-content">
 				    <label><b>내용</b></label>
-				    <textarea name="CONTENT" class="textContent"></textarea>
+				    <textarea name="SOLUTION_CONTENT" class="textContent"></textarea>
 				    
 			    	<button type="button" class="btn success" id="addFile">파일추가</button>
 			    	<button type="submit" class="btn success">등록</button>

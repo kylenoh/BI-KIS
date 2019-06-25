@@ -23,15 +23,7 @@ function getBoardDetail(no){
 	</div>
 	<div class="rightcolumn">
 		<div class="wrap">
-			<div class="header">
-				<div class="header-left">
-					<ul class="breadcrumb">
-					  <li><a href="#">게시판</a></li>
-					</ul>
-				</div>
 				<%@include file="../emp-interface.jsp" %>
-			</div>
-			
 			<div class="main">
 				<div class="container">
 					<form action="board">
