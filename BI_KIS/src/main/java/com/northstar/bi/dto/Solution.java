@@ -13,13 +13,15 @@ public class Solution {
 	private String SOLUTION_UPDATER;
 	private Date SOLUTION_UPDATE_DATE;
 	
+	private String EMP_NAME;
+	
 	public Solution() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Solution(int sOLUTION_NO, String eMP_ID, String sOLUTION_CATE, String sOLUTION_TITLE,
 			Date sOLUTION_CREATE_DATE, String sOLUTION_CONTENT, String sOLUTION_FLAG, String sOLUTION_UPDATER,
-			Date sOLUTION_UPDATE_DATE) {
+			Date sOLUTION_UPDATE_DATE, String eMP_NAME) {
 		super();
 		SOLUTION_NO = sOLUTION_NO;
 		EMP_ID = eMP_ID;
@@ -30,6 +32,7 @@ public class Solution {
 		SOLUTION_FLAG = sOLUTION_FLAG;
 		SOLUTION_UPDATER = sOLUTION_UPDATER;
 		SOLUTION_UPDATE_DATE = sOLUTION_UPDATE_DATE;
+		EMP_NAME = eMP_NAME;
 	}
 
 	public int getSOLUTION_NO() {
@@ -102,6 +105,14 @@ public class Solution {
 
 	public void setSOLUTION_UPDATE_DATE(Date sOLUTION_UPDATE_DATE) {
 		SOLUTION_UPDATE_DATE = sOLUTION_UPDATE_DATE;
+	}
+
+	public String getEMP_NAME() {
+		return EMP_NAME;
+	}
+
+	public void setEMP_NAME(String eMP_NAME) {
+		EMP_NAME = eMP_NAME;
 	}
 
 	

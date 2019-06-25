@@ -51,11 +51,11 @@ function getBoardDetail(no){
 							<c:choose>
 								<c:when test="${fn:length(solutions)>0 }">
 					                <c:forEach var="solutions" items="${solutions }">
-										<tr onclick="getBoardDetail(${solutions.NO })">
-											<td>${solutions.NO }</td>
-											<td>${solutions.TITLE }</td>
+										<tr onclick="getBoardDetail(${solutions.SOLUTION_NO })">
+											<td>${solutions.SOLUTION_NO }</td>
+											<td>${solutions.SOLUTION_TITLE }</td>
 											<td>${solutions.EMP_NAME }</td>
-											<td>${solutions.CREATE_DATE }</td>
+											<td>${solutions.SOLUTION_CREATE_DATE }</td>
 										</tr>
 									</c:forEach>
 								</c:when>

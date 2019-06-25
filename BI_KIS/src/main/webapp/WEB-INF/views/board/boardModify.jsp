@@ -11,15 +11,7 @@
 <body>
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
-	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li><a href="#">게시판 수정</a></li>
-			</ul>
-		</div>
 		<%@include file="../emp-interface.jsp" %>
-	</div>
-	
 	<div class="main">
 		<form method="post" action="modify" enctype="multipart/form-data">
 		  <div class="container">

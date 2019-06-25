@@ -27,17 +27,16 @@ public class SolutionController {
 	@RequestMapping(value = "/solution", method = RequestMethod.GET)
 	public String Solution(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
 						   @RequestParam(name="categoryName", required=false) String categoryName,
-						Model model,SolutionCriteria criteria) {
-		
-		
+						Model model,SolutionCriteria criteria,HttpSession session) {
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
-		
+		criteria.setCategoryName(categoryName);
 		int totalRows = solutionService.getTotalRows(criteria);
 		Pagination pagination = new Pagination(totalRows, cp, rows);
 		
 		List<Solution>solutions = solutionService.getSolutionList(criteria);
+		session.setAttribute("HEADER_VALUE", categoryName);
 		model.addAttribute("solutions",solutions);
 		model.addAttribute("pagination", pagination);
 		
@@ -51,9 +50,6 @@ public class SolutionController {
 	
 	@RequestMapping(value = "/solutionUpload", method = RequestMethod.POST)
 	public String solutionUpload(Solution solution, SolutionFile solutionFile, HttpSession session, MultipartHttpServletRequest files) {
-		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
-		solution.setEMP_ID(User.getId());
-		System.out.println(User.getId());
 		solutionService.insertSolution(solution, solutionFile, session, files);
 		return "redirect:/solution";
 	}

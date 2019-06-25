@@ -37,9 +37,10 @@ public class BoardController {
 //	게시판 진입 시, 페이지
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public String Board(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
+						@RequestParam(name="categoryName", required=false, defaultValue="게시판" ) String categoryName,
 						@RequestParam(name="title", required=false) String title,
 						@RequestParam(name="writer", required=false) String writer,
-						Model model,BoardCriteria criteria) {
+						Model model,BoardCriteria criteria,HttpSession session) {
 		
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
@@ -50,6 +51,7 @@ public class BoardController {
 		Pagination pagination = new Pagination(totalRows, cp, rows);
 
 		List<Board> boards = boardService.getBoardList(criteria);
+		session.setAttribute("HEADER_VALUE", categoryName);
 		model.addAttribute("boards", boards);
 		model.addAttribute("pagination", pagination);
 		return "board/board";
