@@ -40,6 +40,7 @@ public class AdminController {
 		model.addAttribute("empList", empList);
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("authList", authList);
+		model.addAttribute("totalRows",totalRows);
 		return "admin/empAdmin";
 	}
 	@RequestMapping(value="empAuthUpdate")

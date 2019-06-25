@@ -9,8 +9,10 @@
 		<result column="req_category_name" property="categoryName"/>
 		<result column="req_suggest" property="suggest"/>
 		<result column="req_handle" property="handle"/>
+		<result column="req_receive_date" property="receiveDate"/>
 		<result column="req_start_date" property="startDate"/>
 		<result column="req_end_date" property="endDate"/>
+		<result column="req_close_date" property="closeDate"/>
 		<result column="req_flag" property="flag"/>
 		<result column="req_msg" property="msg"/>
 		<association property="customer" column="cus_no" javaType="Customer" select="com.northstar.bi.dao.CompanyDao.getCustomerByNo"/>
@@ -25,9 +27,9 @@
 	</select>
 	<insert id="addRequest" parameterType="Request">
 		insert into bi_request
-			(req_no, cus_no, pjt_no, emp_id, req_category_name, req_suggest, req_handle, req_start_date, req_end_date, req_flag, req_msg)
+			(req_no, cus_no, pjt_no, emp_id, req_category_name, req_suggest, req_handle, req_receive_date, req_start_date, req_end_date, req_close_date, req_flag, req_msg)
 		values
-			(#{no}, #{customer.no}, #{project.no}, #{emp.id}, #{cateogryName}, #{suggest}, #{handle}, #{startDate}, #{endDate}, #{flag}, #{msg})
+			(#{no}, #{customer.no}, #{project.no}, #{emp.id}, #{categoryName}, #{suggest}, #{handle}, #{receiveDate}, #{startDate}, #{endDate}, #{closeDate}, #{flag}, #{msg})
 	</insert>
 	<select id="getRequestByNo" parameterType="int" resultMap="getRequestResultMap">
 		select
@@ -38,8 +40,10 @@
 			req_category_name,
 			req_suggest,
 			req_handle,
+			req_receive_date,
 			req_start_date,
 			req_end_date,
+			req_close_date,
 			req_flag,
 			req_msg
 		from
@@ -68,6 +72,30 @@
 			<if test="suggest != null &amp;&amp; suggest != ''">
 				and R.req_suggest like '%' || #{suggest} || '%'
 			</if>
+			<if test="dateOpt == 'receive'">
+				and
+					R.req_receive_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and
+					R.req_receive_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+			</if>
+			<if test="dateOpt == 'start'">
+				and
+					R.req_start_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and
+					R.req_start_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+			</if>
+			<if test="dateOpt == 'end'">
+				and
+					R.req_end_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and
+					R.req_end_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+			</if>
+			<if test="dateOpt == 'close'">
+				and
+					R.req_close_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and
+					R.req_close_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+			</if>
 	</select>
 	<select id="getRequestByCriteria" parameterType="Criteria" resultMap="getRequestResultMap">
 		select
@@ -78,8 +106,10 @@
 			req_category_name,
 			req_suggest,
 			req_handle,
+			req_receive_date,
 			req_start_date,
 			req_end_date,
+			req_close_date,
 			req_flag,
 			req_msg
 		from (
@@ -91,8 +121,10 @@
 				R.req_category_name,
 				R.req_suggest,
 				R.req_handle,
+				R.req_receive_date,
 				R.req_start_date,
 				R.req_end_date,
+				R.req_close_date,
 				R.req_flag,
 				R.req_msg,
 				row_number() over (order by req_no desc) rn
@@ -114,6 +146,30 @@
 				<if test="suggest != null &amp;&amp; suggest != ''">
 					and R.req_suggest like '%' || #{suggest} || '%'
 				</if>
+				<if test="dateOpt == 'receive'">
+				and
+					R.req_receive_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and
+					R.req_receive_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+			</if>
+			<if test="dateOpt == 'start'">
+				and
+					R.req_start_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and
+					R.req_start_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+			</if>
+			<if test="dateOpt == 'end'">
+				and
+					R.req_end_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and
+					R.req_end_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+			</if>
+			<if test="dateOpt == 'close'">
+				and
+					R.req_close_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and
+					R.req_close_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+			</if>
 			)
 		where
 			rn >= #{beginIndex} and rn &lt;= #{endIndex}

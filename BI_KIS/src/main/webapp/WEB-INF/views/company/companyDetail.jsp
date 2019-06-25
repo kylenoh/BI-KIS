@@ -14,7 +14,7 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
+			  <li>BI 사업부</li>
 			  <li>고객사 관리</li>
 			  <li>고객사</li>
 			</ul>
@@ -65,10 +65,10 @@
 	            </div>
 	            <div style="float:right;">
 	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq company.registrant}">
-	            		<button type="button" class="btn-modify-company" value="${company.customer.no }">수정</button>
-	            		<button type="button" class="btn-del-customer" value="${company.customer.no }">삭제</button>
+	            		<button class="ym-btn" type="button" class="btn-modify-company" value="${company.customer.no }">수정</button>
+	            		<button class="ym-btn" type="button" class="btn-del-customer" value="${company.customer.no }">삭제</button>
 	            	</c:if>
-	            	<button type="button" onclick="location.href='project'">목록</button>
+	            	<button class="ym-btn" type="button" onclick="location.href='project'">목록</button>
 	            </div>
             </div>
         </fieldset>

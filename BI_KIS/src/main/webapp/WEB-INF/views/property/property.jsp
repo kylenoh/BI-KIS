@@ -40,9 +40,9 @@ function propertyDelete(no,flag){
 		<form action="property">
 			<fieldset>
 				<legend>검색라인</legend>
-				<label for="title">품명</label><input type="text" name="PROP_NAME">
-				<label for="writer">자산번호</label><input type="text" name="PROP_NO">
-				<label for="writer">사용자</label><input type="text" name="EMP_ID">
+				<label for="title">품명</label><input type="text" id="title" name="PROP_NAME">
+				<label for="writer">자산번호</label><input type="text" id="writer" name="PROP_NO">
+				<label for="writer">사용자</label><input type="text" id="writer" name="EMP_ID">
 				<select name="PROP_FLAG">
 					<option value="ALL">ALL</option>
 					<option value="N">사용</option>

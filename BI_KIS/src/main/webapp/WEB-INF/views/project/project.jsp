@@ -14,8 +14,8 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
-			  <li>프로젝트 관리</li>
+			  <li>BI 사업부</li>
+			  <li>프로젝트</li>
 			</ul>
 		</div>
 		<%@ include file="../emp-interface.jsp" %>
@@ -26,28 +26,41 @@
             <fieldset>
                 <legend>검색라인</legend>
                 <div>
-                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
+                    <label for="title">프로젝트 명</label><input type="text" id="search-title" name="title">
                 </div>
                 <div>
-                    <label for="startDate"></label><input type="date" id="startDate" name="startDate">    
-                    <label for="endDate"></label><input type="date" id="endDate" name="endDate">
+                	<div>
+	                	<label for="dateOpt">날짜기준</label>
+	                	<select id="project-date-opt" name="dateOpt">
+	                        <option value="all"></option>
+	                        <option value="start">시작일</option>
+	                        <option value="end">종료일</option>
+	                    </select>
+                    </div>
+                    <div>
+                    	<label for="fromDate"></label><input type="date" id="search-fromDate" name="fromDate">    
+                    	<label for="toDate"></label><input type="date" id="search-toDate" name="toDate">
+                    </div>
                 </div>
                 <div>
-                    <label for="companyName">고객사 명</label><input type="text" id="companyName" name="companyName">
+                    <label for="companyName">고객사 명</label><input type="text" id="search-companyName" name="companyName">
                 </div>
                 <div>
-                    <select id="project-flag" name="flag">
+                    <select id="search-flag" name="flag">
                         <option value="all">전체</option>
                         <option value="Y">진행예정</option>
                         <option value="P">진행중</option>
                         <option value="N">종료</option>
                     </select>
 
-                    <button type="submit">Search</button>
+                    <button class="ym-search-btn" type="submit">검색</button>
                 </div>
             </fieldset>
 		</form>
 		<button type="button" onclick="location.href='addproject'" class="write">프로젝트 등록</button>
+		<div>
+			<span> 게시글 수 : ${totalRows}</span>
+		</div>
 		<table border="1">
 			<thead>
 				<tr>

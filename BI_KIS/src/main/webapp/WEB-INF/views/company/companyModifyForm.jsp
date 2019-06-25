@@ -14,7 +14,7 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
+			  <li>BI 사업부</li>
 			  <li>고객사 관리</li>
 			  <li>고객사</li>
 			</ul>
@@ -67,8 +67,8 @@
 		               	<textarea id="remark" name="remark">${customer.remark }</textarea>
 		            </div>
 		            <div style="float:right;">
-		            	<button type="submit">수정</button>
-		            	<button type="button" onclick="location.href='companyDetail?companyNo=${customer.company.no}&customerNo=${customer.no}'">뒤로가기</button>
+		            	<button class="ym-btn" type="submit">수정</button>
+		            	<button class="ym-btn" type="button" onclick="location.href='companyDetail?companyNo=${customer.company.no}&customerNo=${customer.no}'">취소</button>
 		            </div>
 	            </div>
 	        </fieldset>

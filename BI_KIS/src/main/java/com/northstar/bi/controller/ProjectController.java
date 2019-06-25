@@ -51,8 +51,9 @@ public class ProjectController {
 	public String project(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
 						@RequestParam(name="title", required=false)String title,
 						@RequestParam(name="companyName", required=false)String companyName,
-						@RequestParam(name="startDate", required=false,defaultValue="nodate")String startDate,
-						@RequestParam(name="endDate", required=false,defaultValue="nodate")String endDate,
+						@RequestParam(name="dateOpt", required=false,defaultValue="all")String dateOpt,
+						@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
+						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
 						@RequestParam(name="flag", required=false)String flag,
 							Model model, Criteria criteria) throws ParseException {
 		int rows = 10;
@@ -60,8 +61,9 @@ public class ProjectController {
 		criteria.setEndIndex(cp * rows);
 		criteria.setTitle(title);
 		criteria.setCompanyName(companyName);
-		criteria.setStartDate(startDate);
-		criteria.setEndDate(endDate);
+		criteria.setDateOpt(dateOpt);
+		criteria.setFromDate(fromDate);
+		criteria.setToDate(toDate);
 		criteria.setFlag(flag);
 		
 		int totalRows = projectService.getProjectCount(criteria);
@@ -71,6 +73,7 @@ public class ProjectController {
 		
 		model.addAttribute("pjtList",pjtList);
 		model.addAttribute("pagination",pagination);
+		model.addAttribute("totalRows",totalRows);
 		
 		return "project/project";
 	}

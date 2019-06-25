@@ -14,7 +14,7 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
+			  <li>BI 사업부</li>
 			  <li>고객사 관리</li>
 			</ul>
 		</div>
@@ -38,13 +38,12 @@
                     <div>
                     	<label for="dept">부서</label><input type="text" id="dept" name="dept">
                 	</div>
-                    <button type="submit">Search</button>
+                    <button class="ym-search-btn" type="submit">검색</button>
                 </div>
             </fieldset>
 		</form>
-		<button type="button" onclick="location.href='addCompany'" class="write">고객사 등록</button>
-		<button type="button" onclick="location.href='addCustomer'" class="write">담당자 등록</button>
-		
+		<button type="button" onclick="location.href='addCompany'" class="write-double">고객사 등록</button>
+		<button type="button" onclick="location.href='addCustomer'" class="write-double">담당자 등록</button>
 		<table border="1">
 			<thead>
 				<tr>

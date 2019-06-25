@@ -63,22 +63,18 @@
 			<if test="flag != null &amp;&amp; flag != '' &amp;&amp; flag !='all'">
 				and P.pjt_flag = #{flag}
 			</if>
-				<choose>
-					<when test="startDate != 'nodate' &amp;&amp; endDate == 'nodate'">
-						and 
-							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
-					</when>
-					<when test="endDate != 'nodate' &amp;&amp; startDate == 'nodate' ">
-						and 
-							P.pjt_end_date &lt;= to_date(#{endDate},'yyyy-mm-dd')
-					</when>
-					<when test="startDate != 'nodate' &amp;&amp; endDate != 'nodate'">
-						and
-							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
-						and 
-							P.pjt_end_date &lt;= to_date (#{endDate},'yyyy-mm-dd')
-					</when>
-				</choose>
+			<if test="dateOpt == 'start'">
+				and
+					P.pjt_start_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and 
+					P.pjt_start_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
+			</if>
+			<if test="dateOpt == 'end'">
+				and
+					P.pjt_end_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and 
+					P.pjt_end_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
+			</if>
 	</select>
 	<delete id="deleteProject" parameterType="int">
 		delete
@@ -153,22 +149,18 @@
 			<if test="flag != null &amp;&amp; flag != 'all'">
 				and P.pjt_flag = #{flag}
 			</if>
-				<choose>
-					<when test="startDate != 'nodate' &amp;&amp; endDate == 'nodate'">
-						and 
-							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
-					</when>
-					<when test="endDate != 'nodate' &amp;&amp; startDate == 'nodate' ">
-						and 
-							P.pjt_end_date &lt;= to_date(#{endDate},'yyyy-mm-dd')
-					</when>
-					<when test="startDate != 'nodate' &amp;&amp; endDate != 'nodate'">
-						and
-							P.pjt_start_date >= to_date(#{startDate},'yyyy-mm-dd')
-						and 
-							P.pjt_end_date &lt;= to_date (#{endDate},'yyyy-mm-dd')
-					</when>
-				</choose>
+			<if test="dateOpt == 'start'">
+				and
+					P.pjt_start_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and 
+					P.pjt_start_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
+			</if>
+			<if test="dateOpt == 'end'">
+				and
+					P.pjt_end_date >= to_date(#{fromDate},'yyyy-mm-dd')
+				and 
+					P.pjt_end_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
+			</if>
 			)
 		where
 			rn >= #{beginIndex} and rn &lt;= #{endIndex}

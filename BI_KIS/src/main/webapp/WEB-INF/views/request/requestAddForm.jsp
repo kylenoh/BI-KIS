@@ -14,7 +14,7 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
+			  <li>BI 사업부</li>
 			  <li>기술 지원 이력</li>
 			  <li>기술 지원 등록</li>
 			</ul>
@@ -27,8 +27,8 @@
                 <legend>기술 지원 등록</legend>
                 <div id="addForm">
 	                <div>
-	                    <label for="category">분류 명</label>
-	                    <select id="category" name="categoryNo">
+	                    <label for="categoryName">분류 명</label>
+	                    <select id="category" name="categoryName">
 	                        <option value="all"></option>
                         	<option value="error">에러</option>
                         	<option value="정기점검">정기점검</option>
@@ -53,8 +53,10 @@
                     	</select>
 	                </div>
 	                <div id="requestDate">
+	                    <label for="receiveDate">접수일</label><input type="date" id="receiveDate" name="receiveDate">    
 	                    <label for="startDate">시작일</label><input type="date" id="startDate" name="startDate">    
 	                    <label for="endDate">종료일</label><input type="date" id="endDate" name="endDate">
+	                    <label for="closeDate">마감일</label><input type="date" id="closeDate" name="closeDate">
 	                </div>
 	                <div>
 	                	<label for="flag">진행상황</label>
@@ -72,7 +74,7 @@
 	                	<label for="handle">처리 내용</label>
 	                	<textarea id="handle" name="handle"></textarea>
 	                </div>
-	                <button type="submit">등록</button>
+	                <button class="ym-btn" type="submit">등록</button>
                 </div>
             </fieldset>
 		</form>

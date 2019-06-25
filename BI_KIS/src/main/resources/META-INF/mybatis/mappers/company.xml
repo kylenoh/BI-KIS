@@ -118,7 +118,7 @@
 		insert into bi_customer
 			(cus_no, com_no, cus_name, cus_tel1, cus_tel2, cus_email, cus_rank, cus_dept, cus_remark, cus_registrant)
 		values
-			(#{no}, #{company.no}, #{name}, #{tel1}, #{tel2}, #{email}, #{rank}, #{dept}, #{remark}, #{registrant.id)
+			(#{no}, #{company.no}, #{name}, #{tel1}, #{tel2}, #{email}, #{rank}, #{dept}, #{remark}, #{registrant.id})
 	</insert>
 	<insert id="addCompany" parameterType="Company">
 		insert into bi_company

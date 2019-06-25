@@ -94,9 +94,9 @@
   float: right;
   padding-right: 40px;
 }
-#searchForm div{
+#searchForm .search-line{
     display: inline-block;
-    width:49%;
+    width:46%;
 }
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
@@ -131,8 +131,29 @@
 	display:block;
 	border: none;
 }
-.no-link{
+.no-link {
 	text-decoration:none;
 	color:black;
+}
+.ym-btn {
+	border-radius:5px;
+	border: 2px solid lightgray;
+	text-align: center;
+	text-decoration:none;
+	font-size:15px;
+	cursor:pointer;
+	padding:5px 15px 5px 15px;
+	font-weight:bold;
+}
+.ym-search-btn {
+	width:20%;
+	border-radius:5px;
+	border: 2px solid lightgray;
+	text-align: center;
+	text-decoration:none;
+	font-size:15px;
+	cursor:pointer;
+	padding:5px 20px 5px 20px;
+	font-weight:bold;
 }
 }

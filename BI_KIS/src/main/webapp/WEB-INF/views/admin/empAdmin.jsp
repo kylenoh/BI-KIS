@@ -15,7 +15,8 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>사용자 관리</li>
+			  <li>직원 관리</li>
+			  <li>직원 정보</li>
 			</ul>
 		</div>
 		<%@ include file="../emp-interface.jsp" %>
@@ -29,10 +30,16 @@
                     <label for="name">사원 명</label><input type="text" id="name" name="name">
                 </div>
                 <div>
-                    <button type="submit">Search</button>
+                    <button class="ym-search-btn" type="submit">검색</button>
                 </div>
             </fieldset>
 		</form>
+		<div>
+			<button type="button" onclick="location.href='addEmp'" class="write">사원 등록</button>
+		</div>
+		<div>
+			<span> 사원 수 : ${totalRows}</span>
+		</div>
 		<table border="1">
 			<thead>
 				<tr>
@@ -62,8 +69,8 @@
 							</select>
 							<input type="hidden" id="bef-auth-${emp.id }" value="${emp.auth.no }">
 						</td>
-						<td><button type="button" id="btn-modify-emp-${emp.id }" value="${emp.id }">수정</button></td>
-						<td><span>${emp.flag eq 'Y' ? '사용중' : '사용안함'}</span><button type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">${emp.flag eq 'Y' ? '미사용' : '사용' }</button></td>
+						<td><button class="ym-btn" type="button" id="btn-modify-emp-${emp.id }" value="${emp.id }">수정</button></td>
+						<td><span>${emp.flag eq 'Y' ? '사용중' : '사용안함'}</span><button class="ym-btn" type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">${emp.flag eq 'Y' ? '미사용' : '사용' }</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

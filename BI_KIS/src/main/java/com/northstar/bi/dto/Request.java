@@ -14,9 +14,13 @@ public class Request {
 	private String suggest;
 	private String handle;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date receiveDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date startDate;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date closeDate;
 	private String flag;
 	private String msg;
 	
@@ -78,6 +82,14 @@ public class Request {
 		this.handle = handle;
 	}
 
+	public Date getReceiveDate() {
+		return receiveDate;
+	}
+
+	public void setReceiveDate(Date receiveDate) {
+		this.receiveDate = receiveDate;
+	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -92,6 +104,14 @@ public class Request {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public Date getCloseDate() {
+		return closeDate;
+	}
+
+	public void setCloseDate(Date closeDate) {
+		this.closeDate = closeDate;
 	}
 
 	public String getFlag() {
@@ -110,4 +130,5 @@ public class Request {
 		this.msg = msg;
 	}
 
+	
 }

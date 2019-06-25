@@ -14,8 +14,8 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
-			  <li>기술지원이력</li>
+			  <li>BI 사업부</li>
+			  <li>기술 지원 이력</li>
 			</ul>
 		</div>
 		<%@ include file="../emp-interface.jsp" %>
@@ -25,7 +25,7 @@
 	    <form method="post" action="request" id="searchForm">
             <fieldset>
                 <legend>검색라인</legend>
-                <div>
+                <div class="search-line">
                     <label for="category">분류 명</label>
 	                <select id="category" name="cateNo">
 		                <option value="0"></option>
@@ -33,7 +33,7 @@
 		               	<option value="정기점검">정기점검</option>
 	                </select>      
                 </div>
-                <div>
+                <div class="search-line">
                 	<label for="flag">진행상황</label>
                 	<select id="request-flag" name="flag">
                         <option value="all">All</option>
@@ -42,17 +42,35 @@
                         <option value="N">종료</option>
                     </select>
                 </div>
-                <div>
+                <div class="search-line">
                     <label for="companyName">고객사 명</label><input type="text" id="companyName" name="companyName">
                 </div>
-                <div>
-                    <label for="companyName">요청내용</label><input type="text" id="suggest" name="suggest">
-                    <button type="submit">Search</button>
+                <div class="search-line">
+                	<div>
+	                	<label for="dateOpt">날짜기준</label>
+	                	<select id="request-date-opt" name="dateOpt">
+	                        <option value="all"></option>
+	                        <option value="receive">접수일</option>
+	                        <option value="start">시작일</option>
+	                        <option value="end">종료일</option>
+	                        <option value="close">마감일</option>
+	                    </select>
+                    </div>
+                    <div>
+                    	<label for="fromDate"></label><input type="date" id="fromDate" name="fromDate">~    
+                    	<label for="toDate"></label><input type="date" id="toDate" name="toDate">
+                    </div>
+                </div>
+                <div class="search-line">
+                    <label for="suggest">요청내용</label><input type="text" id="suggest" name="suggest">
+                    <button class="ym-search-btn" type="submit">검색</button>
                 </div>
             </fieldset>
 		</form>
 		<button type="button" onclick="location.href='addRequest'" class="write">기술지원 등록</button>
-		
+		<div>
+			<span> 게시글 수 : ${totalRows}</span>
+		</div>
 		<table border="1">
 			<thead>
 				<tr>
@@ -78,8 +96,8 @@
 							<td>${request.project.title }</td>
 							<td>${request.customer.name }</td>
 							<td>${request.emp.name }</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.startDate }"/></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.endDate }"/></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.receiveDate }"/></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${request.closeDate }"/></td>
 							<td>
 								<c:if test="${request.flag eq 'Y' }">
 			                    	진행예정

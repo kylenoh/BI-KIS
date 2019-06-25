@@ -7,8 +7,9 @@ public class Criteria {
 	private String title;
 	private int companyNo;
 	private String companyName;
-	private String startDate;
-	private String endDate;
+	private String dateOpt;
+	private String fromDate;
+	private String toDate;
 	private String flag;
 	private String name;
 	private String customerName;
@@ -59,20 +60,28 @@ public class Criteria {
 		this.companyName = companyName;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public String getDateOpt() {
+		return dateOpt;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setDateOpt(String dateOpt) {
+		this.dateOpt = dateOpt;
 	}
 
-	public String getEndDate() {
-		return endDate;
+	public String getFromDate() {
+		return fromDate;
 	}
 
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public String getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
 	}
 
 	public String getFlag() {
@@ -131,4 +140,5 @@ public class Criteria {
 		this.categoryName = categoryName;
 	}
 
+	
 }

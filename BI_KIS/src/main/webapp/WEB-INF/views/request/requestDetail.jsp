@@ -14,7 +14,7 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
+			  <li>BI 사업부</li>
 			  <li>기술 지원 이력</li>
 			  <li>기술 지원 등록</li>
 			</ul>
@@ -40,8 +40,10 @@
 					<input type="text" id="customerName" name="customerName" value="${request.customer.name }" disabled="disabled">
 	            </div>
 	            <div id="requestDate">
+	                <label for="receiveDate">접수일</label><input type="date" id="receiveDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.receiveDate }"/>" disabled="disabled">    
 	                <label for="startDate">시작일</label><input type="date" id="startDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.startDate }"/>" disabled="disabled">    
 	                <label for="endDate">종료일</label><input type="date" id="endDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.endDate }"/>" disabled="disabled">
+	                <label for="closeDate">마감일</label><input type="date" id="closeDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.closeDate }"/>" disabled="disabled">
 	            </div>
 	            <div>
 	              	<label for="flag">진행상황</label>
@@ -57,10 +59,10 @@
 	            </div>
 	            <div style="float:right;">
 	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq pjt.registrant}">
-		            	<button type="button" class="btn-modify-request" value="${request.no }">수정</button>
-		            	<button type="button" class="btn-del-request" value="${request.no }">삭제</button>
+		            	<button class="ym-btn" type="button" class="btn-modify-request" value="${request.no }">수정</button>
+		            	<button class="ym-btn" type="button" class="btn-del-request" value="${request.no }">삭제</button>
 		            </c:if>
-	            	<button type="button" onclick="location.href='request'">목록</button>
+	            	<button class="ym-btn" type="button" onclick="location.href='request'">목록</button>
 	            </div>
             </div>
         </fieldset>

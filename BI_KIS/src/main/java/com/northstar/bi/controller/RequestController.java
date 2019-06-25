@@ -42,8 +42,11 @@ public class RequestController {
 	@RequestMapping(value="/request")
 	public String request(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
 						@RequestParam(name="categoryName",required=false,defaultValue="0")String categoryName,
+						@RequestParam(name="flag", required=false)String flag,
 			  			@RequestParam(name="companyName",required=false)String companyName,
-			  			@RequestParam(name="flag", required=false)String flag,
+			  			@RequestParam(name="dateOpt", required=false, defaultValue="all")String dateOpt,
+			  			@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
+						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
 			  			@RequestParam(name="suggest", required=false)String suggest,
 			  				Model model, Criteria criteria) {
 		int rows= 10;
@@ -51,6 +54,9 @@ public class RequestController {
 		criteria.setEndIndex(cp * rows);
 		criteria.setCategoryName(categoryName);
 		criteria.setCompanyName(companyName);
+		criteria.setDateOpt(dateOpt);
+		criteria.setFromDate(fromDate);
+		criteria.setToDate(toDate);
 		criteria.setFlag(flag);
 		criteria.setSuggest(suggest);
 		 
@@ -61,6 +67,7 @@ public class RequestController {
 		
 		model.addAttribute("requestList",requestList);
 		model.addAttribute("pagination",pagination);
+		model.addAttribute("totalRows",totalRows);
 		return "request/request";
 	}
 	
@@ -81,8 +88,10 @@ public class RequestController {
 	public String addRequest(@RequestParam(name="categoryName")String categoryName,
 							@RequestParam(name="pjtNo")int pjtNo,
 							@RequestParam(name="customerNo")int customerNo,
-							@RequestParam(name="startDate")String startDate,
+							@RequestParam(name="receiveDate")String receiveDate,
+							@RequestParam(name="startDate", required=false,defaultValue="nodate")String startDate,
 							@RequestParam(name="endDate", required=false,defaultValue="nodate")String endDate,
+							@RequestParam(name="closeDate", required=false,defaultValue="nodate")String closeDate,
 							@RequestParam(name="flag")String flag,
 							@RequestParam(name="suggest")String suggest,
 							@RequestParam(name="handle", required=false)String handle,
@@ -101,8 +110,10 @@ public class RequestController {
 		request.setCategoryName(categoryName);
 		request.setSuggest(suggest);
 		request.setHandle(handle);
+		request.setReceiveDate(formatter.parse(receiveDate));
 		request.setStartDate(formatter.parse(startDate));
 		request.setEndDate(formatter.parse(endDate));
+		request.setCloseDate(formatter.parse(closeDate));
 		request.setFlag(flag);
 		if ("Y".equals(flag)) {
 			request.setMsg("진행예정");
@@ -136,8 +147,10 @@ public class RequestController {
 								@RequestParam(name="categoryName")String categoryName,
 								@RequestParam(name="pjtNo")int pjtNo,
 								@RequestParam(name="customerNo")int customerNo,
-								@RequestParam(name="startDate")String startDate,
+								@RequestParam(name="receiveDate")String receiveDate,
+								@RequestParam(name="startDate", required=false,defaultValue="nodate")String startDate,
 								@RequestParam(name="endDate", required=false,defaultValue="nodate")String endDate,
+								@RequestParam(name="closeDate", required=false,defaultValue="nodate")String closeDate,
 								@RequestParam(name="flag")String flag,
 								@RequestParam(name="suggest")String suggest,
 								@RequestParam(name="handle", required=false)String handle)throws ParseException {
@@ -151,8 +164,10 @@ public class RequestController {
 		request.setCategoryName(categoryName);
 		request.setSuggest(suggest);
 		request.setHandle(handle);
+		request.setReceiveDate(formatter.parse(receiveDate));
 		request.setStartDate(formatter.parse(startDate));
 		request.setEndDate(formatter.parse(endDate));
+		request.setCloseDate(formatter.parse(closeDate));
 		request.setFlag(flag);
 		if ("Y".equals(flag)) {
 			request.setMsg("진행예정");

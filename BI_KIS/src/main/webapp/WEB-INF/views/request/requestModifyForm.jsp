@@ -14,9 +14,9 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
+			  <li>BI 사업부</li>
 			  <li>기술 지원 이력</li>
-			  <li>기술 지원 등록</li>
+			  <li>기술 지원 수정</li>
 			</ul>
 		</div>
 		<%@ include file="../emp-interface.jsp" %>
@@ -49,8 +49,10 @@
                     	</select>
 		            </div>
 		            <div id="requestDate">
+		                <label for="receiveDate">시작일</label><input type="date" id="receiveDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.receiveDate }"/>">    
 		                <label for="startDate">시작일</label><input type="date" id="startDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.startDate }"/>">    
 		                <label for="endDate">종료일</label><input type="date" id="endDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.endDate }"/>">
+		                <label for="closeDate">종료일</label><input type="date" id="closeDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.closeDate }"/>">
 		            </div>
 		            <div>
 		              	<label for="flag">진행상황</label>
@@ -69,8 +71,8 @@
 		              	<textarea id="handle" name="handle">${request.handle }</textarea>
 		            </div>
 		            <div style="float:right;">
-			         	<button type="submit">수정</button>
-			        	<button type="button" onclick="location.href='requestDetail?requestNo=${request.no}'">뒤로가기</button>
+			         	<button class="ym-btn" type="submit">수정</button>
+			        	<button class="ym-btn" type="button" onclick="location.href='requestDetail?requestNo=${request.no}'">취소</button>
 			        </div>
 	            </div>
 	        </fieldset>

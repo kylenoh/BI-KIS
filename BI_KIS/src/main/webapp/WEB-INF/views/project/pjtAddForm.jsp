@@ -14,9 +14,8 @@
 	<div class="header">
 		<div class="header-left">
 			<ul class="breadcrumb">
-			  <li>BI 기술 지원</li>
-			  <li>프로젝트 관리</li>
-			  <li>프로젝트 등록</li>
+			  <li>BI 사업부</li>
+			  <li>프로젝트</li>
 			</ul>
 		</div>
 		<%@ include file="../emp-interface.jsp" %>
@@ -59,7 +58,7 @@
 	                	<label for="remark">비고</label>
 	                	<textarea id="remark" name="remark"></textarea>
 	                </div>
-	                <button type="submit">등록</button>
+	                <button class="ym-btn" type="submit">등록</button>
                 </div>
             </fieldset>
 		</form>
