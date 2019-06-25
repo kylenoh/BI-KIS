@@ -30,7 +30,7 @@ html, body {
 
 .header a:hover {
 	background-color: #ddd;
-	color: black;
+	color: white;
 }
 
 .header a.active {
@@ -71,7 +71,7 @@ html, body {
 
 .dropdown-container {
 	display: none;
-	background-color: #a5a5a5;
+	background-color: #3a3a3a;
 }
 
 .fa-caret-down {
