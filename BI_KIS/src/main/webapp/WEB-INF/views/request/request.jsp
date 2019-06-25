@@ -29,9 +29,8 @@
                     <label for="category">분류 명</label>
 	                <select id="category" name="cateNo">
 		                <option value="0"></option>
-		                <c:forEach var="cateList" items="${categoryList }">
-		                 	<option value="${cateList.no }">${cateList.name }</option>
-		                </c:forEach>
+		               	<option value="error">error</option>
+		               	<option value="정기점검">정기점검</option>
 	                </select>      
                 </div>
                 <div>
@@ -73,7 +72,7 @@
 					<c:when test="${!empty requestList }">
 						<c:forEach var="request" items="${requestList }">
 						<tr>
-							<td>${request.category.name }</td>
+							<td>${request.categoryName }</td>
 							<td><a class="no-link" href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
 							<td>${request.project.company.name }</td>
 							<td>${request.project.title }</td>

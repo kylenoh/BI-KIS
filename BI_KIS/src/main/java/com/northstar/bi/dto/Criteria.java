@@ -15,7 +15,7 @@ public class Criteria {
 	private String email;
 	private String dept;
 	private String suggest;
-	private int cateNo;
+	private String categoryName;
 	
 	public Criteria() {}
 
@@ -123,12 +123,12 @@ public class Criteria {
 		this.suggest = suggest;
 	}
 
-	public int getCateNo() {
-		return cateNo;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCateNo(int cateNo) {
-		this.cateNo = cateNo;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-	
+
 }

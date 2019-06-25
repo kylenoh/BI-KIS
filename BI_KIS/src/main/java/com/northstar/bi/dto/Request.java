@@ -10,7 +10,7 @@ public class Request {
 	private Customer customer;
 	private Project project;
 	private Emp emp;
-	private Category category;
+	private String categoryName;
 	private String suggest;
 	private String handle;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -54,12 +54,12 @@ public class Request {
 		this.emp = emp;
 	}
 
-	public Category getCategory() {
-		return category;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getSuggest() {
