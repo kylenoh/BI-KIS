@@ -46,6 +46,12 @@ public class AdminController {
 		model.addAttribute("totalRows",totalRows);
 		return "admin/empAdmin";
 	}
+	@RequestMapping(value="empDetail")
+	public String empDetail (String empId, Model model) {
+		Emp emp = empService.getEmpById(empId);
+		model.addAttribute("emp",emp);
+		return "admin/empDetail";
+	}
 	@RequestMapping(value="empAuthUpdate")
 	public @ResponseBody String empAuthUpdate(@RequestParam(name="authNo")int authNo,
 							@RequestParam(name="empId")String empId) {

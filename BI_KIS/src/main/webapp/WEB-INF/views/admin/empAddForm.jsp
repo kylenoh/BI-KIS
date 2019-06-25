@@ -12,11 +12,6 @@
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
 	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li>사용자 관리</li>
-			</ul>
-		</div>
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	

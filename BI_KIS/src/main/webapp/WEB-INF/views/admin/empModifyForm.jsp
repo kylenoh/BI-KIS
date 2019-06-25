@@ -12,18 +12,11 @@
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
 	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li>사용자 관리</li>
-			</ul>
-		</div>
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	
 	<div class="main">
 	    <form method="post" action="empModify" id="searchForm">
-            <fieldset>
-                <legend>사용자</legend>
                 <div>
                     <label for="empId">아이디</label><input type="text" id="empId" name="empId" readonly="readonly" value="${emp.id }">
                 </div>
@@ -43,7 +36,6 @@
                     <button type="submit">수정</button>
                     <button type="button" onclick="location.href='empAdmin'">뒤로 가기</button>
                 </div>
-            </fieldset>
 		</form>
 	</div>
 </div>
