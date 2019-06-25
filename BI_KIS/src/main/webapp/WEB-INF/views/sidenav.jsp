@@ -13,7 +13,7 @@
     </div>
      <div class="dropdown-div">
     	<span class="dropdown-span">
-        솔류션 <i class="fa fa-caret-down"></i>
+        솔루션 <i class="fa fa-caret-down"></i>
         </span>
         <div class="dropdown-container">
             <a href="#">WebMethods</a>
@@ -21,9 +21,7 @@
         </div>
     </div>
     <div class="dropdown-div">
-    	<span class="dropdown-span">
-       <a href="board">게시판</a>
-        </span>
+      		<a href="board">게시판</a>
     </div>
     <div class="dropdown-div">
     	<span class="dropdown-span">
@@ -37,7 +35,7 @@
     <c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2}">
 	    <div class="dropdown-div">
 	        <span class="dropdown-span">
-	         	환경설정 
+	         	환경설정 <i class="fa fa-caret-down"></i>
 	        </span>
 	        <div class="dropdown-container">
 	            <a href="empAdmin">권한 관리</a>

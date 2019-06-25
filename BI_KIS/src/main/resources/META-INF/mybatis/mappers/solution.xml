@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.northstar.bi.dao.SolutionDao">
+	<select id="getTotalRows" resultType="int">
+		select 
+			count(*)
+		from
+			BI_SOLUTION SOLUTION, BI_EMP EMP
+		where
+			SOLUTION.EMP_ID = EMP.EMP_ID
+	</select>
+	<select id="getSolutionList" parameterType="SolutionCriteria" resultType="Solution">
+		select 
+				SOLUTION_NO as NO,
+				EMP_NAME,
+				SOLUTION_TITLE as TITLE,
+				SOLUTION_CREATE_DATE as CREATE_DATE,
+				SOLUTION_CONTENT as CONTENT,
+				SOLUTION_FLAG as FLAG,
+				SOLUTION_UPDATER as UPDATER,
+				SOLUTION_UPDATE_DATE as UPDATE_DATE
+		from 
+			(
+				select
+					SOLUTION.SOLUTION_NO,
+					EMP.EMP_NAME,
+					SOLUTION.EMP_ID,
+					SOLUTION.SOLUTION_TITLE,
+					SOLUTION.SOLUTION_CREATE_DATE,
+					SOLUTION.SOLUTION_CONTENT,
+					SOLUTION.SOLUTION_FLAG,
+					SOLUTION.SOLUTION_UPDATER,
+					SOLUTION.SOLUTION_UPDATE_DATE,
+					row_number() over (order by SOLUTION_NO desc) rn
+				from
+					BI_SOLUTION SOLUTION, BI_EMP EMP
+				where
+					SOLUTION.EMP_ID = EMP.EMP_ID
+			)
+		where
+			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	and SOLUTION_FLAG = 'Y'
+		order by
+			SOLUTION_NO desc	
+	</select>
+	
+	<insert id="insertSolution" parameterType="Solution">
+		<selectKey keyProperty="SOLUTION_NO" resultType="int" order="AFTER">
+			SELECT BI_SOLUTION_SEQ.currval FROM DUAL
+		</selectKey>
+		insert into BI_SOLUTION
+		(SOLUTION_NO,EMP_ID,SOLUTION_CATE,SOLUTION_TITLE,SOLUTION_CREATE_DATE,SOLUTION_CONTENT,SOLUTION_FLAG,SOLUTION_UPDATER,SOLUTION_UPDATE_DATE)
+		values
+		(BI_SOLUTION_SEQ.nextval, #{EMP_ID}, #{SOLUTION_CATE}, #{SOLUTION_TITLE}, sysdate, #{SOLUTION_CONTENT}'Y',NULL,NULL)
+	</insert>
+
+</mapper>

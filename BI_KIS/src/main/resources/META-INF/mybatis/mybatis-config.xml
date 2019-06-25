@@ -21,6 +21,8 @@
 		<typeAlias type="com.northstar.bi.dto.BoardReply" alias="BoardReply"/>
 		<typeAlias type="com.northstar.bi.dto.Property" alias="Property"/>
 		<typeAlias type="com.northstar.bi.dto.PropertyCriteria" alias="PropertyCriteria"/>
+		<typeAlias type="com.northstar.bi.dto.SolutionCriteria" alias="SolutionCriteria"/>
+		<typeAlias type="com.northstar.bi.dto.Solution" alias="Solution"/>
 		<typeAlias type="com.northstar.bi.dto.Criteria" alias="Criteria"/>
 		<typeAlias type="com.northstar.bi.dto.Customer" alias="Customer"/>
 		<typeAlias type="com.northstar.bi.dto.Category" alias="Category"/>
@@ -36,6 +38,7 @@
 		<mapper resource="META-INF/mybatis/mappers/board.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/file.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/property.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/solution.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/category.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/request.xml"/>
 	</mappers>
