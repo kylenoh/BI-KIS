@@ -5,11 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<%@include file="../style.jsp" %>
+<link rel="stylesheet" href="resources/css/sh.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
-function moveWrite(){
-	location.href = "boardWrite";
+function solutionWrite(){
+	location.href = "solutionWrite";
 }
 function getBoardDetail(no){
 	location.href = "boardDetail?no="+no;
@@ -17,19 +19,16 @@ function getBoardDetail(no){
 </script>
 </head>
 <body>
-<div class="row">
-	<div class="leftcolumn">
-		<%@ include file="../sidenav.jsp" %>
-	</div>
-	<div class="rightcolumn">
+	<%@ include file="../sidenav.jsp" %>
 		<div class="wrap">
+		
 			<div class="header">
-				<div class="header-left">
-					<ul class="breadcrumb">
-					  <li><a href="#">게시판</a></li>
-					</ul>
-				</div>
-				<%@include file="../emp-interface.jsp" %>
+				<a href="#home">Home</a>
+			  	<a href="#" class="active">게시판</a>
+			  <div class="header-right">
+			  	<a href="#search">회원정보</a>
+  				<a href="#about">로그아웃</a>
+			  </div>
 			</div>
 			
 			<div class="main">
@@ -37,12 +36,12 @@ function getBoardDetail(no){
 					<form action="board">
 						<fieldset>
 							<legend>검색라인</legend>
-							<label for="title">제목</label><input type="text" name="title">
-							<label for="writer">작성자</label><input type="text"name="writer">
-							<button type="submit">Search</button>
+							<label for="title">제목</label><input type="text" name="title" class="inputSearch">
+							<label for="writer">작성자</label><input type="text"name="writer" class="inputSearch">
+							<button type="submit" class="btn info">Search</button>
 						</fieldset>
 					</form>
-					<button class="write" onclick="moveWrite()">글쓰기</button>
+					<button class="btn success" onclick="solutionWrite()">글쓰기</button>
 					
 					<table border="1">
 						<colgroup>
@@ -50,7 +49,6 @@ function getBoardDetail(no){
 							<col width="*">
 							<col width="15%">
 							<col width="20%">
-							<col width="10%">
 						</colgroup>
 						<thead>
 							<tr>
@@ -58,19 +56,17 @@ function getBoardDetail(no){
 								<th scope="col">제목</th>
 								<th scope="col">작성자</th>
 								<th scope="col">작성일</th>
-								<th scope="col">조회수</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:choose>
-								<c:when test="${fn:length(boards)>0 }">
-					                <c:forEach var="boards" items="${boards }">
-										<tr onclick="getBoardDetail(${boards.NO })">
-											<td>${boards.NO }</td>
-											<td>${boards.TITLE }</td>
-											<td>${boards.EMP_NAME }</td>
-											<td>${boards.CREATE_DATE }</td>
-											<td>${boards.COUNT }</td>
+								<c:when test="${fn:length(solutions)>0 }">
+					                <c:forEach var="solutions" items="${solutions }">
+										<tr onclick="getBoardDetail(${solutions.NO })">
+											<td>${solutions.NO }</td>
+											<td>${solutions.TITLE }</td>
+											<td>${solutions.EMP_NAME }</td>
+											<td>${solutions.CREATE_DATE }</td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -87,7 +83,7 @@ function getBoardDetail(no){
 			
 				<div class="footer">
 					<div align="center">
-					<c:if test="${!empty boards }">
+					<c:if test="${!empty solutions }">
 						<c:if test="${pagination.cb gt 1 }">
 							<a href="board?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 						</c:if>
@@ -101,7 +97,5 @@ function getBoardDetail(no){
 					</div>
 				</div><!-- footer -->
 		</div>
-	</div><!-- right column -->
-</div><!-- row -->
 </body>
 </html>

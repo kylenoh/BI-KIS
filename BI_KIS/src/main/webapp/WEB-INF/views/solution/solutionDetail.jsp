@@ -78,18 +78,18 @@ $(function(){
 			</form>
 				<!-- 댓글입력라인 -->
 				<c:if test="${sessionScope.LOGIN_EMP.id!=null}"> 
-						<textarea style="width:100%; height:100px; resize:none;" name="replyContent" id="replyContent"></textarea>
+						<textarea style="width:100%; height:100px; resize: none;" id="replyContent"></textarea>
 						<button id="replyWrite" class="writebtn">댓글등록</button>
 				</c:if>
 				<!-- 댓글출력라인 -->
-				<c:forEach var="reply" items="${Board.REPLYS }">
 					<div id="replyList">
-							<p>
-								<span name="reply_0">${reply.CONTENT }&nbsp;&nbsp;${reply.CREATE_DATE }</span>
-								<button onclick="deleteReply(${reply.NO })">삭제</button>
+						<c:forEach var="reply" items="${Board.REPLYS }">
+							<p id="p_${reply.NO }">
+								<span name="reply_0">&nbsp;&nbsp;${reply.CONTENT }&nbsp;&nbsp;${reply.CREATE_DATE }</span>
+								<a href="javascript:replyDelete(${reply.NO })">삭제</a>
 							</p>
+						</c:forEach>
 					</div>
-				</c:forEach>
 		</div>
 	</div>
 	
@@ -100,25 +100,35 @@ $(function(){
 $(function(){
 	var reply_count=1;
 	var boardNo = $("#boardNo").val();
-	var replyContent = $('textarea[name="replyContent"]').val();
+	
 	
 	$("#replyWrite").on("click",function(e){
 		e.preventDefault();
-		alert(replyContent);
+		var replyContent = $("#replyContent").val();
+		$.ajax({
+			type:"POST",
+			url:"replyWrite",
+			data:{no:boardNo,content:replyContent},
+			success:function(result){
+				var row = "<p><span name='reply_"+(reply_count++)+"'>"+replyContent+"</span>"+"&nbsp;&nbsp;"+"<a href='javascript:replyDelete("+result+");'>삭제</a></p>";
+				$("#replyList").append(row);
+			}
+		});
 	});
 	
 });
-
-function deleteReply(value){
+function replyDelete(replyNo){
 	$.ajax({
-		type:"GET",
+		type:"POST",
 		url: "deleteReply",
-		data:{no:value},
+		data:{no:replyNo},
 		success: function(result){
-			$(this).parent().remove();
+			$("#p_"+result).remove();
 		}
 	});
 }
+
+
 function DELETE(no){
 	if (confirm("정말 삭제하시겠습니까?")) {
 		location.href = "delete?no="+no;

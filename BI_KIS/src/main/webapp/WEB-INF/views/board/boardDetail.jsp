@@ -84,7 +84,7 @@ $(function(){
 				<!-- 댓글출력라인 -->
 					<div id="replyList">
 						<c:forEach var="reply" items="${Board.REPLYS }">
-							<p>
+							<p id="p_${reply.NO }">
 								<span name="reply_0">&nbsp;&nbsp;${reply.CONTENT }&nbsp;&nbsp;${reply.CREATE_DATE }</span>
 								<a href="javascript:replyDelete(${reply.NO })">삭제</a>
 							</p>
@@ -110,7 +110,6 @@ $(function(){
 			url:"replyWrite",
 			data:{no:boardNo,content:replyContent},
 			success:function(result){
-				alert(result);
 				var row = "<p><span name='reply_"+(reply_count++)+"'>"+replyContent+"</span>"+"&nbsp;&nbsp;"+"<a href='javascript:replyDelete("+result+");'>삭제</a></p>";
 				$("#replyList").append(row);
 			}
@@ -119,14 +118,12 @@ $(function(){
 	
 });
 function replyDelete(replyNo){
-	alert(replyNo);
-	alert('삭제');
 	$.ajax({
-		type:"GET",
+		type:"POST",
 		url: "deleteReply",
 		data:{no:replyNo},
 		success: function(result){
-			$(this).parent().remove();
+			$("#p_"+result).remove();
 		}
 	});
 }

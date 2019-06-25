@@ -132,10 +132,12 @@ public class BoardController {
 		return replyNo;
 	}
 //	댓글 삭제
-	@RequestMapping(value = "/deleteReply", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteReply", method = RequestMethod.POST)
 	public @ResponseBody String deleteReply(@RequestParam("no")int no) {
+		System.out.println(no);
 		replyService.deleteBoardReply(no);
-		return "board/boardDetail";
+		String replyNo = Integer.toString(no);
+		return replyNo;
 	}
 	
 }
