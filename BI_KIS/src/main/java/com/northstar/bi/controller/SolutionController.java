@@ -26,7 +26,9 @@ public class SolutionController {
 	
 	@RequestMapping(value = "/solution", method = RequestMethod.GET)
 	public String Solution(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
+						   @RequestParam(name="categoryName", required=false) String categoryName,
 						Model model,SolutionCriteria criteria) {
+		
 		
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);

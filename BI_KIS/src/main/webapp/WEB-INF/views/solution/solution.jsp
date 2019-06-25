@@ -21,10 +21,9 @@ function getBoardDetail(no){
 <body>
 	<%@ include file="../sidenav.jsp" %>
 		<div class="wrap">
-		
 			<div class="header">
-				<a href="#home">Home</a>
-			  	<a href="#" class="active">게시판</a>
+				<a href="#home">솔루션</a>
+			  	<a href="#" class="active">WebMethods</a>
 			  <div class="header-right">
 			  	<a href="#search">회원정보</a>
   				<a href="#about">로그아웃</a>
