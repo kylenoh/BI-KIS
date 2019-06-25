@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,7 +56,9 @@ public class ProjectController {
 						@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
 						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
 						@RequestParam(name="flag", required=false)String flag,
-							Model model, Criteria criteria) throws ParseException {
+						@RequestParam(name="categoryName", required = false, defaultValue = "프로젝트")String categoryName,
+							Model model, Criteria criteria, HttpSession session) throws ParseException {
+		session.setAttribute("HEADER_VALUE", categoryName);
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);

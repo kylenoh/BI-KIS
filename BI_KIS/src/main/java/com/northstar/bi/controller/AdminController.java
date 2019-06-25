@@ -2,6 +2,8 @@ package com.northstar.bi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,8 @@ public class AdminController {
 	@RequestMapping(value="/empAdmin")
 	public String empAdmin (@RequestParam(name="cp", required=false, defaultValue="1")int cp,
 							@RequestParam(name="name", required=false)String name,
-							Model model, Criteria criteria) {
+							Model model, Criteria criteria, HttpSession session, String categoryName) {
+		session.setAttribute("HEADER_VALUE", categoryName);
 		int rows = 10;
 		criteria.setBeginIndex((cp - 1 ) * rows + 1); 
 		criteria.setEndIndex(cp * rows);

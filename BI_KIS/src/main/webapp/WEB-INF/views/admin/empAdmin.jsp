@@ -13,12 +13,6 @@
 <input type="hidden" id="login-auth" value="${LOGIN_EMP.auth.no }">
 <div class="wrap">
 	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li>직원 관리</li>
-			  <li>직원 정보</li>
-			</ul>
-		</div>
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	

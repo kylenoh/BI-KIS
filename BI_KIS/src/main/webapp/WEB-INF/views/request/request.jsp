@@ -12,12 +12,6 @@
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
 	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li>BI 사업부</li>
-			  <li>기술 지원 이력</li>
-			</ul>
-		</div>
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	
@@ -26,8 +20,8 @@
             <fieldset>
                 <legend>검색라인</legend>
                 <div class="search-line">
-                    <label for="category">분류 명</label>
-	                <select id="category" name="cateNo">
+                    <label for="categoryValue">분류 명</label>
+	                <select id="category" name="categoryValue">
 		                <option value="0"></option>
 		               	<option value="error">error</option>
 		               	<option value="정기점검">정기점검</option>

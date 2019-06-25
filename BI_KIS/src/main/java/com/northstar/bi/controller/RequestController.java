@@ -41,18 +41,19 @@ public class RequestController {
 	
 	@RequestMapping(value="/request")
 	public String request(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
-						@RequestParam(name="categoryName",required=false,defaultValue="0")String categoryName,
+						@RequestParam(name="categoryValue",required=false,defaultValue="0")String categoryValue,
 						@RequestParam(name="flag", required=false)String flag,
 			  			@RequestParam(name="companyName",required=false)String companyName,
 			  			@RequestParam(name="dateOpt", required=false, defaultValue="all")String dateOpt,
 			  			@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
 						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
 			  			@RequestParam(name="suggest", required=false)String suggest,
-			  				Model model, Criteria criteria) {
+			  				Model model, Criteria criteria, HttpSession session, String categoryName) {
+		session.setAttribute("HEADER_VALUE", categoryName);
 		int rows= 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
-		criteria.setCategoryName(categoryName);
+		criteria.setCategoryName(categoryValue);
 		criteria.setCompanyName(companyName);
 		criteria.setDateOpt(dateOpt);
 		criteria.setFromDate(fromDate);

@@ -32,7 +32,8 @@ public class CompanyController {
 						@RequestParam(name="customerName", required=false)String customerName,
 						@RequestParam(name="email", required=false)String email,
 						@RequestParam(name="dept", required=false)String dept,
-							Model model, Criteria criteria) throws ParseException {
+							Model model, Criteria criteria, HttpSession session, String categoryName) throws ParseException {
+		session.setAttribute("HEADER_VALUE", categoryName);
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
