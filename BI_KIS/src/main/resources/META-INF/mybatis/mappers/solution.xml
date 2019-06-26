@@ -23,9 +23,9 @@
 		select 
 			count(*)
 		from
-			BI_SOLUTION SOLUTION, BI_EMP EMP
+			BI_SOLUTION SOLUTION, BI_EMP EMP, BI_CATEGORY CATE
 		where
-			SOLUTION.EMP_ID = EMP.EMP_ID
+			SOLUTION.EMP_ID = EMP.EMP_ID and SOLUTION.SOLUTION_CATE = CATE.CATE_NO and CATE.CATE_SECTION_NAME = #{categoryName}
 			<if test="TITLE != null &amp;&amp; TITLE !=''">
 				and SOLUTION.SOLUTION_TITLE like '%' || #{TITLE} || '%'
 			</if>
@@ -38,6 +38,7 @@
 		select 
 				SOLUTION_NO as NO,
 				EMP_NAME,
+				CATE_SECTION_NAME,
 				SOLUTION_TITLE as TITLE,
 				SOLUTION_CREATE_DATE as CREATE_DATE,
 				SOLUTION_CONTENT as CONTENT,
@@ -49,7 +50,9 @@
 				select
 					SOLUTION.SOLUTION_NO,
 					EMP.EMP_NAME,
+					CATE.CATE_SECTION_NAME,
 					SOLUTION.EMP_ID,
+					SOLUTION.SOLUTION_CATE,
 					SOLUTION.SOLUTION_TITLE,
 					SOLUTION.SOLUTION_CREATE_DATE,
 					SOLUTION.SOLUTION_CONTENT,
@@ -58,9 +61,9 @@
 					SOLUTION.SOLUTION_UPDATE_DATE,
 					row_number() over (order by SOLUTION_NO desc) rn
 				from
-					BI_SOLUTION SOLUTION, BI_EMP EMP
+					BI_SOLUTION SOLUTION, BI_EMP EMP, BI_CATEGORY CATE
 				where
-					SOLUTION.EMP_ID = EMP.EMP_ID
+					SOLUTION.EMP_ID = EMP.EMP_ID and SOLUTION.SOLUTION_CATE = CATE.CATE_NO
 					<if test="TITLE != null &amp;&amp; TITLE !=''">
 						and SOLUTION.SOLUTION_TITLE like '%' || #{TITLE} || '%'
 					</if>
@@ -69,7 +72,7 @@
 					</if>
 			)
 		where
-			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	and SOLUTION_FLAG = 'Y'
+			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	and SOLUTION_FLAG = 'Y' and CATE_SECTION_NAME = #{categoryName}
 		order by
 			SOLUTION_NO desc	
 	</select>
@@ -195,7 +198,15 @@
 			FILE_FLAG = 'N' 
 		WHERE FILE_NO = #{value}
 	</update>
-
+	<select id="selectDownload" parameterType="int" resultType="SolutionFile">
+	 	select
+	 		FILE_DUAL as DUAL,
+			FILE_NAME as NAME
+	 	FROM 
+	 		BI_SOLUTION_FILE 
+	 	WHERE 
+	 		FILE_NO = #{value}
+	 </select>
 
 
 

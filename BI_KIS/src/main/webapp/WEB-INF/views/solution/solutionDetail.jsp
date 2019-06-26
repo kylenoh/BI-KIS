@@ -136,7 +136,9 @@ function SolutionDelete(no){
 	}
 }
 function getSolutionList(){
-	location.href="solution";
+	if (confirm("정말 목록으로돌아시겠습니까?")) {
+		location.href="solution";
+	}
 }
 function downloadFile(obj){
 	var idx = obj.parent().find("#IDX").val();

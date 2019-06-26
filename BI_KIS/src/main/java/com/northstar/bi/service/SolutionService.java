@@ -38,5 +38,5 @@ public interface SolutionService {
 	List<SolutionFile> getFileList();
 	BoardFile getFileByNo(int no);
 //	DownLoad
-	BoardFile selectFileInfo(SolutionFile solutionfile,int no,HttpServletResponse response);
+	SolutionFile selectDownload(SolutionFile solutionfile,int no,HttpServletResponse response);
 }
