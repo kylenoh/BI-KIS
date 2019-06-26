@@ -6,7 +6,7 @@ import java.util.List;
 public class Solution {
 	private int NO;
 	private String EMP_ID;
-	private String CATE;
+	private int CATE;
 	private String TITLE;
 	private Date CREATE_DATE;
 	private String CONTENT;
@@ -23,7 +23,7 @@ public class Solution {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Solution(int nO, String eMP_ID, String cATE, String tITLE, Date cREATE_DATE, String cONTENT, String fLAG,
+	public Solution(int nO, String eMP_ID, int cATE, String tITLE, Date cREATE_DATE, String cONTENT, String fLAG,
 			String uPDATER, Date uPDATE_DATE, String eMP_NAME, List<SolutionFile> fILES, List<SolutionReply> rEPLYS) {
 		super();
 		NO = nO;
@@ -56,11 +56,11 @@ public class Solution {
 		EMP_ID = eMP_ID;
 	}
 
-	public String getCATE() {
+	public int getCATE() {
 		return CATE;
 	}
 
-	public void setCATE(String cATE) {
+	public void setCATE(int cATE) {
 		CATE = cATE;
 	}
 

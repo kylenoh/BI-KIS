@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Customer;
 import com.northstar.bi.dto.Emp;
@@ -41,15 +42,23 @@ public class RequestController {
 	
 	@RequestMapping(value="/request")
 	public String request(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
-						@RequestParam(name="categoryValue",required=false,defaultValue="0")String categoryValue,
+						@RequestParam(name="categoryValue",required=false,defaultValue="nodata")String categoryValue,
 						@RequestParam(name="flag", required=false)String flag,
 			  			@RequestParam(name="companyName",required=false)String companyName,
 			  			@RequestParam(name="dateOpt", required=false, defaultValue="all")String dateOpt,
 			  			@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
 						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
 			  			@RequestParam(name="suggest", required=false)String suggest,
-			  				Model model, Criteria criteria, HttpSession session, String categoryName) {
-		session.setAttribute("HEADER_VALUE", categoryName);
+			  			@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
+			  				Model model, Criteria criteria, HttpSession session) {
+		Category category = new Category();
+		if(cateNo == 0) {
+			category = (Category)session.getAttribute("HEADER_VALUE");
+		}
+		if(cateNo != 0) {
+			category = categoryService.getCategoryByCategoryNo(cateNo);
+		}
+		session.setAttribute("HEADER_VALUE", category);
 		int rows= 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);

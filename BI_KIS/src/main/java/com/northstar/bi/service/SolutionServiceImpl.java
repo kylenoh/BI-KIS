@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.northstar.bi.dao.SolutionDao;
 import com.northstar.bi.dto.BoardFile;
+import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Solution;
 import com.northstar.bi.dto.SolutionCriteria;
@@ -40,9 +41,9 @@ public class SolutionServiceImpl implements SolutionService {
 	public void insertSolution(Solution solution, SolutionFile solutionFile, HttpSession session,
 			MultipartHttpServletRequest files) {
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
-		String Category = (String) session.getAttribute("HEADER_VALUE");
+		Category Category = (Category) session.getAttribute("HEADER_VALUE");
 		solution.setEMP_ID(User.getId());
-		solution.setCATE(Category);
+		solution.setCATE(Category.getCATE_NO());
 		solutionDao.insertSolution(solution);	
 		addSolutionFile(solution, solutionFile, files, session);
 	}

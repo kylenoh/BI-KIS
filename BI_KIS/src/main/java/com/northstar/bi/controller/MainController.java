@@ -51,11 +51,13 @@ public class MainController {
 		}
 		session.setAttribute("LOGIN_EMP", emp);
 		session.setAttribute("CATEGORY_LIST", categoryList);
-		return "redirect:/project";
+		return "redirect:/project?cateNo=1";
 	}
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("LOGIN_EMP");
+		session.removeAttribute("CATEGORY_LIST");
+		session.removeAttribute("HEADER_VALUE");
 		return "main";
 	}
 	

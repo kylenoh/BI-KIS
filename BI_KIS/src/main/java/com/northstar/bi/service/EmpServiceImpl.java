@@ -16,6 +16,10 @@ public class EmpServiceImpl implements EmpService{
 	@Autowired
 	EmpDao empDao;
 	@Override
+	public void addEmp(Emp emp) {
+		empDao.addEmp(emp);
+	}
+	@Override
 	public void updateEmp(Emp emp) {
 		empDao.updateEmp(emp);
 	}

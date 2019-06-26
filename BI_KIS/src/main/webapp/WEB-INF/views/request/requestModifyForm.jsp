@@ -12,13 +12,6 @@
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
 	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li>BI 사업부</li>
-			  <li>기술 지원 이력</li>
-			  <li>기술 지원 수정</li>
-			</ul>
-		</div>
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	<div class="main">

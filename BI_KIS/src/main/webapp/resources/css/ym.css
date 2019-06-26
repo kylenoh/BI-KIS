@@ -71,6 +71,9 @@
 	text-decoration:none;
 	color:black;
 }
+.no-link:hover {
+	color:red;
+}
 .ym-btn {
 	border-radius:5px;
 	border: 2px solid lightgray;
@@ -91,5 +94,9 @@
 	cursor:pointer;
 	padding:5px 20px 5px 20px;
 	font-weight:bold;
+}
+.search-line{
+	display: inline-block;
+	width:40%;
 }
 }

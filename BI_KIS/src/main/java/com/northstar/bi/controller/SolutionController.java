@@ -17,33 +17,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.dto.Solution;
 import com.northstar.bi.dto.SolutionCriteria;
 import com.northstar.bi.dto.SolutionFile;
 import com.northstar.bi.dto.SolutionReply;
+import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.SolutionService;
 
 @Controller
 public class SolutionController {
 	
-	@Autowired SolutionService solutionService;
+	@Autowired SolutionService solutionService;	
+	@Autowired CategoryService categoryService;
 	
 	@RequestMapping(value = "/solution", method = RequestMethod.GET)
 	public String Solution(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
 				     	   @RequestParam(name="title", required=false) String title,
 						   @RequestParam(name="writer", required=false) String writer,
-						   @RequestParam(name="categoryName", required=false) String categoryName,
+						   @RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
 						Model model,SolutionCriteria criteria,HttpSession session) {
 		
-		if (categoryName != null) {
-			session.setAttribute("HEADER_VALUE", categoryName);
+		Category category = new Category();
+		if(cateNo == 0) {
+			category = (Category)session.getAttribute("HEADER_VALUE");
 		}
+		if(cateNo != 0) {
+			category = categoryService.getCategoryByCategoryNo(cateNo);
+		}
+		session.setAttribute("HEADER_VALUE", category);
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
-		criteria.setCategoryName(categoryName);
+		criteria.setCategoryName(category.getCATE_SECTION_NAME());
 		criteria.setTITLE(title);
 		criteria.setID(writer);
 		int totalRows = solutionService.getTotalRows(criteria);

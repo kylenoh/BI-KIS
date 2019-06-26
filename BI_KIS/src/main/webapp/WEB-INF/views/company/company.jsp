@@ -20,17 +20,17 @@
             <fieldset>
                 <legend>검색라인</legend>
                 <div>
-                    <label for="title">고객사 명</label><input type="text" id="name" name="name">
+                    <label for="title">고객사 명</label><input type="text" class="inputSearch" id="name" name="name">
                 </div>
                 <div>
-                    <label for="email">이메일</label><input type="text" id="email" name="email">
+                    <label for="email">이메일</label><input type="text" class="inputSearch" id="email" name="email">
                 </div>
                 <div>
-                    <label for="customerName">담당자 명</label><input type="text" id="customerName" name="customerName">
+                    <label for="customerName">담당자 명</label><input type="text" class="inputSearch" id="customerName" name="customerName">
                 </div>
                 <div>
                     <div>
-                    	<label for="dept">부서</label><input type="text" id="dept" name="dept">
+                    	<label for="dept">부서</label><input type="text" class="inputSearch" id="dept" name="dept">
                 	</div>
                     <button class="ym-search-btn" type="submit">검색</button>
                 </div>

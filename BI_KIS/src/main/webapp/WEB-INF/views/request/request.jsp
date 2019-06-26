@@ -22,7 +22,7 @@
                 <div class="search-line">
                     <label for="categoryValue">분류 명</label>
 	                <select id="category" name="categoryValue">
-		                <option value="0"></option>
+		                <option value="nodata"></option>
 		               	<option value="error">error</option>
 		               	<option value="정기점검">정기점검</option>
 	                </select>      
@@ -37,7 +37,7 @@
                     </select>
                 </div>
                 <div class="search-line">
-                    <label for="companyName">고객사 명</label><input type="text" id="companyName" name="companyName">
+                    <label for="companyName">고객사 명</label><input type="text" class="inputSearch" id="companyName" name="companyName">
                 </div>
                 <div class="search-line">
                 	<div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="search-line">
-                    <label for="suggest">요청내용</label><input type="text" id="suggest" name="suggest">
+                    <label for="suggest">요청내용</label><input type="text" class="inputSearch" id="suggest" name="suggest">
                     <button class="ym-search-btn" type="submit">검색</button>
                 </div>
             </fieldset>

@@ -19,10 +19,13 @@
 	    <form method="post" action="project" id="searchForm">
             <fieldset>
                 <legend>검색라인</legend>
-                <div>
-                    <label for="title">프로젝트 명</label><input type="text" id="search-title" name="title">
+                <div class="search-line">
+                    <label for="title">프로젝트 명</label><input type="text" class="inputSearch" id="search-title" name="title">
                 </div>
-                <div>
+                <div class="search-line">
+                    <label for="companyName">고객사 명</label><input type="text" class="inputSearch" id="search-companyName" name="companyName">
+                </div>
+                <div class="search-line">
                 	<div>
 	                	<label for="dateOpt">날짜기준</label>
 	                	<select id="project-date-opt" name="dateOpt">
@@ -36,18 +39,17 @@
                     	<label for="toDate"></label><input type="date" id="search-toDate" name="toDate">
                     </div>
                 </div>
-                <div>
-                    <label for="companyName">고객사 명</label><input type="text" id="search-companyName" name="companyName">
-                </div>
-                <div>
+                <div class="search-line">
+                	<label for="flag">진행상태</label>
                     <select id="search-flag" name="flag">
                         <option value="all">전체</option>
                         <option value="Y">진행예정</option>
                         <option value="P">진행중</option>
                         <option value="N">종료</option>
                     </select>
-
-                    <button class="ym-search-btn" type="submit">검색</button>
+                </div>
+                <div style="text-align:right;">
+                	<button class="ym-search-btn" type="submit">검색</button>
                 </div>
             </fieldset>
 		</form>

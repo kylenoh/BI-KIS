@@ -21,7 +21,7 @@
             <fieldset>
                 <legend>검색라인</legend>
                 <div>
-                    <label for="name">사원 명</label><input type="text" id="name" name="name">
+                    <label for="name">사원 명</label><input type="text" class="inputSearch" id="name" name="name">
                 </div>
                 <div>
                     <button class="ym-search-btn" type="submit">검색</button>

@@ -12,13 +12,6 @@
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
 	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li>BI 사업부</li>
-			  <li>기술 지원 이력</li>
-			  <li>기술 지원 등록</li>
-			</ul>
-		</div>
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	<div class="main">
@@ -59,8 +52,8 @@
 	            </div>
 	            <div style="float:right;">
 	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq pjt.registrant}">
-		            	<button class="ym-btn" type="button" class="btn-modify-request" value="${request.no }">수정</button>
-		            	<button class="ym-btn" type="button" class="btn-del-request" value="${request.no }">삭제</button>
+		            	<button type="button" class="btn-modify-request" value="${request.no }">수정</button>
+		            	<button type="button" class="btn-del-request" value="${request.no }">삭제</button>
 		            </c:if>
 	            	<button class="ym-btn" type="button" onclick="location.href='request'">목록</button>
 	            </div>
