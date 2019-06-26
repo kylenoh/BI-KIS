@@ -4,13 +4,35 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.northstar.bi.dao.SolutionDao">
+	
+	<resultMap type="Solution" id="SolutionResultMap">
+		<id column="SOLUTION_NO" property="NO"/>
+		<result column="EMP_ID" property="EMP_ID"/>
+		<result column="EMP_NAME" property="EMP_NAME"/>
+		<result column="SOLUTION_TITLE" property="TITLE"/>
+		<result column="SOLUTION_CREATE_DATE" property="CREATE_DATE"/>
+		<result column="SOLUTION_CONTENT" property="CONTENT"/>
+		<result column="SOLUTION_FLAG" property="FLAG"/>
+		<result column="SOLUTION_UPDATER" property="UPDATER"/>
+		<result column="SOLUTION_UPDATE_DATE" property="UPDATE_DATE"/>
+		<collection property="FILES" column="SOLUTION_NO" javaType="java.util.ArrayList" ofType="SolutionFile" select="com.northstar.bi.dao.SolutionDao.getFileByNo"/>
+		<collection property="REPLYS" column="SOLUTION_NO" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.SolutionDao.getReplybyNo"/>
+	</resultMap>
+	
 	<select id="getTotalRows" resultType="int">
 		select 
 			count(*)
 		from
-			BI_SOLUTION SOLUTION, BI_EMP EMP, BI_CATEGORY CATEGORY
+			BI_SOLUTION SOLUTION, BI_EMP EMP
 		where
-			SOLUTION.EMP_ID = EMP.EMP_ID and SOLUTION.SOLUTION_CATE = CATEGORY.CATE_SECTION_NAME
+			SOLUTION.EMP_ID = EMP.EMP_ID
+			<if test="TITLE != null &amp;&amp; TITLE !=''">
+				and SOLUTION.SOLUTION_TITLE like '%' || #{TITLE} || '%'
+			</if>
+			<if test="ID != null &amp;&amp; ID !=''">
+				and EMP.EMP_NAME like '%' || #{ID} || '%'
+			</if>
+			order by SOLUTION_NO desc
 	</select>
 	<select id="getSolutionList" parameterType="SolutionCriteria" resultType="Solution">
 		select 
@@ -39,6 +61,12 @@
 					BI_SOLUTION SOLUTION, BI_EMP EMP
 				where
 					SOLUTION.EMP_ID = EMP.EMP_ID
+					<if test="TITLE != null &amp;&amp; TITLE !=''">
+						and SOLUTION.SOLUTION_TITLE like '%' || #{TITLE} || '%'
+					</if>
+					<if test="ID != null &amp;&amp; ID !=''">
+						and EMP.EMP_NAME like '%' || #{ID} || '%'
+					</if>
 			)
 		where
 			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	and SOLUTION_FLAG = 'Y'
@@ -47,13 +75,145 @@
 	</select>
 	
 	<insert id="insertSolution" parameterType="Solution">
-		<selectKey keyProperty="SOLUTION_NO" resultType="int" order="AFTER">
+		<selectKey keyProperty="NO" resultType="int" order="AFTER">
 			SELECT BI_SOLUTION_SEQ.currval FROM DUAL
 		</selectKey>
 		insert into BI_SOLUTION
 		(SOLUTION_NO,EMP_ID,SOLUTION_CATE,SOLUTION_TITLE,SOLUTION_CREATE_DATE,SOLUTION_CONTENT,SOLUTION_FLAG,SOLUTION_UPDATER,SOLUTION_UPDATE_DATE)
 		values
-		(BI_SOLUTION_SEQ.nextval, #{EMP_ID}, #{SOLUTION_CATE}, #{SOLUTION_TITLE}, sysdate, #{SOLUTION_CONTENT},'Y',NULL,NULL)
+		(BI_SOLUTION_SEQ.nextval, #{EMP_ID}, #{CATE}, #{TITLE}, sysdate, #{CONTENT},'Y',NULL,NULL)
 	</insert>
+	
+	<select id="getSolutionByNo" parameterType="int" resultMap="SolutionResultMap">
+		select
+			SOLUTION.SOLUTION_NO,
+			EMP.EMP_NAME,
+			SOLUTION.EMP_ID,
+			SOLUTION.SOLUTION_TITLE,
+			SOLUTION.SOLUTION_CREATE_DATE,
+			SOLUTION.SOLUTION_CONTENT,
+			SOLUTION.SOLUTION_FLAG,
+			SOLUTION.SOLUTION_UPDATER,
+			SOLUTION.SOLUTION_UPDATE_DATE
+		from
+			BI_SOLUTION SOLUTION, 
+			BI_EMP EMP
+		where
+			SOLUTION.EMP_ID = EMP.EMP_ID 
+		and SOLUTION.SOLUTION_NO = #{value}
+	</select>
+	<select id="getReplybyNo" parameterType="int" resultType="SolutionReply">
+		select 
+			REPLY_NO as NO,
+			SOLUTION_NO,
+			EMP_ID,
+			REPLY_CREATE_DATE as CREATE_DATE,
+			REPLY_CONTENT as CONTENT
+		from
+			BI_SOLUTION_REPLY
+		where
+			SOLUTION_NO = #{value}
+	</select>
+	<select id="getFileByNo" parameterType="int" resultType="SolutionFile">
+		select
+			FILE_NO as NO,
+			SOLUTION_NO,
+			EMP_ID,
+			FILE_DUAL as DUAL,
+			FILE_NAME as NAME,
+			FILE_FLAG as FLAG
+		from
+			BI_SOLUTION_FILE
+		where
+			SOLUTION_NO = #{value} and FILE_FLAG = 'N'
+	</select>
+
+	<delete id="deleteSolution" parameterType="Solution">
+		update
+			BI_SOLUTION
+		set
+			SOLUTION_FLAG = 'N'
+		where
+			SOLUTION_NO = #{value}
+	</delete>
+	<update id="updateSolution" parameterType="Solution">
+			update
+				BI_SOLUTION
+			set
+				SOLUTION_TITLE			= #{TITLE},
+				SOLUTION_CONTENT		= #{CONTENT},
+				SOLUTION_UPDATER		= #{UPDATER},
+				SOLUTION_UPDATE_DATE	= SYSDATE
+			where
+				SOLUTION_NO = #{NO}
+	</update>
+	<insert id="insertSolutionReply" parameterType="SolutionReply">
+		<selectKey resultType="int" keyProperty="NO" order="AFTER">
+			SELECT REP_SOLUTION_SEQ.currval FROM DUAL
+		</selectKey>
+		insert into BI_SOLUTION_REPLY
+			(REPLY_NO,SOLUTION_NO,EMP_ID,REPLY_CREATE_DATE,REPLY_CONTENT)
+		values
+			(REP_SOLUTION_SEQ.nextval,#{SOLUTION_NO},#{ID},sysdate,#{CONTENT})
+	</insert>
+	<select id="getSolutionReplybyNo" parameterType="int" resultType="SolutionReply">
+		select 
+			REPLY.REPLY_NO as NO,
+			REPLY.SOLUTION_NO,
+			EMP.EMP_NAME,
+			REPLY.REPLY_CREATE_DATE as CREATE_DATE,
+			REPLY.REPLY_CONTENT as CONTENT
+		from
+			BI_SOLUTION_REPLY REPLY,BI_EMP EMP
+		where
+			SOLUTION_NO = #{value} and REPLY.EMP_ID = EMP.EMP_ID
+	</select>
+	<delete id="deleteSolutionReply" parameterType="int">
+		delete from
+			BI_SOLUTION_REPLY
+		where
+			REPLY_NO = #{value}
+	</delete>
+	<update id="deleteSolutionFileList" parameterType="int">
+		UPDATE 
+			BI_SOLUTION_FILE 
+		SET
+			FILE_FLAG = 'Y' 
+		WHERE SOLUTION_NO = #{value}
+	</update>
+
+	<insert id="insertSolutionFile" parameterType="SolutionFile">
+		insert into BI_SOLUTION_FILE
+		(FILE_NO,SOLUTION_NO,EMP_ID,FILE_DUAL,FILE_NAME,FILE_FLAG)
+		values
+		(FILE_SOLUTION_SEQ.nextval, #{SOLUTION_NO}, #{ID}, #{DUAL}, #{NAME}, #{FLAG})
+	</insert>
+	<update id="updateSolutionFile" parameterType="int"> 
+		UPDATE 
+			BI_SOLUTION_FILE 
+		SET 
+			FILE_FLAG = 'N' 
+		WHERE FILE_NO = #{value}
+	</update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>
