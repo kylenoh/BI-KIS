@@ -1,46 +1,51 @@
 package com.northstar.bi.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class Solution {
-	private int SOLUTION_NO;
+	private int NO;
 	private String EMP_ID;
-	private String SOLUTION_CATE;
-	private String SOLUTION_TITLE;
-	private Date SOLUTION_CREATE_DATE;
-	private String SOLUTION_CONTENT;
-	private String SOLUTION_FLAG;
-	private String SOLUTION_UPDATER;
-	private Date SOLUTION_UPDATE_DATE;
+	private int CATE;
+	private String TITLE;
+	private Date CREATE_DATE;
+	private String CONTENT;
+	private String FLAG;
+	private String UPDATER;
+	private Date UPDATE_DATE;
 	
 	private String EMP_NAME;
+	
+	private List<SolutionFile> FILES;
+	private List<SolutionReply> REPLYS;
 	
 	public Solution() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Solution(int sOLUTION_NO, String eMP_ID, String sOLUTION_CATE, String sOLUTION_TITLE,
-			Date sOLUTION_CREATE_DATE, String sOLUTION_CONTENT, String sOLUTION_FLAG, String sOLUTION_UPDATER,
-			Date sOLUTION_UPDATE_DATE, String eMP_NAME) {
+	public Solution(int nO, String eMP_ID, int cATE, String tITLE, Date cREATE_DATE, String cONTENT, String fLAG,
+			String uPDATER, Date uPDATE_DATE, String eMP_NAME, List<SolutionFile> fILES, List<SolutionReply> rEPLYS) {
 		super();
-		SOLUTION_NO = sOLUTION_NO;
+		NO = nO;
 		EMP_ID = eMP_ID;
-		SOLUTION_CATE = sOLUTION_CATE;
-		SOLUTION_TITLE = sOLUTION_TITLE;
-		SOLUTION_CREATE_DATE = sOLUTION_CREATE_DATE;
-		SOLUTION_CONTENT = sOLUTION_CONTENT;
-		SOLUTION_FLAG = sOLUTION_FLAG;
-		SOLUTION_UPDATER = sOLUTION_UPDATER;
-		SOLUTION_UPDATE_DATE = sOLUTION_UPDATE_DATE;
+		CATE = cATE;
+		TITLE = tITLE;
+		CREATE_DATE = cREATE_DATE;
+		CONTENT = cONTENT;
+		FLAG = fLAG;
+		UPDATER = uPDATER;
+		UPDATE_DATE = uPDATE_DATE;
 		EMP_NAME = eMP_NAME;
+		FILES = fILES;
+		REPLYS = rEPLYS;
 	}
 
-	public int getSOLUTION_NO() {
-		return SOLUTION_NO;
+	public int getNO() {
+		return NO;
 	}
 
-	public void setSOLUTION_NO(int sOLUTION_NO) {
-		SOLUTION_NO = sOLUTION_NO;
+	public void setNO(int nO) {
+		NO = nO;
 	}
 
 	public String getEMP_ID() {
@@ -51,60 +56,60 @@ public class Solution {
 		EMP_ID = eMP_ID;
 	}
 
-	public String getSOLUTION_CATE() {
-		return SOLUTION_CATE;
+	public int getCATE() {
+		return CATE;
 	}
 
-	public void setSOLUTION_CATE(String sOLUTION_CATE) {
-		SOLUTION_CATE = sOLUTION_CATE;
+	public void setCATE(int cATE) {
+		CATE = cATE;
 	}
 
-	public String getSOLUTION_TITLE() {
-		return SOLUTION_TITLE;
+	public String getTITLE() {
+		return TITLE;
 	}
 
-	public void setSOLUTION_TITLE(String sOLUTION_TITLE) {
-		SOLUTION_TITLE = sOLUTION_TITLE;
+	public void setTITLE(String tITLE) {
+		TITLE = tITLE;
 	}
 
-	public Date getSOLUTION_CREATE_DATE() {
-		return SOLUTION_CREATE_DATE;
+	public Date getCREATE_DATE() {
+		return CREATE_DATE;
 	}
 
-	public void setSOLUTION_CREATE_DATE(Date sOLUTION_CREATE_DATE) {
-		SOLUTION_CREATE_DATE = sOLUTION_CREATE_DATE;
+	public void setCREATE_DATE(Date cREATE_DATE) {
+		CREATE_DATE = cREATE_DATE;
 	}
 
-	public String getSOLUTION_CONTENT() {
-		return SOLUTION_CONTENT;
+	public String getCONTENT() {
+		return CONTENT;
 	}
 
-	public void setSOLUTION_CONTENT(String sOLUTION_CONTENT) {
-		SOLUTION_CONTENT = sOLUTION_CONTENT;
+	public void setCONTENT(String cONTENT) {
+		CONTENT = cONTENT;
 	}
 
-	public String getSOLUTION_FLAG() {
-		return SOLUTION_FLAG;
+	public String getFLAG() {
+		return FLAG;
 	}
 
-	public void setSOLUTION_FLAG(String sOLUTION_FLAG) {
-		SOLUTION_FLAG = sOLUTION_FLAG;
+	public void setFLAG(String fLAG) {
+		FLAG = fLAG;
 	}
 
-	public String getSOLUTION_UPDATER() {
-		return SOLUTION_UPDATER;
+	public String getUPDATER() {
+		return UPDATER;
 	}
 
-	public void setSOLUTION_UPDATER(String sOLUTION_UPDATER) {
-		SOLUTION_UPDATER = sOLUTION_UPDATER;
+	public void setUPDATER(String uPDATER) {
+		UPDATER = uPDATER;
 	}
 
-	public Date getSOLUTION_UPDATE_DATE() {
-		return SOLUTION_UPDATE_DATE;
+	public Date getUPDATE_DATE() {
+		return UPDATE_DATE;
 	}
 
-	public void setSOLUTION_UPDATE_DATE(Date sOLUTION_UPDATE_DATE) {
-		SOLUTION_UPDATE_DATE = sOLUTION_UPDATE_DATE;
+	public void setUPDATE_DATE(Date uPDATE_DATE) {
+		UPDATE_DATE = uPDATE_DATE;
 	}
 
 	public String getEMP_NAME() {
@@ -115,7 +120,22 @@ public class Solution {
 		EMP_NAME = eMP_NAME;
 	}
 
-	
+	public List<SolutionFile> getFILES() {
+		return FILES;
+	}
+
+	public void setFILES(List<SolutionFile> fILES) {
+		FILES = fILES;
+	}
+
+	public List<SolutionReply> getREPLYS() {
+		return REPLYS;
+	}
+
+	public void setREPLYS(List<SolutionReply> rEPLYS) {
+		REPLYS = rEPLYS;
+	}
+
 	
 	
 }

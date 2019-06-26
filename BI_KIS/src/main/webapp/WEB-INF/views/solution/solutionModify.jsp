@@ -11,29 +11,28 @@
 <body>
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
-	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li><a href="#">게시판 수정</a></li>
-			</ul>
-		</div>
 		<%@include file="../emp-interface.jsp" %>
-	</div>
-	
 	<div class="main">
-		<form method="post" action="modify" enctype="multipart/form-data">
+		<form method="post" action="solutionModify" enctype="multipart/form-data">
 		  <div class="container">
 		  	<div class="container-header">
-		 	 	<input type="hidden" name="NO" value="${Board.NO }">
+		 	 	<input type="hidden" name="NO" value="${solution.NO }">
 			    <label><b>제목</b></label>
-			    <input type="text" name="TITLE" class="boardTitle" value="${Board.TITLE }" required>
+			    <input type="text" name="TITLE" class="inputTitle" value="${solution.TITLE }" required>
 			</div>
 			<div class="container-content">
 			    <label><b>내용</b></label>
-			    <textarea name="CONTENT" class="boardContent">${Board.CONTENT }</textarea>
-			    <label><b>첨부파일</b></label>
+			    <textarea name="CONTENT" class="textContent">${solution.CONTENT }</textarea>
+			   <div class="container-footer">
+					<button type="button" class="writebtn" id="addFile">파일추가</button>
+			    	<button type="button" class="writebtn" onclick="getSolutionList()">목록으로</button>
+			    	<button type="submit" class="writebtn">수정</button>
+		    	</div>
+			</div>
+			
+		     <label><b>첨부파일</b></label>
 			    <div id="fileDiv">
-				    <c:forEach varStatus="var" var="file" items="${Board.FILES }">
+				    <c:forEach varStatus="var" var="file" items="${solution.FILES }">
 				    	<p>
 							<input type="text" id="IDX" name="IDX_${var.index }" value="${file.NO }"><!-- 숨김 상자 -->
 							<a href="#this" id="name_${var.index }" name="name_${var.index }">${file.NAME }</a><!-- 파일 명 -->
@@ -42,12 +41,6 @@
 						</p>
 					</c:forEach>
 				</div>
-			</div>
-			<div class="container-footer">
-				<button type="button" class="writebtn" id="addFile">파일추가</button>
-		    	<button type="button" class="writebtn" onclick="getList()">목록으로</button>
-		    	<button type="submit" class="writebtn">수정</button>
-		    </div>
 		  </div>
 		</form>
 		
@@ -71,8 +64,8 @@ $(function(){
 	});
 });
 
-function getList(){
-	location.href="board";
+function getSolutionList(){
+	location.href="solution";
 }
 function addFile(){
 	var str = "<p><input type='file' id='file_"+(file_count)+"' name='file_"+(file_count)+"'>"+

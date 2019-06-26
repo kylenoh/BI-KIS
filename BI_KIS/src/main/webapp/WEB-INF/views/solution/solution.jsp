@@ -11,8 +11,8 @@
 function solutionWrite(){
 	location.href = "solutionWrite";
 }
-function getBoardDetail(no){
-	location.href = "boardDetail?no="+no;
+function getSolutionDetail(no){
+	location.href = "solutionDetail?no="+no;
 }
 </script>
 </head>
@@ -22,7 +22,7 @@ function getBoardDetail(no){
 			<%@include file="../emp-interface.jsp" %>
 			<div class="main">
 				<div class="container">
-					<form action="board">
+					<form action="solution">
 						<fieldset>
 							<legend>검색라인</legend>
 							<label for="title">제목</label><input type="text" name="title" class="inputSearch">
@@ -30,14 +30,16 @@ function getBoardDetail(no){
 							<button type="submit" class="btn info">Search</button>
 						</fieldset>
 					</form>
+
 					<button class="btn success" onclick="solutionWrite()">글쓰기</button>
+					<small> 게시글 수 : ${pagination.totalRows}</small>
 					
 					<table border="1">
 						<colgroup>
-							<col width="10%">
+							<col width="5%">
 							<col width="*">
 							<col width="15%">
-							<col width="20%">
+							<col width="15%">
 						</colgroup>
 						<thead>
 							<tr>
@@ -51,11 +53,11 @@ function getBoardDetail(no){
 							<c:choose>
 								<c:when test="${fn:length(solutions)>0 }">
 					                <c:forEach var="solutions" items="${solutions }">
-										<tr onclick="getBoardDetail(${solutions.SOLUTION_NO })">
-											<td>${solutions.SOLUTION_NO }</td>
-											<td>${solutions.SOLUTION_TITLE }</td>
+										<tr onclick="getSolutionDetail(${solutions.NO })">
+											<td>${solutions.NO }</td>
+											<td>${solutions.TITLE }</td>
 											<td>${solutions.EMP_NAME }</td>
-											<td>${solutions.SOLUTION_CREATE_DATE }</td>
+											<td><fmt:formatDate value="${solutions.CREATE_DATE }" pattern="yy-MM-dd"/> </td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -77,7 +79,7 @@ function getBoardDetail(no){
 							<a href="board?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 						</c:if>
 						<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-							<a href="board?cp=${num}">${num }</a>
+							<a href="solution?cp=${num}">${num }</a>
 						</c:forEach>
 						<c:if test="${pagination.cb lt pagination.totalBlocks }">
 							<a href="board?cp=${pagination.endPageIndex + 1 }">&raquo;</a>

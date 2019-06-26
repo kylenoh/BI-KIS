@@ -23,6 +23,8 @@
 		<typeAlias type="com.northstar.bi.dto.PropertyCriteria" alias="PropertyCriteria"/>
 		<typeAlias type="com.northstar.bi.dto.SolutionCriteria" alias="SolutionCriteria"/>
 		<typeAlias type="com.northstar.bi.dto.Solution" alias="Solution"/>
+		<typeAlias type="com.northstar.bi.dto.SolutionFile" alias="SolutionFile"/>
+		<typeAlias type="com.northstar.bi.dto.SolutionReply" alias="SolutionReply"/>
 		<typeAlias type="com.northstar.bi.dto.Criteria" alias="Criteria"/>
 		<typeAlias type="com.northstar.bi.dto.Customer" alias="Customer"/>
 		<typeAlias type="com.northstar.bi.dto.Category" alias="Category"/>
