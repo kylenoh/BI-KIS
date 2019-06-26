@@ -66,22 +66,26 @@
 			var empId = $(this).val();
 			var row ="";
 			var hidden = "";
-			$.ajax({
-				url: "getEmpByEmpIdInfo",
-				data: {empId:empId},
-				dataType: 'json',
-				success:function(result){
-					row += '<div style="display:inline-block; width: auto !important;">';
-					row += '<span>' + result.name + '</span>';
-					row += '<a id="emp-info-' + result.id +'" class="close" href="javascript:void(0)"> x </a>';
-					row += '<input type="hidden" name="emp-info" value="' + result.id + '">';
-					row += '</div>';
-					
-					$('#emp').find('option:first').prop('selected', 'selected');
-					$('#emp-area').append(row);
-				}
-			});
 			
+			if($('.close').hasClass(empId)){
+				alert("이미 등록 되어 있는 직원 입니다.");
+				$('#emp').find('option:first').prop('selected', 'selected');
+			} else {
+				$.ajax({
+					url: "getEmpByEmpIdInfo",
+					data: {empId:empId},
+					dataType: 'json',
+					success:function(result){
+						row += '<div style="display:inline-block; width: auto !important;">';
+						row += '<span>' + result.name + '</span>';
+						row += '<a id="emp-info-' + result.id +'" class="close ' + result.id + '" href="javascript:void(0)"> x </a>';
+						row += '<input type="hidden" name="emp-info" value="' + result.id + '">';
+						row += '</div>';
+						$('#emp').find('option:first').prop('selected', 'selected');
+						$('#emp-area').append(row);	
+					}
+				});
+			}
 		});
 		$('#emp-area').on('click','[id^=emp-info-]',function(){
 			$(this).parent().remove();

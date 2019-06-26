@@ -19,6 +19,13 @@
 		<association property="project" column="pjt_no" javaType="Project" select="com.northstar.bi.dao.ProjectDao.getProjectByNo"/>
 		<association property="emp" column="emp_id" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpById" />
 	</resultMap>
+	<delete id="deleteRequest" parameterType="int">
+		delete
+		from
+			bi_request
+		where
+			req_no = #{value}
+	</delete>
 	<select id="getRequestNo" resultType="int">
 		select
 			bi_request_seq.nextval

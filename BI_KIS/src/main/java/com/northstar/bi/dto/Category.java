@@ -8,6 +8,7 @@ public class Category {
 	private String CATE_SECTION_NAME;
 	private int CATE_SECTION_LEVEL;
 	private String CATE_VALUE;
+	private int CATE_AUTH_NO;
 	
 	public Category() {}
 
@@ -59,4 +60,13 @@ public class Category {
 		CATE_VALUE = cATE_VALUE;
 	}
 
+	public int getCATE_AUTH_NO() {
+		return CATE_AUTH_NO;
+	}
+
+	public void setCATE_AUTH_NO(int cATE_AUTH_NO) {
+		CATE_AUTH_NO = cATE_AUTH_NO;
+	}
+
+	
 }

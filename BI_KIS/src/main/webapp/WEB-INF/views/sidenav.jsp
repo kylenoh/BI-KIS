@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <div class="sidenav">
 	<c:forEach var="categoryList" items="${CATEGORY_LIST}">
-		<div class="dropdown-div">
-			<span id="dropdown-span-${categoryList.CATE_DIVISION_LEVEL }" class="dropdown-span">${categoryList.CATE_DIVISION_NAME }<i class="fa fa-caret-down"></i></span>    
-	        <div id="dropdown-container-${categoryList.CATE_DIVISION_LEVEL }"class="dropdown-container"></div>
-	    </div>
+			<div class="dropdown-div">
+				<span id="dropdown-span-${categoryList.CATE_DIVISION_LEVEL }" class="dropdown-span">${categoryList.CATE_DIVISION_NAME }<i class="fa fa-caret-down"></i></span>    
+		        <div id="dropdown-container-${categoryList.CATE_DIVISION_LEVEL }"class="dropdown-container"></div>
+		    </div>
 	</c:forEach>
 </div>
 <script type="text/javascript">

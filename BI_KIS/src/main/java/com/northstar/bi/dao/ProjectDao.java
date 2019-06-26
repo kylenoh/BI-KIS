@@ -8,14 +8,16 @@ import com.northstar.bi.dto.Project;
 
 public interface ProjectDao {
 
+	List<Project> getProjectByCompanyNo(int companyNo);
 	int getProjectNo();
+	void deleteEmpProByProjectNo(int projectNo);
 	void deleteEmpPro(ConPro conpro);
 	void addEmpPro(ConPro conpro);
 	List<Project> getProjectList();
 	List<Project> getProjectByCriteria(Criteria criteria);
-	Project getProjectByNo(int pjtNo);
+	Project getProjectByNo(int projectNo);
 	void addProject(Project project);
 	void modifyProject(Project project);
-	void deleteProject(int pjtNo);
+	void deleteProject(int projectNo);
 	int getProjectCount(Criteria criteria);
 }

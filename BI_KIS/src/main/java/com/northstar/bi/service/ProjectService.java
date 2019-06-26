@@ -7,14 +7,16 @@ import com.northstar.bi.dto.Project;
 
 public interface ProjectService {
 
+	List<Project> getProjectByCompanyNo(int companyNo);
 	int getProjectNo();
-	void deleteEmpPro(List<String> empId, int pjtNo);
-	void addEmpPro(List<String> empId,int pjtNo);
+	void deleteEmpProByProjectNo(int projectNo);
+	void deleteEmpPro(List<String> empId, int projectNo);
+	void addEmpPro(List<String> empId,int projectNo);
 	List<Project> getProjectList();
 	List<Project> getProjectByCriteria (Criteria criteria);
-	Project getProjectByNo(int pjtNo);
+	Project getProjectByNo(int projectNo);
 	void addProject(Project project);
 	void modifyProject(Project project);
-	void deleteProject(int pjtNo);
+	void deleteProject(int projectNo);
 	int getProjectCount(Criteria criteria);
 }

@@ -17,24 +17,32 @@ public class ProjectServiceImpl implements ProjectService{
 	ProjectDao projectDao;
 	
 	@Override
+	public void deleteEmpProByProjectNo(int projectNo) {
+		projectDao.deleteEmpProByProjectNo(projectNo);
+	}
+	@Override
+	public List<Project> getProjectByCompanyNo(int companyNo) {
+		return projectDao.getProjectByCompanyNo(companyNo);
+	}
+	@Override
 	public int getProjectNo() {
 		return projectDao.getProjectNo();
 	}
 	@Override
-	public void deleteEmpPro(List<String> empIds, int pjtNo) {
+	public void deleteEmpPro(List<String> empIds, int projectNo) {
 		for (String empId : empIds) {
 			ConPro conPro = new ConPro();
 			conPro.setEmpId(empId);
-			conPro.setPjtNo(pjtNo);
+			conPro.setPjtNo(projectNo);
 			projectDao.deleteEmpPro(conPro);
 		}
 	}
 	@Override
-	public void addEmpPro(List<String> empIds, int pjtNo) {
+	public void addEmpPro(List<String> empIds, int projectNo) {
 		for (String empId : empIds) {
 			ConPro conPro = new ConPro();
 			conPro.setEmpId(empId);
-			conPro.setPjtNo(pjtNo);
+			conPro.setPjtNo(projectNo);
 			projectDao.addEmpPro(conPro);
 		}
 	}
@@ -47,8 +55,8 @@ public class ProjectServiceImpl implements ProjectService{
 		return projectDao.getProjectByCriteria(criteria);
 	}
 	@Override
-	public Project getProjectByNo(int pjtNo) {
-		return projectDao.getProjectByNo(pjtNo);
+	public Project getProjectByNo(int projectNo) {
+		return projectDao.getProjectByNo(projectNo);
 	}
 	@Override
 	public void addProject(Project project) {
@@ -59,8 +67,8 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDao.modifyProject(project);
 	}
 	@Override
-	public void deleteProject(int pjtNo) {
-		projectDao.deleteProject(pjtNo);
+	public void deleteProject(int projectNo) {
+		projectDao.deleteProject(projectNo);
 	}
 	@Override
 	public int getProjectCount(Criteria criteria) {

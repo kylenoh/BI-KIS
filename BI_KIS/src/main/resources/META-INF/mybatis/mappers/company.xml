@@ -183,33 +183,6 @@
 		order by
 			cus_no desc
 	</select>
-	<select id="getCompanyDetail" parameterType="customer" resultType="Company">
-		select
-			CO.com_no			as no,
-			CO.com_name			as name,
-			CO.com_owner		as owner,
-			CO.com_tel			as tel,
-			CO.com_addr			as addr,
-			CO.com_remark		as remark,
-			CU.cus_no			as "customer.no",	
-			CU.com_no			as "customer.company.no",
-			CU.cus_name			as "customer.name",
-			CU.cus_tel1			as "customer.tel1",
-			CU.cus_tel2			as "customer.tel2",
-			CU.cus_email		as "customer.email",
-			CU.cus_rank			as "customer.rank",
-			CU.cus_dept			as "customer.dept",
-			CU.cus_remark		as "customer.remark"
-		from
-			bi_company CO, bi_customer CU
-		where
-			CU.com_no(+) = CO.com_no
-		and
-			CO.com_no = #{company.no}
-			<if test="no != 0">
-				and CU.cus_no = #{no}
-			</if>
-	</select>
 	<select id="getCustomerByNo" parameterType="int" resultMap="getCustomerResultMap">
 		select
 			cus_no,

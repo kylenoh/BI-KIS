@@ -40,15 +40,6 @@ public class CompanyServiceImpl implements CompanyService{
 		return companyDao.getCompanyByCriteria(criteria);
 	}
 	@Override
-	public Company getCompanyDetail(int companyNo, int customerNo) {
-		Customer customer = new Customer();
-		Company company = new Company();
-		company.setNo(companyNo);
-		customer.setCompany(company);
-		customer.setNo(customerNo);
-		return companyDao.getCompanyDetail(customer);
-	}
-	@Override
 	public Customer getCustomerByNo(int customerNo) {
 		return companyDao.getCustomerByNo(customerNo);
 	}

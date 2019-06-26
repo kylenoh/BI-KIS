@@ -89,15 +89,17 @@ public class AdminController {
 							@RequestParam(name="rank")String rank,
 							@RequestParam(name="tel")String tel,
 							@RequestParam(name="addr")String addr,
-							@RequestParam(name="email")String email) {
+							@RequestParam(name="email")String email,
+							HttpSession session) {
 		Emp emp = empService.getEmpById(empId);
+		Category category = (Category)session.getAttribute("HEADER_VALUE");
 		emp.setName(name);
 		emp.setRank(rank);
 		emp.setTel(tel);
 		emp.setAddr(addr);
 		emp.setEmail(email);
 		empService.updateEmp(emp);
-		return "redirect:/empAdmin";
+		return "redirect:/" + category.getCATE_VALUE();
 	}
 	@RequestMapping(value="empDelete")
 	public String empDelete (@RequestParam(name="empId")String empId,

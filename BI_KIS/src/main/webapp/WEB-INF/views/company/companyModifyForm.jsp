@@ -16,54 +16,31 @@
 	</div>
 	<div class="main">
 		<form method="post" action="companyModify" id="companyForm">
-			<input type="hidden" name="companyNo" value="${customer.company.no}">
-			<input type="hidden" name="customerNo" value="${customer.no}">
+			<input type="hidden" name="companyNo" value="${company.no}">
 		    <fieldset>
 	        	<legend>고객사</legend>
 	        	<div id="companyDetail">
 	        		<div>
-		                <label for="title">고객사 명</label><input type="text" id="name" name="name" value="${customer.company.name }">
+		                <label for="title">고객사 명</label><input type="text" id="name" name="name" value="${company.name }">
 		            </div>
 		            <div>
-		                <label for="owner">대표자</label><input type="text" id="owner" name="owner" value="${customer.company.owner}">
+		                <label for="owner">대표자</label><input type="text" id="owner" name="owner" value="${company.owner}">
 		            </div>
 		            <div>
-		                <label for="tel">연락처</label><input type="text" id="tel" name="tel" value="${customer.company.tel }">
+		                <label for="tel">연락처</label><input type="text" id="tel" name="tel" value="${company.tel }">
 		            </div>
 		            <div>
-		                <label for="addr">주소</label><input type="text" id="addr" name="addr" value=${customer.company.addr }>
+		                <label for="addr">주소</label><input type="text" id="addr" name="addr" value=${company.addr }>
 		            </div>
 		            <div>
 		             	<label for="remark">비고</label>
-		               	<textarea id="remark" name="remark">${customer.company.remark}</textarea>
+		               	<textarea id="remark" name="remark">${company.remark}</textarea>
 		            </div>
 	        	</div>
-	            <div id="customerDetail">
-		        	<div>
-		            	<label for="name">담당자 명</label><input type="text" id="name" name="name" value="${customer.name }">
-		            </div>
-		            <div>
-		                <label for="rank">직급</label><input type="text" id="rank" name="rank" value="${customer.rank }">
-		            </div>
-		            <div>
-		                <label for="dept">부서명</label><input type="text" id="dept" name="dept" value="${customer.dept }">
-		            </div>
-		            <div>
-		                <label for="tel1">연락처1</label><input type="text" id="tel1" name="tel1" value="${customer.tel1 }">
-		                <label for="tel2">연락처2</label><input type="text" id="tel2" name="tel2" value="${customer.tel2 }">
-		            </div>
-		            <div>
-		                <label for="email">이메일</label><input type="text" id="email" name="email" value="${customer.email }">
-		            </div>
-		            <div>
-		              	<label for="remark">비고</label>
-		               	<textarea id="remark" name="remark">${customer.remark }</textarea>
-		            </div>
-		            <div style="float:right;">
-		            	<button class="ym-btn" type="submit">수정</button>
-		            	<button class="ym-btn" type="button" onclick="location.href='companyDetail?companyNo=${customer.company.no}&customerNo=${customer.no}'">취소</button>
-		            </div>
-	            </div>
+		        <div style="float:right;">
+		         	<button class="ym-btn" type="submit">수정</button>
+		           	<button class="ym-btn" type="button" onclick="location.href='companyDetail?companyNo=${company.no}'">취소</button>
+		        </div>
 	        </fieldset>
         </form>
 	</div>

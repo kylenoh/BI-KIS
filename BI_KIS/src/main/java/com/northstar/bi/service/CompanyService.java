@@ -16,7 +16,6 @@ public interface CompanyService {
 	List<Company> getCompanyByCriteria(Criteria criteria);
 	Company getCompanyByComNo(int comNo);
 	Customer getCustomerByNo(int customerNo);
-	Company getCompanyDetail(int companyNo, int customerNo);
 	int getCompanyCount(Criteria criteria);
 	void addCompany(Company company);
 	void addCustomer(Customer customer);

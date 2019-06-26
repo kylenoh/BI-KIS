@@ -141,6 +141,7 @@ public class ProjectController {
 	}
 	@RequestMapping(value="/pjtdelete")
 	public String pjtdelete(int pjtNo) {
+		projectService.deleteEmpProByProjectNo(pjtNo);
 		projectService.deleteProject(pjtNo);
 		return "redirect:/project";
 	}

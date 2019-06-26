@@ -32,12 +32,12 @@
                     <div>
                     	<label for="dept">부서</label><input type="text" class="inputSearch" id="dept" name="dept">
                 	</div>
-                    <button class="ym-search-btn" type="submit">검색</button>
+                    <button class="btn info" type="submit">검색</button>
                 </div>
             </fieldset>
 		</form>
-		<button type="button" onclick="location.href='addCompany'" class="write-double">고객사 등록</button>
-		<button type="button" onclick="location.href='addCustomer'" class="write-double">담당자 등록</button>
+		<button class="btn success" onclick="location.href='addCompany'" >고객사 등록</button>
+		<button class="btn success" onclick="location.href='addCustomer'">담당자 등록</button>
 		<table border="1">
 			<thead>
 				<tr>
@@ -53,8 +53,8 @@
 					<c:when test="${!empty companyList }">
 						<c:forEach var="company" items="${companyList }">
 							<tr>
-								<td><a class="no-link" href="companyDetail?companyNo=${company.no}&customerNo=${company.customer.no}">${company.name}</a></td>
-								<td>${company.customer.name }</td>
+								<td><a class="no-link" href="companyDetail?companyNo=${company.no}">${company.name}</a></td>
+								<td><a class="no-link" href="customerDetail?customerNo=${company.customer.no}">${company.customer.name }</a></td>
 								<td>${company.customer.tel1 }</td>
 								<td>${company.customer.email }</td>
 								<td>${company.customer.remark }</td>

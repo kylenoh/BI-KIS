@@ -99,4 +99,18 @@
 	display: inline-block;
 	width:40%;
 }
+.selectSearch{
+	width: 20%;
+    margin: 0px 20px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.dateSearch{
+	width: 20%;
+    margin: 0px 20px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 }

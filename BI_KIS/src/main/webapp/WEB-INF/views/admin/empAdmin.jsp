@@ -24,15 +24,13 @@
                     <label for="name">사원 명</label><input type="text" class="inputSearch" id="name" name="name">
                 </div>
                 <div>
-                    <button class="ym-search-btn" type="submit">검색</button>
+                    <button class="btn info" type="submit">검색</button>
                 </div>
             </fieldset>
 		</form>
 		<div>
-			<button type="button" onclick="location.href='addEmp'" class="write">사원 등록</button>
-		</div>
-		<div>
-			<span> 사원 수 : ${totalRows}</span>
+			<button class="btn success" onclick="location.href='addEmp'">사원 등록</button>
+			<small> 사원 수 : ${totalRows}</small>
 		</div>
 		<table border="1">
 			<thead>
@@ -63,8 +61,8 @@
 							</select>
 							<input type="hidden" id="bef-auth-${emp.id }" value="${emp.auth.no }">
 						</td>
-						<td><button class="ym-btn" type="button" id="btn-modify-emp-${emp.id }" value="${emp.id }">수정</button></td>
-						<td><span>${emp.flag eq 'Y' ? '사용중' : '사용안함'}</span><button class="ym-btn" type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">${emp.flag eq 'Y' ? '미사용' : '사용' }</button></td>
+						<td><button class="btn" type="button" id="btn-modify-emp-${emp.id }" value="${emp.id }">수정</button></td>
+						<td><span>${emp.flag eq 'Y' ? '사용중' : '사용안함'}</span><button class="btn" type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">${emp.flag eq 'Y' ? '미사용' : '사용' }</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

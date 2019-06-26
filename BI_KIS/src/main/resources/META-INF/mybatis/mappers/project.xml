@@ -17,6 +17,30 @@
 		<association property="company" column="com_no" javaType="Company" select="com.northstar.bi.dao.CompanyDao.getCompanyByComNo"/>
 		<collection property="emps" column="pjt_no" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
 	</resultMap>
+	<delete id="deleteEmpProByProjectNo" parameterType="int">
+		delete
+			from
+				bi_con_pro
+			where
+				pjt_no = #{value}
+	</delete>
+	<select id="getProjectByCompanyNo" parameterType="int" resultMap="getProjectResultMap">
+		select
+			pjt_no,
+			com_no,
+			pjt_title,
+			pjt_start_date,
+			pjt_end_date,
+			pjt_content,
+			pjt_remark,
+			pjt_flag,
+			pjt_msg,
+			pjt_registrant
+		from
+			bi_project
+		where
+			com_no = #{value}
+	</select>
 	<delete id="deleteEmpPro" parameterType="Conpro">
 		delete
 			from
@@ -45,7 +69,7 @@
 			pjt_msg,
 			pjt_registrant
 		from
-			bi_project P
+			bi_project
 	</select>
 	<select id="getProjectCount" parameterType="Criteria" resultType="int">
 		select
@@ -60,8 +84,11 @@
 			<if test="companyName != null &amp;&amp; companyName != ''">
 				and C.com_name like '%' || #{companyName} || '%'
 			</if>
-			<if test="flag != null &amp;&amp; flag != '' &amp;&amp; flag !='all'">
+			<if test="flag != null &amp;&amp; flag !='all'">
 				and P.pjt_flag = #{flag}
+			</if>
+			<if test="flag == null">
+				and P.pjt_flag != 'N'
 			</if>
 			<if test="dateOpt == 'start'">
 				and
@@ -148,6 +175,9 @@
 			</if>
 			<if test="flag != null &amp;&amp; flag != 'all'">
 				and P.pjt_flag = #{flag}
+			</if>
+			<if test="flag == null">
+				and P.pjt_flag != 'N'
 			</if>
 			<if test="dateOpt == 'start'">
 				and

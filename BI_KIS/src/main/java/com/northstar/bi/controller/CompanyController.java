@@ -18,8 +18,10 @@ import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Customer;
 import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Pagination;
+import com.northstar.bi.dto.Project;
 import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.CompanyService;
+import com.northstar.bi.service.ProjectService;
 
 @Controller
 public class CompanyController {
@@ -28,6 +30,8 @@ public class CompanyController {
 	CompanyService companyService;
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	ProjectService projectService;
 	
 	@RequestMapping(value="/company")
 	public String company(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
@@ -65,12 +69,19 @@ public class CompanyController {
 	}
 	@RequestMapping(value="/companyDetail")
 	public String companyDetail(@RequestParam(name="companyNo")int companyNo,
-								@RequestParam(name="customerNo",required=false,defaultValue="0")int customerNo,
 								Model model) {
-		Company company = companyService.getCompanyDetail(companyNo, customerNo);
+		Company company = companyService.getCompanyByComNo(companyNo);
 		
 		model.addAttribute("company",company);
 		return "company/companyDetail";
+	}
+	@RequestMapping(value="/customerDetail")
+	public String customerDetail(@RequestParam(name="customerNo")int customerNo,
+								Model model) {
+		Customer customer = companyService.getCustomerByNo(customerNo);
+		
+		model.addAttribute("customer",customer);
+		return "company/customerDetail";
 	}
 	@RequestMapping(value="addCompany", method=RequestMethod.GET)
 	public String addCompanyForm(Model model) {
@@ -142,12 +153,17 @@ public class CompanyController {
 	public String companyDelete(Model model, int companyNo) {
 		companyService.deleteCustomerByCompanyNo(companyNo);
 		companyService.deleteCompany(companyNo);
+		List<Project> projectList = projectService.getProjectByCompanyNo(companyNo);
+		for(Project project : projectList) {
+			projectService.deleteEmpProByProjectNo(project.getNo());
+			projectService.deleteProject(project.getNo());
+		}
 		return "redirect:/company";
 	}
 	@RequestMapping(value="companyModify", method=RequestMethod.GET)
-	public String companyModifyForm(Model model, int customerNo) {
-		Customer customer = companyService.getCustomerByNo(customerNo);
-		model.addAttribute("customer",customer);
+	public String companyModifyForm(Model model, int companyNo) {
+		Company company = companyService.getCompanyByComNo(companyNo);
+		model.addAttribute("company",company);
 		return "company/companyModifyForm";
 	}
 	@RequestMapping(value="companyModify", method=RequestMethod.POST)
@@ -157,18 +173,8 @@ public class CompanyController {
 								@RequestParam(name="tel")String tel,
 								@RequestParam(name="addr")String addr,
 								@RequestParam(name="remark",required=false)String remark,
-								@RequestParam(name="cusNo")int cusNo,
-								@RequestParam(name="cusName")String cusName,
-								@RequestParam(name="cusRank")String cusRank,
-								@RequestParam(name="cusDept")String cusDept,
-								@RequestParam(name="cusTel1")String cusTel1,
-								@RequestParam(name="cusTel2")String cusTel2,
-								@RequestParam(name="cusEmail")String cusEmail,
-								@RequestParam(name="cusRemark",required=false)String cusRemark,
 								Model model) {
 		Company company = companyService.getCompanyByComNo(companyNo);
-		Customer customer = companyService.getCustomerByNo(cusNo);
-		
 		company.setNo(companyNo);
 		company.setName(name);
 		company.setOwner(owner);
@@ -176,17 +182,36 @@ public class CompanyController {
 		company.setAddr(addr);
 		company.setRemark(remark);
 		companyService.modifyCompany(company);
+		return "redirect:/companyDetail?companyNo=" + companyNo;
+	}
+	@RequestMapping(value="customerModify", method=RequestMethod.GET)
+	public String customerModifyForm(Model model, int customerNo) {
+		Customer customer = companyService.getCustomerByNo(customerNo);
+		model.addAttribute("customer",customer);
+		return "company/customerModifyForm";
+	}
+	@RequestMapping(value="customerModify", method=RequestMethod.POST)
+	public String customerModify(@RequestParam(name="no")int no,
+								@RequestParam(name="name")String name,
+								@RequestParam(name="rank")String rank,
+								@RequestParam(name="dept")String dept,
+								@RequestParam(name="tel1")String tel1,
+								@RequestParam(name="tel2")String tel2,
+								@RequestParam(name="email")String email,
+								@RequestParam(name="remark",required=false)String remark,
+								Model model) {
+		Customer customer = companyService.getCustomerByNo(no);
 		
-		customer.setNo(cusNo);
-		customer.setName(cusName);
-		customer.setRank(cusRank);
-		customer.setDept(cusDept);
-		customer.setTel1(cusTel1);
-		customer.setTel2(cusTel2);
-		customer.setEmail(cusEmail);
-		customer.setRemark(cusRemark);
+		customer.setNo(no);
+		customer.setName(name);
+		customer.setRank(rank);
+		customer.setDept(dept);
+		customer.setTel1(tel1);
+		customer.setTel2(tel2);
+		customer.setEmail(email);
+		customer.setRemark(remark);
 		companyService.modifyCustomer(customer);
 		
-		return "redirect:/customerDetail?=customerNo=" + cusNo;
+		return "redirect:/customerDetail?customerNo=" + no;
 	}
 }

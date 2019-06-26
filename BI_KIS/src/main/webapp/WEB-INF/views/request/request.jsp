@@ -21,7 +21,7 @@
                 <legend>검색라인</legend>
                 <div class="search-line">
                     <label for="categoryValue">분류 명</label>
-	                <select id="category" name="categoryValue">
+	                <select id="category" name="categoryValue" class="selectSearch">
 		                <option value="nodata"></option>
 		               	<option value="error">error</option>
 		               	<option value="정기점검">정기점검</option>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="search-line">
                 	<label for="flag">진행상황</label>
-                	<select id="request-flag" name="flag">
+                	<select id="request-flag" name="flag" class="selectSearch">
                         <option value="all">All</option>
                         <option value="Y">진행예정</option>
                         <option value="P">진행중</option>
@@ -42,27 +42,25 @@
                 <div class="search-line">
                 	<div>
 	                	<label for="dateOpt">날짜기준</label>
-	                	<select id="request-date-opt" name="dateOpt">
+	                	<select id="request-date-opt" name="dateOpt" class="selectSearch">
 	                        <option value="all"></option>
 	                        <option value="receive">접수일</option>
 	                        <option value="start">시작일</option>
 	                        <option value="end">종료일</option>
 	                        <option value="close">마감일</option>
 	                    </select>
-                    </div>
-                    <div>
-                    	<label for="fromDate"></label><input type="date" id="fromDate" name="fromDate">~    
-                    	<label for="toDate"></label><input type="date" id="toDate" name="toDate">
+                    	<label for="fromDate"></label><input class="dateSearch" type="date" id="fromDate" name="fromDate">~    
+                    	<label for="toDate"></label><input class="dateSearch" type="date" id="toDate" name="toDate">
                     </div>
                 </div>
                 <div class="search-line">
                     <label for="suggest">요청내용</label><input type="text" class="inputSearch" id="suggest" name="suggest">
-                    <button class="ym-search-btn" type="submit">검색</button>
+                    <button class="btn info" type="submit">검색</button>
                 </div>
             </fieldset>
 		</form>
-		<button type="button" onclick="location.href='addRequest'" class="write">기술지원 등록</button>
 		<div>
+			<button class="btn success" onclick="location.href='addRequest'" >기술지원 등록</button>
 			<span> 게시글 수 : ${totalRows}</span>
 		</div>
 		<table border="1">
