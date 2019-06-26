@@ -20,7 +20,6 @@ import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.CompanyService;
-import com.northstar.bi.service.EmpService;
 
 @Controller
 public class CompanyController {

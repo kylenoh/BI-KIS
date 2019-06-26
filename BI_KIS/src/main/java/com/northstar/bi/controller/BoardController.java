@@ -21,10 +21,12 @@ import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
 import com.northstar.bi.dto.BoardFile;
 import com.northstar.bi.dto.BoardReply;
+import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.service.BoardReplyService;
 import com.northstar.bi.service.BoardService;
+import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.FileService;
 
 
@@ -34,14 +36,22 @@ public class BoardController {
 	@Autowired BoardService boardService;
 	@Autowired BoardReplyService replyService;
 	@Autowired FileService fileService;
+	@Autowired CategoryService categoryService;
 //	게시판 진입 시, 페이지
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public String Board(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
-						@RequestParam(name="categoryName", required=false, defaultValue="게시판" ) String categoryName,
+						@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
 						@RequestParam(name="title", required=false) String title,
 						@RequestParam(name="writer", required=false) String writer,
 						Model model,BoardCriteria criteria,HttpSession session) {
-		
+		Category category = new Category();
+		if(cateNo == 0) {
+			category = (Category)session.getAttribute("HEADER_VALUE");
+		}
+		if(cateNo != 0) {
+			category = categoryService.getCategoryByCategoryNo(cateNo);
+		}
+		session.setAttribute("HEADER_VALUE", category);
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
@@ -51,7 +61,6 @@ public class BoardController {
 		Pagination pagination = new Pagination(totalRows, cp, rows);
 
 		List<Board> boards = boardService.getBoardList(criteria);
-		session.setAttribute("HEADER_VALUE", categoryName);
 		model.addAttribute("boards", boards);
 		model.addAttribute("pagination", pagination);
 		return "board/board";

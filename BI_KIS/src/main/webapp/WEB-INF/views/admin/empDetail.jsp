@@ -39,7 +39,7 @@
 		      	<button type="button" class="btn-modify-emp ym-btn" value="${emp.id }">수정</button>
 		       	<button type="button" class="btn-del-emp ym-btn" value="${emp.id }">삭제</button>
 	       	</c:if>
-	       	<button class="ym-btn" type="button" onclick="location.href='empAdmin'">목록</button>
+	       	<button class="ym-btn" type="button" onclick="location.href='${HEADER_VALUE.CATE_VALUE}'">목록</button>
 	    </div>
 	</div>
 </div>
