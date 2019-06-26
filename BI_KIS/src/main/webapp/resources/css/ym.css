@@ -71,6 +71,9 @@
 	text-decoration:none;
 	color:black;
 }
+.no-link:hover {
+	color:red;
+}
 .ym-btn {
 	border-radius:5px;
 	border: 2px solid lightgray;

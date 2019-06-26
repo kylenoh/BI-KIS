@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Company;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Customer;
 import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Pagination;
+import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.CompanyService;
 import com.northstar.bi.service.EmpService;
 
@@ -25,6 +27,8 @@ public class CompanyController {
 
 	@Autowired
 	CompanyService companyService;
+	@Autowired
+	CategoryService categoryService;
 	
 	@RequestMapping(value="/company")
 	public String company(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
@@ -32,8 +36,16 @@ public class CompanyController {
 						@RequestParam(name="customerName", required=false)String customerName,
 						@RequestParam(name="email", required=false)String email,
 						@RequestParam(name="dept", required=false)String dept,
-							Model model, Criteria criteria, HttpSession session, String categoryName) throws ParseException {
-		session.setAttribute("HEADER_VALUE", categoryName);
+						@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
+							Model model, Criteria criteria, HttpSession session) throws ParseException {
+		Category category = new Category();
+		if(cateNo == 0) {
+			category = (Category)session.getAttribute("HEADER_VALUE");
+		}
+		if(cateNo != 0) {
+			category = categoryService.getCategoryByCategoryNo(cateNo);
+		}
+		session.setAttribute("HEADER_VALUE", category);
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);

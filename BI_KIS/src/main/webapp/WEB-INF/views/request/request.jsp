@@ -22,7 +22,7 @@
                 <div class="search-line">
                     <label for="categoryValue">분류 명</label>
 	                <select id="category" name="categoryValue">
-		                <option value="0"></option>
+		                <option value="nodata"></option>
 		               	<option value="error">error</option>
 		               	<option value="정기점검">정기점검</option>
 	                </select>      

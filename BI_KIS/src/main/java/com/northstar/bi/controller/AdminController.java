@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.northstar.bi.dto.Auth;
+import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Pagination;
+import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.EmpService;
 
 @Controller
@@ -23,12 +25,22 @@ public class AdminController {
 
 	@Autowired
 	EmpService empService;
-
+	@Autowired
+	CategoryService categoryService;
+	
 	@RequestMapping(value="/empAdmin")
 	public String empAdmin (@RequestParam(name="cp", required=false, defaultValue="1")int cp,
 							@RequestParam(name="name", required=false)String name,
-							Model model, Criteria criteria, HttpSession session, String categoryName) {
-		session.setAttribute("HEADER_VALUE", categoryName);
+							@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
+							Model model, Criteria criteria, HttpSession session) {
+		Category category = new Category();
+		if(cateNo == 0) {
+			category = (Category)session.getAttribute("HEADER_VALUE");
+		}
+		if(cateNo != 0) {
+			category = categoryService.getCategoryByCategoryNo(cateNo);
+		}
+		session.setAttribute("HEADER_VALUE", category);
 		int rows = 10;
 		criteria.setBeginIndex((cp - 1 ) * rows + 1); 
 		criteria.setEndIndex(cp * rows);
@@ -76,11 +88,13 @@ public class AdminController {
 							@RequestParam(name="name")String name,
 							@RequestParam(name="rank")String rank,
 							@RequestParam(name="tel")String tel,
+							@RequestParam(name="addr")String addr,
 							@RequestParam(name="email")String email) {
 		Emp emp = empService.getEmpById(empId);
 		emp.setName(name);
 		emp.setRank(rank);
 		emp.setTel(tel);
+		emp.setAddr(addr);
 		emp.setEmail(email);
 		empService.updateEmp(emp);
 		return "redirect:/empAdmin";
@@ -96,6 +110,30 @@ public class AdminController {
 			emp.setFlag("N");
 		}
 		empService.updateEmp(emp);
+		return "redirect:/empAdmin";
+	}
+	@RequestMapping(value="addEmp", method=RequestMethod.GET)
+	public String addEmpForm () {
+		return "admin/empAddForm";
+	}
+	@RequestMapping(value="addEmp", method=RequestMethod.POST)
+	public String addEmp(@RequestParam(name="empId")String empId,
+						@RequestParam(name="password")String password,
+						@RequestParam(name="name")String name,
+						@RequestParam(name="rank")String rank,
+						@RequestParam(name="tel")String tel,
+						@RequestParam(name="addr")String addr,
+						@RequestParam(name="email")String email) {
+		Emp emp = new Emp();
+		emp.setId(empId);
+		emp.setPassword(password);
+		emp.setName(name);
+		emp.setRank(rank);
+		emp.setTel(tel);
+		emp.setAddr(addr);
+		emp.setEmail(email);
+		
+		empService.addEmp(emp);
 		return "redirect:/empAdmin";
 	}
 }

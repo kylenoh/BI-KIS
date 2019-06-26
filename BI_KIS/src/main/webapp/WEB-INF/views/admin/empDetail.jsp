@@ -29,6 +29,9 @@
            	<label for="tel">연락처</label><input type="text" id="tel" name="tel" disabled="disabled" value="${emp.tel }">
         </div>
         <div>
+          	<label for="addr">주소</label><input type="text" id="addr" disabled="disabled" name="addr" value="${emp.addr }">
+        </div>
+        <div>
           	<label for="email">이메일</label><input type="text" id="email" disabled="disabled" name="email" value="${emp.email }">
         </div>
         <div style="float:right;">
@@ -36,7 +39,7 @@
 		      	<button type="button" class="btn-modify-emp ym-btn" value="${emp.id }">수정</button>
 		       	<button type="button" class="btn-del-emp ym-btn" value="${emp.id }">삭제</button>
 	       	</c:if>
-	       	<button class="ym-btn" type="button" onclick="location.href='project'">목록</button>
+	       	<button class="ym-btn" type="button" onclick="location.href='empAdmin'">목록</button>
 	    </div>
 	</div>
 </div>

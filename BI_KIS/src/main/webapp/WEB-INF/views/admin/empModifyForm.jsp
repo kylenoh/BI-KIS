@@ -30,11 +30,14 @@
                 	<label for="tel">연락처</label><input type="text" id="tel" name="tel" value="${emp.tel }">
                 </div>
                 <div>
+                	<label for="addr">주소</label><input type="text" id="addr" name="email" value="${emp.addr }">
+                </div>
+                <div>
                 	<label for="email">이메일</label><input type="text" id="email" name="email" value="${emp.email }">
                 </div>
                 <div>
                     <button type="submit">수정</button>
-                    <button type="button" onclick="location.href='empAdmin'">뒤로 가기</button>
+                    <button type="button" onclick="location.href='empAdmin'">취소</button>
                 </div>
 		</form>
 	</div>

@@ -60,14 +60,17 @@
 			R.pjt_no = P.pjt_no
 		and
 			P.com_no = C.com_no
-			<if test="categoryName != 0">
-				and R.category_name = #{categoryName}
+			<if test="categoryName != 'nodata'">
+				and R.req_category_name = #{categoryName}
 			</if>
 			<if test="companyName != null &amp;&amp; companyName != ''">
 				and C.com_name like '%' || #{companyName} || '%'
 			</if>
 			<if test="flag != null &amp;&amp; flag != 'all'">
 				and R.req_flag = #{flag}
+			</if>
+			<if test="flag == null">
+				and R.req_flag != 'N'
 			</if>
 			<if test="suggest != null &amp;&amp; suggest != ''">
 				and R.req_suggest like '%' || #{suggest} || '%'
@@ -134,14 +137,17 @@
 				R.pjt_no = P.pjt_no
 			and
 				P.com_no = C.com_no
-				<if test="categoryName != 0">
-					and R.category_name = #{categoryName}
+				<if test="categoryName != 'nodata'">
+					and R.req_category_name = #{categoryName}
 				</if>
 				<if test="companyName != null &amp;&amp; companyName != ''">
 					and C.com_name like '%' || #{companyName} || '%'
 				</if>
 				<if test="flag != null &amp;&amp; flag != 'all'">
-					and R.req_flag = #{flag}
+					and R.req_flag = #{flag}	
+				</if>
+				<if test="flag == null">
+					and R.req_flag != 'N'
 				</if>
 				<if test="suggest != null &amp;&amp; suggest != ''">
 					and R.req_suggest like '%' || #{suggest} || '%'
@@ -170,6 +176,7 @@
 				and
 					R.req_close_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
 			</if>
+			
 			)
 		where
 			rn >= #{beginIndex} and rn &lt;= #{endIndex}

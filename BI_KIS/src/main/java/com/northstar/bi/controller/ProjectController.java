@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.northstar.bi.dao.ProjectDao;
+import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Company;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Customer;
 import com.northstar.bi.dto.Emp;
 import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.dto.Project;
+import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.CompanyService;
 import com.northstar.bi.service.EmpService;
 import com.northstar.bi.service.ProjectService;
@@ -35,6 +37,8 @@ public class ProjectController {
 	CompanyService companyService;
 	@Autowired
 	EmpService empService;
+	@Autowired
+	CategoryService categoryService;
 	
 	@RequestMapping(value="/getEmpByEmpIdInfo")
 	public @ResponseBody Emp EmpByEmpIdInfo(@RequestParam("empId")String empId) {
@@ -56,9 +60,16 @@ public class ProjectController {
 						@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
 						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
 						@RequestParam(name="flag", required=false)String flag,
-						@RequestParam(name="categoryName", required = false, defaultValue = "프로젝트")String categoryName,
+						@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
 							Model model, Criteria criteria, HttpSession session) throws ParseException {
-		session.setAttribute("HEADER_VALUE", categoryName);
+		Category category = new Category();
+		if(cateNo == 0) {
+			category = (Category)session.getAttribute("HEADER_VALUE");
+		}
+		if(cateNo != 0) {
+			category = categoryService.getCategoryByCategoryNo(cateNo);
+		}
+		session.setAttribute("HEADER_VALUE", category);
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
