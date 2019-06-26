@@ -121,7 +121,7 @@ public class SolutionController {
 						SolutionFile solutionfile,
 						 HttpServletResponse response) {
 		solutionfile.setSOLUTION_NO(no);
-		solutionService.selectFileInfo(solutionfile, no, response);
+		solutionService.selectDownload(solutionfile, no, response);
 	}
 //	댓글 작성
 	@RequestMapping(value = "/solutionReplyWrite", method = RequestMethod.POST)

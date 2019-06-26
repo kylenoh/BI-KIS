@@ -65,7 +65,9 @@ $(function(){
 });
 
 function getSolutionList(){
-	location.href="solution";
+	if (confirm("정말 목록으로돌아시겠습니까?")) {
+		location.href="solution";
+	}
 }
 function addFile(){
 	var str = "<p><input type='file' id='file_"+(file_count)+"' name='file_"+(file_count)+"'>"+

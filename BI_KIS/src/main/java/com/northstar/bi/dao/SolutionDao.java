@@ -34,7 +34,7 @@ public interface SolutionDao {
 //	DeleteFile
 	SolutionFile deleteFile (int no);
 //	Download
-	SolutionFile selectFileInfo(int no);
+	SolutionFile selectDownload(int no);
 	
 ////	Reply
 //	Insert

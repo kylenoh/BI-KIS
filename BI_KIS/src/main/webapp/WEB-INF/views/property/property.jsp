@@ -22,20 +22,7 @@ function propertyDelete(no,flag){
 <body>
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
-	<div class="header">
-		<div class="header-left">
-			<ul class="breadcrumb">
-			  <li><a href="#">BI 기술 정보</a></li>
-			  <li>
-			  	<a href="#">
-			  		자산관리
-			  	</a>
-			  </li>
-			</ul>
-		</div>
 		<%@include file="../emp-interface.jsp" %>
-	</div>
-	
 	<div class="main">
 		<form action="property">
 			<fieldset>
