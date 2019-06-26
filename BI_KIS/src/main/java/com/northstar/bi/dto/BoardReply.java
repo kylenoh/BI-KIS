@@ -9,17 +9,20 @@ public class BoardReply {
 	private Date CREATE_DATE;
 	private String CONTENT;
 	
+	private String EMP_NAME;
+	
 	public BoardReply() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public BoardReply(int nO, int bOARD_NO, String iD, Date cREATE_DATE, String cONTENT) {
+
+	public BoardReply(int nO, int bOARD_NO, String iD, Date cREATE_DATE, String cONTENT, String eMP_NAME) {
 		super();
 		NO = nO;
 		BOARD_NO = bOARD_NO;
 		ID = iD;
 		CREATE_DATE = cREATE_DATE;
 		CONTENT = cONTENT;
+		EMP_NAME = eMP_NAME;
 	}
 
 	public int getNO() {
@@ -60,7 +63,15 @@ public class BoardReply {
 
 	public void setCONTENT(String cONTENT) {
 		CONTENT = cONTENT;
-	};
+	}
+
+	public String getEMP_NAME() {
+		return EMP_NAME;
+	}
+
+	public void setEMP_NAME(String eMP_NAME) {
+		EMP_NAME = eMP_NAME;
+	}
 	
 	
 	

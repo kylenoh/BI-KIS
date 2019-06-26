@@ -46,7 +46,7 @@
 	</div>
 <script type="text/javascript">
 function getSolutionList(){
-	if (confirm("목록으로돌아시겠습니까?")) {
+	if (confirm("목록으로돌아가시겠습니까?")) {
 		location.href="solution";
 	}
 }

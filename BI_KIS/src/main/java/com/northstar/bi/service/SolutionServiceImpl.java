@@ -121,7 +121,7 @@ public class SolutionServiceImpl implements SolutionService {
 		return null;
 	}
 	@Override
-	public List<SolutionReply> getReplyList(int no) {
+	public List<SolutionReply> getSolutionReplybyNo(int no) {
 		return solutionDao.getSolutionReplybyNo(no);
 	}
 	@Override

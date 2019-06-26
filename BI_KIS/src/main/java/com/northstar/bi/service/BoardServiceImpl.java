@@ -50,7 +50,6 @@ public class BoardServiceImpl implements BoardService {
 //	특정 게시판 출력
 	@Override
 	public Board getBoardByNo(int no) {
-		boardDao.updateCnt(no);
 		return boardDao.getBoardByNo(no);
 	}
 

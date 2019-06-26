@@ -27,7 +27,7 @@ function getSolutionDetail(no){
 							<legend>검색라인</legend>
 							<label for="title">제목</label><input type="text" name="title" class="inputSearch">
 							<label for="writer">작성자</label><input type="text"name="writer" class="inputSearch">
-							<button type="submit" class="btn info">Search</button>
+							<button type="submit" class="btn info">검색</button>
 						</fieldset>
 					</form>
 

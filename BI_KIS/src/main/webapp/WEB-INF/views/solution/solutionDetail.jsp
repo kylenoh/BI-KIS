@@ -24,13 +24,13 @@ $(function(){
 	<div class="main">
 		<div class="main-inner">
 				
-			<form method="post" action="solutionUpdate">
+			<form method="post" action="solutionUpdate" class="form">
 				<input type="hidden" name="NO" value="${solution.NO }" id="solutionNo">
 			  <div class="container">
 			  	<div class="container-header">
 			  		<table border="1">
 				  		<colgroup>
-							<col width="15%">
+							<col width="10%">
 							<col width="*">
 							<col width="15%">
 							<col width="15%">
@@ -38,9 +38,9 @@ $(function(){
 			  			<thead>
 			  				<tr>
 				  				<th scope="col">글번호</th>
-			  					<th><b>제목</b></th>
-			  					<th><b>작성자</b></th>
-			  					<th><b>작성일자</b></th>
+			  					<th scope="col"><b>제목</b></th>
+			  					<th scope="col"><b>작성자</b></th>
+			  					<th scope="col"><b>작성일자</b></th>
 			  				</tr>
 			  			</thead>
 			  			<tbody>
@@ -50,8 +50,8 @@ $(function(){
 				  				<td>${solution.EMP_NAME }</td>
 				  				<td><fmt:formatDate value="${solution.CREATE_DATE }" pattern="yyyy-MM-dd HH:mm"/> </td>
 				  			</tr>
-							<tr class="contentSection">
-								<td colspan="5">${solution.CONTENT }</td>
+							<tr>
+								<td colspan="5" style="min-height:1000px;">${solution.CONTENT }</td>
 							</tr>
 							<tr>
 								<td colspan="5">
@@ -79,7 +79,7 @@ $(function(){
 						<c:forEach var="reply" items="${solution.REPLYS }">
 							<p id="p_${reply.NO }">
 								<span name="reply_0">&nbsp;&nbsp;${reply.CONTENT }&nbsp;&nbsp;${reply.EMP_NAME}&nbsp;&nbsp;${reply.CREATE_DATE }</span>
-								<a href="javascript:replyDelete(${reply.NO })">삭제</a>
+								<a href="javascript:replyDelete(${reply.NO },${solution.NO })">삭제</a>
 							</p>
 						</c:forEach>
 					</div>
@@ -87,8 +87,14 @@ $(function(){
 			
 				<!-- 댓글입력라인 -->
 				<c:if test="${sessionScope.LOGIN_EMP.id!=null}"> 
-						<textarea style="width:100%; height:100px; resize: none;" id="replyContent"></textarea>
-						<button id="replyWrite" class="btn success">댓글등록</button>
+					<div class="replyBox clearfix">
+						<form action="solutionReplyWrite" method="POST">
+							<input type="hidden" name="no" value="${solution.NO }">
+							<textarea class="replyContent" name="replyContent"></textarea>
+							<button id="replyWrite" type="submit" class="btn success">댓글등록</button>
+						</form>
+					</div>
+						
 				</c:if>
 			
 		</div>
@@ -98,35 +104,8 @@ $(function(){
 	</div>
 </div>
 <script type="text/javascript">
-$(function(){
-	var reply_count=1;
-	var solutionNo = $("#solutionNo").val();
-	
-	
-	$("#replyWrite").on("click",function(e){
-		e.preventDefault();
-		var replyContent = $("#replyContent").val();
-		$.ajax({
-			type:"POST",
-			url:"solutionReplyWrite",
-			data:{no:solutionNo,content:replyContent},
-			success:function(result){
-				var row = "<p><span name='reply_"+(reply_count++)+"'>"+replyContent+"</span>"+"&nbsp;&nbsp;"+"<a href='javascript:replyDelete("+result+");'>삭제</a></p>";
-				$("#replyList").append(row);
-			}
-		});
-	});
-	
-});
-function replyDelete(replyNo){
-	$.ajax({
-		type:"POST",
-		url: "solutionDeleteReply",
-		data:{no:replyNo},
-		success: function(result){
-			$("#p_"+result).remove();
-		}
-	});
+function replyDelete(replyNo,no){
+	location.href="solutionDeleteReply?replyNo="+replyNo+"&no="+no;
 }
 
 
@@ -136,7 +115,7 @@ function SolutionDelete(no){
 	}
 }
 function getSolutionList(){
-	if (confirm("정말 목록으로돌아시겠습니까?")) {
+	if (confirm("목록으로돌아가시겠습니까?")) {
 		location.href="solution";
 	}
 }

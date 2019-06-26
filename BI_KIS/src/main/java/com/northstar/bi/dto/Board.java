@@ -1,20 +1,21 @@
 package com.northstar.bi.dto;
 
+import java.util.Date;
 import java.util.List;
 
 public class Board {
 	private int NO;
 	private String EMP_ID;
 	private String TITLE;
-	private String CREATE_DATE;
+	private Date CREATE_DATE;
 	private String CONTENT;
-	private int COUNT;
 	private String FLAG;
 	private String UPDATER;
-	private String UPDATE_DATE;
+	private Date UPDATE_DATE;
 	
 //	외부 데이터
 	private String CATE_NAME;
+	private String UPDATE_NAME;
 	private String EMP_NAME;
 
 	
@@ -25,8 +26,8 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int nO, String eMP_ID, String tITLE, String cREATE_DATE, String cONTENT, int cOUNT, String fLAG,
-			String uPDATER, String uPDATE_DATE, String cATE_NAME, String eMP_NAME, List<BoardFile> fILES,
+	public Board(int nO, String eMP_ID, String tITLE, Date cREATE_DATE, String cONTENT, String fLAG, String uPDATER,
+			Date uPDATE_DATE, String cATE_NAME, String uPDATE_NAME, String eMP_NAME, List<BoardFile> fILES,
 			List<BoardReply> rEPLYS) {
 		super();
 		NO = nO;
@@ -34,11 +35,11 @@ public class Board {
 		TITLE = tITLE;
 		CREATE_DATE = cREATE_DATE;
 		CONTENT = cONTENT;
-		COUNT = cOUNT;
 		FLAG = fLAG;
 		UPDATER = uPDATER;
 		UPDATE_DATE = uPDATE_DATE;
 		CATE_NAME = cATE_NAME;
+		UPDATE_NAME = uPDATE_NAME;
 		EMP_NAME = eMP_NAME;
 		FILES = fILES;
 		REPLYS = rEPLYS;
@@ -68,11 +69,11 @@ public class Board {
 		TITLE = tITLE;
 	}
 
-	public String getCREATE_DATE() {
+	public Date getCREATE_DATE() {
 		return CREATE_DATE;
 	}
 
-	public void setCREATE_DATE(String cREATE_DATE) {
+	public void setCREATE_DATE(Date cREATE_DATE) {
 		CREATE_DATE = cREATE_DATE;
 	}
 
@@ -82,14 +83,6 @@ public class Board {
 
 	public void setCONTENT(String cONTENT) {
 		CONTENT = cONTENT;
-	}
-
-	public int getCOUNT() {
-		return COUNT;
-	}
-
-	public void setCOUNT(int cOUNT) {
-		COUNT = cOUNT;
 	}
 
 	public String getFLAG() {
@@ -108,11 +101,11 @@ public class Board {
 		UPDATER = uPDATER;
 	}
 
-	public String getUPDATE_DATE() {
+	public Date getUPDATE_DATE() {
 		return UPDATE_DATE;
 	}
 
-	public void setUPDATE_DATE(String uPDATE_DATE) {
+	public void setUPDATE_DATE(Date uPDATE_DATE) {
 		UPDATE_DATE = uPDATE_DATE;
 	}
 
@@ -122,6 +115,14 @@ public class Board {
 
 	public void setCATE_NAME(String cATE_NAME) {
 		CATE_NAME = cATE_NAME;
+	}
+
+	public String getUPDATE_NAME() {
+		return UPDATE_NAME;
+	}
+
+	public void setUPDATE_NAME(String uPDATE_NAME) {
+		UPDATE_NAME = uPDATE_NAME;
 	}
 
 	public String getEMP_NAME() {
@@ -148,13 +149,6 @@ public class Board {
 		REPLYS = rEPLYS;
 	}
 
-	@Override
-	public String toString() {
-		return "Board [NO=" + NO + ", EMP_ID=" + EMP_ID + ", TITLE=" + TITLE + ", CREATE_DATE=" + CREATE_DATE
-				+ ", CONTENT=" + CONTENT + ", COUNT=" + COUNT + ", FLAG=" + FLAG + ", UPDATER=" + UPDATER
-				+ ", UPDATE_DATE=" + UPDATE_DATE + ", CATE_NAME=" + CATE_NAME + ", EMP_NAME=" + EMP_NAME + ", FILES="
-				+ FILES + ", REPLYS=" + REPLYS + "]";
-	}
-
+	
 	
 }

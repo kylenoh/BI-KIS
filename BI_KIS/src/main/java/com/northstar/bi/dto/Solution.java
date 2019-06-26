@@ -15,6 +15,7 @@ public class Solution {
 	private Date UPDATE_DATE;
 	
 	private String EMP_NAME;
+	private String UPDATE_NAME;
 	private String CATE_SECTION_NAME;
 	
 	private List<SolutionFile> FILES;
@@ -25,8 +26,8 @@ public class Solution {
 	}
 
 	public Solution(int nO, String eMP_ID, int cATE, String tITLE, Date cREATE_DATE, String cONTENT, String fLAG,
-			String uPDATER, Date uPDATE_DATE, String eMP_NAME, String cATE_SECTION_NAME, List<SolutionFile> fILES,
-			List<SolutionReply> rEPLYS) {
+			String uPDATER, Date uPDATE_DATE, String eMP_NAME, String uPDATE_NAME, String cATE_SECTION_NAME,
+			List<SolutionFile> fILES, List<SolutionReply> rEPLYS) {
 		super();
 		NO = nO;
 		EMP_ID = eMP_ID;
@@ -38,6 +39,7 @@ public class Solution {
 		UPDATER = uPDATER;
 		UPDATE_DATE = uPDATE_DATE;
 		EMP_NAME = eMP_NAME;
+		UPDATE_NAME = uPDATE_NAME;
 		CATE_SECTION_NAME = cATE_SECTION_NAME;
 		FILES = fILES;
 		REPLYS = rEPLYS;
@@ -123,6 +125,14 @@ public class Solution {
 		EMP_NAME = eMP_NAME;
 	}
 
+	public String getUPDATE_NAME() {
+		return UPDATE_NAME;
+	}
+
+	public void setUPDATE_NAME(String uPDATE_NAME) {
+		UPDATE_NAME = uPDATE_NAME;
+	}
+
 	public String getCATE_SECTION_NAME() {
 		return CATE_SECTION_NAME;
 	}
@@ -146,6 +156,8 @@ public class Solution {
 	public void setREPLYS(List<SolutionReply> rEPLYS) {
 		REPLYS = rEPLYS;
 	}
+
+	
 
 
 }

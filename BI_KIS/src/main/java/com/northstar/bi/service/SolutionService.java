@@ -31,7 +31,7 @@ public interface SolutionService {
 //	Insert
 	void insertSolutionReply(SolutionReply reply);
 //	Select
-	List<SolutionReply>getReplyList(int no);
+	List<SolutionReply>getSolutionReplybyNo(int no);
 //	Delete
 	void deleteSolutionReply(int no);
 	

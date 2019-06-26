@@ -29,20 +29,20 @@ function getBoardDetail(no){
 					<form action="board">
 						<fieldset>
 							<legend>검색라인</legend>
-							<label for="title">제목</label><input type="text" name="title">
-							<label for="writer">작성자</label><input type="text"name="writer">
-							<button type="submit">Search</button>
+							<label for="title">제목</label><input type="text" name="title" class="inputSearch">
+							<label for="writer">작성자</label><input type="text"name="writer" class="inputSearch">
+							<button type="submit" class="btn info">검색</button>
 						</fieldset>
 					</form>
-					<button class="write" onclick="moveWrite()">글쓰기</button>
+					<button class="btn success" onclick="moveWrite()">글쓰기</button>
+					<small> 게시글 수 : ${pagination.totalRows}</small>
 					
 					<table border="1">
 						<colgroup>
 							<col width="10%">
 							<col width="*">
 							<col width="15%">
-							<col width="20%">
-							<col width="10%">
+							<col width="15%">
 						</colgroup>
 						<thead>
 							<tr>
@@ -50,7 +50,6 @@ function getBoardDetail(no){
 								<th scope="col">제목</th>
 								<th scope="col">작성자</th>
 								<th scope="col">작성일</th>
-								<th scope="col">조회수</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -61,14 +60,13 @@ function getBoardDetail(no){
 											<td>${boards.NO }</td>
 											<td>${boards.TITLE }</td>
 											<td>${boards.EMP_NAME }</td>
-											<td>${boards.CREATE_DATE }</td>
-											<td>${boards.COUNT }</td>
+											<td><fmt:formatDate value="${boards.CREATE_DATE }" pattern="yy-MM-dd"/></td>
 										</tr>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
 									<tr>
-										<td colspan="5">조회된 결과가 없습니다.</td>
+										<td colspan="4">조회된 결과가 없습니다.</td>
 									</tr>					
 								</c:otherwise>
 							</c:choose>

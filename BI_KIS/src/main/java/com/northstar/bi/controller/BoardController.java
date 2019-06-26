@@ -129,26 +129,23 @@ public class BoardController {
 		boardfile.setNO(no);
 		fileService.selectFileInfo(boardfile,no,response);
 	}
-//	댓글 작성
 	@RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
-	public @ResponseBody String ReplyWrite(@RequestParam("no")int no,
-										   @RequestParam("content")String content,
-										   BoardReply reply,Model model,HttpSession session) {
+	public String ReplyWrite(@RequestParam("no")int no,
+							 @RequestParam("replyContent")String content,
+							  BoardReply reply,Model model,HttpSession session) {
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
 		reply.setBOARD_NO(no);
 		reply.setCONTENT(content);
 		reply.setID(User.getId());
 		replyService.insertBoardReply(reply);
-		String replyNo =Integer.toString(reply.getNO());
-		return replyNo;
+		return "redirect:/boardDetail?no="+no;
 	}
-//	댓글 삭제
-	@RequestMapping(value = "/deleteReply", method = RequestMethod.POST)
-	public @ResponseBody String deleteReply(@RequestParam("no")int no) {
-		System.out.println(no);
-		replyService.deleteBoardReply(no);
-		String replyNo = Integer.toString(no);
-		return replyNo;
+	@RequestMapping(value = "/deleteReply", method = RequestMethod.GET)
+	public String deleteReply(@RequestParam("replyNo")int replyNo,
+							  @RequestParam("no")int no) {
+		replyService.deleteBoardReply(replyNo);
+		return "redirect:/boardDetail?no="+no;
 	}
+
 	
 }

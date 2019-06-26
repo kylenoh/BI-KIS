@@ -18,28 +18,36 @@
 		  	<div class="container-header">
 		 	 	<input type="hidden" name="NO" value="${Board.NO }">
 			    <label><b>제목</b></label>
-			    <input type="text" name="TITLE" class="boardTitle" value="${Board.TITLE }" required>
+			    <input type="text" name="TITLE" class="inputTitle" value="${Board.TITLE }" required>
 			</div>
 			<div class="container-content">
 			    <label><b>내용</b></label>
-			    <textarea name="CONTENT" class="boardContent">${Board.CONTENT }</textarea>
-			    <label><b>첨부파일</b></label>
+			    <textarea name="CONTENT" class="textContent">${Board.CONTENT }</textarea>
+			    <div class="container-footer">
+					<button type="button" class="btn success" id="addFile">파일추가</button>
+			    	<button type="submit" class="btn success">수정</button>
+			    	<button type="button" class="btn warning" onclick="getList()">목록으로</button>
+			    </div>
+			    
+			    <c:if test="${Board.UPDATE_DATE != null}">
+					<div class="updater_console">
+						${Board.UPDATER }님이 마지막 수정 하였습니다. (<fmt:formatDate value="${Board.UPDATE_DATE }" pattern="yyyy-MM-dd HH:mm"/>)
+					</div>
+				</c:if>
+	
 			    <div id="fileDiv">
+				    <label><b>첨부파일</b></label>
 				    <c:forEach varStatus="var" var="file" items="${Board.FILES }">
 				    	<p>
-							<input type="text" id="IDX" name="IDX_${var.index }" value="${file.NO }"><!-- 숨김 상자 -->
-							<a href="#this" id="name_${var.index }" name="name_${var.index }">${file.NAME }</a><!-- 파일 명 -->
+							<input type="hidden" id="IDX" name="IDX_${var.index }" value="${file.NO }"><!-- 숨김 상자 -->
+							<a href="#" id="name_${var.index }" name="name_${var.index }">${file.NAME }</a><!-- 파일 명 -->
 							<input type="file" id="file_${var.index }" name="file_${var.index }"><!-- 파일 상자 -->
-							<a href="#this" class="btn" id="delete_${var.index }" name="delete_${var.index }">삭제</a><!-- 삭제 -->
+							<a href="#" id="delete_${var.index }" name="delete_${var.index }">삭제</a><!-- 삭제 -->
 						</p>
 					</c:forEach>
 				</div>
 			</div>
-			<div class="container-footer">
-				<button type="button" class="writebtn" id="addFile">파일추가</button>
-		    	<button type="button" class="writebtn" onclick="getList()">목록으로</button>
-		    	<button type="submit" class="writebtn">수정</button>
-		    </div>
+			
 		  </div>
 		</form>
 		
@@ -64,11 +72,13 @@ $(function(){
 });
 
 function getList(){
-	location.href="board";
+	if (confirm("목록으로돌아가시겠습니까?")) {
+		location.href="board";
+	}
 }
 function addFile(){
 	var str = "<p><input type='file' id='file_"+(file_count)+"' name='file_"+(file_count)+"'>"+
-			"<a href='#this' class='btn' id='delete_"+(file_count)+"' name='delete_"+(file_count)+"'>삭제</a>" +
+			"<a href='#' id='delete_"+(file_count)+"' name='delete_"+(file_count)+"'>삭제</a>" +
 		"</p>";
 	$("#fileDiv").append(str);
 	$("#delete_"+(file_count++)).on("click", function(e){ //삭제 버튼

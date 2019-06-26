@@ -16,7 +16,7 @@
 		<result column="SOLUTION_UPDATER" property="UPDATER"/>
 		<result column="SOLUTION_UPDATE_DATE" property="UPDATE_DATE"/>
 		<collection property="FILES" column="SOLUTION_NO" javaType="java.util.ArrayList" ofType="SolutionFile" select="com.northstar.bi.dao.SolutionDao.getFileByNo"/>
-		<collection property="REPLYS" column="SOLUTION_NO" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.SolutionDao.getReplybyNo"/>
+		<collection property="REPLYS" column="SOLUTION_NO" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.SolutionDao.getSolutionReplybyNo"/>
 	</resultMap>
 	
 	<select id="getTotalRows" resultType="int">
@@ -105,18 +105,6 @@
 			SOLUTION.EMP_ID = EMP.EMP_ID 
 		and SOLUTION.SOLUTION_NO = #{value}
 	</select>
-	<select id="getReplybyNo" parameterType="int" resultType="SolutionReply">
-		select 
-			REPLY_NO as NO,
-			SOLUTION_NO,
-			EMP_ID,
-			REPLY_CREATE_DATE as CREATE_DATE,
-			REPLY_CONTENT as CONTENT
-		from
-			BI_SOLUTION_REPLY
-		where
-			SOLUTION_NO = #{value}
-	</select>
 	<select id="getFileByNo" parameterType="int" resultType="SolutionFile">
 		select
 			FILE_NO as NO,
@@ -170,6 +158,8 @@
 			BI_SOLUTION_REPLY REPLY,BI_EMP EMP
 		where
 			SOLUTION_NO = #{value} and REPLY.EMP_ID = EMP.EMP_ID
+		order by 
+			CREATE_DATE desc
 	</select>
 	<delete id="deleteSolutionReply" parameterType="int">
 		delete from

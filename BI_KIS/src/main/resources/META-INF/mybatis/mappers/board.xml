@@ -12,7 +12,6 @@
 		<result column="BOARD_TITLE" property="TITLE"/>
 		<result column="BOARD_CREATE_DATE" property="CREATE_DATE"/>
 		<result column="BOARD_CONTENT" property="CONTENT"/>
-		<result column="BOARD_COUNT" property="COUNT"/>
 		<result column="BOARD_FLAG" property="FLAG"/>
 		<result column="BOARD_UPDATER" property="UPDATER"/>
 		<result column="BOARD_UPDATE_DATE" property="UPDATE_DATE"/>
@@ -27,9 +26,9 @@
 			SELECT BI_BOARD_SEQ.currval FROM DUAL
 		</selectKey>
 		insert into BI_BOARD
-		(BOARD_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_COUNT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
+		(BOARD_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
 		values
-		(BI_BOARD_SEQ.nextval, #{EMP_ID}, #{TITLE}, sysdate, #{CONTENT},0,'Y',NULL,NULL)
+		(BI_BOARD_SEQ.nextval, #{EMP_ID}, #{TITLE}, sysdate, #{CONTENT},'Y',NULL,NULL)
 	</insert>
 	
 	<select id="getTotalRows" resultType="int">
@@ -55,7 +54,6 @@
 				BOARD_TITLE as TITLE,
 				BOARD_CREATE_DATE as CREATE_DATE,
 				BOARD_CONTENT as CONTENT,
-				BOARD_COUNT as COUNT,
 				BOARD_FLAG as FLAG,
 				BOARD_UPDATER as UPDATER,
 				BOARD_UPDATE_DATE as UPDATE_DATE
@@ -68,7 +66,6 @@
 					BOARD.BOARD_TITLE,
 					BOARD.BOARD_CREATE_DATE,
 					BOARD.BOARD_CONTENT,
-					BOARD.BOARD_COUNT,
 					BOARD.BOARD_FLAG,
 					BOARD.BOARD_UPDATER,
 					BOARD.BOARD_UPDATE_DATE,
@@ -97,7 +94,6 @@
 			BOARD.BOARD_TITLE,
 			BOARD.BOARD_CREATE_DATE,
 			BOARD.BOARD_CONTENT,
-			BOARD.BOARD_COUNT,
 			BOARD.BOARD_FLAG,
 			BOARD.BOARD_UPDATER,
 			BOARD.BOARD_UPDATE_DATE
@@ -129,17 +125,6 @@
 		where
 			BOARD_NO = #{value}
 	</delete>
-	
-	<update id="updateCnt" parameterType="int">
-		update 
-			BI_BOARD
-		set
-			BOARD_COUNT = NVL(BOARD_COUNT, 0) + 1
-		where
-            BOARD_NO = #{value}
-
-	</update>
-
 
 	<insert id="insertBoardReply" parameterType="BoardReply">
 		<selectKey resultType="int" keyProperty="NO" order="AFTER">
@@ -152,15 +137,17 @@
 	</insert>
 	<select id="getReplybyNo" parameterType="int" resultType="BoardReply">
 		select 
-			REPLY_NO as NO,
-			BOARD_NO,
-			EMP_ID,
-			REPLY_CREATE_DATE as CREATE_DATE,
-			REPLY_CONTENT as CONTENT
+			REPLY.REPLY_NO as NO,
+			REPLY.BOARD_NO,
+			EMP.EMP_NAME,
+			REPLY.REPLY_CREATE_DATE as CREATE_DATE,
+			REPLY.REPLY_CONTENT as CONTENT
 		from
-			BI_BOARD_REPLY
+			BI_BOARD_REPLY REPLY,BI_EMP EMP
 		where
-			BOARD_NO = #{value}
+			BOARD_NO = #{value} and REPLY.EMP_ID = EMP.EMP_ID
+		order by
+			CREATE_DATE desc
 	</select>
 	<delete id="deleteBoardReply" parameterType="int">
 		delete from

@@ -19,25 +19,25 @@
 		  <div class="container">
 		  	<div class="container-header">
 			    <label for="uploadtitle"><b>제목</b></label>
-			    <input type="text" name="TITLE" class="boardTitle" required>
+			    <input type="text" name="TITLE" class="inputTitle" required>
 			</div>
 			<div class="container-content">
 			    <label for="content"><b>내용</b></label>
-			    <textarea name="CONTENT" class="boardContent"></textarea>
+			    <textarea name="CONTENT" class="textContent"></textarea>
+			    
+			    <button type="button" class="btn success" id="addFile">파일추가</button>
+		    	<button type="submit" class="btn success">등록</button>
+		    	<button type="button" class="btn warning" onclick="getList()">목록으로</button>
+			    
+			</div>
+
 			    <label for="file"><b>첨부파일</b></label>
 			    <div id="fileDiv">
 			    	<p>
 					    <input type="file" name="file_0" id="boardFile">
-					    <a href="#this" class="btn" id="delete" name="delete">삭제</a>
+					    <a href="#" id="delete" name="delete">삭제</a>
 					</p>
 				</div>
-				
-			</div>
-			<div class="container-footer">
-		    	<button type="button" class="writebtn" id="addFile">파일추가</button>
-		    	<button type="submit" class="writebtn">등록</button>
-		    	<button type="button" class="writebtn" onclick="getList()">목록으로</button>
-		    </div>
 		  </div>
 		</form>
 	</div>
@@ -47,7 +47,9 @@
 </div>
 <script type="text/javascript">
 function getList(){
-	location.href="board";
+	if (confirm("목록으로돌아가시겠습니까?")) {
+		location.href="board";
+	}
 }
 function deleteFile(obj){
 	obj.parent().remove();
@@ -59,7 +61,7 @@ $(function(){
 
 	$("#addFile").on("click",function(e){
 		e.preventDefault();
-		var str = "<p><input type='file' name='file_"+(file_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
+		var str = "<p><input type='file' name='file_"+(file_count++)+"'><a href='#' name='delete'>삭제</a></p>";
 		$("#fileDiv").append(str);	
 		$("a[name='delete']").on("click", function(e){
 			e.preventDefault();

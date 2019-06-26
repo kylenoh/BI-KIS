@@ -78,10 +78,10 @@ public class SolutionController {
 	}
 	
 	@RequestMapping(value = "/solutionDetail", method = RequestMethod.GET)
-	public String BoardDetail(@RequestParam("no") int no,
+	public String SolutionDetail(@RequestParam("no") int no,
 							  Model model) {
 		Solution solution = solutionService.getSolutionByNo(no);
-		List<SolutionReply>replys = solutionService.getReplyList(no);
+		List<SolutionReply>replys = solutionService.getSolutionReplybyNo(no);
 		model.addAttribute("solution",solution);
 		model.addAttribute("replys",replys);
 		return "solution/solutionDetail";
@@ -123,26 +123,22 @@ public class SolutionController {
 		solutionfile.setSOLUTION_NO(no);
 		solutionService.selectDownload(solutionfile, no, response);
 	}
-//	댓글 작성
 	@RequestMapping(value = "/solutionReplyWrite", method = RequestMethod.POST)
-	public @ResponseBody String SolutionReplyWrite(@RequestParam("no")int no,
-										   @RequestParam("content")String content,
+	public String SolutionReplyWrite(@RequestParam("no")int no,
+										   @RequestParam("replyContent")String content,
 										   SolutionReply reply,Model model,HttpSession session) {
 		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
 		reply.setSOLUTION_NO(no);
 		reply.setCONTENT(content);
 		reply.setID(User.getId());
 		solutionService.insertSolutionReply(reply);
-		String replyNo = Integer.toString(reply.getNO());
-		return replyNo;
+		return "redirect:/solutionDetail?no="+no;
 	}
-//	댓글 삭제
-	@RequestMapping(value = "/solutionDeleteReply", method = RequestMethod.POST)
-	public @ResponseBody String SolutionDeleteReply(@RequestParam("no")int no) {
-		System.out.println(no);
-		solutionService.deleteSolutionReply(no);
-		String replyNo = Integer.toString(no);
-		return replyNo;
+	@RequestMapping(value = "/solutionDeleteReply", method = RequestMethod.GET)
+	public String SolutionDeleteReply(@RequestParam("replyNo")int replyNo,
+													 @RequestParam("no")int no) {
+		solutionService.deleteSolutionReply(replyNo);
+		return "redirect:/solutionDetail?no="+no;
 	}
 	
 }
