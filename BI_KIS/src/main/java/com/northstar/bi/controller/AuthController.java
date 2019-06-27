@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.northstar.bi.dto.Auth;
+import com.northstar.bi.dto.AuthCriteria;
 import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Pagination;
-import com.northstar.bi.dto.Property;
-import com.northstar.bi.dto.PropertyCriteria;
 import com.northstar.bi.service.AuthService;
 import com.northstar.bi.service.CategoryService;
 
@@ -26,9 +26,9 @@ public class AuthController {
 	
 //	페이징
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
-	public String Auth(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
+	public String Authorization(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
 						@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
-						Model model,PropertyCriteria criteria,HttpSession session) {
+						Model model,AuthCriteria criteria,HttpSession session) {
 		Category category = new Category();
 		if(cateNo == 0) {
 			category = (Category)session.getAttribute("HEADER_VALUE");
@@ -44,49 +44,43 @@ public class AuthController {
 		int totalRows = authService.getTotalRows(criteria);
 		Pagination pagination = new Pagination(totalRows, cp, rows);
 		
-		List<Property>props = authService.getAuthList(criteria);
-		model.addAttribute("props", props);
+		List<Auth>auths = authService.getAuthList(criteria);
+		model.addAttribute("auths", auths);
 		model.addAttribute("pagination", pagination);
 		
 		return "auth/auth";
 	}
 //	자산 등록 게시판 진입
-	@RequestMapping(value = "/propertyWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "/authWrite", method = RequestMethod.GET)
 	public String AuthWrite() {
 		return "property/propertyWrite";
 	}
 //	자산 수정 게시판 진입
-	@RequestMapping(value = "/propertyModify", method = RequestMethod.GET)
+	@RequestMapping(value = "/authModify", method = RequestMethod.GET)
 	public String PropertyWrite(@RequestParam("no")int no, Model model) {
-		Property prop = authService.getAuthByNo(no);
-		model.addAttribute("prop", prop);
+		Auth auth = authService.getAuthByNo(no);
+		model.addAttribute("auth", auth);
 		return "property/propertyModify";
 	}
 //	게시글 사용 여부 변경
-	@RequestMapping(value = "/propertyDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "/authDelete", method = RequestMethod.GET)
 	public String AuthDelete(@RequestParam("no")int no,
 						 @RequestParam("flag")String flag,
-						 Property prop) {
-		System.out.println(flag);
-		if (flag.equals("N")) {
-			prop.setFLAG("Y");
-		}else {
-			prop.setFLAG("N");
-		}
-		prop.setNO(no);
-		authService.AuthDelete(prop);
+						 Auth auth) {
+		auth.setNo(no);
+		authService.AuthDelete(auth);
 		return "redirect:/property";
 	}
 //	품목 등록
-	@RequestMapping(value = "/regProperty", method = RequestMethod.POST)
-	public String AuthRegister(Property prop) {
-		authService.Authregister(prop);
+	@RequestMapping(value = "/regAuth", method = RequestMethod.POST)
+	public String AuthRegister(Auth auth) {
+		authService.Authregister(auth);
 		return "redirect:/property";
 	}
 //	품목 수정
-	@RequestMapping(value = "/Modify", method = RequestMethod.POST)
-	public String AuthModify(Property prop) {
-		authService.AuthModify(prop);
+	@RequestMapping(value = "/AuthModify", method = RequestMethod.POST)
+	public String AuthModify(Auth auth) {
+		authService.AuthModify(auth);
 		return "redirect:/property";
 	}
 

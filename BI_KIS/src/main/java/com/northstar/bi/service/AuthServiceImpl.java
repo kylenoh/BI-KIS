@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.northstar.bi.dao.AuthDao;
-import com.northstar.bi.dao.PropertyDao;
 import com.northstar.bi.dto.Auth;
 import com.northstar.bi.dto.AuthCriteria;
-import com.northstar.bi.dto.Property;
-import com.northstar.bi.dto.PropertyCriteria;
 
 @Service
 public class AuthServiceImpl implements AuthService{
@@ -32,7 +29,7 @@ public class AuthServiceImpl implements AuthService{
 	}
 	
 	@Override
-	public Property getAuthByNo(int no) {
+	public Auth getAuthByNo(int no) {
 		return authDao.getAuthByNo(no);
 	}
 	@Override
