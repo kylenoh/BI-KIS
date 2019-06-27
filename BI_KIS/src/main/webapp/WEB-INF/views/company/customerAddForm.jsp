@@ -15,29 +15,28 @@
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	<div class="main">
+		<div class="container">
 	    <form method="post" action="addCustomer" id="CustomerForm">
-            <fieldset>
-                <legend>담당자 등록</legend>
                 <div id="addForm">
 	                <div>
-	                    <label for="name">담당자 명</label><input type="text" id="name" name="name">
+	                    <label for="name">담당자 명</label><input type="text" id="name" name="name" class="inputTitle">
 	                </div>
 	                <div>
-	                    <label for="rank">직급</label><input type="text" id="rank" name="rank">
+	                    <label for="rank">직급</label><input type="text" id="rank" name="rank" class="inputTitle">
 	                </div>
 	                <div>
-	                    <label for="dept">부서명</label><input type="text" id="dept" name="dept">
+	                    <label for="dept">부서명</label><input type="text" id="dept" name="dept" class="inputTitle">
 	                </div>
 	                <div>
-	                    <label for="tel1">연락처1</label><input type="text" id="tel1" name="tel1">
-	                    <label for="tel2">연락처2</label><input type="text" id="tel2" name="tel2">
+	                    <label for="tel1">연락처1</label><input type="text" id="tel1" name="tel1" class="inputTitle">
+	                    <label for="tel2">연락처2</label><input type="text" id="tel2" name="tel2" class="inputTitle">
 	                </div>
 	                <div>
-	                    <label for="email">이메일</label><input type="text" id="email" name="email">
+	                    <label for="email">이메일</label><input type="text" id="email" name="email" class="inputTitle">
 	                </div>
 	                <div>
 	                    <label for="company">고객사 명</label>
-	                    <select id="company" name="companyNo">
+	                    <select id="company" name="companyNo" class="inputTitle">
 	                        <option value="all"></option>
 	                        <c:forEach var="comList" items="${companyList }">
 	                        	<option value="${comList.no }">${comList.name }</option>
@@ -46,12 +45,12 @@
 	                </div>
 	                <div>
 	                	<label for="remark">비고</label>
-	                	<textarea id="remark" name="remark"></textarea>
+	                	<textarea id="remark" name="remark" class="textContent"></textarea>
 	                </div>
-	                <button class="ym-btn" type="submit">등록</button>
+	                <button class="btn success" type="submit">등록</button>
                 </div>
-            </fieldset>
 		</form>
+		</div>
 	</div>
 </div>
 	

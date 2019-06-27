@@ -50,38 +50,5 @@ public class AuthController {
 		
 		return "auth/auth";
 	}
-//	자산 등록 게시판 진입
-	@RequestMapping(value = "/authWrite", method = RequestMethod.GET)
-	public String AuthWrite() {
-		return "property/propertyWrite";
-	}
-//	자산 수정 게시판 진입
-	@RequestMapping(value = "/authModify", method = RequestMethod.GET)
-	public String PropertyWrite(@RequestParam("no")int no, Model model) {
-		Auth auth = authService.getAuthByNo(no);
-		model.addAttribute("auth", auth);
-		return "property/propertyModify";
-	}
-//	게시글 사용 여부 변경
-	@RequestMapping(value = "/authDelete", method = RequestMethod.GET)
-	public String AuthDelete(@RequestParam("no")int no,
-						 @RequestParam("flag")String flag,
-						 Auth auth) {
-		auth.setNo(no);
-		authService.AuthDelete(auth);
-		return "redirect:/property";
-	}
-//	품목 등록
-	@RequestMapping(value = "/regAuth", method = RequestMethod.POST)
-	public String AuthRegister(Auth auth) {
-		authService.Authregister(auth);
-		return "redirect:/property";
-	}
-//	품목 수정
-	@RequestMapping(value = "/AuthModify", method = RequestMethod.POST)
-	public String AuthModify(Auth auth) {
-		authService.AuthModify(auth);
-		return "redirect:/property";
-	}
 
 }

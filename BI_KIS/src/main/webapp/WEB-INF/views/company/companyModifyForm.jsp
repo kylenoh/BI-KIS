@@ -15,34 +15,33 @@
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	<div class="main">
+		<div class="container">
 		<form method="post" action="companyModify" id="companyForm">
 			<input type="hidden" name="companyNo" value="${company.no}">
-		    <fieldset>
-	        	<legend>고객사</legend>
 	        	<div id="companyDetail">
 	        		<div>
-		                <label for="title">고객사 명</label><input type="text" id="name" name="name" value="${company.name }">
+		                <label for="title">고객사 명</label><input class="inputTitle"type="text" id="name" name="name" value="${company.name }">
 		            </div>
 		            <div>
-		                <label for="owner">대표자</label><input type="text" id="owner" name="owner" value="${company.owner}">
+		                <label for="owner">대표자</label><input class="inputTitle"type="text" id="owner" name="owner" value="${company.owner}">
 		            </div>
 		            <div>
-		                <label for="tel">연락처</label><input type="text" id="tel" name="tel" value="${company.tel }">
+		                <label for="tel">연락처</label><input class="inputTitle"type="text" id="tel" name="tel" value="${company.tel }">
 		            </div>
 		            <div>
-		                <label for="addr">주소</label><input type="text" id="addr" name="addr" value=${company.addr }>
+		                <label for="addr">주소</label><input class="inputTitle"type="text" id="addr" name="addr" value=${company.addr }>
 		            </div>
 		            <div>
 		             	<label for="remark">비고</label>
-		               	<textarea id="remark" name="remark">${company.remark}</textarea>
+		               	<textarea id="remark" class="textContent" name="remark">${company.remark}</textarea>
 		            </div>
 	        	</div>
 		        <div style="float:right;">
-		         	<button class="ym-btn" type="submit">수정</button>
-		           	<button class="ym-btn" type="button" onclick="location.href='companyDetail?companyNo=${company.no}'">취소</button>
+		         	<button class="btn success" type="submit">수정</button>
+		           	<button class="btn danger" type="button" onclick="location.href='companyDetail?companyNo=${company.no}'">취소</button>
 		        </div>
-	        </fieldset>
-        </form>
+        	</form>
+		</div>	
 	</div>
 </div>
 </body>

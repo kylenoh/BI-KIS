@@ -1,46 +1,188 @@
-.updater_console{
-	margin:20px 0;
+.updater_console {
+	margin: 20px 0;
 }
-.form{
-	margin-bottom:20px;
-	border-bottom:3px solid #333;
+
+.form {
+	margin-bottom: 20px;
+	border-bottom: 3px solid #333;
 }
-.replyBox{
-	width:100%;
+
+.replyBox {
+	width: 100%;
 }
-.replyContent{
-	padding:14px 28px;
-	height:30px;
-	width:85%;
+
+.replyContent {
+	padding: 14px 28px;
+	height: 30px;
+	width: 85%;
 	resize: none;
 	position: relative;
 }
-#replyWrite{
+
+#replyWrite {
 	position: absolute;
-	margin-left:20px;
+	margin-left: 20px;
 }
+
 .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+	content: "";
+	clear: both;
+	display: table;
 }
+
 .grid-container {
-  display: grid;
-  grid-template-columns: 10% auto 10% auto auto;
-  grid-gap:12px;
+	display: grid;
+	grid-template-columns: 10% auto 10% auto auto;
+	grid-gap: 12px;
 }
+
 .labelItem {
-	margin:10px 0;
-	padding:12px;
+	margin: 10px 0;
+	padding: 12px;
 	text-align: center;
 }
-.inputItem{
+
+.inputItem {
 	grid-column:;
 }
-.inputSearch2{
+
+.inputSearch2 {
 	width: 100%;
-	margin:10px 0;
-	padding:12px;
+	margin: 10px 0;
+	padding: 12px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
+}
+
+.findBtn {
+	width:120px;
+	height:55px;
+	border: 2px solid #2196F3;
+	background-color: white;
+	color: black;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+}
+/*///////////////////////////////////////////////////////////////////////////////*/
+.popup {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popupInput {
+	visibility: hidden;
+	width: 160px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popupInput::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+}
+
+.popup .show {
+	visibility: visible;
+}
+/*///////////////////////////////////////////////////////////////////////////////*/
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	top: 357px;
+	left: 732px;
+	width: 300px; /* Full width */
+	height: 100px; /* Full height */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	position: fixed;
+	background-color: #fefefe;
+	width: 300px;
+}
+
+/* The Close Button */
+.close {
+	color: #333;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal-header {
+	padding: 2px 16px;
+	background-color: #5cb85c;
+	color: white;
+}
+
+.modal-body {
+	padding: 2px 16px;
+}
+
+.modal-footer {
+	padding: 2px 16px;
+	background-color: #5cb85c;
+	color: white;
+}
+/*///////////////////////////////////////////////////////////////////////////////*/
+.form-inline { 
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+/* Add some margins for each label */
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+/* Style the input fields */
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline select {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* Style the submit button */
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
 }

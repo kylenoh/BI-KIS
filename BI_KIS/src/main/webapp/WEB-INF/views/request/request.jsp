@@ -16,18 +16,18 @@
 	</div>
 	
 	<div class="main">
+		<div class="container">
 	    <form method="post" action="request" id="searchForm">
             <fieldset>
                 <legend>검색라인</legend>
-                <div class="search-line">
+                <div class="form-inline">
                     <label for="categoryValue">분류 명</label>
 	                <select id="category" name="categoryValue" class="selectSearch">
 		                <option value="nodata"></option>
 		               	<option value="error">error</option>
 		               	<option value="정기점검">정기점검</option>
-	                </select>      
-                </div>
-                <div class="search-line">
+	                </select>     
+	                <label for="companyName">고객사 명</label><input type="text" class="inputSearch" id="companyName" name="companyName"> 
                 	<label for="flag">진행상황</label>
                 	<select id="request-flag" name="flag" class="selectSearch">
                         <option value="all">All</option>
@@ -36,10 +36,7 @@
                         <option value="N">종료</option>
                     </select>
                 </div>
-                <div class="search-line">
-                    <label for="companyName">고객사 명</label><input type="text" class="inputSearch" id="companyName" name="companyName">
-                </div>
-                <div class="search-line">
+                <div class="form-inline">
                 	<div>
 	                	<label for="dateOpt">날짜기준</label>
 	                	<select id="request-date-opt" name="dateOpt" class="selectSearch">
@@ -53,7 +50,7 @@
                     	<label for="toDate"></label><input class="dateSearch" type="date" id="toDate" name="toDate">
                     </div>
                 </div>
-                <div class="search-line">
+                <div class="form-inline">
                     <label for="suggest">요청내용</label><input type="text" class="inputSearch" id="suggest" name="suggest">
                     <button class="btn info" type="submit">검색</button>
                 </div>
@@ -114,19 +111,20 @@
 		</table>
 	</div>
 	
-	<div class="footer">
-		<div align="center"> 
-			<c:if test="${!empty requestList}">
-				<c:if test="${pagination.cb gt 1 }">
-					<a href="request?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+		<div class="footer">
+			<div align="center"> 
+				<c:if test="${!empty requestList}">
+					<c:if test="${pagination.cb gt 1 }">
+						<a href="request?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+					</c:if>
+					<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
+						<a href="request?cp=${num}">${num }</a>
+					</c:forEach>
+					<c:if test="${pagination.cb lt pagination.totalBlocks }">
+						<a href="request?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+					</c:if>
 				</c:if>
-				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-					<a href="request?cp=${num}">${num }</a>
-				</c:forEach>
-				<c:if test="${pagination.cb lt pagination.totalBlocks }">
-					<a href="request?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
-				</c:if>
-			</c:if>
+			</div>
 		</div>
 	</div>
 </div>

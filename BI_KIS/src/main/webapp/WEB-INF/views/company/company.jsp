@@ -16,22 +16,17 @@
 	</div>
 	
 	<div class="main">
+		<div class="container">
 	    <form method="post" action="company" id="searchForm">
             <fieldset>
                 <legend>검색라인</legend>
-                <div>
-                    <label for="title">고객사 명</label><input type="text" class="inputSearch" id="name" name="name">
+                <div class="form-inline">
+                    <label for="title">고객사 명</label><input type="text" id="name" name="name">
+                    <label for="customerName">담당자 명</label><input type="text" id="customerName" name="customerName">
                 </div>
-                <div>
-                    <label for="email">이메일</label><input type="text" class="inputSearch" id="email" name="email">
-                </div>
-                <div>
-                    <label for="customerName">담당자 명</label><input type="text" class="inputSearch" id="customerName" name="customerName">
-                </div>
-                <div>
-                    <div>
-                    	<label for="dept">부서</label><input type="text" class="inputSearch" id="dept" name="dept">
-                	</div>
+                <div class="form-inline">
+                    <label for="email">이메일</label><input type="text" id="email" name="email">
+                   	<label for="dept">부서</label><input type="text"  id="dept" name="dept">
                     <button class="btn info" type="submit">검색</button>
                 </div>
             </fieldset>
@@ -71,20 +66,21 @@
 			</tbody>
 		</table>
 	</div>
-	
-	<div class="footer">
-		<div align="center">
-			<c:if test="${!empty companyList}">
-				<c:if test="${pagination.cb gt 1 }">
-					<a href="company?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+		
+		<div class="footer">
+			<div align="center">
+				<c:if test="${!empty companyList}">
+					<c:if test="${pagination.cb gt 1 }">
+						<a href="company?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+					</c:if>
+					<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
+						<a href="company?cp=${num}">${num }</a>
+					</c:forEach>
+					<c:if test="${pagination.cb lt pagination.totalBlocks }">
+						<a href="company?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+					</c:if>
 				</c:if>
-				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-					<a href="company?cp=${num}">${num }</a>
-				</c:forEach>
-				<c:if test="${pagination.cb lt pagination.totalBlocks }">
-					<a href="company?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
-				</c:if>
-			</c:if>
+			</div>
 		</div>
 	</div>
 </div>

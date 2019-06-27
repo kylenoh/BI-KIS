@@ -76,13 +76,13 @@ function getSolutionDetail(no){
 					<div align="center">
 					<c:if test="${!empty solutions }">
 						<c:if test="${pagination.cb gt 1 }">
-							<a href="board?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+							<a href="solution?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 						</c:if>
 						<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
 							<a href="solution?cp=${num}">${num }</a>
 						</c:forEach>
 						<c:if test="${pagination.cb lt pagination.totalBlocks }">
-							<a href="board?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+							<a href="solution?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 						</c:if>
 					</c:if>
 					</div>

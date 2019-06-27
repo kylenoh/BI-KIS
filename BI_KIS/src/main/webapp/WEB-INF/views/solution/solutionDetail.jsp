@@ -9,14 +9,7 @@
 <script type="text/javascript" src="resources/js/common.js"></script>
 <title>Insert title here</title>
 </head>
-<script type="text/javascript">
-$(function(){
-	$("a[id='file']").on("click",function(e){
-		e.preventDefault();
-		downloadFile($(this));
-	});
-});
-</script>
+
 <body>
 <%@ include file="../sidenav.jsp" %>
 <div class="wrap">
@@ -71,6 +64,7 @@ $(function(){
 			    	<button type="submit" class="btn success">수정</button>
 			    	<button type="button" class="btn danger" onclick="SolutionDelete(${solution.NO })">삭제</button>
 			    	<button type="button" class="btn warning" onclick="getSolutionList()">목록</button>
+			    	<button type="button" class="btn warning" id="myBtn">URL 복사</button>
 			    </div>
 			  </div>
 			</form>
@@ -102,27 +96,79 @@ $(function(){
 	
 	<div class="footer">
 	</div>
+	
+	
+<!-- The Modal -->
+	<div id="myModal" class="modal">
+	
+	  <!-- Modal content -->
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <span class="close">&times;</span>
+	      <span>머리글</span>
+	    </div>
+	    <div class="modal-body">
+	      <input type="text" value="" id="myInput" class="popupInput"><button onclick="myFunction()">Copy text</button>
+	    </div>
+	    <div class="modal-footer">
+	      <span>바닥글</span>
+	    </div>
+	  </div>
+	
+	</div>
 </div>
 <script type="text/javascript">
+$(document).ready(function(e){
+	var href = $(location).attr('href');
+	$("#myInput").val(href);
+
+	$("#myBtn").click(function(){
+	  $("#myModal").css("display","block");
+	});
+	$(".close").click(function(){
+		$("#myModal").css("display","none");
+	});
+	if (e.target == $("#myModal")) {
+		$("#myModal").css("display","none");
+	  }
+});
+</script>
+<script type="text/javascript">
+$(function(){
+	$("a[id='file']").on("click",function(e){
+		e.preventDefault();
+		downloadFile($(this));
+	});
+});
 function replyDelete(replyNo,no){
 	location.href="solutionDeleteReply?replyNo="+replyNo+"&no="+no;
 }
-
 
 function SolutionDelete(no){
 	if (confirm("정말 삭제하시겠습니까?")) {
 		location.href = "solutionDelete?no="+no;
 	}
 }
+
 function getSolutionList(){
 	if (confirm("목록으로돌아가시겠습니까?")) {
 		location.href="solution";
 	}
 }
+
 function downloadFile(obj){
 	var idx = obj.parent().find("#IDX").val();
 	location.href = "solutionDownload?idx="+idx;
 }
+
+function myFunction() {
+	var href = $(location).attr('href');
+    var copyText = $("#myInput").select();
+	alert(href);
+    
+    document.execCommand("copy");
+	  alert("Copied the text: " + copyText.value);
+	}
 </script>
 </body>
 </html>
