@@ -35,16 +35,14 @@
                     </select>
                 </div>
                 <div class="search-line">
-                	<div>
-	                	<label for="dateOpt">날짜기준</label>
-	                	<select id="project-date-opt" name="dateOpt" class="selectSearch">
-	                        <option value="all"></option>
-	                        <option value="start">시작일</option>
-	                        <option value="end">종료일</option>
-	                    </select>
-	                    <label for="fromDate"></label><input type="date" id="search-fromDate" name="fromDate" class="dateSearch">    
-                    	<label for="toDate"></label><input type="date" id="search-toDate" name="toDate" class="dateSearch">
-                    </div>
+	              	<label for="dateOpt">날짜기준</label>
+	             	<select id="project-date-opt" name="dateOpt" class="selectSearch">
+	                    <option value="all"></option>
+	                    <option value="start">시작일</option>
+	                    <option value="end">종료일</option>
+	                </select>
+	                <label for="fromDate"></label><input type="date" id="search-fromDate" name="fromDate" class="dateSearch">    
+                   	<label for="toDate"></label><input type="date" id="search-toDate" name="toDate" class="dateSearch">
                 </div>
                 <div style="text-align:right;">
                 	<button class="btn info" type="submit">검색</button>
@@ -74,10 +72,15 @@
 								<td>${project.company.name }</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd" value="${project.startDate }"/>
 								  ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${project.endDate }"/></td>
-								<td>
-								<c:forEach var="emp" items="${project.emps }">
-									${emp.name}
-								</c:forEach>
+								<td class="emp-list">
+									<c:forEach var="emp" items="${project.emps }" varStatus="status">
+										<c:if test="${!status.last }">
+											${emp.name},
+										</c:if>
+										<c:if test="${status.last }">
+											${emp.name}
+										</c:if> 
+									</c:forEach>
 								</td>
 								<td>
 									<c:if test="${project.flag eq 'Y' }">

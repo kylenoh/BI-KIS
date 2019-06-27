@@ -117,6 +117,8 @@
 			A.auth_no = E.auth_no
 		and
 			emp_id = #{value}
+		and
+			emp_flag = 'Y'
 	</select>
 	<select id="getEmpByProNo" parameterType="int" resultType="Emp">
 		select

@@ -14,6 +14,10 @@ public class CategoryServiceImpl implements CategoryService{
 	@Autowired
 	CategoryDao categoryDao;
 	@Override
+	public List<Category> getAllCategoryList() {
+		return categoryDao.getAllCategoryList();
+	}
+	@Override
 	public Category getCategoryByCategoryNo(int categoryNo) {
 		return categoryDao.getCategoryByCategoryNo(categoryNo);
 	}

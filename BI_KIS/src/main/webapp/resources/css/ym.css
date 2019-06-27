@@ -69,7 +69,6 @@
 }
 .no-link {
 	text-decoration:none;
-	color:black;
 }
 .no-link:hover {
 	color:red;
@@ -108,7 +107,6 @@
 }
 .dateSearch{
 	width: 20%;
-    margin: 0px 20px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
