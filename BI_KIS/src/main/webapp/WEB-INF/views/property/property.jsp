@@ -42,7 +42,7 @@ function propertyDelete(no,flag){
 								<option value="N">사용</option>
 								<option value="Y">미 사용</option>
 							</select>
-							<button type="submit" class="btn info">검색</button>
+							<button type="submit" class="findBtn info">검색</button>
 						</div>
 					</div>
 			</fieldset>

@@ -31,6 +31,7 @@
 		<typeAlias type="com.northstar.bi.dto.Request" alias="Request"/>
 		<typeAlias type="com.northstar.bi.dto.ConPro" alias="ConPro"/>
 		<typeAlias type="com.northstar.bi.dto.Auth" alias="Auth"/>
+		<typeAlias type="com.northstar.bi.dto.AuthCriteria" alias="AuthCriteria"/>
 	</typeAliases>
 	
 	<mappers>
@@ -40,6 +41,7 @@
 		<mapper resource="META-INF/mybatis/mappers/board.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/file.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/property.xml"/>
+		<mapper resource="META-INF/mybatis/mappers/auth.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/solution.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/category.xml"/>
 		<mapper resource="META-INF/mybatis/mappers/request.xml"/>

@@ -15,47 +15,46 @@
 		<%@ include file="../emp-interface.jsp" %>
 	</div>
 	<div class="main">
-	    <form method="post" action="pjtadd" id="pjtForm">
-            <fieldset>
-                <legend>프로젝트 등록</legend>
-                <div id="addForm">
-	                <div>
-	                    <label for="title">프로젝트 명</label><input type="text" id="title" name="title">
+		<div class="container">
+		    <form method="post" action="pjtadd" id="pjtForm">
+	                <div id="addForm">
+		                <div>
+		                    <label for="title">프로젝트 명</label><input type="text"  name="title" class="inputTitle">
+		                </div>
+		                <div>
+		                    <label for="company">고객사 명</label>
+		                    <select name="companyNo" class="inputTitle">
+		                        <option value="all"></option>
+		                        <c:forEach var="comList" items="${companyList }">
+		                        	<option value="${comList.no }">${comList.name }</option>
+		                        </c:forEach>
+	                    	</select>    
+		                </div>
+		                <div class="form-inline">
+		                    <label for="startDate">시작일</label><input type="date" id="startDate" name="startDate">    
+		                    <label for="endDate">종료일</label><input type="date" id="endDate" name="endDate">
+		                </div>
+		                <div id="emp-area">
+		                	<label>담당자</label>
+		                	<select id="emp" class="inputTitle">
+		                		<option></option>
+		                		<c:forEach var="emp" items="${empList }">
+		                			<option id="emp-id-${emp.id }" value="${emp.id }">${emp.name }</option>
+		                		</c:forEach>
+		                	</select>
+		                </div>
+		                <div>
+		                    <label for="content">내용</label>
+		                    <textarea class="textContent" name="content"></textarea>
+		                </div>
+		                <div>
+		                	<label for="remark">비고</label>
+		                	<textarea class="textContent" name="remark"></textarea>
+		                </div>
+		                <button class="btn success" type="submit">등록</button>
 	                </div>
-	                <div>
-	                    <label for="company">고객사 명</label>
-	                    <select id="company" name="companyNo">
-	                        <option value="all"></option>
-	                        <c:forEach var="comList" items="${companyList }">
-	                        	<option value="${comList.no }">${comList.name }</option>
-	                        </c:forEach>
-                    	</select>    
-	                </div>
-	                <div id="PjtDate">
-	                    <label for="startDate">시작일</label><input type="date" id="startDate" name="startDate">    
-	                    <label for="endDate">종료일</label><input type="date" id="endDate" name="endDate">
-	                </div>
-	                <div id="emp-area">
-	                	<label>담당자</label>
-	                	<select id="emp">
-	                		<option></option>
-	                		<c:forEach var="emp" items="${empList }">
-	                			<option id="emp-id-${emp.id }" value="${emp.id }">${emp.name }</option>
-	                		</c:forEach>
-	                	</select>
-	                </div>
-	                <div>
-	                    <label for="content">내용</label>
-	                    <textarea id="content" name="content"></textarea>
-	                </div>
-	                <div>
-	                	<label for="remark">비고</label>
-	                	<textarea id="remark" name="remark"></textarea>
-	                </div>
-	                <button class="ym-btn" type="submit">등록</button>
-                </div>
-            </fieldset>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 	

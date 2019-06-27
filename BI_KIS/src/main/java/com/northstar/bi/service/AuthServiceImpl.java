@@ -13,10 +13,6 @@ import com.northstar.bi.dto.AuthCriteria;
 public class AuthServiceImpl implements AuthService{
 
 	@Autowired AuthDao authDao;
-	@Override
-	public void Authregister(Auth auth) {
-		authDao.Authregister(auth);
-	}
 	
 	@Override
 	public List<Auth> getAuthList(AuthCriteria criteria) {
@@ -26,19 +22,6 @@ public class AuthServiceImpl implements AuthService{
 	@Override
 	public int getTotalRows(AuthCriteria criteria) {
 		return authDao.getTotalRows(criteria);
-	}
-	
-	@Override
-	public Auth getAuthByNo(int no) {
-		return authDao.getAuthByNo(no);
-	}
-	@Override
-	public void AuthModify(Auth auth) {
-		authDao.AuthModify(auth);
-	}
-	@Override
-	public void AuthDelete(Auth auth) {
-		authDao.AuthDelete(auth);
 	}
 	
 }

@@ -22,8 +22,6 @@
                 <legend>검색라인</legend>
                 <div>
                     <label for="name">사원 명</label><input type="text" class="inputSearch" id="name" name="name">
-                </div>
-                <div>
                     <button class="btn info" type="submit">검색</button>
                 </div>
             </fieldset>
@@ -41,7 +39,6 @@
 					<th>연락처</th>
 					<th>이메일</th>
 					<th>권한</th>
-					<th>수정</th>
 					<th>사용여부</th>
 				</tr>
 			</thead>
@@ -61,8 +58,7 @@
 							</select>
 							<input type="hidden" id="bef-auth-${emp.id }" value="${emp.auth.no }">
 						</td>
-						<td><button class="btn" type="button" id="btn-modify-emp-${emp.id }" value="${emp.id }">수정</button></td>
-						<td><span>${emp.flag eq 'Y' ? '사용중' : '사용안함'}</span><button class="btn" type="button" id="btn-delete-emp-${emp.id }" value="${emp.id }">${emp.flag eq 'Y' ? '미사용' : '사용' }</button></td>
+						<td><span>${emp.flag eq 'Y' ? '사용중' : '사용안함'}</span></td>
 					</tr>
 				</c:forEach>
 			</tbody>
