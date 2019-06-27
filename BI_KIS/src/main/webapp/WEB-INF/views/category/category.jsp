@@ -18,9 +18,18 @@
 						<div>
 							${category.CATE_DIVISION_NAME }
 						</div>
-						<div>
-							${category.CATE_SECTION_NAME }
-						</div>
+						<c:forEach var="categoryAll" items="${categoryAllList }">
+							<c:if test="${category.CATE_DIVISION_NAME == categoryAll.CATE_DIVISION_NAME }">
+								<div style="text-indent:20px;">
+									${categoryAll.CATE_SECTION_NAME}
+								</div>
+							</c:if>
+							<c:if test="${category.CATE_DIVISION_NAME == categoryALL.CATE_DIVISION_NAME && categoryALL.CATE_DIVISION_NAME == '솔루션' && category.CATE_NO - 1 == categoryAll.CATE_NO }">
+								<div>
+								성공
+								</div>
+							</c:if>
+						</c:forEach>
 					</c:forEach>
 				</div>
 			</div>

@@ -1,6 +1,8 @@
 package com.northstar.bi.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -30,9 +32,9 @@ public class CategoryController {
 			category = categoryService.getCategoryByCategoryNo(cateNo);
 		}
 		session.setAttribute("HEADER_VALUE", category);
-		
-		List<Category> categoryList = categoryService.getAllCategoryList();
-		
+		List<Category> categoryAllList = categoryService.getAllCategoryList();
+		List<Category> categoryList = categoryService.getCategoryList();
+		model.addAttribute("categoryAllList",categoryAllList);
 		model.addAttribute("categoryList",categoryList);
 		return "category/category";
 	}

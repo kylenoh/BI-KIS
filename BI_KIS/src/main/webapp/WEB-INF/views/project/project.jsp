@@ -31,20 +31,6 @@
                         <option value="N">종료</option>
                     </select>
                 </div>
-<<<<<<< HEAD
-                <div class="search-line">
-	              	<label for="dateOpt">날짜기준</label>
-	             	<select id="project-date-opt" name="dateOpt" class="selectSearch">
-	                    <option value="all"></option>
-	                    <option value="start">시작일</option>
-	                    <option value="end">종료일</option>
-	                </select>
-	                <label for="fromDate"></label><input type="date" id="search-fromDate" name="fromDate" class="dateSearch">    
-                   	<label for="toDate"></label><input type="date" id="search-toDate" name="toDate" class="dateSearch">
-                </div>
-                <div style="text-align:right;">
-                	<button class="btn info" type="submit">검색</button>
-=======
                 <div class="form-inline">
 	                	<label for="dateOpt">날짜기준</label>
 	                	<select id="project-date-opt" name="dateOpt" class="selectSearch">
@@ -55,7 +41,6 @@
 	                    <label for="fromDate"></label><input type="date" id="search-fromDate" name="fromDate" class="dateSearch">    
                     	<label for="toDate"></label><input type="date" id="search-toDate" name="toDate" class="dateSearch">
 	                	<button class="btn info" type="submit">검색</button>
->>>>>>> branch 'master' of https://github.com/kylenoh/BI-KIS.git
                 </div>
             </fieldset>
 		</form>
