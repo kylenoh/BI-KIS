@@ -24,38 +24,40 @@ function propertyDelete(no,flag){
 <div class="wrap">
 		<%@include file="../emp-interface.jsp" %>
 	<div class="main">
-		<table border="1" style="border-collapse: collapse;">
-			<colgroup>
-				<col width="10%">
-				<col width="20%">
-				<col width="*">
-			</colgroup>
-			<thead>
-				<tr>
-					<th scope="col">권한번호</th>
-					<th scope="col">권한 명</th>
-					<th scope="col">권한 내용</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:choose>
-					<c:when test="${fn:length(auths)>0 }">
-						<c:forEach var="auths" items="${auths }">
-							<tr>
-								<td>${auths.no }</td>
-								<td>${auths.name }</td>
-								<td>${auths.content }</td>
-							</tr>
-						</c:forEach>
-					</c:when>
-						<c:otherwise>
-							<tr>
-								<td colspan="3">조회된 결과가 없습니다.</td>
-							</tr>					
-						</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
+		<div class="container">
+			<table border="1" style="border-collapse: collapse;">
+				<colgroup>
+					<col width="10%">
+					<col width="20%">
+					<col width="*">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col">권한번호</th>
+						<th scope="col">권한 명</th>
+						<th scope="col">권한 내용</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:choose>
+						<c:when test="${fn:length(auths)>0 }">
+							<c:forEach var="auths" items="${auths }">
+								<tr>
+									<td>${auths.no }</td>
+									<td>${auths.name }</td>
+									<td>${auths.content }</td>
+								</tr>
+							</c:forEach>
+						</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="3">조회된 결과가 없습니다.</td>
+								</tr>					
+							</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	
 	<div class="footer">

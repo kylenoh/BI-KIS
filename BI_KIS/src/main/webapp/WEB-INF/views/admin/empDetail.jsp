@@ -37,8 +37,8 @@
 	        </div>
 	        <div style="float:right;">
 		       	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq emp.id}">
-			      	<button type="button" class="btn-modify-emp btn success" value="${emp.id }">수정</button>
-			       	<button type="button" class="btn-del-emp btn danger" value="${emp.id }">삭제</button>
+			      	<button type="button" id="btn-modify-emp" class=" btn success" value="${emp.id }">수정</button>
+			       	<button type="button" id="btn-del-emp"class="btn danger" value="${emp.id }">삭제</button>
 		       	</c:if>
 		       	<button class="btn warning" type="button" onclick="location.href='${HEADER_VALUE.CATE_VALUE}'">목록</button>
 		    </div>
@@ -48,13 +48,13 @@
 </body>
 <script type="text/javascript">
 	$(function(){
-		$('.btn-del-emp').click(function(){
+		$('#btn-del-emp').click(function(){
 			var empId = $(this).val();
 			if (confirm("정말 삭제하시겠습니까?")) {
 				location.href="empDelete?empId=" + empId;
 			}
 		});
-		$('.btn-modify-emp').click(function(){
+		$('#btn-modify-emp').click(function(){
 			var empId = $(this).val();
 			if (confirm("수정 페이지로 이동하시겠습니까?")){
 				location.href="empModify?empId=" + empId;

@@ -7,9 +7,9 @@
 
 	<insert id="addEmp" parameterType="Emp">
 		insert into	bi_emp
-			(emp_id, emp_pass, emp_name, emp_rank, emp_tel, emp_addr, emp_email)
+			(emp_id, auth_no, emp_pass, emp_name, emp_rank, emp_tel, emp_addr, emp_email)
 		values
-			(#{id}, #{password}, #{name}, #{rank}, #{tel}, #{addr}, #{email})
+			(#{id}, 2, #{password}, #{name}, #{rank}, #{tel}, #{addr}, #{email})
 	</insert>
 	<update id="updateEmp" parameterType="Emp">
 		update

@@ -9,13 +9,15 @@ public class Property {
 	private String REMARK;
 	private String BUY_DATE;
 	private String FLAG;
+	
+	private String EMP_NAME;
 
 	public Property() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Property(int nO, String iD, String pROP_NAME, String cODE, String pROP_DATE, String rEMARK, String bUY_DATE,
-			String fLAG) {
+			String fLAG, String eMP_NAME) {
 		super();
 		NO = nO;
 		ID = iD;
@@ -25,6 +27,7 @@ public class Property {
 		REMARK = rEMARK;
 		BUY_DATE = bUY_DATE;
 		FLAG = fLAG;
+		EMP_NAME = eMP_NAME;
 	}
 
 	public int getNO() {
@@ -91,6 +94,15 @@ public class Property {
 		FLAG = fLAG;
 	}
 
+	public String getEMP_NAME() {
+		return EMP_NAME;
+	}
+
+	public void setEMP_NAME(String eMP_NAME) {
+		EMP_NAME = eMP_NAME;
+	}
+
+	
 	
 
 }

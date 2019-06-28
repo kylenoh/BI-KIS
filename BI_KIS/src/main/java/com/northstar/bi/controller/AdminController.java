@@ -16,6 +16,7 @@ import com.northstar.bi.dto.Auth;
 import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Emp;
+import com.northstar.bi.dto.Emps;
 import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.EmpService;
@@ -137,5 +138,11 @@ public class AdminController {
 		
 		empService.addEmp(emp);
 		return "redirect:/empAdmin";
+	}
+	
+	@RequestMapping(value = "/IdCheck", method = RequestMethod.GET,produces = "application/json; charset=utf-8")
+	public @ResponseBody Emps idCheck(@RequestParam(name="id")String empId) {
+		System.out.println(empId);
+		return empService.idCheck(empId);
 	}
 }
