@@ -6,6 +6,8 @@ import com.northstar.bi.dto.Category;
 
 public interface CategoryDao {
 
+	Category getLastSectionLevel(String divisionName);
+	void addCategory(Category category);
 	Category getCategoryByCategoryNo(int categoryNo);
 	List<Category> getAllCategoryList();
 	List<Category> getCategoryList();
