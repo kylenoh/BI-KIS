@@ -5,6 +5,7 @@ import java.util.List;
 import com.northstar.bi.dto.Auth;
 import com.northstar.bi.dto.Criteria;
 import com.northstar.bi.dto.Emp;
+import com.northstar.bi.dto.Emps;
 
 public interface EmpService {
 
@@ -15,4 +16,5 @@ public interface EmpService {
 	List<Emp> getEmpByCriteria(Criteria criteria);
 	List<Emp> getEmpList();
 	Emp getEmpById(String emp);
+	Emps idCheck(String empId);
 }

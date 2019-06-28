@@ -20,17 +20,22 @@
 		  <div class="container">
 		  	<div class="container-header">
 		  		<input type="hidden" name="NO" value="${prop.NO }">
-			    <label for="uploadtitle"><b>품명</b></label>
+			    <label><b>품명</b></label>
 			    <input type="text" name="PROP_NAME" class="inputTitle" value="${prop.PROP_NAME }" required>
    			    
-   			    <label for="uploadtitle"><b>자산번호</b></label>
+   			    <label><b>자산번호</b></label>
 			    <input type="text" name="CODE" class="inputTitle" value="${prop.CODE }" required>
    			    
-   			    <label for="uploadtitle"><b>구입일자</b></label>
+   			    <label><b>구입일자</b></label>
 			    <input type="date" name="BUY_DATE" class="inputTitle" value="${prop.BUY_DATE }" required>
 			    
-			    <label for="uploadtitle"><b>사용자</b></label>
-			    <input type="text" name="ID" value="${prop.ID }" class="inputTitle">
+			    <label><b>사용자</b></label>
+			    <select id="emp" name="ID" class="inputTitle" >
+		                		<option></option>
+		                		<c:forEach var="emp" items="${empList }">
+		                			<option id="emp-id-${emp.id }" value="${emp.id }">${emp.name }</option>
+		                		</c:forEach>
+		                	</select>
 			    
 			    <label for="uploadtitle"><b>지급일자</b></label>
 			    <input type="date" name="PROP_DATE" value="${prop.PROP_DATE }" class="inputTitle">
@@ -42,6 +47,7 @@
 			</div>
 			<div class="container-footer">
 		    	<button type="submit" class="btn success">수정</button>
+		    	<button type="button" class="btn danger" onclick="propertyDelete(${prop.NO })">삭제</button>
 		    	<button type="button" class="btn warning" onclick="getList()">목록으로</button>
 		    </div>
 		  </div>
@@ -57,26 +63,11 @@ function getList(){
 		location.href="property";
 	}
 }
-function deleteFile(obj){
-	obj.parent().remove();
+function propertyDelete(no){
+	if (confirm("삭제 하시겠습니까?")) {
+		location.href="propertyDelete?no="+no;
+	}
 }
-</script>
-<script type="text/javascript">
-var file_count=1;
-$(function(){
-
-	$("#addFile").on("click",function(e){
-		e.preventDefault();
-		var str = "<p><input type='file' name='file_"+(file_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
-		$("#fileDiv").append(str);	
-		$("a[name='delete']").on("click", function(e){
-			e.preventDefault();
-			deleteFile($(this));
-		});
-	});
-	
-
-});
 </script>
 </body>
 </html>

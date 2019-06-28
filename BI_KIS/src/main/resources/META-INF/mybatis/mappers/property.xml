@@ -14,26 +14,26 @@
 		select 
 			count(*)
 		from
-			BI_PROP
-		<where>
+			BI_PROP PROP,BI_EMP EMP
+		where
+			EMP.EMP_ID(+) = PROP.EMP_ID
 			<if test="EMP_ID != null &amp;&amp; EMP_ID != ''">
-				EMP_ID like '%' || #{EMP_ID} || '%'
+				and EMP.EMP_NAME like '%' || #{EMP_ID} || '%'
 			</if>
 			<if test="PROP_NO != null &amp;&amp; PROP_NO != ''">
-				and PROP_NO like '%' || #{PROP_NO} || '%'
+				and PROP.PROP_NO like '%' || #{PROP_NO} || '%'
 			</if>
 			<if test="PROP_NAME != null &amp;&amp; PROP_NAME != ''">
-				and PROP_NAME like '%' || #{PROP_NAME} || '%'
+				and PROP.PROP_NAME like '%' || #{PROP_NAME} || '%'
 			</if>
 			<if test="PROP_FLAG != null &amp;&amp; PROP_FLAG != '' &amp;&amp; PROP_FLAG !='ALL'">
-				and PROP_FLAG = #{PROP_FLAG}
+				and PROP.PROP_FLAG = #{PROP_FLAG}
 			</if>
-		</where>
 	</select>
 	<select id="getPropertyList" parameterType="PropertyCriteria" resultType="Property">
 	select 
 				PROP_NO as NO,
-				EMP_ID as ID,
+				EMP_NAME,
 				PROP_NAME,
 				PROP_CODE as CODE,
 				PROP_DATE,
@@ -43,36 +43,36 @@
 		from 
 			(
 				select
-					PROP_NO,
-					EMP_ID,
-					PROP_NAME,
-					PROP_CODE,
-					PROP_DATE,
-					PROP_REMARK,
-					PROP_BUY_DATE,
-					PROP_FLAG,
+					PROP.PROP_NO,
+					EMP.EMP_NAME,
+					PROP.PROP_NAME,
+					PROP.PROP_CODE,
+					PROP.PROP_DATE,
+					PROP.PROP_REMARK,
+					PROP.PROP_BUY_DATE,
+					PROP.PROP_FLAG,
 					row_number() over (order by PROP_NO desc) rn
 				from
-					BI_PROP
-						<where>
+					BI_PROP PROP, BI_EMP EMP
+				where
+					EMP.EMP_ID(+) = PROP.EMP_ID
 							<if test="EMP_ID != null &amp;&amp; EMP_ID != ''">
-								EMP_ID like '%' || #{EMP_ID} || '%'
+								and EMP.EMP_NAME like '%' || #{EMP_ID} || '%'
 							</if>
 							<if test="PROP_NO != null &amp;&amp; PROP_NO != ''">
-								and PROP_NO like '%' || #{PROP_NO} || '%'
+								and PROP.PROP_NO like '%' || #{PROP_NO} || '%'
 							</if>
 							<if test="PROP_NAME != null &amp;&amp; PROP_NAME != ''">
-								and PROP_NAME like '%' || #{PROP_NAME} || '%'
+								and PROP.PROP_NAME like '%' || #{PROP_NAME} || '%'
 							</if>
 							<if test="PROP_FLAG != null &amp;&amp; PROP_FLAG != '' &amp;&amp; PROP_FLAG !='ALL'">
-								and PROP_FLAG = #{PROP_FLAG}
+								and PROP.PROP_FLAG = #{PROP_FLAG}
 							</if>
-						</where>
 			)
 		where
 			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}
 		order by
-			PROP_DATE desc	
+			PROP_NO desc	
 	</select>
 	<select id="getPropertyByNo" parameterType="int" resultType="Property">
 		select
@@ -103,10 +103,8 @@
 			PROP_NO = #{NO}
 	</update>
 	<update id="Delete" parameterType="Property">
-		update
+		delete from
 			BI_PROP
-		set	
-			PROP_FLAG = #{FLAG}
 		where
 			PROP_NO = #{NO}
 	</update>

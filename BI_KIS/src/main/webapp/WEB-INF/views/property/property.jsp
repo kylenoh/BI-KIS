@@ -24,6 +24,7 @@ function propertyDelete(no,flag){
 <div class="wrap">
 		<%@include file="../emp-interface.jsp" %>
 	<div class="main">
+		<div class="container">
 		<form action="property">
 			<fieldset>
 				<legend>검색라인</legend>
@@ -81,11 +82,20 @@ function propertyDelete(no,flag){
 								<td>${props.PROP_NAME }</td>
 								<td>${props.CODE }</td>
 								<td>${props.BUY_DATE }</td>
-								<td>${props.ID } </td>
+								<td>${props.EMP_NAME } </td>
 								<td>${props.PROP_DATE }</td>
 								<td>${props.REMARK }</td>
+								<td>
+									<c:choose>
+										<c:when test="${props.EMP_NAME != null }">
+											사용
+										</c:when>
+										<c:otherwise>
+											미사용
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td><button onclick="propertyModify(${props.NO })">수정</button></td>
-								<td><button onclick="propertyDelete(${props.NO },'${props.FLAG }')" value="${props.FLAG}">${props.FLAG eq 'N' ? '사용' : '미사용'}</button></td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -113,6 +123,7 @@ function propertyDelete(no,flag){
 				</c:if>
 			</c:if>
 		</div>
+	</div>
 	</div>
 </div>
 	

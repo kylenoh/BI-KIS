@@ -24,10 +24,15 @@
 			    <input type="text" name="CODE" class="inputTitle" required>
    			    
    			    <label for="BUY_DATE"><b>구입일자</b></label>
-			    <input type="date" name="BUY_DATE" class="inputTitle">
+			    <input type="date" name="BUY_DATE" class="inputTitle" value="${y}-${m}-${d}">
 			    
 			    <label for="ID"><b>사용자</b></label>
-			    <input type="text" name="ID" class="inputTitle">
+			    			<select id="emp" name="ID" class="inputTitle">
+		                		<option></option>
+		                		<c:forEach var="emp" items="${empList }">
+		                			<option id="emp-id-${emp.id }" value="${emp.id }">${emp.name }</option>
+		                		</c:forEach>
+		                	</select>
 			    
 			    <label for="PROP_DATE"><b>지급일자</b></label>
 			    <input type="date" name="PROP_DATE" class="inputTitle">
