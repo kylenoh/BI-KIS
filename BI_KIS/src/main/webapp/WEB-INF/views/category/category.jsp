@@ -40,12 +40,12 @@
 	$(function(){
 		var categoryArea = $('#category-솔루션');
 		var btnRow = "<div>";
-		btnRow += "<button id='add-category-btn'>+</button>";
+		btnRow += "<button type='button' id='add-category-btn'>+</button>";
 		btnRow += "</div>";
 		btnRow += "<input type='hidden' name='divisionName' value='솔루션'>";
 		categoryArea.children().append(btnRow);
 		
-		$('[id^=category-]').on('click','#add-category-btn',function(){
+		$('[id^=category-form]').on('click','#add-category-btn',function(){
 			var row = "<div>";
 			row += "<input tpye='text' name='addCategoryName'>";
 			row += "<a class='add-category-info close' href='javascript:void(0)'> x </a>";

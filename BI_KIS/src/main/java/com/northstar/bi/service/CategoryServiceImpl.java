@@ -17,9 +17,13 @@ public class CategoryServiceImpl implements CategoryService{
 	public void addCategory(List<String> categoryNameList, String divisionName) {
 		for(String categoryName : categoryNameList) {
 			Category category = categoryDao.getLastSectionLevel(divisionName);
-			System.out.println("/////////////////////" + divisionName + category.getCATE_SECTION_NAME());
 			category.setCATE_SECTION_NAME(categoryName);
-			category.setCATE_SECTION_LEVEL(category.getCATE_SECTION_LEVEL() + 1);
+			if(category.getCATE_SECTION_LEVEL() != 1) {
+				category.setCATE_SECTION_LEVEL(category.getCATE_SECTION_LEVEL() + 1);	
+			}
+			if(category.getCATE_SECTION_LEVEL() == 1) {
+				category.setCATE_SECTION_LEVEL(category.getCATE_SECTION_LEVEL());
+			}
 			categoryDao.addCategory(category);
 		}
 	}
