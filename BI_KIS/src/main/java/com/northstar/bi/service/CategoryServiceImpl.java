@@ -14,17 +14,39 @@ public class CategoryServiceImpl implements CategoryService{
 	@Autowired
 	CategoryDao categoryDao;
 	@Override
-	public void addCategory(List<String> categoryNameList, String divisionName) {
-		for(String categoryName : categoryNameList) {
-			Category category = categoryDao.getLastSectionLevel(divisionName);
-			category.setCATE_SECTION_NAME(categoryName);
-			if(category.getCATE_SECTION_LEVEL() != 1) {
-				category.setCATE_SECTION_LEVEL(category.getCATE_SECTION_LEVEL() + 1);	
+	public void categoryEvent(Category category) {
+		//add
+		if(category.getADD_SECTION_NAME_LIST() != null) {
+			for(String categoryName : category.getADD_SECTION_NAME_LIST()) {
+				Category addCategory = categoryDao.getLastSectionLevel(category.getCATE_DIVISION_NAME());
+				addCategory.setCATE_SECTION_NAME(categoryName);
+				if(addCategory.getCATE_SECTION_LEVEL() != 1) {
+					addCategory.setCATE_SECTION_LEVEL(addCategory.getCATE_SECTION_LEVEL() + 1);	
+				}
+				if(addCategory.getCATE_SECTION_LEVEL() == 1) {
+					addCategory.setCATE_SECTION_LEVEL(addCategory.getCATE_SECTION_LEVEL());
+				}
+				categoryDao.addCategory(addCategory);
 			}
-			if(category.getCATE_SECTION_LEVEL() == 1) {
-				category.setCATE_SECTION_LEVEL(category.getCATE_SECTION_LEVEL());
+		}
+		//update
+		if(category.getCATE_NO_LIST() != null) {
+			for(int categoryNo : category.getCATE_NO_LIST()) {
+				for(String categorySectionName : category.getSECTION_NAME_LIST()) {
+					Category updateCategory = categoryDao.getCategoryByCategoryNo(categoryNo);
+					updateCategory.setCATE_SECTION_NAME(categorySectionName);
+					categoryDao.modifyCategory(updateCategory);
+					break;
+				}
 			}
-			categoryDao.addCategory(category);
+		}
+		//delete
+		if(category.getDEL_CATE_NO_LIST() != null) {
+			for(int categoryNo : category.getDEL_CATE_NO_LIST()) {
+				Category updatecategory = categoryDao.getCategoryByCategoryNo(categoryNo);
+				categoryDao.deleteCategory(categoryNo);
+				categoryDao.updateSectionLevel(updatecategory);
+			}
 		}
 	}
 	@Override

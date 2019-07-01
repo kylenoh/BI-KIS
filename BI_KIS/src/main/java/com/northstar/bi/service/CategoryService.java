@@ -6,7 +6,7 @@ import com.northstar.bi.dto.Category;
 
 public interface CategoryService {
 
-	void addCategory(List<String> categoryNameList, String divisionName);
+	void categoryEvent(Category category);
 	Category getCategoryByCategoryNo(int categoryNo);
 	List<Category> getAllCategoryList();
 	List<Category> getCategoryList();

@@ -111,4 +111,9 @@
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+.close-cate {
+	color:#333;
+	text-decoration:none;
+	font-weight: bold;
+}
 }

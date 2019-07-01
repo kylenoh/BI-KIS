@@ -4,6 +4,36 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.northstar.bi.dao.CategoryDao">
+	<update id="updateSectionLevel" parameterType="Category">
+		update
+			bi_category
+		set
+			CATE_SECTION_LEVEL = CATE_SECTION_LEVEL - 1
+		where
+			CATE_SECTION_LEVEL >= #{CATE_SECTION_LEVEL}
+		and
+			CATE_DIVISION_NAME = #{CATE_DIVISION_NAME}
+		
+	</update>
+	<delete id="deleteCategory" parameterType="int">
+		delete
+			from bi_category
+		where
+			CATE_NO = #{value}
+	</delete>
+	<update id="modifyCategory" parameterType="Category">
+		update
+			bi_category
+		set
+			CATE_DIVISION_NAME		=	#{CATE_DIVISION_NAME},
+			CATE_DIVISION_LEVEL		= 	#{CATE_DIVISION_LEVEL},
+			CATE_SECTION_NAME		=	#{CATE_SECTION_NAME},
+			CATE_SECTION_LEVEL		=	#{CATE_SECTION_LEVEL},
+			CATE_VALUE				=	#{CATE_VALUE},
+			CATE_AUTH_NO			=	#{CATE_AUTH_NO}
+		where
+			CATE_NO = #{CATE_NO}
+	</update>
 	<insert id="addCategory" parameterType="Category">
 		insert into bi_category
 			(CATE_NO, CATE_DIVISION_NAME, CATE_DIVISION_LEVEL, CATE_SECTION_NAME, CATE_SECTION_LEVEL, CATE_VALUE, CATE_AUTH_NO)

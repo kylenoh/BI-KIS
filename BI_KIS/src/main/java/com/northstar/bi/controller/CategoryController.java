@@ -37,11 +37,10 @@ public class CategoryController {
 		model.addAttribute("categoryList",categoryList);
 		return "category/category";
 	}
-	@RequestMapping(value="addCategory", method=RequestMethod.POST)
-	public String addCategory(@RequestParam("addCategoryName")List<String> categoryName,
-								@RequestParam("divisionName")String divisionName) {
+	@RequestMapping(value="categoryEvent", method=RequestMethod.POST)
+	public String categoryEvent(Category category) {
 		
-		categoryService.addCategory(categoryName,divisionName);
+		categoryService.categoryEvent(category);
 		return "redirect:/category";
 	}
 }

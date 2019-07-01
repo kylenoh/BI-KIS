@@ -1,5 +1,7 @@
 package com.northstar.bi.dto;
 
+import java.util.List;
+
 public class Category {
 
 	private int CATE_NO;
@@ -9,7 +11,11 @@ public class Category {
 	private int CATE_SECTION_LEVEL;
 	private String CATE_VALUE;
 	private int CATE_AUTH_NO;
-	
+
+	private List<String> SECTION_NAME_LIST;
+	private List<Integer> CATE_NO_LIST;
+	private List<String> ADD_SECTION_NAME_LIST;
+	private List<Integer> DEL_CATE_NO_LIST;
 	public Category() {}
 
 	public int getCATE_NO() {
@@ -66,6 +72,38 @@ public class Category {
 
 	public void setCATE_AUTH_NO(int cATE_AUTH_NO) {
 		CATE_AUTH_NO = cATE_AUTH_NO;
+	}
+
+	public List<String> getSECTION_NAME_LIST() {
+		return SECTION_NAME_LIST;
+	}
+
+	public void setSECTION_NAME_LIST(List<String> sECTION_NAME_LIST) {
+		SECTION_NAME_LIST = sECTION_NAME_LIST;
+	}
+
+	public List<Integer> getCATE_NO_LIST() {
+		return CATE_NO_LIST;
+	}
+
+	public void setCATE_NO_LIST(List<Integer> cATE_NO_LIST) {
+		CATE_NO_LIST = cATE_NO_LIST;
+	}
+
+	public List<String> getADD_SECTION_NAME_LIST() {
+		return ADD_SECTION_NAME_LIST;
+	}
+
+	public void setADD_SECTION_NAME_LIST(List<String> aDD_SECTION_NAME_LIST) {
+		ADD_SECTION_NAME_LIST = aDD_SECTION_NAME_LIST;
+	}
+
+	public List<Integer> getDEL_CATE_NO_LIST() {
+		return DEL_CATE_NO_LIST;
+	}
+
+	public void setDEL_CATE_NO_LIST(List<Integer> dEL_CATE_NO_LIST) {
+		DEL_CATE_NO_LIST = dEL_CATE_NO_LIST;
 	}
 
 	
