@@ -18,66 +18,52 @@
 		<collection property="emps" column="pjt_no" javaType="java.util.ArrayList" ofType="int" select="com.northstar.bi.dao.EmpDao.getEmpByProNo"/>
 	</resultMap>
 	<delete id="deleteEmpProByProjectNo" parameterType="int">
-		delete
-			from
-				bi_con_pro
-			where
-				pjt_no = #{value}
+		delete	from	bi_con_pro
+			where		pjt_no = #{value}
 	</delete>
 	<select id="getProjectByCompanyNo" parameterType="int" resultMap="getProjectResultMap">
-		select
-			pjt_no,
-			com_no,
-			pjt_title,
-			pjt_start_date,
-			pjt_end_date,
-			pjt_content,
-			pjt_remark,
-			pjt_flag,
-			pjt_msg,
-			pjt_registrant
-		from
-			bi_project
-		where
-			com_no = #{value}
+		select	pjt_no,
+				com_no,
+				pjt_title,
+				pjt_start_date,
+				pjt_end_date,
+				pjt_content,
+				pjt_remark,
+				pjt_flag,
+				pjt_msg,
+				pjt_registrant
+		from	bi_project
+		where	com_no = #{value}
 	</select>
 	<delete id="deleteEmpPro" parameterType="Conpro">
-		delete
-			from
-				bi_con_pro
-			where
-				pjt_no = #{pjtNo}
-			and
-				emp_id = #{empId}
+		delete	from	bi_con_pro
+			where		pjt_no = #{pjtNo}
+			and			emp_id = #{empId}
 	</delete>
 	<insert id="addEmpPro" parameterType="ConPro">
 		insert into bi_con_pro
-			(emp_id, pjt_no)
-		values
-			(#{empId}, #{pjtNo})
+				   (emp_id,
+				    pjt_no)
+		values     (#{empId},
+					#{pjtNo})
 	</insert>
 	<select id="getProjectList" resultMap="getProjectResultMap">
-		select
-			pjt_no,
-			com_no,
-			pjt_title,
-			pjt_start_date,
-			pjt_end_date,
-			pjt_content,
-			pjt_remark,
-			pjt_flag,
-			pjt_msg,
-			pjt_registrant
-		from
-			bi_project
+		select	pjt_no,
+				com_no,
+				pjt_title,
+				pjt_start_date,
+				pjt_end_date,
+				pjt_content,
+				pjt_remark,
+				pjt_flag,
+				pjt_msg,
+				pjt_registrant
+		from	bi_project
 	</select>
 	<select id="getProjectCount" parameterType="Criteria" resultType="int">
-		select
-			count(*)
-		from
-			bi_project P, bi_company C
-		where
-			P.com_no = C.com_no
+		select	count(*)
+		from	bi_project P, bi_company C
+		where	P.com_no = C.com_no
 			<if test="title != null &amp;&amp; title != ''" >
 				and P.pjt_title like '%' || #{title} || '%'
 			</if>
@@ -104,114 +90,114 @@
 			</if>
 	</select>
 	<delete id="deleteProject" parameterType="int">
-		delete
-		from
-			bi_project
-		where
-			pjt_no = #{value}
+		delete	from bi_project
+		where        pjt_no = #{value}
 	</delete>
 	<update id="modifyProject" parameterType="Project">
-		update
-			bi_project
-		set
-			com_no			= #{company.no},
-			pjt_title		= #{title},
-			pjt_start_date	= #{startDate},
-			pjt_end_date	= #{endDate},
-			pjt_content		= #{content},
-			pjt_remark		= #{remark},
-			pjt_flag		= #{flag},
-			pjt_msg			= #{msg}
-		where
-			pjt_no = #{no}
+		update	bi_project
+		set		com_no			= #{company.no},
+				pjt_title		= #{title},
+				pjt_start_date	= #{startDate},
+				pjt_end_date	= #{endDate},
+				pjt_content		= #{content},
+				pjt_remark		= #{remark},
+				pjt_flag		= #{flag},
+				pjt_msg			= #{msg}
+		where	pjt_no = #{no}
 	</update>
 	<select id="getProjectNo" resultType="int">
-		select 
-			bi_project_seq.nextval
-		from 
-			dual
+		select	bi_project_seq.nextval
+		from 	dual
 	</select>
 	<insert id="addProject" parameterType="Project">
 		insert into bi_project
-			(pjt_no, com_no, pjt_title, pjt_start_date, pjt_end_date, pjt_content, pjt_remark, pjt_flag, pjt_msg, pjt_registrant)
-		values
-			(#{no}, #{company.no}, #{title}, #{startDate}, #{endDate}, #{content}, #{remark}, #{flag}, #{msg}, #{registrant.id})
+			 	   (pjt_no,
+			 	    com_no,
+					pjt_title,
+					pjt_start_date,
+					pjt_end_date,
+					pjt_content,
+					pjt_remark,
+					pjt_flag,
+					pjt_msg,
+					pjt_registrant)
+		values     (#{no},
+					#{company.no},
+					#{title},
+					#{startDate},
+					#{endDate},
+					#{content},
+					#{remark},
+					#{flag},
+					#{msg},
+					#{registrant.id})
 	</insert>
 	<select id="getProjectByCriteria" parameterType="Criteria" resultMap="getProjectResultMap">
-		select
-			pjt_no,
-			com_no,
-			pjt_title,
-			pjt_start_date,
-			pjt_end_date,
-			pjt_content,
-			pjt_remark,
-			pjt_flag,
-			pjt_msg,
-			pjt_registrant
+		select	pjt_no,
+				com_no,
+				pjt_title,
+				pjt_start_date,
+				pjt_end_date,
+				pjt_content,
+				pjt_remark,
+				pjt_flag,
+				pjt_msg,
+				pjt_registrant
 		from (
-			select
-				P.pjt_no,
-				C.com_no,
-				C.com_name,
-				P.pjt_title,
-				P.pjt_start_date,
-				P.pjt_end_date,
-				P.pjt_content,
-				P.pjt_remark,
-				P.pjt_flag,
-				P.pjt_msg,
-				pjt_registrant,
-				row_number() over (order by pjt_no desc) rn
-			from
-				bi_project P, bi_company C
-			where
-				P.com_no = C.com_no
-			<if test="title != null &amp;&amp; title != ''">
-				and P.pjt_title like '%' || #{title} || '%'
-			</if>
-			<if test="companyName != null &amp;&amp; companyName != ''">
-				and C.com_name like '%' || #{companyName} || '%'
-			</if>
-			<if test="flag != null &amp;&amp; flag != 'all'">
-				and P.pjt_flag = #{flag}
-			</if>
-			<if test="flag == null">
-				and P.pjt_flag != 'N'
-			</if>
-			<if test="dateOpt == 'start'">
-				and
-					P.pjt_start_date >= to_date(#{fromDate},'yyyy-mm-dd')
-				and 
-					P.pjt_start_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
-			</if>
-			<if test="dateOpt == 'end'">
-				and
-					P.pjt_end_date >= to_date(#{fromDate},'yyyy-mm-dd')
-				and 
-					P.pjt_end_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
-			</if>
-			)
-		where
-			rn >= #{beginIndex} and rn &lt;= #{endIndex}
-		order by
-			pjt_no desc
+				select	PJT.pjt_no,
+						C.com_no,
+						C.com_name,
+						PJT.pjt_title,
+						PJT.pjt_start_date,
+						PJT.pjt_end_date,
+						PJT.pjt_content,
+						PJT.pjt_remark,
+						PJT.pjt_flag,
+						PJT.pjt_msg,
+						pjt_registrant,
+						row_number() over (order by pjt_no desc) rn
+				from	bi_project PJT, bi_company C
+				where	PJT.com_no = C.com_no
+					<if test="title != null &amp;&amp; title != ''">
+						and PJT.pjt_title like '%' || #{title} || '%'
+					</if>
+					<if test="companyName != null &amp;&amp; companyName != ''">
+						and C.com_name like '%' || #{companyName} || '%'
+					</if>
+					<if test="flag != null &amp;&amp; flag != 'all'">
+						and PJT.pjt_flag = #{flag}
+					</if>
+					<if test="flag == null">
+						and PJT.pjt_flag != 'N'
+					</if>
+					<if test="dateOpt == 'start'">
+						and
+							PJT.pjt_start_date >= to_date(#{fromDate},'yyyy-mm-dd')
+						and 
+							PJT.pjt_start_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
+					</if>
+					<if test="dateOpt == 'end'">
+						and
+							PJT.pjt_end_date >= to_date(#{fromDate},'yyyy-mm-dd')
+						and 
+							PJT.pjt_end_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
+					</if>
+					)
+		where	rn >= #{beginIndex} 
+		and		rn &lt;= #{endIndex} order by pjt_no desc
 	</select>
 	<select id="getProjectByNo" parameterType="int" resultMap="getProjectResultMap">
-		select
-			pjt_no,
-			com_no,
-			pjt_title,
-			pjt_start_date,
-			pjt_end_date,
-			pjt_content,
-			pjt_remark,
-			pjt_flag,
-			pjt_msg,
-			pjt_registrant
-		from
-			bi_project 
-		where
-			pjt_no = #{value} 
+		select	pjt_no,
+				com_no,
+				pjt_title,
+				pjt_start_date,
+				pjt_end_date,
+				pjt_content,
+				pjt_remark,
+				pjt_flag,
+				pjt_msg,
+				pjt_registrant
+		from	bi_project 
+		where	pjt_no = #{value} 
 	</select>
 </mapper>

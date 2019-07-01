@@ -20,53 +20,64 @@
 		<association property="emp" column="emp_id" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpById" />
 	</resultMap>
 	<delete id="deleteRequest" parameterType="int">
-		delete
-		from
-			bi_request
-		where
-			req_no = #{value}
+		delete	from	bi_request
+		where			req_no = #{value}
 	</delete>
 	<select id="getRequestNo" resultType="int">
-		select
-			bi_request_seq.nextval
-		from
-			dual
+		select	bi_request_seq.nextval
+		from	dual
 	</select>
 	<insert id="addRequest" parameterType="Request">
 		insert into bi_request
-			(req_no, cus_no, pjt_no, emp_id, req_category_name, req_suggest, req_handle, req_receive_date, req_start_date, req_end_date, req_close_date, req_flag, req_msg)
-		values
-			(#{no}, #{customer.no}, #{project.no}, #{emp.id}, #{categoryName}, #{suggest}, #{handle}, #{receiveDate}, #{startDate}, #{endDate}, #{closeDate}, #{flag}, #{msg})
+				   (req_no,
+					cus_no,
+					pjt_no,
+					emp_id,
+					req_category_name,
+					req_suggest,
+					req_handle,
+					req_receive_date,
+					req_start_date,
+					req_end_date,
+					req_close_date,
+					req_flag,
+					req_msg)
+		values     (#{no},
+					#{customer.no},
+					#{project.no},
+					#{emp.id},
+					#{categoryName},
+					#{suggest},
+					#{handle},
+					#{receiveDate},
+					#{startDate},
+					#{endDate},
+					#{closeDate},
+					#{flag},
+					#{msg})
 	</insert>
 	<select id="getRequestByNo" parameterType="int" resultMap="getRequestResultMap">
-		select
-			req_no,
-			cus_no,
-			pjt_no,
-			emp_id,
-			req_category_name,
-			req_suggest,
-			req_handle,
-			req_receive_date,
-			req_start_date,
-			req_end_date,
-			req_close_date,
-			req_flag,
-			req_msg
-		from
-			bi_request
-		where
-			req_no = #{value}
+		select	req_no,
+				cus_no,
+				pjt_no,
+				emp_id,
+				req_category_name,
+				req_suggest,
+				req_handle,
+				req_receive_date,
+				req_start_date,
+				req_end_date,
+				req_close_date,
+				req_flag,
+				req_msg
+		from	bi_request
+		where	req_no = #{value}
 	</select>
 	<select id="getRequestCount" parameterType="Criteria" resultType="int">
-		select
-			count(*)
-		from
-			bi_request R, bi_project P, bi_company C
-		where
-			R.pjt_no = P.pjt_no
-		and
-			P.com_no = C.com_no
+		select	count(*)
+		from	bi_request R, bi_project P, bi_company C
+		where	R.pjt_no = P.pjt_no
+		and		P.com_no = C.com_no
 			<if test="categoryName != 'nodata'">
 				and R.req_category_name = #{categoryName}
 			</if>
@@ -108,42 +119,37 @@
 			</if>
 	</select>
 	<select id="getRequestByCriteria" parameterType="Criteria" resultMap="getRequestResultMap">
-		select
-			req_no,
-			cus_no,
-			pjt_no,
-			emp_id,
-			req_category_name,
-			req_suggest,
-			req_handle,
-			req_receive_date,
-			req_start_date,
-			req_end_date,
-			req_close_date,
-			req_flag,
-			req_msg
+		select	req_no,
+				cus_no,
+				pjt_no,
+				emp_id,
+				req_category_name,
+				req_suggest,
+				req_handle,
+				req_receive_date,
+				req_start_date,
+				req_end_date,
+				req_close_date,
+				req_flag,
+				req_msg
 		from (
-			select
-				R.req_no,
-				R.cus_no,
-				R.pjt_no,
-				R.emp_id,
-				R.req_category_name,
-				R.req_suggest,
-				R.req_handle,
-				R.req_receive_date,
-				R.req_start_date,
-				R.req_end_date,
-				R.req_close_date,
-				R.req_flag,
-				R.req_msg,
-				row_number() over (order by req_no desc) rn
-			from
-				bi_request R, bi_project P, bi_company C
-			where
-				R.pjt_no = P.pjt_no
-			and
-				P.com_no = C.com_no
+				select	R.req_no,
+						R.cus_no,
+						R.pjt_no,
+						R.emp_id,
+						R.req_category_name,
+						R.req_suggest,
+						R.req_handle,
+						R.req_receive_date,
+						R.req_start_date,
+						R.req_end_date,
+						R.req_close_date,
+						R.req_flag,
+						R.req_msg,
+						row_number() over (order by req_no desc) rn
+				from	bi_request R, bi_project P, bi_company C
+				where	R.pjt_no = P.pjt_no
+				and		P.com_no = C.com_no
 				<if test="categoryName != 'nodata'">
 					and R.req_category_name = #{categoryName}
 				</if>
@@ -164,30 +170,28 @@
 					R.req_receive_date >= to_date(#{fromDate},'yyyy-mm-dd')
 				and
 					R.req_receive_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
-			</if>
-			<if test="dateOpt == 'start'">
-				and
-					R.req_start_date >= to_date(#{fromDate},'yyyy-mm-dd')
-				and
-					R.req_start_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
-			</if>
-			<if test="dateOpt == 'end'">
-				and
-					R.req_end_date >= to_date(#{fromDate},'yyyy-mm-dd')
-				and
-					R.req_end_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
-			</if>
-			<if test="dateOpt == 'close'">
-				and
-					R.req_close_date >= to_date(#{fromDate},'yyyy-mm-dd')
-				and
-					R.req_close_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
-			</if>
-			
-			)
-		where
-			rn >= #{beginIndex} and rn &lt;= #{endIndex}
-		order by
-			req_no desc
+				</if>
+				<if test="dateOpt == 'start'">
+					and
+						R.req_start_date >= to_date(#{fromDate},'yyyy-mm-dd')
+					and
+						R.req_start_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+				</if>
+				<if test="dateOpt == 'end'">
+					and
+						R.req_end_date >= to_date(#{fromDate},'yyyy-mm-dd')
+					and
+						R.req_end_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+				</if>
+				<if test="dateOpt == 'close'">
+					and
+						R.req_close_date >= to_date(#{fromDate},'yyyy-mm-dd')
+					and
+						R.req_close_date &lt;= to_date(#{toDate},'yyyy-mm-dd')
+				</if>
+				
+				)
+		where	rn >= #{beginIndex} 
+		and		rn &lt;= #{endIndex} order by req_no desc
 	</select>
 </mapper>

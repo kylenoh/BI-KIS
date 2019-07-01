@@ -4,7 +4,6 @@ public class SolutionFile {
 
 	private int NO;
 	private int SOLUTION_NO;
-	private String ID;
 	private String DUAL;
 	private String NAME;
 	private String FLAG;
@@ -13,11 +12,10 @@ public class SolutionFile {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SolutionFile(int nO, int sOLUTION_NO, String iD, String dUAL, String nAME, String fLAG) {
+	public SolutionFile(int nO, int sOLUTION_NO, String dUAL, String nAME, String fLAG) {
 		super();
 		NO = nO;
 		SOLUTION_NO = sOLUTION_NO;
-		ID = iD;
 		DUAL = dUAL;
 		NAME = nAME;
 		FLAG = fLAG;
@@ -37,14 +35,6 @@ public class SolutionFile {
 
 	public void setSOLUTION_NO(int sOLUTION_NO) {
 		SOLUTION_NO = sOLUTION_NO;
-	}
-
-	public String getID() {
-		return ID;
-	}
-
-	public void setID(String iD) {
-		ID = iD;
 	}
 
 	public String getDUAL() {
@@ -71,7 +61,5 @@ public class SolutionFile {
 		FLAG = fLAG;
 	}
 
-	
-	
 	
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.northstar.bi.dto.BoardFile;
 import com.northstar.bi.dto.Solution;
 import com.northstar.bi.dto.SolutionCriteria;
 import com.northstar.bi.dto.SolutionFile;
@@ -35,8 +34,6 @@ public interface SolutionService {
 //	Delete
 	void deleteSolutionReply(int no);
 	
-	List<SolutionFile> getFileList();
-	BoardFile getFileByNo(int no);
 //	DownLoad
 	SolutionFile selectDownload(SolutionFile solutionfile,int no,HttpServletResponse response);
 }

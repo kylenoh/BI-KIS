@@ -27,144 +27,145 @@
 		<association property="registrant" column="com_registrant" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpById"/>
 	</resultMap>
 	<select id="getCompanyByProjectNo" parameterType="int" resultMap="getCompanyResultMap">
-		select
-			C.com_no,
-			C.com_name,
-			C.com_owner,
-			C.com_tel,
-			C.com_addr,
-			C.com_remark,
-			C.com_registrant
-		from
-			bi_project P , bi_company C
-		where
-			P.com_no = C.com_no
-		and
-			P.pjt_no = #{value} 
+		select	COMPANY.com_no,
+				COMPANY.com_name,
+				COMPANY.com_owner,
+				COMPANY.com_tel,
+				COMPANY.com_addr,
+				COMPANY.com_remark,
+				COMPANY.com_registrant
+		from	bi_project PJT , bi_company COMPANY
+		where	PJT.com_no = COMPANY.com_no
+		and		PJT.pjt_no = #{value} 
 	</select>
 	<select id="getCustomerListByCompanyNo" parameterType="int" resultMap="getCustomerResultMap">
-		select
-			cus_no,
-			com_no,
-			cus_name,
-			cus_tel1,
-			cus_tel2,
-			cus_email,
-			cus_rank,
-			cus_dept,
-			cus_remark
-		from
-			bi_customer
-		where
-			com_no = #{value}
+		select	cus_no,
+				com_no,
+				cus_name,
+				cus_tel1,
+				cus_tel2,
+				cus_email,
+				cus_rank,
+				cus_dept,
+				cus_remark
+		from	bi_customer
+		where	com_no = #{value}
 	</select>
 	<update id="modifyCompany" parameterType="Company">
-		update
-			bi_company
-		set
-			com_name = #{name},
-			com_owner = #{owner},
-			com_tel = #{tel},
-			com_addr = #{addr},
-			com_remark = #{remark}
-		where
-			com_no = #{no}
+		update	bi_company
+		set		com_name = #{name},
+				com_owner = #{owner},
+				com_tel = #{tel},
+				com_addr = #{addr},
+				com_remark = #{remark}
+		where	com_no = #{no}
 	</update>
 	<update id="modifyCustomer" parameterType="Customer">
-		update
-			bi_customer
-		set
-			cus_name = #{name},
-			cus_tel1 = #{tel1},
-			cus_tel2 = #{tel2},
-			cus_email = #{email},
-			cus_rank = #{rank},
-			cus_dept = #{dept},
-			cus_remark = #{remark}
-		where
-			cus_no = #{customer.no}
+		update	bi_customer
+		set		cus_name = #{name},
+				cus_tel1 = #{tel1},
+				cus_tel2 = #{tel2},
+				cus_email = #{email},
+				cus_rank = #{rank},
+				cus_dept = #{dept},
+				cus_remark = #{remark}
+		where	cus_no = #{customer.no}
 	</update>
 	<delete id="deleteCompany" parameterType="int">
-		delete
-			from bi_company
-		where
-			com_no = #{value}
+		delete	from bi_company
+		where	com_no = #{value}
 	</delete>
 	<delete id="deleteCustomerByCompanyNo" parameterType="int">
-		delete
-			from bi_customer
-		where
-			com_no = #{value}
+		delete	from bi_customer
+		where	com_no = #{value}
 	</delete>
 	<delete id="deleteCustomer" parameterType="int">
-		delete
-			from bi_customer
-		where
-			cus_no = #{value}
+		delete	from bi_customer
+		where	cus_no = #{value}
 	</delete>
 	<select id="getCompanyNo" resultType="int">
-		select 
-			bi_company_seq.nextval 
-		from 
-			dual
+		select	bi_company_seq.nextval 
+		from 	dual
 	</select>
 	<select id="getCustomerNo" resultType="int">
-		select
-			bi_customer_seq.nextval
-		from
-			dual
+		select	bi_customer_seq.nextval
+		from	dual
 	</select>
 	<insert id="addCustomer" parameterType="Customer">
 		insert into bi_customer
-			(cus_no, com_no, cus_name, cus_tel1, cus_tel2, cus_email, cus_rank, cus_dept, cus_remark, cus_registrant)
-		values
-			(#{no}, #{company.no}, #{name}, #{tel1}, #{tel2}, #{email}, #{rank}, #{dept}, #{remark}, #{registrant.id})
+				   (cus_no,
+					com_no,
+					cus_name,
+					cus_tel1,
+					cus_tel2,
+					cus_email,
+					cus_rank,
+					cus_dept,
+					cus_remark,
+					cus_registrant)
+		values     (#{no},
+				    #{company.no},
+				    #{name},
+					#{tel1},
+					#{tel2},
+					#{email},
+					#{rank},
+					#{dept},
+					#{remark},
+					#{registrant.id})
 	</insert>
 	<insert id="addCompany" parameterType="Company">
 		insert into bi_company
-			(com_no, com_name, com_owner, com_tel, com_addr, com_remark, com_registrant)
-		values
-			(#{no}, #{name}, #{owner}, #{tel}, #{addr}, #{remark}, #{registrant.id})
+				   (com_no,
+				    com_name,
+				    com_owner,
+				    com_tel,
+				    com_addr,
+				    com_remark,
+				    com_registrant)
+		values     (#{no},
+					#{name},
+					#{owner},
+					#{tel},
+					#{addr},
+					#{remark},
+					#{registrant.id})
 	</insert>
 	<select id="getCompanyByCriteria" parameterType="Criteria" resultType="Company">
-		select
-			company_no		as no,
-			com_name		as name,
-			com_owner		as owner,
-			com_tel			as tel,
-			com_addr		as addr,
-			com_remark		as remark,
-			cus_no			as "customer.no",	
-			com_no			as "customer.company.no",
-			cus_name		as "customer.name",
-			cus_tel1		as "customer.tel1",
-			cus_tel2		as "customer.tel2",
-			cus_email		as "customer.email",
-			cus_rank		as "customer.rank",
-			cus_dept		as "customer.dept",
-			cus_remark		as "customer.remark"
+		select	company_no		as no,
+				com_name		as name,
+				com_owner		as owner,
+				com_tel			as tel,
+				com_addr		as addr,
+				com_remark		as remark,
+				cus_no			as "customer.no",	
+				com_no			as "customer.company.no",
+				cus_name		as "customer.name",
+				cus_tel1		as "customer.tel1",
+				cus_tel2		as "customer.tel2",
+				cus_email		as "customer.email",
+				cus_rank		as "customer.rank",
+				cus_dept		as "customer.dept",
+				cus_remark		as "customer.remark"
 		from (
-			select
-				CO.com_no			as company_no,
-				CO.com_name,
-				CO.com_owner,
-				CO.com_tel,
-				CO.com_addr,
-				CO.com_remark,
-				CU.cus_no,
-				CU.com_no,
-				CU.cus_name,
-				CU.cus_tel1,
-				CU.cus_tel2,
-				CU.cus_email,
-				CU.cus_rank,
-				CU.cus_dept,
-				CU.cus_remark,
-				row_number() over (order by cus_no desc) rn
-			from
-				bi_company CO, bi_customer CU
-			where
-				CU.com_no(+) = CO.com_no  
+				select	CO.com_no			as company_no,
+						CO.com_name,
+						CO.com_owner,
+						CO.com_tel,
+						CO.com_addr,
+						CO.com_remark,
+						CU.cus_no,
+						CU.com_no,
+						CU.cus_name,
+						CU.cus_tel1,
+						CU.cus_tel2,
+						CU.cus_email,
+						CU.cus_rank,
+						CU.cus_dept,
+						CU.cus_remark,
+						row_number() over (order by cus_no desc) rn
+				from	bi_company CO, bi_customer CU
+				where	CU.com_no(+) = CO.com_no  
 				<if test="name != null &amp;&amp; name != ''">
 					and CO.com_name like '%' || #{name} || '%'
 				</if>
@@ -178,34 +179,26 @@
 					and CU.cus_dept = #{dept}
 				</if>
 			)
-		where
-			rn >= #{beginIndex} and rn &lt;= #{endIndex}
-		order by
-			cus_no desc
+		where	rn >= #{beginIndex}
+		and 	rn &lt;= #{endIndex} order by cus_no desc
 	</select>
 	<select id="getCustomerByNo" parameterType="int" resultMap="getCustomerResultMap">
-		select
-			cus_no,
-			com_no,
-			cus_name,
-			cus_tel1,
-			cus_tel2,
-			cus_email,
-			cus_rank,
-			cus_dept,
-			cus_remark
-		from
-			bi_customer
-		where
-			cus_no = #{value}
+		select	cus_no,
+				com_no,
+				cus_name,
+				cus_tel1,
+				cus_tel2,
+				cus_email,
+				cus_rank,
+				cus_dept,
+				cus_remark
+		from	bi_customer
+		where	cus_no = #{value}
 	</select>
 	<select id="getCompanyCount" parameterType="Criteria" resultType="int">
-		select
-			count(*)
-		from
-			bi_company CO, bi_customer CU
-		where
-			CU.com_no(+) = CO.com_no
+		select	count(*)
+		from	bi_company CO, bi_customer CU
+		where	CU.com_no(+) = CO.com_no
 			<if test="name != null &amp;&amp; name != ''">
 				and CO.com_name like '%' || #{name} || '%'
 			</if>
@@ -220,29 +213,24 @@
 			</if>
 	</select>
 	<select id="getCompanyByComNo" parameterType="int" resultMap="getCompanyResultMap">
-		select
-			com_no,
-			com_name,
-			com_owner,
-			com_tel,
-			com_addr,
-			com_remark,
-			com_registrant
-		from
-			bi_company
-		where
-			com_no = #{value}
+		select	com_no,
+				com_name,
+				com_owner,
+				com_tel,
+				com_addr,
+				com_remark,
+				com_registrant
+		from	bi_company
+		where	com_no = #{value}
 	</select>
 	<select id="getCompanyList" resultMap="getCompanyResultMap">
-		select
-			com_no,
-			com_name,
-			com_owner,
-			com_tel,
-			com_addr,
-			com_remark,
-			com_registrant
-		from
-			bi_company
+		select	com_no,
+				com_name,
+				com_owner,
+				com_tel,
+				com_addr,
+				com_remark,
+				com_registrant
+		from	bi_company
 	</select>
 </mapper>

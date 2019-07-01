@@ -5,30 +5,22 @@
 
 <mapper namespace="com.northstar.bi.dao.AuthDao">
 	<select id="getTotalRows" resultType="int">
-		select 
-			count(*)
-		from
-			BI_AUTH
+		select 	count(*)
+		  from	BI_AUTH
 	</select>
 	<select id="getAuthList" parameterType="AuthCriteria" resultType="Auth">
-	select 
-				AUTH_NO as no,
-				AUTH_NAME as name,
-				AUTH_CONTENT as content
-		from 
-			(
-				select
-					AUTH_NO,
+	select	AUTH_NO as no,
+			AUTH_NAME as name,
+			AUTH_CONTENT as content
+	from	(
+			select	AUTH_NO,
 					AUTH_NAME,
 					AUTH_CONTENT,
 					row_number() over (order by AUTH_NO desc) rn
-				from
-					BI_AUTH
-			)
-		where
-			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}
-		order by
-			no desc	
+			from	BI_AUTH	)
+	where	rn 
+			&gt;= #{beginIndex}
+	and rn &lt;= #{endIndex} order by no desc	
 	</select>
 </mapper>
 

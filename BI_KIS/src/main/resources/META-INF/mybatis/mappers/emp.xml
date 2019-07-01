@@ -7,75 +7,75 @@
 
 	<insert id="addEmp" parameterType="Emp">
 		insert into	bi_emp
-			(emp_id, auth_no, emp_pass, emp_name, emp_rank, emp_tel, emp_addr, emp_email)
-		values
-			(#{id}, 2, #{password}, #{name}, #{rank}, #{tel}, #{addr}, #{email})
+				   (emp_id, 
+				 	auth_no,
+				 	emp_pass,
+				 	emp_name,
+				 	emp_rank,
+				 	emp_tel,
+				 	emp_addr,
+				 	emp_email)
+		values     (#{id},
+					2,
+					#{password},
+					#{name},
+					#{rank},
+					#{tel},
+					#{addr},
+					#{email})
 	</insert>
 	<update id="updateEmp" parameterType="Emp">
-		update
-			bi_emp
-		set
-			auth_no = #{auth.no},
-			emp_pass = #{password},
-			emp_name = #{name},
-			emp_rank = #{rank},
-			emp_tel = #{tel},
-			emp_addr = #{addr},
-			emp_email = #{email},
-			emp_flag = #{flag}
-		where
-			emp_id = #{id}
+		update	bi_emp
+		set		auth_no = #{auth.no},
+				emp_pass = #{password},
+				emp_name = #{name},
+				emp_rank = #{rank},
+				emp_tel = #{tel},
+				emp_addr = #{addr},
+				emp_email = #{email},
+				emp_flag = #{flag}
+		where	emp_id = #{id}
 	</update>
 	<select id="getAuthList" resultType="Auth">
-		select 
-			auth_no			as no,
-			auth_name		as name
-		from
-			bi_auth
+		select	auth_no			as no,
+				auth_name		as name
+		from	bi_auth
 	</select>
 	<select id="getEmpByCriteria" parameterType="Criteria" resultType="Emp">
-		select
-			 emp_id			as id,
-			 auth_no		as "auth.no",
-			 auth_name		as "auth.name",
-			 emp_pass		as password,
-			 emp_name		as name,
-			 emp_rank		as rank,
-			 emp_tel		as tel,
-			 emp_addr		as addr,
-			 emp_email		as email,
-			 emp_flag		as flag
+		select	 emp_id			as id,
+				 auth_no		as "auth.no",
+				 auth_name		as "auth.name",
+				 emp_pass		as password,
+				 emp_name		as name,
+				 emp_rank		as rank,
+				 emp_tel		as tel,
+				 emp_addr		as addr,
+				 emp_email		as email,
+				 emp_flag		as flag
 		from (
-			select
-				 E.emp_id,
-				 E.auth_no,
-				 A.auth_name,
-				 E.emp_pass,
-				 E.emp_name,
-				 E.emp_rank,
-				 E.emp_tel,
-				 E.emp_addr,
-				 E.emp_email,
-				 E.emp_flag,
-				 row_number() over (order by emp_name) rn
-			from
-				bi_emp E, bi_auth A
-			where
-				E.auth_no = A.auth_no
+			select	 Emp.emp_id,
+					 Emp.auth_no,
+					 Auth.auth_name,
+					 Emp.emp_pass,
+					 Emp.emp_name,
+					 Emp.emp_rank,
+					 Emp.emp_tel,
+					 Emp.emp_addr,
+					 Emp.emp_email,
+					 Emp.emp_flag,
+					 row_number() over (order by emp_name) rn
+			from     bi_emp Emp, bi_auth Auth
+			where    Emp.auth_no = Auth.auth_no
 				<if test="name != null &amp;&amp; name != ''">
 					and emp_name like '%' || #{name} || '%'
 				</if>
 			)
-		where
-			rn >= #{beginIndex} and rn &lt;= #{endIndex}
-		order by
-			emp_name
+		where	rn >= #{beginIndex}
+		and rn &lt;= #{endIndex} order by emp_name
 	</select>
 	<select id="getEmpCount" parameterType="Criteria" resultType="int">
-		select
-			count(*)
-		from
-			bi_emp
+		select	count(*)
+		from	bi_emp
 		<where>
 			<if test="name != null &amp;&amp; name != ''">
 				emp_name like '%' || #{name} || '%'
@@ -83,62 +83,49 @@
 		</where>
 	</select>
 	<select id="getEmpList" resultType="Emp">
-		select
-			 E.emp_id		as id,
-			 E.auth_no		as "auth.no",
-			 A.auth_name	as "auth.name",
-			 E.emp_pass		as password,
-			 E.emp_name		as name,
-			 E.emp_rank		as rank,
-			 E.emp_tel		as tel,
-			 E.emp_addr		as addr,
-			 E.emp_email	as email,
-			 E.emp_flag		as flag
-		from
-			bi_emp E, bi_auth A
-		where
-			E.auth_no = A.auth_no
+		select	 Emp.emp_id		as id,
+				 Emp.auth_no		as "auth.no",
+				 Auth.auth_name	as "auth.name",
+				 Emp.emp_pass		as password,
+				 Emp.emp_name		as name,
+				 Emp.emp_rank		as rank,
+				 Emp.emp_tel		as tel,
+				 Emp.emp_addr		as addr,
+				 Emp.emp_email	as email,
+				 Emp.emp_flag		as flag
+		from	bi_emp Emp, bi_auth Auth
+		where	Emp.auth_no = Auth.auth_no
 	</select>
 	<select id="getEmpById" parameterType="String" resultType="Emp">
-		select
-			 E.emp_id		as id,
-			 E.auth_no		as "auth.no",
-			 A.auth_name	as "auth.name",
-			 E.emp_pass		as password,
-			 E.emp_name		as name,
-			 E.emp_rank		as rank,
-			 E.emp_tel		as tel,
-			 E.emp_addr		as addr,
-			 E.emp_email	as email,
-			 E.emp_flag		as flag
-		from
-			bi_emp E, bi_auth A
-		where
-			A.auth_no = E.auth_no
-		and
-			emp_id = #{value}
-		and
-			emp_flag = 'Y'
+		select	 Emp.emp_id		as id,
+				 Emp.auth_no		as "auth.no",
+				 Auth.auth_name	as "auth.name",
+				 Emp.emp_pass		as password,
+				 Emp.emp_name		as name,
+				 Emp.emp_rank		as rank,
+				 Emp.emp_tel		as tel,
+				 Emp.emp_addr		as addr,
+				 Emp.emp_email	as email,
+				 Emp.emp_flag		as flag
+		from     bi_emp Emp, bi_auth Auth
+		where    Auth.auth_no = Emp.auth_no
+		and      emp_id = #{value}
+		and      emp_flag = 'Y'
 	</select>
 	<select id="getEmpByProNo" parameterType="int" resultType="Emp">
-		select
-			 E.emp_id		as id,
-			 E.auth_no		as "auth.no",
-			 A.auth_name	as "auth.name",
-			 E.emp_pass		as password,
-			 E.emp_name		as name,
-			 E.emp_rank		as rank,
-			 E.emp_tel		as tel,
-			 E.emp_addr		as addr,
-			 E.emp_email	as email,
-			 E.emp_flag		as flag
-		from
-			bi_emp E , bi_con_pro CP , bi_auth A
-		where
-			CP.pjt_no = #{value}
-		and	
-			E.emp_id = CP.emp_id
-		and
-			A.auth_no = E.auth_no
+		select	 Emp.emp_id		as id,
+				 Emp.auth_no		as "auth.no",
+				 Auth.auth_name	as "auth.name",
+				 Emp.emp_pass		as password,
+				 Emp.emp_name		as name,
+				 Emp.emp_rank		as rank,
+				 Emp.emp_tel		as tel,
+				 Emp.emp_addr		as addr,
+				 Emp.emp_email	as email,
+				 Emp.emp_flag		as flag
+		from     bi_emp Emp , bi_con_pro CP , bi_auth Auth
+		where    CP.pjt_no = #{value}
+		and	     Emp.emp_id = CP.emp_id
+		and      Auth.auth_no = Emp.auth_no
 	</select>
 </mapper>

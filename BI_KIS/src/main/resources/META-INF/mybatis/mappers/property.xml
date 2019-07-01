@@ -6,17 +6,27 @@
 <mapper namespace="com.northstar.bi.dao.PropertyDao">
 	<insert id="register" parameterType="Property">
 		insert into BI_PROP
-		(PROP_NO,EMP_ID,PROP_NAME,PROP_CODE,PROP_DATE,PROP_REMARK,PROP_BUY_DATE,PROP_FLAG)
-		values
-		(BI_PROPERTY_SEQ.nextval, #{ID}, #{PROP_NAME}, #{CODE}, #{PROP_DATE}, #{REMARK}, #{BUY_DATE},'N')
+				   (PROP_NO,
+				    EMP_ID,
+				    PROP_NAME,
+				    PROP_CODE,
+				    PROP_DATE,
+				    PROP_REMARK,
+				    PROP_BUY_DATE,
+				    PROP_FLAG)
+		values     (BI_PROPERTY_SEQ.nextval,
+					#{ID},
+					#{PROP_NAME},
+					#{CODE},
+					#{PROP_DATE},
+					#{REMARK},
+					#{BUY_DATE},
+					'N')
 	</insert>
 	<select id="getTotalRows" resultType="int">
-		select 
-			count(*)
-		from
-			BI_PROP PROP,BI_EMP EMP
-		where
-			EMP.EMP_ID(+) = PROP.EMP_ID
+		select 	count(*)
+		from	BI_PROP PROP,BI_EMP EMP
+		where	EMP.EMP_ID(+) = PROP.EMP_ID
 			<if test="EMP_ID != null &amp;&amp; EMP_ID != ''">
 				and EMP.EMP_NAME like '%' || #{EMP_ID} || '%'
 			</if>
@@ -31,8 +41,7 @@
 			</if>
 	</select>
 	<select id="getPropertyList" parameterType="PropertyCriteria" resultType="Property">
-	select 
-				PROP_NO as NO,
+	select 		PROP_NO as NO,
 				EMP_NAME,
 				PROP_NAME,
 				PROP_CODE as CODE,
@@ -42,20 +51,17 @@
 				PROP_FLAG as FLAG
 		from 
 			(
-				select
-					PROP.PROP_NO,
-					EMP.EMP_NAME,
-					PROP.PROP_NAME,
-					PROP.PROP_CODE,
-					PROP.PROP_DATE,
-					PROP.PROP_REMARK,
-					PROP.PROP_BUY_DATE,
-					PROP.PROP_FLAG,
-					row_number() over (order by PROP_NO desc) rn
-				from
-					BI_PROP PROP, BI_EMP EMP
-				where
-					EMP.EMP_ID(+) = PROP.EMP_ID
+				select	PROP.PROP_NO,
+						EMP.EMP_NAME,
+						PROP.PROP_NAME,
+						PROP.PROP_CODE,
+						PROP.PROP_DATE,
+						PROP.PROP_REMARK,
+						PROP.PROP_BUY_DATE,
+						PROP.PROP_FLAG,
+						row_number() over (order by PROP_NO desc) rn
+				from	BI_PROP PROP, BI_EMP EMP
+				where	EMP.EMP_ID(+) = PROP.EMP_ID
 							<if test="EMP_ID != null &amp;&amp; EMP_ID != ''">
 								and EMP.EMP_NAME like '%' || #{EMP_ID} || '%'
 							</if>
@@ -69,14 +75,11 @@
 								and PROP.PROP_FLAG = #{PROP_FLAG}
 							</if>
 			)
-		where
-			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}
-		order by
-			PROP_NO desc	
+		where	rn &gt;= #{beginIndex} 
+		and		rn &lt;= #{endIndex} order by PROP_NO desc	
 	</select>
 	<select id="getPropertyByNo" parameterType="int" resultType="Property">
-		select
-				PROP_NO as NO,
+		select	PROP_NO as NO,
 				EMP_ID as ID,
 				PROP_NAME,
 				PROP_CODE as CODE,
@@ -84,29 +87,22 @@
 				PROP_REMARK as REMARK,
 				PROP_BUY_DATE as BUY_DATE,
 				PROP_FLAG as FLAG
-			from
-				BI_PROP
-			where
-				PROP_NO = #{value}
+		from	BI_PROP
+		where	PROP_NO = #{value}
 	</select>
 	<update id="Modify" parameterType="Property">
-		update
-			BI_PROP
-		set
-			EMP_ID			= #{ID},
-			PROP_NAME 		= #{PROP_NAME},
-			PROP_CODE 		= #{CODE},
-			PROP_DATE 		= #{PROP_DATE},
-			PROP_REMARK 	= #{REMARK},
-			PROP_BUY_DATE 	= #{BUY_DATE}
-		where
-			PROP_NO = #{NO}
+		update	BI_PROP
+		set		EMP_ID			= #{ID},
+				PROP_NAME 		= #{PROP_NAME},
+				PROP_CODE 		= #{CODE},
+				PROP_DATE 		= #{PROP_DATE},
+				PROP_REMARK 	= #{REMARK},
+				PROP_BUY_DATE 	= #{BUY_DATE}
+		where	PROP_NO = #{NO}
 	</update>
 	<update id="Delete" parameterType="Property">
-		delete from
-			BI_PROP
-		where
-			PROP_NO = #{NO}
+		delete from		BI_PROP
+		where			PROP_NO = #{NO}
 	</update>
 </mapper>
 

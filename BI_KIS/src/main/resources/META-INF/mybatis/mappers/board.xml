@@ -26,30 +26,39 @@
 			SELECT BI_BOARD_SEQ.currval FROM DUAL
 		</selectKey>
 		insert into BI_BOARD
-		(BOARD_NO,EMP_ID,BOARD_TITLE,BOARD_CREATE_DATE,BOARD_CONTENT,BOARD_FLAG,BOARD_UPDATER,BOARD_UPDATE_DATE)
-		values
-		(BI_BOARD_SEQ.nextval, #{EMP_ID}, #{TITLE}, sysdate, #{CONTENT},'Y',NULL,NULL)
+				   (BOARD_NO,
+					EMP_ID,BOARD_TITLE,
+					BOARD_CREATE_DATE,
+					BOARD_CONTENT,
+					BOARD_FLAG,
+					BOARD_UPDATER,
+					BOARD_UPDATE_DATE)
+		values		(BI_BOARD_SEQ.nextval,
+					#{EMP_ID},
+					#{TITLE},
+					sysdate,
+					#{CONTENT},
+					'Y',
+					NULL,
+					NULL)
 	</insert>
 	
 	<select id="getTotalRows" resultType="int">
-		select 
-			count(*)
-		from
-			BI_BOARD BOARD, BI_EMP EMP
-		where
-			BOARD.EMP_ID = EMP.EMP_ID
-			<if test="TITLE != null &amp;&amp; TITLE !=''">
-				and BOARD.BOARD_TITLE like '%' || #{TITLE} || '%'
-			</if>
-			<if test="ID != null &amp;&amp; ID !=''">
-				and EMP.EMP_NAME like '%' || #{ID} || '%'
-			</if>
+		select	count(*)
+		from	BI_BOARD BOARD,
+				BI_EMP EMP
+		where	BOARD.EMP_ID = EMP.EMP_ID
+		<if test="TITLE != null &amp;&amp; TITLE !=''">
+			and BOARD.BOARD_TITLE like '%' || #{TITLE} || '%'
+		</if>
+		<if test="ID != null &amp;&amp; ID !=''">
+			and EMP.EMP_NAME like '%' || #{ID} || '%'
+		</if>
 		order by BOARD_NO desc
 	</select>
 	
 	<select id="getBoardList" parameterType="BoardCriteria" resultType="Board">
-		select 
-				BOARD_NO as NO,
+		select 	BOARD_NO as NO,
 				EMP_NAME,
 				BOARD_TITLE as TITLE,
 				BOARD_CREATE_DATE as CREATE_DATE,
@@ -57,73 +66,63 @@
 				BOARD_FLAG as FLAG,
 				BOARD_UPDATER as UPDATER,
 				BOARD_UPDATE_DATE as UPDATE_DATE
-		from 
-			(
-				select
-					BOARD.BOARD_NO,
-					EMP.EMP_NAME,
-					BOARD.EMP_ID,
-					BOARD.BOARD_TITLE,
-					BOARD.BOARD_CREATE_DATE,
-					BOARD.BOARD_CONTENT,
-					BOARD.BOARD_FLAG,
-					BOARD.BOARD_UPDATER,
-					BOARD.BOARD_UPDATE_DATE,
-					row_number() over (order by BOARD_NO desc) rn
-				from
-					BI_BOARD BOARD, BI_EMP EMP
-				where
-					BOARD.EMP_ID = EMP.EMP_ID
-					<if test="TITLE != null &amp;&amp; TITLE !=''">
-						and BOARD.BOARD_TITLE like '%' || #{TITLE} || '%'
-					</if>
-					<if test="ID != null &amp;&amp; ID !=''">
-						and EMP.EMP_NAME like '%' || #{ID} || '%'
-					</if>
-			)
-		where
-			rn &gt;= #{beginIndex} and rn &lt;= #{endIndex}	and BOARD_FLAG = 'Y'
-		order by
-			BOARD_NO desc	
+		from (
+				select	BOARD.BOARD_NO,
+						EMP.EMP_NAME,
+						BOARD.EMP_ID,
+						BOARD.BOARD_TITLE,
+						BOARD.BOARD_CREATE_DATE,
+						BOARD.BOARD_CONTENT,
+						BOARD.BOARD_FLAG,
+						BOARD.BOARD_UPDATER,
+						BOARD.BOARD_UPDATE_DATE,
+						row_number() over (order by BOARD_NO desc) rn
+		from	BI_BOARD BOARD,
+				BI_EMP EMP
+		where	BOARD.EMP_ID = EMP.EMP_ID
+				<if test="TITLE != null &amp;&amp; TITLE !=''">
+					and BOARD.BOARD_TITLE like '%' || #{TITLE} || '%'
+				</if>
+				<if test="ID != null &amp;&amp; ID !=''">
+					and EMP.EMP_NAME like '%' || #{ID} || '%'
+				</if>
+				)
+		where	rn 
+				&gt;= #{beginIndex} 
+		and		 rn &lt;= #{endIndex}
+		and BOARD_FLAG = 'Y' order by BOARD_NO desc	
 	</select>
 	<select id="getBoardByNo" parameterType="int" resultMap="BoardResultMap">
-		select
-			BOARD.BOARD_NO,
-			EMP.EMP_NAME,
-			BOARD.EMP_ID,
-			BOARD.BOARD_TITLE,
-			BOARD.BOARD_CREATE_DATE,
-			BOARD.BOARD_CONTENT,
-			BOARD.BOARD_FLAG,
-			BOARD.BOARD_UPDATER,
-			BOARD.BOARD_UPDATE_DATE
-		from
-			BI_BOARD BOARD, 
-			BI_EMP EMP
-		where
-			BOARD.EMP_ID = EMP.EMP_ID 
-		and BOARD.BOARD_NO = #{value}
+		select	BOARD.BOARD_NO,
+				EMP.EMP_NAME,
+				BOARD.EMP_ID,
+				BOARD.BOARD_TITLE,
+				BOARD.BOARD_CREATE_DATE,
+				BOARD.BOARD_CONTENT,
+				BOARD.BOARD_FLAG,
+				BOARD.BOARD_UPDATER,
+				BOARD.BOARD_UPDATE_DATE
+			from
+				BI_BOARD BOARD, 
+				BI_EMP EMP
+			where
+				BOARD.EMP_ID = EMP.EMP_ID 
+			and BOARD.BOARD_NO = #{value}
 	</select>
 	
 	<update id="updateBoard" parameterType="Board">
-		update
-			BI_BOARD
-		set
-			BOARD_TITLE			= #{TITLE},
-			BOARD_CONTENT		= #{CONTENT},
-			BOARD_UPDATER		= #{UPDATER},
-			BOARD_UPDATE_DATE	= SYSDATE
-		where
-			BOARD_NO = #{NO}
+		update	BI_BOARD
+		set		BOARD_TITLE			= #{TITLE},
+				BOARD_CONTENT		= #{CONTENT},
+				BOARD_UPDATER		= #{UPDATER},
+				BOARD_UPDATE_DATE	= SYSDATE
+		where	BOARD_NO = #{NO}
 	</update>
 	
 	<delete id="deleteBoard" parameterType="Board">
-		update
-			BI_BOARD
-		set
-			BOARD_FLAG = 'N'
-		where
-			BOARD_NO = #{value}
+		update	BI_BOARD
+		set		BOARD_FLAG = 'N'
+		where	BOARD_NO = #{value}
 	</delete>
 
 	<insert id="insertBoardReply" parameterType="BoardReply">
@@ -131,29 +130,31 @@
 			SELECT REP_BOARD_SEQ.currval FROM DUAL
 		</selectKey>
 		insert into BI_BOARD_REPLY
-			(REPLY_NO,BOARD_NO,EMP_ID,REPLY_CREATE_DATE,REPLY_CONTENT)
+				   (REPLY_NO,
+				   	BOARD_NO,
+				   	EMP_ID,
+				   	REPLY_CREATE_DATE,
+				   	REPLY_CONTENT)
 		values
-			(REP_BOARD_SEQ.nextval,#{BOARD_NO},#{ID},sysdate,#{CONTENT})
+				   (REP_BOARD_SEQ.nextval,
+				   	#{BOARD_NO},
+				   	#{ID},
+				   	sysdate,
+				   	#{CONTENT})
 	</insert>
 	<select id="getReplybyNo" parameterType="int" resultType="BoardReply">
-		select 
-			REPLY.REPLY_NO as NO,
-			REPLY.BOARD_NO,
-			EMP.EMP_NAME,
-			REPLY.REPLY_CREATE_DATE as CREATE_DATE,
-			REPLY.REPLY_CONTENT as CONTENT
-		from
-			BI_BOARD_REPLY REPLY,BI_EMP EMP
-		where
-			BOARD_NO = #{value} and REPLY.EMP_ID = EMP.EMP_ID
-		order by
-			CREATE_DATE desc
+		select 	REPLY.REPLY_NO as NO,
+				REPLY.BOARD_NO,
+				EMP.EMP_NAME,
+				REPLY.REPLY_CREATE_DATE as CREATE_DATE,
+				REPLY.REPLY_CONTENT as CONTENT
+		from	BI_BOARD_REPLY REPLY,BI_EMP EMP
+		where	BOARD_NO = #{value} 
+		and		REPLY.EMP_ID = EMP.EMP_ID order by	CREATE_DATE desc
 	</select>
 	<delete id="deleteBoardReply" parameterType="int">
-		delete from
-			BI_BOARD_REPLY
-		where
-			REPLY_NO = #{value}
+		delete from	BI_BOARD_REPLY
+		where		REPLY_NO = #{value}
 	</delete>
 
 </mapper>

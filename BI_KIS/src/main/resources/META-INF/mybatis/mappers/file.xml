@@ -6,75 +6,62 @@
 <mapper namespace="com.northstar.bi.dao.FileDao">
 	<insert id="insertFile" parameterType="BoardFile">
 		insert into BI_FILE
-		(FILE_NO,BOARD_NO,EMP_ID,FILE_DUAL,FILE_NAME,FILE_FLAG)
-		values
-		(FILE_NO_SEQ.nextval, #{BOARD_NO}, #{ID}, #{DUAL}, #{NAME}, #{FLAG})
+				   (FILE_NO,
+				    BOARD_NO,
+				    FILE_DUAL,
+				    FILE_NAME,
+				    FILE_FLAG)
+		values 	   (FILE_NO_SEQ.nextval,
+					#{BOARD_NO},
+					#{DUAL},
+					#{NAME},
+					#{FLAG})
 	</insert>
 	<select id="getFileByNo" parameterType="int" resultType="BoardFile">
-		select
-			FILE_NO as NO,
-			BOARD_NO,
-			EMP_ID,
-			FILE_DUAL as DUAL,
-			FILE_NAME as NAME,
-			FILE_FLAG as FLAG
-		from
-			BI_FILE
-		where
-			BOARD_NO = #{value} and FILE_FLAG = 'N'
+		select	FILE_NO as NO,
+				BOARD_NO,
+				FILE_DUAL as DUAL,
+				FILE_NAME as NAME,
+				FILE_FLAG as FLAG
+		from	BI_FILE
+		where	BOARD_NO = #{value} and FILE_FLAG = 'N'
 	</select>
 	<select id="getFile" parameterType="int" resultType="BoardFile">
-		select
-			FILE_NO as NO,
-			BOARD_NO,
-			EMP_ID as ID,
-			FILE_DUAL as DUAL,
-			FILE_NAME as NAME
-		from
-			BI_FILE
+		select	FILE_NO as NO,
+				BOARD_NO,
+				FILE_DUAL as DUAL,
+				FILE_NAME as NAME
+		from	BI_FILE
 		where
 			FILE_NO = #{value}
 	</select>
 	<select id="getFileList" resultType="BoardFile">
-		select
-			FILE_NO as NO,
-			BOARD_NO,
-			EMP_ID as ID,
-			FILE_DUAL as DUAL,
-			FILE_NAME as NAME
-		from
-			BI_FILE
+		select	FILE_NO as NO,
+				BOARD_NO,
+				FILE_DUAL as DUAL,
+				FILE_NAME as NAME
+		from	BI_FILE
 	</select>
 	<select id="selectFileInfo" parameterType="int" resultType="BoardFile">
-	 	select
-	 		FILE_DUAL as DUAL,
-			FILE_NAME as NAME
-	 	FROM 
-	 		BI_FILE 
-	 	WHERE 
-	 		FILE_NO = #{value}
+	 	select	FILE_DUAL as DUAL,
+				FILE_NAME as NAME
+	 	FROM 	BI_FILE 
+	 	WHERE	FILE_NO = #{value}
 	 </select>
 	
 	<delete id="deleteFile" parameterType="int">
-		delete
-		from
-			BI_FILE
-		where
-			FILE_NO = #{value}
+		delete	from	BI_FILE
+		where			FILE_NO = #{value}
 	</delete>
 	<update id="deleteFileList" parameterType="int">
-		UPDATE 
-			BI_FILE 
-		SET
-			FILE_FLAG = 'Y' 
-		WHERE BOARD_NO = #{value}
+		UPDATE	BI_FILE 
+		SET		FILE_FLAG = 'Y' 
+		WHERE	BOARD_NO = #{value}
 	</update>
 	<update id="updateFile" parameterType="int"> 
-		UPDATE 
-			BI_FILE 
-		SET 
-			FILE_FLAG = 'N' 
-		WHERE FILE_NO = #{value}
+		UPDATE 	BI_FILE 
+		SET 	FILE_FLAG = 'N' 
+		WHERE	FILE_NO = #{value}
 	</update>
 
 </mapper>
