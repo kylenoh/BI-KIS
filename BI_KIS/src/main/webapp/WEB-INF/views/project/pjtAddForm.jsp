@@ -66,7 +66,7 @@
 			var row ="";
 			var hidden = "";
 			
-			if($('.close').hasClass(empId)){
+			if($('.close-cate').hasClass(empId)){
 				alert("이미 등록 되어 있는 직원 입니다.");
 				$('#emp').find('option:first').prop('selected', 'selected');
 			} else {
@@ -77,7 +77,7 @@
 					success:function(result){
 						row += '<div style="display:inline-block; width: auto !important;">';
 						row += '<span>' + result.name + '</span>';
-						row += '<a id="emp-info-' + result.id +'" class="close ' + result.id + '" href="javascript:void(0)"> x </a>';
+						row += '<a id="emp-info-' + result.id +'" class="close-cate ' + result.id + '" href="javascript:void(0)"> x </a>';
 						row += '<input type="hidden" name="emp-info" value="' + result.id + '">';
 						row += '</div>';
 						$('#emp').find('option:first').prop('selected', 'selected');
