@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,19 +20,23 @@ import com.northstar.bi.dto.Board;
 import com.northstar.bi.dto.BoardCriteria;
 import com.northstar.bi.dto.BoardFile;
 import com.northstar.bi.dto.Emp;
+import com.northstar.bi.dto.SolutionFile;
+import com.northstar.bi.utils.BoardFileUtils;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-	@Autowired
-	BoardDao boardDao;
-	@Autowired
-	FileDao fileDao;
-
+	@Autowired	BoardDao boardDao;
+	@Autowired	FileDao fileDao;
+	@Resource(name="BoardFileUtils") private BoardFileUtils boardUtils;
+	
 //	게시판 추가
 	@Override
 	public void insertBoard(Board board, BoardFile boardfile, MultipartHttpServletRequest files, HttpSession session) {
 		boardDao.insertBoard(board);
-		addFile(board, boardfile, files, session);
+		List<BoardFile> list = boardUtils.InsertFileinfo(board, files);
+		for (int i = 0; i < list.size(); i++) {
+			fileDao.insertFile(list.get(i));
+		}
 	}
 
 //	페이지 전체 카운트
@@ -59,46 +64,17 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.updateBoard(board);	//일반 게시글 업데이트
 		int boardNo = board.getNO();	
 		fileDao.deleteFileList(boardNo);
-		String requestName;
-		String idx;
-		int paramValue;
-		String uploadPath = "D:\\BIFile\\";
-		String storedName;
-		String originName;
 		
-		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
-		
-		Iterator<String>iterator = files.getFileNames();
-		MultipartFile multipartfile = null;
-		try {
-			while (iterator.hasNext()) {
-				multipartfile = files.getFile(iterator.next());
-				if (multipartfile.isEmpty() == false) {
-					System.out.println("신규파일 추가");
-					storedName = getRandom()+"_"+multipartfile.getOriginalFilename();
-					originName = multipartfile.getOriginalFilename();
-					
-						multipartfile.transferTo(new File(uploadPath + storedName));
-						boardfile.setBOARD_NO(board.getNO());
-						boardfile.setID(User.getId());
-						boardfile.setDUAL(storedName);
-						boardfile.setNAME(originName);
-						boardfile.setFLAG("N");
-						fileDao.insertFile(boardfile);
-				}else {
-					System.out.println("기존 파일");
-					requestName = multipartfile.getName();
-					idx = "IDX_"+requestName.substring(requestName.indexOf("_")+1);
-					paramValue = Integer.parseInt(request.getParameter(idx));
-					fileDao.updateFile(paramValue);
-				}
+		String temp = null;
+		List<BoardFile>list = boardUtils.updateFileInfo(board, files,request);
+		for (int i = 0; i < list.size(); i++) {
+				temp = list.get(i).getFLAG();
+			if (temp.equals("N")) {
+				fileDao.insertFile(list.get(i));
+			}else {
+				fileDao.updateFile(list.get(i).getNO());
 			}
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		
 
 	}
 
@@ -124,50 +100,6 @@ public class BoardServiceImpl implements BoardService {
 			file.delete();
 		}
 		return fileDao.deleteFile(no);
-	}
-//	파일추가
-	private BoardFile addFile(Board board, BoardFile boardfile, MultipartHttpServletRequest files,
-			HttpSession session) {
-		String uploadPath = "D:\\BIFile\\";
-		String storedName = null;
-		String originName = null;
-		int boardIdx = board.getNO();
-		
-		Emp User = (Emp) session.getAttribute("LOGIN_EMP");
-		Iterator<String>iterator = files.getFileNames();
-		MultipartFile multipartfile = null;
-		File target = new File(uploadPath);
-
-		try {
-			if (target.exists() == false) {
-				target.mkdirs();
-			}
-			
-			while (iterator.hasNext()) {
-				multipartfile = files.getFile(iterator.next());
-				if (multipartfile.isEmpty()==false) {
-					storedName = getRandom()+"_"+multipartfile.getOriginalFilename();
-					originName = multipartfile.getOriginalFilename();
-					target = new File(uploadPath + storedName);
-					multipartfile.transferTo(target);
-					boardfile.setBOARD_NO(boardIdx);
-					boardfile.setID(User.getId());
-					boardfile.setDUAL(storedName);
-					boardfile.setNAME(originName);
-					boardfile.setFLAG("N");
-					fileDao.insertFile(boardfile);
-				}
-			}
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return boardfile;
-	}
-//	중복방지
-	private String getRandom() {
-		return UUID.randomUUID().toString().replace("-", "");
 	}
 
 

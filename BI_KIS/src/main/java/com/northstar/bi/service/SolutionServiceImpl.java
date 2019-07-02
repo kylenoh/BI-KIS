@@ -3,8 +3,6 @@ package com.northstar.bi.service;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.northstar.bi.dao.SolutionDao;
@@ -25,7 +22,6 @@ import com.northstar.bi.dto.Solution;
 import com.northstar.bi.dto.SolutionCriteria;
 import com.northstar.bi.dto.SolutionFile;
 import com.northstar.bi.dto.SolutionReply;
-import com.northstar.bi.utils.CommonUtils;
 import com.northstar.bi.utils.SolutionFileUtils;
 
 @Service
@@ -82,13 +78,9 @@ public class SolutionServiceImpl implements SolutionService {
 		List<SolutionFile>list = solutionUtils.updateFileInfo(solution, files,request);
 		for (int i = 0; i < list.size(); i++) {
 				temp = list.get(i).getFLAG();
-				System.out.println(temp);
-				System.out.println(list.get(i).getNAME());
 			if (temp.equals("N")) {
-				System.out.println("새로추가된 파일");
-				solutionDao.insertSolutionFile(solutionFile);
+				solutionDao.insertSolutionFile(list.get(i));
 			}else {
-				System.out.println("기존파일 원상태로");
 				solutionDao.updateSolutionFile(list.get(i).getNO());
 			}
 		}

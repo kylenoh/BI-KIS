@@ -4,7 +4,6 @@ public class BoardFile {
 
 	private int NO;
 	private int BOARD_NO;
-	private String ID;
 	private String DUAL;
 	private String NAME;
 	private String FLAG;
@@ -13,11 +12,10 @@ public class BoardFile {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardFile(int nO, int bOARD_NO, String iD, String dUAL, String nAME, String fLAG) {
+	public BoardFile(int nO, int bOARD_NO, String dUAL, String nAME, String fLAG) {
 		super();
 		NO = nO;
 		BOARD_NO = bOARD_NO;
-		ID = iD;
 		DUAL = dUAL;
 		NAME = nAME;
 		FLAG = fLAG;
@@ -37,14 +35,6 @@ public class BoardFile {
 
 	public void setBOARD_NO(int bOARD_NO) {
 		BOARD_NO = bOARD_NO;
-	}
-
-	public String getID() {
-		return ID;
-	}
-
-	public void setID(String iD) {
-		ID = iD;
 	}
 
 	public String getDUAL() {
