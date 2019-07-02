@@ -42,12 +42,24 @@ function propertyDelete(no,flag){
 					<c:choose>
 						<c:when test="${fn:length(auths)>0 }">
 							<c:forEach var="auths" items="${auths }">
-								<tr>
-									<td>${auths.no }</td>
-									<td>${auths.name }</td>
-									<td>${auths.content }</td>
-								</tr>
-							</c:forEach>
+									<tr>
+										<td>${auths.no }</td>
+										<td>${auths.name }</td>
+										<td>
+											<c:forEach var="category" items="${categoryList }" varStatus="stauts">
+												<c:if test="${auths.no <= category.CATE_AUTH_NO }">
+													<c:if test="${!stauts.last }">
+														${category.CATE_SECTION_NAME },
+													</c:if>
+													<c:if test="${status.last }">
+														${category.CATE_SECTION_NAME }
+													</c:if>
+												</c:if>
+											</c:forEach>
+										</td>
+									</tr>
+								</c:forEach>
+			
 						</c:when>
 							<c:otherwise>
 								<tr>

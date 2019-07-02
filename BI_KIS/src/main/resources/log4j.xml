@@ -10,10 +10,6 @@
 		</layout>
 	</appender>
 	
-	<!-- Application Loggers -->
-	<logger name="com.northstar.bi">
-		<level value="info" />
-	</logger>
 	<logger name="com.northstar.bi.dao">
 		<level value="trace" />
 	</logger>

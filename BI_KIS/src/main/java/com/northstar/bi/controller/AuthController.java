@@ -43,10 +43,12 @@ public class AuthController {
 		
 		int totalRows = authService.getTotalRows(criteria);
 		Pagination pagination = new Pagination(totalRows, cp, rows);
+		List<Category> categoryList = categoryService.getAllCategoryList();
 		
 		List<Auth>auths = authService.getAuthList(criteria);
 		model.addAttribute("auths", auths);
 		model.addAttribute("pagination", pagination);
+		model.addAttribute("categoryList",categoryList);
 		
 		return "auth/auth";
 	}

@@ -35,10 +35,6 @@ public class CompanyController {
 	
 	@RequestMapping(value="/company")
 	public String company(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
-						@RequestParam(name="name", required=false)String name,
-						@RequestParam(name="customerName", required=false)String customerName,
-						@RequestParam(name="email", required=false)String email,
-						@RequestParam(name="dept", required=false)String dept,
 						@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
 							Model model, Criteria criteria, HttpSession session) throws ParseException {
 		Category category = new Category();
@@ -49,13 +45,10 @@ public class CompanyController {
 			category = categoryService.getCategoryByCategoryNo(cateNo);
 		}
 		session.setAttribute("HEADER_VALUE", category);
+		
 		int rows = 10;
 		criteria.setBeginIndex((cp-1) * rows + 1);
 		criteria.setEndIndex(cp * rows);
-		criteria.setName(name);
-		criteria.setCustomerName(customerName);
-		criteria.setEmail(email);
-		criteria.setDept(dept);
 		
 		int totalRows = companyService.getCompanyCount(criteria);
 		Pagination pagination = new Pagination(totalRows, cp, rows);
@@ -88,22 +81,11 @@ public class CompanyController {
 		return "company/companyAddForm";
 	}
 	@RequestMapping(value="addCompany", method=RequestMethod.POST)
-	public String addCompany(@RequestParam(name="name")String name,
-							@RequestParam(name="owner")String owner,
-							@RequestParam(name="tel")String tel,
-							@RequestParam(name="addr")String addr,
-							@RequestParam(name="remark",required=false)String remark,
-							HttpSession session, Model model) {
-		Company company = new Company();
+	public String addCompany(Company company, HttpSession session, Model model) {
 		int companyNo = companyService.getCompanyNo();
 		Emp emp = (Emp)session.getAttribute("LOGIN_EMP");
 		
 		company.setNo(companyNo);
-		company.setName(name);
-		company.setOwner(owner);
-		company.setTel(tel);
-		company.setAddr(addr);
-		company.setRemark(remark);
 		company.setRegistrant(emp);
 		
 		companyService.addCompany(company);
@@ -116,29 +98,14 @@ public class CompanyController {
 		return "company/customerAddForm";
 	}
 	@RequestMapping(value="addCustomer", method=RequestMethod.POST)
-	public String addCustomer(@RequestParam(name="name")String name,
-							@RequestParam(name="rank")String rank,
-							@RequestParam(name="dept")String dept,
-							@RequestParam(name="tel1")String tel1,
-							@RequestParam(name="tel2")String tel2,
-							@RequestParam(name="email")String email,
-							@RequestParam(name="companyNo")int companyNo,
-							@RequestParam(name="remark",required=false)String remark,
-							HttpSession session, Model model) {
-		Customer customer = new Customer();
+	public String addCustomer(@RequestParam(name="companyNo")int companyNo,
+							Customer customer, HttpSession session, Model model) {
 		Company company = companyService.getCompanyByComNo(companyNo);
 		int customerNo = companyService.getCustomerNo();
 		Emp emp = (Emp)session.getAttribute("LOGIN_EMP");
 		
 		customer.setNo(customerNo);
-		customer.setName(name);
-		customer.setRank(rank);
-		customer.setDept(dept);
-		customer.setTel1(tel1);
-		customer.setTel2(tel2);
-		customer.setEmail(email);
 		customer.setCompany(company);
-		customer.setRemark(remark);
 		customer.setRegistrant(emp);
 		
 		companyService.addCustomer(customer);
@@ -167,22 +134,9 @@ public class CompanyController {
 		return "company/companyModifyForm";
 	}
 	@RequestMapping(value="companyModify", method=RequestMethod.POST)
-	public String companyModify(@RequestParam(name="companyNo")int companyNo,
-								@RequestParam(name="name")String name,
-								@RequestParam(name="owner")String owner,
-								@RequestParam(name="tel")String tel,
-								@RequestParam(name="addr")String addr,
-								@RequestParam(name="remark",required=false)String remark,
-								Model model) {
-		Company company = companyService.getCompanyByComNo(companyNo);
-		company.setNo(companyNo);
-		company.setName(name);
-		company.setOwner(owner);
-		company.setTel(tel);
-		company.setAddr(addr);
-		company.setRemark(remark);
+	public String companyModify(Company company,Model model) {
 		companyService.modifyCompany(company);
-		return "redirect:/companyDetail?companyNo=" + companyNo;
+		return "redirect:/companyDetail?companyNo=" + company.getNo();
 	}
 	@RequestMapping(value="customerModify", method=RequestMethod.GET)
 	public String customerModifyForm(Model model, int customerNo) {
@@ -191,27 +145,10 @@ public class CompanyController {
 		return "company/customerModifyForm";
 	}
 	@RequestMapping(value="customerModify", method=RequestMethod.POST)
-	public String customerModify(@RequestParam(name="no")int no,
-								@RequestParam(name="name")String name,
-								@RequestParam(name="rank")String rank,
-								@RequestParam(name="dept")String dept,
-								@RequestParam(name="tel1")String tel1,
-								@RequestParam(name="tel2")String tel2,
-								@RequestParam(name="email")String email,
-								@RequestParam(name="remark",required=false)String remark,
-								Model model) {
-		Customer customer = companyService.getCustomerByNo(no);
+	public String customerModify(Customer customer, Model model) {
 		
-		customer.setNo(no);
-		customer.setName(name);
-		customer.setRank(rank);
-		customer.setDept(dept);
-		customer.setTel1(tel1);
-		customer.setTel2(tel2);
-		customer.setEmail(email);
-		customer.setRemark(remark);
 		companyService.modifyCustomer(customer);
 		
-		return "redirect:/customerDetail?customerNo=" + no;
+		return "redirect:/customerDetail?customerNo=" + customer.getNo();
 	}
 }

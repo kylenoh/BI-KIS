@@ -17,7 +17,7 @@
 	<div class="main">
 		<div class="container">
 		<form method="post" action="companyModify" id="companyForm">
-			<input type="hidden" name="companyNo" value="${company.no}">
+			<input type="hidden" name="no" value="${company.no}">
 	        	<div id="companyDetail">
 	        		<div>
 		                <label for="title">고객사 명</label><input class="inputTitle"type="text" id="name" name="name" value="${company.name }">

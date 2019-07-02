@@ -106,28 +106,19 @@ public class ProjectController {
 		return "project/projectDetail";
 	}
 	@RequestMapping(value="/pjtadd", method=RequestMethod.POST)
-	public String pjtadd(@RequestParam("title") String title,
-							@RequestParam("companyNo") int compnayNo,
-							@RequestParam("startDate") String startDate,
+	public String pjtadd(@RequestParam("companyNo") int compnayNo,
 							@RequestParam(value="endDate",required=false,defaultValue="nodate") String endDate,
-							@RequestParam(value="content") String content,
-							@RequestParam(value="remark",required=false) String remark,
 							@RequestParam(value="emp-info",required=false)List<String> empId,
-							HttpSession session) throws ParseException {
-		Project project = new Project();
+							Project project, HttpSession session) throws ParseException {
 		Emp loginEmp = (Emp) session.getAttribute("LOGIN_EMP");
 		Company company = companyService.getCompanyByComNo(compnayNo);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		int pjtNo = projectService.getProjectNo();
 		project.setNo(pjtNo);
-		project.setTitle(title);
 		project.setCompany(company);
-		project.setStartDate(formatter.parse(startDate));
 		if(!("nodate".equals(endDate))) {
 			project.setEndDate(formatter.parse(endDate));
 		}
-		project.setContent(content);
-		project.setRemark(remark);
 		project.setFlag("Y");
 		project.setMsg("진행예정");
 		project.setRegistrant(loginEmp);
@@ -157,44 +148,33 @@ public class ProjectController {
 		return "project/pjtModifyForm";
 	}
 	@RequestMapping(value="pjtmodify", method=RequestMethod.POST)
-	public String pjtmodify(@RequestParam("pjtNo") int pjtNo,
-							@RequestParam("title") String title,
-							@RequestParam("companyNo") int compnayNo,
-							@RequestParam("startDate") String startDate,
+	public String pjtmodify(@RequestParam("companyNo") int compnayNo,
 							@RequestParam(value="endDate",required=false,defaultValue="nodate") String endDate,
-							@RequestParam(value="content") String content,
-							@RequestParam(value="remark",required=false) String remark,
-							@RequestParam("flag") String flag,
-							@RequestParam(value="emp-info",required=false)List<String> empId) throws ParseException {
-		Project pjt = projectService.getProjectByNo(pjtNo); 
+							@RequestParam(value="emp-info",required=false)List<String> empId,
+							Project pjt) throws ParseException {
 		Company company = companyService.getCompanyByComNo(compnayNo);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
 		
-		pjt.setTitle(title);
 		pjt.setCompany(company);
-		pjt.setStartDate(formatter.parse(startDate));
 		if(!("nodate".equals(endDate))) {
 			pjt.setEndDate(formatter.parse(endDate));
 		}
-		pjt.setContent(content);
-		pjt.setRemark(remark);
-		pjt.setFlag(flag);
-		if ("Y".equals(flag)) {
+		if ("Y".equals(pjt.getFlag())) {
 			pjt.setMsg("진행예정");
 		}
-		if ("P".equals(flag)) {
+		if ("P".equals(pjt.getFlag())) {
 			pjt.setMsg("진행중");
 		}
-		if ("N".equals(flag)) {
+		if ("N".equals(pjt.getFlag())) {
 			pjt.setMsg("종료");
 		}
 		
 		if(null != empId) {
-			projectService.deleteEmpPro(empId,pjtNo);
-			projectService.addEmpPro(empId,pjtNo);
+			projectService.deleteEmpPro(empId,pjt.getNo());
+			projectService.addEmpPro(empId,pjt.getNo());
 		}
 		projectService.modifyProject(pjt);
-		return "redirect:/pjtdetail?pjtNo=" + pjtNo;
+		return "redirect:/pjtdetail?pjtNo=" + pjt.getNo();
 	}
 }

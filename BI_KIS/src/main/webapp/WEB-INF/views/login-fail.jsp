@@ -43,6 +43,9 @@
 				<c:if test="${param.login eq 'expire' }">
 			   		<p style="color:red; font-size:14px;">로그인이 필요한 페이지 입니다.</p> 
 				</c:if>
+				<c:if test="${param.login eq 'flag' }">
+			   		<p style="color:red; font-size:14px;">탈퇴한 계정입니다.</p> 
+				</c:if>
 			</div>
 		</div>
 	</div>

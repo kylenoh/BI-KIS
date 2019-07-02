@@ -49,6 +49,9 @@ public class MainController {
 		if (!emp.getPassword().equals(password)) {
 			return "redirect:/login?login=fail";
 		}
+		if(emp.getFlag().equals("N")) {
+			return "redirect:/login?login=flag";
+		}
 		session.setAttribute("LOGIN_EMP", emp);
 		session.setAttribute("CATEGORY_LIST", categoryList);
 		return "redirect:/project?cateNo=1";

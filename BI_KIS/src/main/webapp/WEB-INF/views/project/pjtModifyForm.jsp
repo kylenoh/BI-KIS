@@ -17,7 +17,7 @@
 	<div class="main">
 		<div class="container">
 			<form method="post" action="pjtmodify" id="pjtForm">
-				<input type="hidden" name="pjtNo" value="${pjt.no }">
+				<input type="hidden" name="no" value="${pjt.no }">
 		            <div id="PjtDetail">
 			            <div>
 			        	    <label for="title">프로젝트 명</label>
