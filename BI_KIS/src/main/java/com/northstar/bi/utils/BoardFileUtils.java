@@ -11,24 +11,24 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.northstar.bi.dto.Solution;
-import com.northstar.bi.dto.SolutionFile;
+import com.northstar.bi.dto.Board;
+import com.northstar.bi.dto.BoardFile;
 
-@Component("SolutionFileUtils")
-public class SolutionFileUtils {
-	private static final String UPLOADPATH = "D:\\\\BISolutionFile\\\\";
+@Component("BoardFileUtils")
+public class BoardFileUtils {
+	private static final String UPLOADPATH = "D:\\BIFile\\";
 
-	public List<SolutionFile> InsertFileinfo(Solution solution, MultipartHttpServletRequest files) {
+	public List<BoardFile> InsertFileinfo(Board board, MultipartHttpServletRequest files) {
 		Iterator<String> iterator = files.getFileNames();
 		MultipartFile multipartFile = null;
 		String originalFileName = null;
 		String originalFileExtension = null;
 		String storedFileName = null;
 
-		SolutionFile solutionfile = null;
-		int solutionIdx = solution.getNO();
+		BoardFile boardfile = null;
+		int boardIdx = board.getNO();
 
-		List<SolutionFile> list = new ArrayList<SolutionFile>();
+		List<BoardFile> list = new ArrayList<BoardFile>();
 		try {
 			File file = new File(UPLOADPATH);
 			if (file.exists() == false) {
@@ -37,17 +37,17 @@ public class SolutionFileUtils {
 			while (iterator.hasNext()) {
 				multipartFile = files.getFile(iterator.next());
 				if (multipartFile.isEmpty() == false) {
-					solutionfile = new SolutionFile();
+					boardfile = new BoardFile();
 					originalFileName = multipartFile.getOriginalFilename();
 					originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 					storedFileName = CommonUtils.getUUID() + originalFileExtension;
 					file = new File(UPLOADPATH + storedFileName);
 					multipartFile.transferTo(file);
-					solutionfile.setSOLUTION_NO(solutionIdx);
-					solutionfile.setDUAL(storedFileName);
-					solutionfile.setNAME(originalFileName);
-					solutionfile.setFLAG("N");
-					list.add(solutionfile);
+					boardfile.setBOARD_NO(boardIdx);
+					boardfile.setDUAL(storedFileName);
+					boardfile.setNAME(originalFileName);
+					boardfile.setFLAG("N");
+					list.add(boardfile);
 				}
 			}
 		} catch (Exception e) {
@@ -57,7 +57,7 @@ public class SolutionFileUtils {
 		return list;
 	}
 
-	public List<SolutionFile> updateFileInfo(Solution solution, MultipartHttpServletRequest files,HttpServletRequest request) {
+	public List<BoardFile> updateFileInfo(Board board, MultipartHttpServletRequest files,HttpServletRequest request) {
 		Iterator<String> iterator = files.getFileNames();
 		MultipartFile multipartFile = null;
 		String originalFileName = null;
@@ -66,35 +66,35 @@ public class SolutionFileUtils {
 		String requestName = null; 
 		String idx = null;
 
-		SolutionFile solutionfile = null;
-		int solutionIdx = solution.getNO();
+		BoardFile boardfile = null;
+		int boardIdx = board.getNO();
 		File file = new File(UPLOADPATH);
 
-		List<SolutionFile> list = new ArrayList<SolutionFile>();
+		List<BoardFile> list = new ArrayList<BoardFile>();
 		try {
 			while (iterator.hasNext()) {
 				multipartFile = files.getFile(iterator.next());
 				if (multipartFile.isEmpty() == false) {
-					solutionfile = new SolutionFile();
+					boardfile = new BoardFile();
 					originalFileName = multipartFile.getOriginalFilename();
 					originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 					storedFileName = CommonUtils.getUUID() + originalFileExtension;
 					file = new File(UPLOADPATH + storedFileName);
 					multipartFile.transferTo(file);
-					solutionfile.setSOLUTION_NO(solutionIdx);
-					solutionfile.setDUAL(storedFileName);
-					solutionfile.setNAME(originalFileName);
+					boardfile.setBOARD_NO(boardIdx);
+					boardfile.setDUAL(storedFileName);
+					boardfile.setNAME(originalFileName);
 					
-					solutionfile.setFLAG("N");
-					list.add(solutionfile);
+					boardfile.setFLAG("N");
+					list.add(boardfile);
 				} else {
 					requestName = multipartFile.getName();
 					idx = "IDX_" + requestName.substring(requestName.indexOf("_") + 1);
 					int fileNo = Integer.parseInt(request.getParameter(idx));
-						solutionfile = new SolutionFile();
-						solutionfile.setFLAG("Y");
-						solutionfile.setNO(fileNo);
-						list.add(solutionfile);
+						boardfile = new BoardFile();
+						boardfile.setFLAG("Y");
+						boardfile.setNO(fileNo);
+						list.add(boardfile);
 				}
 			}
 

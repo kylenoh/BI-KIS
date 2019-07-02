@@ -119,11 +119,11 @@
 		where	BOARD_NO = #{NO}
 	</update>
 	
-	<delete id="deleteBoard" parameterType="Board">
+	<update id="deleteBoard" parameterType="Board">
 		update	BI_BOARD
 		set		BOARD_FLAG = 'N'
 		where	BOARD_NO = #{value}
-	</delete>
+	</update>
 
 	<insert id="insertBoardReply" parameterType="BoardReply">
 		<selectKey resultType="int" keyProperty="NO" order="AFTER">

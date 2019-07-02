@@ -54,7 +54,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-var file_count='${fn:length(Solution.FILES)+1}';
+var file_count = '${fn:length(solution.FILES)+1}';
 
 $(function(){
 	$("#addFile").on("click", function(e){ //파일 추가 버튼
