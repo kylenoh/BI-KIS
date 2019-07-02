@@ -16,19 +16,21 @@
 				<div class="container">
 					<c:forEach var="category" items="${categoryList}">
 						<div id="category-${category.CATE_DIVISION_NAME }">
-							${category.CATE_DIVISION_NAME }
+							<div class="category-division-div info">
+								${category.CATE_DIVISION_NAME }
+							</div>
 							<form action="categoryEvent" method="post" id="category-form-${category.CATE_DIVISION_NAME }">
 								<c:forEach var="categoryAll" items="${categoryAllList }">
 									<c:if test="${category.CATE_DIVISION_NAME == categoryAll.CATE_DIVISION_NAME }">
 										<c:if test="${categoryAll.CATE_DIVISION_NAME == '솔루션'}">
-											<div style="text-indent:20px;">
+											<div class="category-section-div success">
 												${categoryAll.CATE_SECTION_NAME}
-												<button type="button" id="category-modfiy-${categoryAll.CATE_NO}" value="${categoryAll.CATE_SECTION_NAME }">수정</button>
+												<button class="small-btn success" type="button" id="category-modfiy-${categoryAll.CATE_NO}" value="${categoryAll.CATE_SECTION_NAME }">수정</button>
 												<a id="category-close-${categoryAll.CATE_NO }" class="category-close close-cate delete-cate" href="javascript:void(0)">x</a>
 											</div>
 										</c:if>
-										<c:if test="${categoryAll.CATE_DIVISION_NAME != '솔루션'}">
-											<div style="text-indent:20px;">
+										<c:if test="${categoryAll.CATE_DIVISION_NAME != '솔루션' && categoryAll.CATE_SECTION_NAME != null}">
+											<div class="category-section-div success">
 												${categoryAll.CATE_SECTION_NAME}
 											</div>
 										</c:if>
@@ -38,8 +40,8 @@
 						</div>
 					</c:forEach>
 				</div>
-				<div>
-					<input type="submit" form="category-form-솔루션" value="저장"/>
+				<div style="margin-bottom:20px;">
+					<input class="btn warning" type="submit" form="category-form-솔루션" value="저장"/>
 				</div>
 			</div>
 		</div>
@@ -48,11 +50,11 @@
 <script type="text/javascript">
 	$(function(){
 		var categoryArea = $('#category-솔루션');
-		var btnRow = "<div>";
-		btnRow += "<button type='button' id='add-category-btn'>+</button>";
+		var btnRow = "<div class='category-btn'>";
+		btnRow += "<button class='small-btn' type='button' id='add-category-btn'>추가</button>";
 		btnRow += "</div>";
 		btnRow += "<input type='hidden' name='CATE_DIVISION_NAME' value='솔루션'>";
-		categoryArea.children().append(btnRow);
+		categoryArea.children().last().append(btnRow);
 		
 		$('[id^=category-form]').on('click','[id^=category-modfiy-]',function(){
 			categoryNo = $(this).attr('id').replace('category-modfiy-','');
@@ -63,11 +65,11 @@
 			$(this).parent().html(row);
 		});
 		$('[id^=category-form]').on('click','#add-category-btn',function(){
-			var row = "<div>";
+			var row = "<div class='category-section-div success'>";
 			row += "<input tpye='text' name='ADD_SECTION_NAME_LIST'>";
 			row += "<a class='category-close close-cate' href='javascript:void(0)'> x </a>";
 			row += "</div>";
-			$(this).before(row);
+			$(this).parent().before(row);
 		})
 		$('[id^=category-]').on('click','.category-close',function(){
 			if($(this).hasClass('delete-cate')){
