@@ -70,8 +70,8 @@ function propertyDelete(no,flag){
 					<th scope="col">사용자</th>
 					<th scope="col">지급일</th>
 					<th scope="col">비고</th>
-					<th scope="col">수정</th>
 					<th scope="col">사용여부</th>
+					<th scope="col">수정</th>
 				</tr>
 			</thead>
 			<tbody>
