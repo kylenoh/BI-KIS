@@ -17,7 +17,16 @@
 					<c:forEach var="category" items="${categoryList}">
 						<div id="category-${category.CATE_DIVISION_NAME }">
 							<div class="category-division-div info">
-								${category.CATE_DIVISION_NAME }
+								<div style="display: inline-block;">
+									${category.CATE_DIVISION_NAME }
+								</div>
+								<div style="display: inline-block;">
+									<select class="categoryAuth" id="category-${category.CATE_DIVISION_LEVEL }">
+										<c:forEach var="listAuth" items="${auths }">
+											<option value="${listAuth.no }" <c:if test="${category.CATE_AUTH_NO eq listAuth.no }">selected</c:if>>${listAuth.name}</option>
+										</c:forEach>
+									</select>
+								</div>
 							</div>
 							<form action="categoryEvent" method="post" id="category-form-${category.CATE_DIVISION_NAME }">
 								<c:forEach var="categoryAll" items="${categoryAllList }">
@@ -80,7 +89,17 @@
 			}else{
 				$(this).parent().remove();	
 			}
-			
+		})
+		$('.categoryAuth').on('change',function(){
+			var authNo = $(this).val();
+			var divisionLevel = $(this).attr('id').replace('category-','');
+			$.ajax({
+				url: "categoryAuthUpdate",
+				data: {CATE_AUTH_NO:authNo, CATE_DIVISION_LEVEL:divisionLevel},
+				success:function(){
+					alert("접근 권한이 수정되었습니다.");
+				}
+			})
 		})
 	})
 	

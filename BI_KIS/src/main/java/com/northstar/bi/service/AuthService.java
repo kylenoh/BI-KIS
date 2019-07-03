@@ -7,6 +7,6 @@ import com.northstar.bi.dto.AuthCriteria;
 
 public interface AuthService {
 //	Select
-	int getTotalRows (AuthCriteria criteria);
-	List<Auth> getAuthList (AuthCriteria criteria);
+	int getTotalRows ();
+	List<Auth> getAuthList ();
 }

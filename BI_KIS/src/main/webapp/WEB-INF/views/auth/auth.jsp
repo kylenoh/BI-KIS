@@ -35,7 +35,7 @@ function propertyDelete(no,flag){
 					<tr>
 						<th scope="col">권한번호</th>
 						<th scope="col">권한 명</th>
-						<th scope="col">권한 내용</th>
+						<th scope="col">접근 가능</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,16 +45,9 @@ function propertyDelete(no,flag){
 									<tr>
 										<td>${auths.no }</td>
 										<td>${auths.name }</td>
-										<td>
-											<c:forEach var="category" items="${categoryList }" varStatus="stauts">
-												<c:if test="${auths.no <= category.CATE_AUTH_NO }">
-													<c:if test="${!stauts.last }">
-														${category.CATE_SECTION_NAME },
-													</c:if>
-													<c:if test="${status.last }">
-														${category.CATE_SECTION_NAME }
-													</c:if>
-												</c:if>
+										<td class="category-auth">
+											<c:forEach var="category"  items="${categoryList }" varStatus="stauts">
+												<c:if  test="${auths.no <= category.CATE_AUTH_NO }">${category.CATE_DIVISION_NAME },</c:if>
 											</c:forEach>
 										</td>
 									</tr>
@@ -73,21 +66,16 @@ function propertyDelete(no,flag){
 	</div>
 	
 	<div class="footer">
-		<div align="center">
-			<c:if test="${!empty auths }">
-				<c:if test="${pagination.cb gt 1 }">
-					<a href="auth?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
-				</c:if>
-				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-					<a href="auth?cp=${num}">${num }</a>
-				</c:forEach>
-				<c:if test="${pagination.cb lt pagination.totalBlocks }">
-					<a href="auth?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
-				</c:if>
-			</c:if>
-		</div>
 	</div>
 </div>
 	
 </body>
+<script type="text/javascript">
+$(function(){
+	$(".category-auth").each(function(){
+		var text = $.trim($(this).text());
+		$(this).text(text.substring(0, text.length -1));	
+	})
+})
+</script>
 </html>

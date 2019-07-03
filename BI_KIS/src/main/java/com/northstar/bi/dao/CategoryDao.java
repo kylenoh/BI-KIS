@@ -9,6 +9,7 @@ public interface CategoryDao {
 	Category getLastSectionLevel(String divisionName);
 	void updateSectionLevel(Category category); 
 	void deleteCategory(int categoryNo);
+	void modifyCategoryAuthNo(Category category);
 	void modifyCategory(Category category);
 	void addCategory(Category category);
 	Category getCategoryByCategoryNo(int categoryNo);
