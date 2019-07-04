@@ -38,13 +38,6 @@
 	transition: 0.3s;
 	width:100%;
 }
-#addForm, #addForm div {
-	display: block;
-	width:100% !important;
-}
-#addForm button{
-	float: right;
-}
 #content, #remark {
 	width: 100%;
 	height: 400px;

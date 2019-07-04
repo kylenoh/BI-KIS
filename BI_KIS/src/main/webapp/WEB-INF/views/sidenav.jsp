@@ -12,6 +12,35 @@
 </div>
 <script type="text/javascript">
 	$(function(){
+		$('.summernote').summernote({
+			height: 300,
+			lang : 'ko-KR',
+			callbacks: { // 콜백을 사용
+	                // 이미지를 업로드할 경우 이벤트를 발생
+			    onImageUpload: function(files, editor, welEditable) {
+				    sendFile(files[0], this);
+				}
+			}
+		});
+		 /* summernote에서 이미지 업로드시 실행할 함수 */
+	 	function sendFile(file, editor) {
+            // 파일 전송을 위한 폼생성
+	 		data = new FormData();
+	 	    data.append("uploadFile", file);
+	 	    $.ajax({ // ajax를 통해 파일 업로드 처리
+	 	        data : data,
+	 	        type : "POST",
+	 	        url : "imageUpload",
+	 	        cache : false,
+	 	        contentType : false,
+	 	        processData : false,
+	 	        success : function(data) { // 처리가 성공할 경우
+                    // 에디터에 이미지 출력
+                    alert(data);
+	 	        	$(editor).summernote('editor.insertImage', data);
+	 	        }
+	 	    });
+	 	}
 		$(".dropdown-div").on('click','[id^=dropdown-span-]',function(){
 			var divisionName = $(this).text().trim();
 			var divisionLevel = $(this).attr('id').replace('dropdown-span-','');
