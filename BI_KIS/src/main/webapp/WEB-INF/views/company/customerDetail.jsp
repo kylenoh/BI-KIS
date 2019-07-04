@@ -39,7 +39,7 @@
 		    </div>
 		</div>
        	<div style="float:right;">
-          	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq company.registrant}">
+          	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.id eq company.registrant}">
           		<button type="button" class="btn success" id="btn-modify-customer" value="${customer.no }">수정</button>
            		<button type="button" class="btn danger" id="btn-del-customer" value="${customer.no }">삭제</button>
            	</c:if>

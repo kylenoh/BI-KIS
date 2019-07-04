@@ -14,6 +14,10 @@ public class CategoryServiceImpl implements CategoryService{
 	@Autowired
 	CategoryDao categoryDao;
 	@Override
+	public void modifyCategoryAuthNo(Category category) {
+		categoryDao.modifyCategoryAuthNo(category);
+	}
+	@Override
 	public void categoryEvent(Category category) {
 		//add
 		if(category.getADD_SECTION_NAME_LIST() != null) {

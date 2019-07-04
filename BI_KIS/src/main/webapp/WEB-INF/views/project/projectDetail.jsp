@@ -47,14 +47,14 @@
 		            </div>
 		            <div>
 		                <label for="content">내용</label>
-		                <textarea class="textContent" disabled="disabled">${pjt.content }</textarea>
+		                <div>${pjt.content }</div>
 		            </div>
 		            <div>
 		            	<label for="remark">비고</label>
-		              	<textarea class="textContent" disabled="disabled">${pjt.remark }</textarea>
+		              	<div>${pjt.remark }</div>
 		            </div>
 		            <div style="float:right;">
-		            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq pjt.registrant}">
+		            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.id eq pjt.registrant}">
 			            	<button type="button" class="btn success" id="btn-modify-pjt" value="${pjt.no }">수정</button>
 			            	<button type="button" class="btn danger" id="btn-del-pjt" value="${pjt.no }">삭제</button>
 		            	</c:if>

@@ -69,7 +69,7 @@
 				cus_rank = #{rank},
 				cus_dept = #{dept},
 				cus_remark = #{remark}
-		where	cus_no = #{customer.no}
+		where	cus_no = #{no}
 	</update>
 	<delete id="deleteCompany" parameterType="int">
 		delete	from bi_company

@@ -129,7 +129,7 @@ label {
 
 .inputTitle {
 	width: 100%;
-	padding:10px 0;
+	padding:10px;
 	border: 2px solid #ccc;
 	border-radius: 4px;
 	background-color: #f8f8f8;
@@ -139,7 +139,7 @@ label {
 
 .textContent {
 	width: 100%;
-	min-height: 400px;
+	min-height: 300px;
 	border: 2px solid #ccc;
 	border-radius: 4px;
 	background-color: #f8f8f8;
@@ -147,6 +147,7 @@ label {
 	resize: none;
 	margin: 5px 0 22px 0;
 	display: block;
+	padding: 10px;
 }
 /**	테이블	*/
 table {

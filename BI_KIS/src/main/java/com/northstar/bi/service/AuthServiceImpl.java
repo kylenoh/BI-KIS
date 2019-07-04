@@ -15,13 +15,13 @@ public class AuthServiceImpl implements AuthService{
 	@Autowired AuthDao authDao;
 	
 	@Override
-	public List<Auth> getAuthList(AuthCriteria criteria) {
-		return authDao.getAuthList(criteria);
+	public List<Auth> getAuthList() {
+		return authDao.getAuthList();
 	}
 	
 	@Override
-	public int getTotalRows(AuthCriteria criteria) {
-		return authDao.getTotalRows(criteria);
+	public int getTotalRows() {
+		return authDao.getTotalRows();
 	}
 	
 }

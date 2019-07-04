@@ -36,7 +36,7 @@
 	          	<label for="email">이메일</label><input type="text" id="email" disabled="disabled" name="email" value="${emp.email }" class="inputTitle">
 	        </div>
 	        <div style="float:right;">
-		       	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq emp.id}">
+		       	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.id eq emp.id}">
 			      	<button type="button" id="btn-modify-emp" class=" btn success" value="${emp.id }">수정</button>
 			       	<button type="button" id="btn-del-emp"class="btn danger" value="${emp.id }">삭제</button>
 		       	</c:if>

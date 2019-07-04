@@ -17,7 +17,7 @@
 	<div class="main">
 		<div class="container">
 			<form method="post" action="pjtmodify" id="pjtForm">
-				<input type="hidden" name="pjtNo" value="${pjt.no }">
+				<input type="hidden" name="no" value="${pjt.no }">
 		            <div id="PjtDetail">
 			            <div>
 			        	    <label for="title">프로젝트 명</label>
@@ -61,11 +61,11 @@
 			            </div>
 			            <div>
 			                <label for="content">내용</label>
-			                <textarea class="textContent" name="content">${pjt.content }</textarea>
+			                <textarea class="summernote" name="content">${pjt.content }</textarea>
 			            </div>
 			            <div>
 			            	<label for="remark">비고</label>
-			              	<textarea class="textContent" name="remark">${pjt.remark }</textarea>
+			              	<textarea class="summernote" name="remark">${pjt.remark }</textarea>
 			            </div>
 			            <div style="float:right;">
 			            	<button class="btn success" type="submit" >수정</button>
@@ -80,6 +80,7 @@
 </body>
 <script type="text/javascript">
 	$(function(){
+		
 		$('#emp').on('change',function(){
 			var empId = $(this).val();
 			var row ="";

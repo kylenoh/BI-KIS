@@ -44,12 +44,12 @@
 		                	</select>
 		                </div>
 		                <div>
-		                    <label for="content">내용</label>
-		                    <textarea class="textContent" name="content"></textarea>
+		                    <label for="content">내용</label>                    
+		                    <textarea class="summernote" name="content"></textarea>
 		                </div>
 		                <div>
 		                	<label for="remark">비고</label>
-		                	<textarea class="textContent" name="remark"></textarea>
+		                	<textarea class="summernote" name="remark"></textarea>
 		                </div>
 		                <button class="btn success" type="submit">등록</button>
 	                </div>

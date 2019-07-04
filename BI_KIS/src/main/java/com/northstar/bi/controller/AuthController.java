@@ -26,9 +26,8 @@ public class AuthController {
 	
 //	페이징
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
-	public String Authorization(@RequestParam(name="cp", required=false, defaultValue="1") int cp,
-						@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
-						Model model,AuthCriteria criteria,HttpSession session) {
+	public String Authorization(@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
+						Model model,HttpSession session) {
 		Category category = new Category();
 		if(cateNo == 0) {
 			category = (Category)session.getAttribute("HEADER_VALUE");
@@ -37,16 +36,12 @@ public class AuthController {
 			category = categoryService.getCategoryByCategoryNo(cateNo);
 		}
 		session.setAttribute("HEADER_VALUE", category);
-		int rows = 10;
-		criteria.setBeginIndex((cp-1) * rows + 1);
-		criteria.setEndIndex(cp * rows);
 		
-		int totalRows = authService.getTotalRows(criteria);
-		Pagination pagination = new Pagination(totalRows, cp, rows);
+		List<Category> categoryList = categoryService.getCategoryList();
 		
-		List<Auth>auths = authService.getAuthList(criteria);
+		List<Auth>auths = authService.getAuthList();
 		model.addAttribute("auths", auths);
-		model.addAttribute("pagination", pagination);
+		model.addAttribute("categoryList",categoryList);
 		
 		return "auth/auth";
 	}

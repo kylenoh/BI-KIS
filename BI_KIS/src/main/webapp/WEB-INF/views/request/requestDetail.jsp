@@ -50,7 +50,7 @@
 	              	<textarea id="handle" name="handle" disabled="disabled" class="textContent">${request.handle }</textarea>
 	            </div>
 	            <div style="float:right;">
-	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.auth.no eq 2 || LOGIN_EMP.id eq pjt.registrant}">
+	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.id eq pjt.registrant}">
 		            	<button type="button" class="btn success"id="btn-modify-request" value="${request.no }">수정</button>
 		            	<button type="button" class="btn danger" id="btn-del-request" value="${request.no }">삭제</button>
 		            </c:if>
