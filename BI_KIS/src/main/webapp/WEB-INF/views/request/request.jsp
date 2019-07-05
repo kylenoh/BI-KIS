@@ -80,7 +80,7 @@
 						<c:forEach var="request" items="${requestList }">
 						<tr>
 							<td>${request.categoryName }</td>
-							<td><a class="no-link" href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
+							<td id="request-suggest-${request.no }"><a class="no-link" href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
 							<td>${request.project.company.name }</td>
 							<td>${request.project.title }</td>
 							<td>${request.customer.name }</td>
@@ -130,4 +130,13 @@
 </div>
 	
 </body>
+<script type="text/javascript">
+$(function(){
+	$('[id^=request-suggest-]').each(function(){
+		var re = /(<img([^>]+).)/g;
+		var text = $(this).html().replace(re,'');
+		$(this).html(text);
+	});
+})
+</script>
 </html>

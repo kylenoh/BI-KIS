@@ -41,6 +41,7 @@ public class RequestServiceImpl implements RequestService{
 	
 	@Override
 	public List<Request> getRequestByCriteria(Criteria criteria) {
-		return requestDao.getRequestByCriteria(criteria);
+		List<Request> requests = requestDao.getRequestByCriteria(criteria);
+		return requests;
 	}
 }

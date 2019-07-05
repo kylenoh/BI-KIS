@@ -21,13 +21,15 @@
 		            <div id="requestDetail">
 			            <div>
 			                <label for="category">분류 명</label>
-			                <select id="category" name="categoryNo" class="inputTitle">
+			                <select id="category" name="categoryName" class="inputTitle">
 	                        	<option value="error" <c:if test="${request.categoryName eq 'error' }">selected</c:if>>에러 </option>
 	                        	<option value="정기점검" <c:if test="${request.categoryName eq '정기점검' }">selected</c:if>>정기점검 </option>
 	                    	</select>   
 			            </div>
 			            <div>
-			        	    <label for="pjtName">프로젝트 명</label><input type="text" class="inputTitle" id="pjtName" name="pjtName" value="${request.project.title }">
+			        	    <label for="pjtName">프로젝트 명</label>
+			        	    <input type="text" class="inputTitle" id="pjtName" name="pjtName" readonly="readonly" value="${request.project.title }">
+			        	    <input type="hidden" id="pjtNo" name="pjtNo" value="${request.project.no }">
 			            </div>
 			            <div>
 			                <label for="companyName">고객사 명</label><input type="text" class="inputTitle" id="companyName" name="companyName" value="${request.project.company.name }" readonly="readonly">
@@ -41,15 +43,17 @@
 	                    	</select>
 			            </div>
 			            <div id="form-inline">
-			                <label for="receiveDate">시작일</label>
-			                <input type="date" id="receiveDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.receiveDate }"/>">    
+			                <label for="receiveDate">접수일</label>
+			                <input type="date" id="receiveDate" name="receiveDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.receiveDate }"/>">
+			                    
 			                <label for="startDate">시작일</label>
-			                
-			                <input type="date" id="startDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.startDate }"/>">    
+			                <input type="date" id="startDate" name="startDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.startDate }"/>">
+			                    
 			                <label for="endDate">종료일</label>
+			                <input type="date" id="endDate" name="endDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.endDate }"/>">
 			                
-			                <input type="date" id="endDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.endDate }"/>">
-			                <label for="closeDate">종료일</label><input type="date" id="closeDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.closeDate }"/>">
+			                <label for="closeDate">마감일</label>
+			                <input type="date" id="closeDate" name="closeDate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${request.closeDate }"/>">
 			            </div>
 			            <div>
 			              	<label for="flag">진행상황</label>
