@@ -110,7 +110,6 @@
 		from     bi_emp Emp, bi_auth Auth
 		where    Auth.auth_no = Emp.auth_no
 		and      emp_id = #{value}
-		and      emp_flag = 'Y'
 	</select>
 	<select id="getEmpByProNo" parameterType="int" resultType="Emp">
 		select	 Emp.emp_id		as id,

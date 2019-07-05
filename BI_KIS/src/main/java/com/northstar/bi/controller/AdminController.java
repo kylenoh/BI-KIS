@@ -106,10 +106,10 @@ public class AdminController {
 	public String empDelete (@RequestParam(name="empId")String empId,
 							@RequestParam(name="flagCheck")String flagCheck) {
 		Emp emp = empService.getEmpById(empId);
-		if("사용".equals(flagCheck)) {
+		if("N".equals(flagCheck)) {
 			emp.setFlag("Y");
 		}
-		if("미사용".equals(flagCheck)) {
+		if("Y".equals(flagCheck)) {
 			emp.setFlag("N");
 		}
 		empService.updateEmp(emp);

@@ -35,6 +35,7 @@
 	        <div>
 	          	<label for="email">이메일</label><input type="text" id="email" disabled="disabled" name="email" value="${emp.email }" class="inputTitle">
 	        </div>
+	        <input type="hidden" id="flagCheck" value="${emp.flag }">
 	        <div style="float:right;">
 		       	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.id eq emp.id}">
 			      	<button type="button" id="btn-modify-emp" class=" btn success" value="${emp.id }">수정</button>
@@ -50,8 +51,9 @@
 	$(function(){
 		$('#btn-del-emp').click(function(){
 			var empId = $(this).val();
+			var flagCheck = $('#flagCheck').val()
 			if (confirm("정말 삭제하시겠습니까?")) {
-				location.href="empDelete?empId=" + empId;
+				location.href="empDelete?empId=" + empId + "&flagCheck=" + flagCheck;
 			}
 		});
 		$('#btn-modify-emp').click(function(){

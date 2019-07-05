@@ -22,7 +22,7 @@
 				}
 			}
 		});
-		 /* summernote에서 이미지 업로드시 실행할 함수 */
+		  /* summernote에서 이미지 업로드시 실행할 함수 */
 	 	function sendFile(file, editor) {
             // 파일 전송을 위한 폼생성
 	 		data = new FormData();
@@ -34,13 +34,14 @@
 	 	        cache : false,
 	 	        contentType : false,
 	 	        processData : false,
+	 	        enctype : 'multipart/form-data',
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
                     alert(data);
 	 	        	$(editor).summernote('editor.insertImage', data);
 	 	        }
 	 	    });
-	 	}
+	 	} 
 		$(".dropdown-div").on('click','[id^=dropdown-span-]',function(){
 			var divisionName = $(this).text().trim();
 			var divisionLevel = $(this).attr('id').replace('dropdown-span-','');
