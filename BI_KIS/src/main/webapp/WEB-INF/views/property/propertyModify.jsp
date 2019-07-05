@@ -16,10 +16,11 @@
 		<%@include file="../emp-interface.jsp" %>
 	<div class="main">
 		
-		<form method="POST" action="Modify">
+		<form method="POST" action="PropertyModify">
 		  <div class="container">
 		  	<div class="container-header">
 		  		<input type="hidden" name="NO" value="${prop.NO }">
+		  		<input type="hidden" id="idcheck" value="${prop.ID }">
 			    <label><b>품명</b></label>
 			    <input type="text" name="PROP_NAME" class="inputTitle" value="${prop.PROP_NAME }" required>
    			    
@@ -30,10 +31,10 @@
 			    <input type="date" name="BUY_DATE" class="inputTitle" value="${prop.BUY_DATE }" required>
 			    
 			    <label><b>사용자</b></label>
-			    <select id="emp" name="ID" class="inputTitle" >
+			    <select id="emp" name="ID" class="inputTitle">
 		                		<option></option>
 		                		<c:forEach var="emp" items="${empList }">
-		                			<option id="emp-id-${emp.id }" value="${emp.id }">${emp.name }</option>
+		                				<option id="emp-id-${emp.id }" value="${emp.id }">${emp.name }</option>
 		                		</c:forEach>
 		                	</select>
 			    
@@ -58,6 +59,10 @@
 	</div>
 </div>
 <script type="text/javascript">
+$(function(){
+	var id = $("#idcheck").val();
+		 $("select[name='ID'] option[value='"+id+"']").attr("selected", "selected");
+});
 function getList(){
 	if (confirm("목록으로 돌아가시겠습니까?")) {
 		location.href="property";
