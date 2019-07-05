@@ -59,7 +59,7 @@
 	        		var rows = "";
 	        		$.each(SectionList, function(index, section){
 	        			if(section.cate_SECTION_NAME != null){
-		        			rows += '<a href="' + section.cate_VALUE + '?cateNo=' + section.cate_NO + '"> ' + section.cate_SECTION_NAME + ' </a>';
+		        			rows += '<a class="cateList" href="' + section.cate_VALUE + '?cateNo=' + section.cate_NO + '"> ' + section.cate_SECTION_NAME + ' </a>';
 	        			}else {
 	        				location.href = section.cate_VALUE + '?cateNo=' + section.cate_NO;
 	        			}
