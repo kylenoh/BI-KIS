@@ -61,11 +61,11 @@
 			            </div>
 			            <div>
 			             	<label for="suggest">요청 내용</label>
-			              	<textarea id="suggest" name="suggest" class="textContent">${request.suggest }</textarea>
+			              	<textarea id="suggest" name="suggest" class="summernote">${request.suggest }</textarea>
 			            </div>
 			            <div>
 			             	<label for="handle">처리 내용</label>
-			              	<textarea id="handle" name="handle" class="textContent">${request.handle }</textarea>
+			              	<textarea id="handle" name="handle" class="summernote">${request.handle }</textarea>
 			            </div>
 			            <div style="float:right;">
 				         	<button class="btn success" type="submit">수정</button>

@@ -32,7 +32,7 @@
 		                </div>
 		                <div>
 		                	<label for="remark">비고</label>
-		                	<textarea id="remark" name="remark" class="textContent"></textarea>
+		                	<textarea id="remark" name="remark" class="summernote"></textarea>
 		                </div>
 		                <button type="submit" class="btn success">등록</button>
 	                </div>

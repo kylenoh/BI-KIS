@@ -182,9 +182,11 @@
 						and 
 							PJT.pjt_end_date &lt;= to_date (#{toDate},'yyyy-mm-dd')
 					</if>
+				order by PJT.pjt_start_date
 					)
 		where	rn >= #{beginIndex} 
-		and		rn &lt;= #{endIndex} order by pjt_no desc
+		and		rn &lt;= #{endIndex}
+		
 	</select>
 	<select id="getProjectByNo" parameterType="int" resultMap="getProjectResultMap">
 		select	pjt_no,
