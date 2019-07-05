@@ -43,11 +43,11 @@
 	            </div>
 	            <div>
 	             	<label for="suggest">요청 내용</label>
-	              	<textarea id="suggest" name="suggest" disabled="disabled" class="textContent">${request.suggest }</textarea>
+	              	<div id="suggest">${request.suggest }</div>
 	            </div>
 	            <div>
 	             	<label for="handle">처리 내용</label>
-	              	<textarea id="handle" name="handle" disabled="disabled" class="textContent">${request.handle }</textarea>
+	              	<div id="handle">${request.handle }</div>
 	            </div>
 	            <div style="float:right;">
 	            	<c:if test="${LOGIN_EMP.auth.no eq 1 || LOGIN_EMP.id eq pjt.registrant}">

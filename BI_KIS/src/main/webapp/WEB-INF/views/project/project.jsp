@@ -21,25 +21,25 @@
             <fieldset>
                 <legend>검색라인</legend>
                 <div class="form-inline">
-                    <label for="title">프로젝트 명</label><input type="text"  id="search-title" name="title">
-                    <label for="companyName">고객사 명</label><input type="text" id="search-companyName" name="companyName">
+                    <label for="title">프로젝트 명</label><input type="text"  id="search-title" name="title" value="${param.title }">
+                    <label for="companyName">고객사 명</label><input type="text" id="search-companyName" name="companyName" value=${param.companyName }>
                 	<label for="flag">진행상태</label>
                     <select id="search-flag" name="flag">
-                        <option value="all">전체</option>
-                        <option value="Y">진행예정</option>
-                        <option value="P">진행중</option>
-                        <option value="N">종료</option>
+                        <option value="all" ${param.flag eq 'all' ? 'selected' : '' }>전체</option>
+                        <option value="Y" ${param.flag eq 'Y' ? 'selected' : '' }>진행예정</option>
+                        <option value="P" ${param.flag eq 'P' ? 'selected' : '' }>진행중</option>
+                        <option value="N" ${param.flag eq 'N' ? 'selected' : '' }>종료</option>
                     </select>
                 </div>
                 <div class="form-inline">
 	                	<label for="dateOpt">날짜기준</label>
-	                	<select id="project-date-opt" name="dateOpt" class="selectSearch">
+	                	<select id="project-date-opt" name="dateOpt">
 	                        <option value="all"></option>
-	                        <option value="start">시작일</option>
-	                        <option value="end">종료일</option>
+	                        <option value="start" ${param.dateOpt eq 'start' ? 'selected' : '' }>시작일</option>
+	                        <option value="end" ${param.dateOpt eq 'end' ? 'selected' :  '' }>종료일</option>
 	                    </select>
-	                    <label for="fromDate"></label><input type="date" id="search-fromDate" name="fromDate" class="dateSearch">    
-                    	<label for="toDate"></label><input type="date" id="search-toDate" name="toDate" class="dateSearch">
+	                    <label for="fromDate"></label><input type="date" id="search-fromDate" name="fromDate" value="${param.fromDate}">    
+                    	<label for="toDate"></label><input type="date" id="search-toDate" name="toDate" value="${param.toDate }">
 	                	<button class="btn info" type="submit">검색</button>
                 </div>
             </fieldset>
@@ -106,13 +106,13 @@
 			<div align="center"> 
 				<c:if test="${!empty pjtList}">
 					<c:if test="${pagination.cb gt 1 }">
-						<a href="project?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+						<a href="project?cp=${pagination.beginPageIndex - 1}+ &flag=${param.flag}">&laquo;</a>
 					</c:if>
 					<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-						<a href="project?cp=${num}">${num }</a>
+						<a href="project?cp=${num} + &flag=${param.flag}">${num }</a>
 					</c:forEach>
 					<c:if test="${pagination.cb lt pagination.totalBlocks }">
-						<a href="project?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+						<a href="project?cp=${pagination.endPageIndex + 1 }+ &flag=${param.flag}">&raquo;</a>
 					</c:if>
 				</c:if>
 			</div>

@@ -21,12 +21,12 @@
             <fieldset>
                 <legend>검색라인</legend>
                 <div class="form-inline">
-                    <label for="title">고객사 명</label><input type="text" id="name" name="name">
-                    <label for="customerName">담당자 명</label><input type="text" id="customerName" name="customerName">
+                    <label for="title">고객사 명</label><input type="text" id="name" name="name" value="${param.name}">
+                    <label for="customerName">담당자 명</label><input type="text" id="customerName" name="customerName" value="${param.customerName }">
                 </div>
                 <div class="form-inline">
-                    <label for="email">이메일</label><input type="text" id="email" name="email">
-                   	<label for="dept">부서</label><input type="text"  id="dept" name="dept">
+                    <label for="email">이메일</label><input type="text" id="email" name="email" value="${param.email }">
+                   	<label for="dept">부서</label><input type="text"  id="dept" name="dept" value="${param.dept }">
                     <button class="btn info" type="submit">검색</button>
                 </div>
             </fieldset>

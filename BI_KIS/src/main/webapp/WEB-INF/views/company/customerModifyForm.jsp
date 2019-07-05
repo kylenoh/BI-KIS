@@ -37,7 +37,7 @@
 			            </div>
 			            <div>
 			              	<label for="remark">비고</label>
-			               	<textarea id="remark" name="remark" class="textContent">${customer.remark }</textarea>
+			               	<textarea id="remark" name="remark" class="summernote">${customer.remark }</textarea>
 			            </div>
 			            <div style="float:right;">
 			            	<button class="btn success" type="submit">수정</button>

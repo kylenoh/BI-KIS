@@ -33,7 +33,7 @@
 		            </div>
 		            <div>
 		             	<label for="remark">비고</label>
-		               	<textarea id="remark" class="textContent" name="remark">${company.remark}</textarea>
+		               	<textarea id="remark" class="summernote">${company.remark}</textarea>
 		            </div>
 	        	</div>
 		        <div style="float:right;">

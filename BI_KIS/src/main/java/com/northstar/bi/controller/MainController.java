@@ -1,9 +1,8 @@
 package com.northstar.bi.controller;
 
-import java.io.File;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import com.northstar.bi.dto.Category;
 import com.northstar.bi.dto.Emp;
 import com.northstar.bi.service.CategoryService;
 import com.northstar.bi.service.EmpService;
+import com.northstar.bi.utils.SummernoteUtils;
 
 @Controller
 public class MainController {
@@ -28,6 +28,7 @@ public class MainController {
 	EmpService empService;
 	@Autowired
 	CategoryService categoryService;
+	@Resource(name="SummernoteUtils") private SummernoteUtils summernoteUtils;
 	
 	@RequestMapping(value="/")
 	public String main(HttpSession session, Model model) {
@@ -70,17 +71,8 @@ public class MainController {
 	}
 	@RequestMapping(value="imageUpload", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
 	@ResponseBody
-	public String upload(@RequestParam("uploadFile") MultipartFile mf,HttpServletRequest request, HttpSession session)throws Exception {
-			String saveDirectory = "C:/upload";
-			String fileName = mf.getOriginalFilename();
-			String filepath = saveDirectory + "\\" + fileName;
-			File f = new File(filepath);
-			if( !f.exists()) {
-				f.mkdirs();
-			}
-			mf.transferTo(f);
-			String data = "upload/"+ fileName;
-			return data;
+	public String upload(@RequestParam("uploadFile") MultipartFile mf)throws Exception {
+			return summernoteUtils.saveFile(mf);
 	}
 	
 }

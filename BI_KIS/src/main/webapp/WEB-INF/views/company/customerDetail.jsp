@@ -35,7 +35,7 @@
 		    </div>
 		    <div>
 		      	<label for="remark">비고</label>
-		       	<textarea id="remark" name="remark" disabled="disabled" class="textContent">${customer.remark }</textarea>
+		       	<div id="remark">${customer.remark }</div>
 		    </div>
 		</div>
        	<div style="float:right;">

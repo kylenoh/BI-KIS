@@ -49,9 +49,6 @@
 						</div>
 					</c:forEach>
 				</div>
-				<div style="margin-bottom:20px;">
-					<input class="btn warning" type="submit" form="category-form-솔루션" value="저장"/>
-				</div>
 			</div>
 		</div>
 </body>
@@ -60,7 +57,8 @@
 	$(function(){
 		var categoryArea = $('#category-솔루션');
 		var btnRow = "<div class='category-btn'>";
-		btnRow += "<button class='small-btn' type='button' id='add-category-btn'>추가</button>";
+		btnRow += "<button class='small-btn warning' type='button' id='add-category-btn'>추가</button>";
+		btnRow += '<input class="small-btn warning" type="submit" form="category-form-솔루션" value="저장"/>';
 		btnRow += "</div>";
 		btnRow += "<input type='hidden' name='CATE_DIVISION_NAME' value='솔루션'>";
 		categoryArea.children().last().append(btnRow);

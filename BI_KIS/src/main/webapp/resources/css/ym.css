@@ -87,23 +87,6 @@
 	padding:5px 20px 5px 20px;
 	font-weight:bold;
 }
-.search-line{
-	display: inline-block;
-	width:40%;
-}
-.selectSearch{
-	width: 20%;
-    margin: 0px 20px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-.dateSearch{
-	width: 20%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
 .close-cate {
 	color:#333;
 	text-decoration:none;
@@ -140,6 +123,9 @@
 	font-size: 12px;
 	cursor: pointer;
 	border-radius: 5px;
-	padding : 4px 5px; 
+	padding : 6px 10px; 
+}
+.category-btn *{
+	margin-right: 10px;
 }
 }
