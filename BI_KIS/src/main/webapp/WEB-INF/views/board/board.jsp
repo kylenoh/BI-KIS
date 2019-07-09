@@ -29,8 +29,8 @@ function getBoardDetail(no){
 					<form action="board">
 						<fieldset>
 							<legend>검색라인</legend>
-							<label for="title">제목</label><input type="text" name="title" class="inputSearch">
-							<label for="writer">작성자</label><input type="text"name="writer" class="inputSearch">
+							<label for="title">제목</label><input type="text" name="title" class="inputSearch" value=${param.title }>
+							<label for="writer">작성자</label><input type="text"name="writer" class="inputSearch" value=${param.writer }>
 							<button type="submit" class="btn info">검색</button>
 						</fieldset>
 					</form>

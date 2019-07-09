@@ -48,6 +48,7 @@
 		from	BI_BOARD BOARD,
 				BI_EMP EMP
 		where	BOARD.EMP_ID = EMP.EMP_ID
+		and		BOARD.BOARD_FLAG = 'Y'
 		<if test="TITLE != null &amp;&amp; TITLE !=''">
 			and BOARD.BOARD_TITLE like '%' || #{TITLE} || '%'
 		</if>
@@ -90,7 +91,8 @@
 		where	rn 
 				&gt;= #{beginIndex} 
 		and		 rn &lt;= #{endIndex}
-		and BOARD_FLAG = 'Y' order by BOARD_NO desc	
+		and BOARD_FLAG = 'Y'
+		order by BOARD_NO desc	
 	</select>
 	<select id="getBoardByNo" parameterType="int" resultMap="BoardResultMap">
 		select	BOARD.BOARD_NO,
@@ -150,7 +152,8 @@
 				REPLY.REPLY_CONTENT as CONTENT
 		from	BI_BOARD_REPLY REPLY,BI_EMP EMP
 		where	BOARD_NO = #{value} 
-		and		REPLY.EMP_ID = EMP.EMP_ID order by	CREATE_DATE desc
+		and		REPLY.EMP_ID = EMP.EMP_ID
+		order by	CREATE_DATE desc
 	</select>
 	<delete id="deleteBoardReply" parameterType="int">
 		delete from	BI_BOARD_REPLY

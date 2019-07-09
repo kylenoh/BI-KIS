@@ -109,7 +109,7 @@
 						<a href="project?cp=${pagination.beginPageIndex - 1}+ &flag=${param.flag}">&laquo;</a>
 					</c:if>
 					<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-						<a href="project?cp=${num} + &flag=${param.flag}">${num }</a>
+						<a href="project?cp=${num}&title=${param.title }&flag=${param.flag}">${num }</a>
 					</c:forEach>
 					<c:if test="${pagination.cb lt pagination.totalBlocks }">
 						<a href="project?cp=${pagination.endPageIndex + 1 }+ &flag=${param.flag}">&raquo;</a>

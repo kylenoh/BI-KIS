@@ -70,10 +70,10 @@
 			<if test="companyName != null &amp;&amp; companyName != ''">
 				and C.com_name like '%' || #{companyName} || '%'
 			</if>
-			<if test="flag != null &amp;&amp; flag !='all'">
+			<if test="flag != null &amp;&amp; flag !='all' &amp;&amp; flag != 'start'">
 				and P.pjt_flag = #{flag}
 			</if>
-			<if test="flag == null">
+			<if test="flag == 'start'">
 				and P.pjt_flag != 'N'
 			</if>
 			<if test="dateOpt == 'start'">
@@ -164,10 +164,10 @@
 					<if test="companyName != null &amp;&amp; companyName != ''">
 						and C.com_name like '%' || #{companyName} || '%'
 					</if>
-					<if test="flag != null &amp;&amp; flag != 'all'">
+					<if test="flag != null &amp;&amp; flag != 'all' &amp;&amp; flag != 'start'">
 						and PJT.pjt_flag = #{flag}
 					</if>
-					<if test="flag == null">
+					<if test="flag == 'start'">
 						and PJT.pjt_flag != 'N'
 					</if>
 					<if test="dateOpt == 'start'">

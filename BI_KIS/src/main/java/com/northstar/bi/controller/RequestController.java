@@ -43,7 +43,7 @@ public class RequestController {
 	@RequestMapping(value="/request")
 	public String request(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
 						@RequestParam(name="categoryValue",required=false,defaultValue="nodata")String categoryValue,
-						@RequestParam(name="flag", required=false)String flag,
+						@RequestParam(name="flag", required=false, defaultValue = "start")String flag,
 			  			@RequestParam(name="companyName",required=false)String companyName,
 			  			@RequestParam(name="dateOpt", required=false, defaultValue="all")String dateOpt,
 			  			@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
