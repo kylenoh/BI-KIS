@@ -130,13 +130,4 @@
 </div>
 	
 </body>
-<script type="text/javascript">
-$(function(){
-	$('[id^=request-suggest-]').each(function(){
-		var re = /(<img([^>]+).)/g;
-		var text = $(this).html().replace(re,'');
-		$(this).html(text);
-	});
-})
-</script>
 </html>

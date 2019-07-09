@@ -120,22 +120,7 @@ public class AdminController {
 		return "admin/empAddForm";
 	}
 	@RequestMapping(value="addEmp", method=RequestMethod.POST)
-	public String addEmp(@RequestParam(name="empId")String empId,
-						@RequestParam(name="password")String password,
-						@RequestParam(name="name")String name,
-						@RequestParam(name="rank")String rank,
-						@RequestParam(name="tel")String tel,
-						@RequestParam(name="addr")String addr,
-						@RequestParam(name="email")String email) {
-		Emp emp = new Emp();
-		emp.setId(empId);
-		emp.setPassword(password);
-		emp.setName(name);
-		emp.setRank(rank);
-		emp.setTel(tel);
-		emp.setAddr(addr);
-		emp.setEmail(email);
-		
+	public String addEmp(Emp emp) {
 		empService.addEmp(emp);
 		return "redirect:/empAdmin";
 	}

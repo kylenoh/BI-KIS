@@ -19,12 +19,12 @@
 		    <form method="post" action="pjtadd" id="pjtForm">
 	                <div id="addForm">
 		                <div>
-		                    <label for="title">프로젝트 명</label><input type="text"  name="title" class="inputTitle">
+		                    <label for="title">프로젝트 명</label><input type="text" id="project" name="title" class="inputTitle">
 		                </div>
 		                <div>
 		                    <label for="company">고객사 명</label>
-		                    <select name="companyNo" class="inputTitle">
-		                        <option value="all"></option>
+		                    <select id="company" name="companyNo" class="inputTitle">
+		                        <option></option>
 		                        <c:forEach var="comList" items="${companyList }">
 		                        	<option value="${comList.no }">${comList.name }</option>
 		                        </c:forEach>
@@ -89,6 +89,34 @@
 		$('#emp-area').on('click','[id^=emp-info-]',function(){
 			$(this).parent().remove();
 		})
-	});
+		
+		$('#pjtForm').submit(function(){
+			var project = $('#project');
+			var company = $('#company');
+			var startDate = $('#startDate');
+			var endDate = $('#endDate');
+			
+			if("" == project.val()){
+				alert("프로젝트 명을 입력해주세요.");
+				project.focus();
+				return false;
+			}
+			if("" == company.val()){
+				alert("고객사를 선택해주세요.");
+				company.focus();
+				return false;
+			}
+			if("" == startDate.val()){
+				alert("시작일을 선택해주세요.");
+				startDate.focus();
+				return false;
+			}
+			if("" == endDate.val()){
+				alert("종료일을 선택해주세요.");
+				endDate.focus();
+				return false;
+			}
+		})
+});
 </script>
 </html>

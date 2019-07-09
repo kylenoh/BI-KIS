@@ -46,7 +46,7 @@
 				PROP_NAME,
 				PROP_CODE as CODE,
 				PROP_DATE,
-				PROP_REMARK as REMARK,
+				regexp_replace(PROP_REMARK,'(&lt;img([^>]+).)') as REMARK,
 				PROP_BUY_DATE as BUY_DATE,
 				PROP_FLAG as FLAG
 		from 
@@ -76,7 +76,8 @@
 							</if>
 			)
 		where	rn &gt;= #{beginIndex} 
-		and		rn &lt;= #{endIndex} order by PROP_NO desc	
+		and		rn &lt;= #{endIndex}
+		order by PROP_NO desc	
 	</select>
 	<select id="getPropertyByNo" parameterType="int" resultType="Property">
 		select	PROP_NO as NO,

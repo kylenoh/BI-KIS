@@ -22,7 +22,7 @@
 			</div>
 			<div class="container-content">
 			    <label><b>내용</b></label>
-			    <textarea name="CONTENT" class="textContent">${Board.CONTENT }</textarea>
+			    <textarea name="CONTENT" class="summernote">${Board.CONTENT }</textarea>
 			    <div class="container-footer">
 					<button type="button" class="btn success" id="addFile">파일추가</button>
 			    	<button type="submit" class="btn success">수정</button>

@@ -21,7 +21,7 @@
 		            <div id="PjtDetail">
 			            <div>
 			        	    <label for="title">프로젝트 명</label>
-			        	    <input type="text" class="inputTitle" value="${pjt.title }" name="title">
+			        	    <input type="text" id="project" class="inputTitle" value="${pjt.title }" name="title">
 			            </div>
 			            <div>
 			                <label for="company">고객사 명</label>
@@ -109,6 +109,16 @@
 		$('#emp-area').on('click','[id^=emp-info-]',function(){
 			$(this).parent().remove();
 		})
-	});
+		$('#pjtForm').submit(function(){
+		var project = $('#project');
+		
+		if("" == project.val()){
+			alert("프로젝트 명을 입력해주세요.");
+			project.focus();
+			return false;
+		}
+		
+	})
+});
 </script>
 </html>
