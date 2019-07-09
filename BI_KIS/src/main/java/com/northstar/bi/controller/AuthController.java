@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.northstar.bi.dto.Auth;
-import com.northstar.bi.dto.AuthCriteria;
 import com.northstar.bi.dto.Category;
-import com.northstar.bi.dto.Pagination;
 import com.northstar.bi.service.AuthService;
 import com.northstar.bi.service.CategoryService;
 

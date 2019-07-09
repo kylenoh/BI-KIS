@@ -104,8 +104,11 @@ public class PropertyController {
 		return "redirect:/property";
 	}
 //	품목 수정
-	@RequestMapping(value = "/Modify", method = RequestMethod.POST)
+	@RequestMapping(value = "/PropertyModify", method = RequestMethod.POST)
 	public String PropertyModify(Property prop) {
+		if (prop.getID().isEmpty()) {
+			prop.setPROP_DATE("");
+		}
 		propService.Modify(prop);
 		return "redirect:/property";
 	}

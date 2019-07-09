@@ -22,7 +22,7 @@
 	<select id="getTotalRows" resultType="int">
 		select 	count(*)
 		from	BI_SOLUTION SOLUTION, BI_EMP EMP, BI_CATEGORY CATE
-		where	SOLUTION.EMP_ID = EMP.EMP_ID and SOLUTION.SOLUTION_CATE = CATE.CATE_NO and CATE.CATE_SECTION_NAME = #{categoryName}
+		where	SOLUTION.EMP_ID = EMP.EMP_ID and SOLUTION.SOLUTION_CATE = CATE.CATE_NO and CATE.CATE_SECTION_NAME = #{categoryName} and SOLUTION.SOLUTION_FLAG = 'Y'
 			<if test="TITLE != null &amp;&amp; TITLE !=''">
 				and SOLUTION.SOLUTION_TITLE like '%' || #{TITLE} || '%'
 			</if>
