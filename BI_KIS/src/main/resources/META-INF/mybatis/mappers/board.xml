@@ -47,7 +47,7 @@
 		select	count(*)
 		from	BI_BOARD BOARD,
 				BI_EMP EMP
-		where	BOARD.EMP_ID = EMP.EMP_ID
+		where	BOARD.EMP_ID = EMP.EMP_ID and BOARD.BOARD_FLAG = 'Y'
 		<if test="TITLE != null &amp;&amp; TITLE !=''">
 			and BOARD.BOARD_TITLE like '%' || #{TITLE} || '%'
 		</if>
