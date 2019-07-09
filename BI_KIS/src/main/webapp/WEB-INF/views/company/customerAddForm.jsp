@@ -55,4 +55,18 @@
 </div>
 	
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#CustomerForm').submit(function(){
+		var customerName = $('#name');
+		
+		
+		if("" == customerName.val()){
+			alert("담당자 명을 입력해주세요.");
+			project.focus();
+			return false;
+		}
+	});
+})
+</script>
 </html>

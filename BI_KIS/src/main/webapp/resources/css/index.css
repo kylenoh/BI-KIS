@@ -167,6 +167,10 @@ th, td {
 tr:nth-child(even) {
 	background-color: #f2f2f2
 }
+p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
 /**	버튼	*/
 .btn {
 	border: 2px solid black;

@@ -45,4 +45,23 @@
 	</div>
 </div>
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#searchForm').submit(function(){
+		var name = $('#name');
+		var rank = $('#rank');
+		
+		if("" == name.val()){
+			alert("이름을 입력해주세요.");
+			name.focus();
+			return false;
+		}
+		if("" == rank.val()){
+			alert("직책을 입력해주세요.");
+			rank.focus();
+			return false;
+		}
+	})
+})
+</script>
 </html>

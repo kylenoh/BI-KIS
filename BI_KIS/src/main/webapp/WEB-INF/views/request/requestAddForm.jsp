@@ -21,7 +21,7 @@
 		                <div>
 		                    <label for="categoryName">분류 명</label>
 		                    <select id="category" name="categoryName" class="inputTitle">
-		                        <option value="all"></option>
+		                        <option></option>
 	                        	<option value="error">에러</option>
 	                        	<option value="정기점검">정기점검</option>
 	                    	</select>  
@@ -29,7 +29,7 @@
 		                <div>
 		                    <label for="pjtNo">프로젝트 명</label>
 		                    <select id="pjtNo" name="pjtNo" class="inputTitle">
-		                    	<option value="all"></option>
+		                    	<option></option>
 		                    	<c:forEach var="project" items="${projectList }">
 		                    		<option value="${project.no }">${project.title }</option>
 		                    	</c:forEach>
@@ -41,7 +41,7 @@
 		                <div>
 		                    <label for="customer">담당자 명</label>
 							<select id="customer" name="customerNo" class="inputTitle">
-		                        <option value="all">담당자 선택</option>
+		                        <option></option>
 	                    	</select>
 		                </div>
 		                <div class="form-inline">
@@ -84,7 +84,7 @@ $(function(){
 			dataType: 'json',
 			success:function(results){
 				var rows = "";
-				rows += '<option value="all">담당자 선택</option>';
+				rows += '<option>담당자 선택</option>';
 				$.each(results, function(index, result){
 					rows += '<option value="' + result.no + '" >';
 					rows += result.name + '</option>';
@@ -95,6 +95,39 @@ $(function(){
 			}
 		})
 	});
+	$('#requestForm').submit(function(){
+		var category = $('#category');
+		var project = $('#pjtNo');
+		var customer = $('#customer');
+		var receiveDate = $('#receiveDate');
+		var closeDate = $('#closeDate');
+		
+		if("" == category.val()){
+			alert("분류를 선택해주세요.");
+			category.focus();
+			return false;
+		}
+		if("" == project.val()){
+			alert("프로젝트를 선택해주세요.");
+			project.focus();
+			return false;
+		}
+		if("" == customer.val()){
+			alert("담당자를 선택해주세요.");
+			customer.focus();
+			return false;
+		}
+		if("" == receiveDate.val()){
+			alert("접수일을 선택해주세요.");
+			receiveDate.focus();
+			return false;
+		}
+		if("" == closeDate.val()){
+			alert("마감일을 선택해주세요.");
+			closeDate.focus();
+			return false;
+		}
+	})
 })
 </script>
 </html>

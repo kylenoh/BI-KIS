@@ -42,4 +42,17 @@
 </div>
 	
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#companyForm').submit(function(){
+		var companyName = $('#name');
+		
+		if("" == companyName.val()){
+			alert("고객사 명을 입력해주세요.");
+			project.focus();
+			return false;
+		}
+	});
+})
+</script>
 </html>

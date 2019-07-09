@@ -24,7 +24,7 @@
 				</div>
 				<div class="container-content">
 				    <label><b>내용</b></label>
-				    <textarea name="CONTENT" class="textContent"></textarea>
+				    <textarea name="CONTENT" class="summernote"></textarea>
 				    
 			    	<button type="button" class="btn success" id="addFile">파일추가</button>
 			    	<button type="submit" class="btn success">등록</button>

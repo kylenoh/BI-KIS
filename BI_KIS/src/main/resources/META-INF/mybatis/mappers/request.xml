@@ -138,7 +138,7 @@
 				pjt_no,
 				emp_id,
 				req_category_name,
-				req_suggest,
+				regexp_replace(req_suggest,'(&lt;img([^>]+).)') req_suggest,
 				req_handle,
 				req_receive_date,
 				req_start_date,

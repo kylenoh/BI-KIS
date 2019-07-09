@@ -66,14 +66,14 @@
 		$('[id^=category-form]').on('click','[id^=category-modfiy-]',function(){
 			categoryNo = $(this).attr('id').replace('category-modfiy-','');
 			categorySectionName = $(this).val();
-			var row = "<input type='text' name='SECTION_NAME_LIST' value='" + categorySectionName + "'>";
+			var row = "<input type='text' class='section-name' name='SECTION_NAME_LIST' value='" + categorySectionName + "'>";
 			row += "<input type='hidden' name='CATE_NO_LIST' value = '" + categoryNo +"'>";
 			row += "<a class='category-close close-cate' href='javascript:void(0)'>x</a>";
 			$(this).parent().html(row);
 		});
 		$('[id^=category-form]').on('click','#add-category-btn',function(){
 			var row = "<div class='category-section-div success'>";
-			row += "<input tpye='text' name='ADD_SECTION_NAME_LIST'>";
+			row += "<input tpye='text' class='section-name' name='ADD_SECTION_NAME_LIST'>";
 			row += "<a class='category-close close-cate' href='javascript:void(0)'> x </a>";
 			row += "</div>";
 			$(this).parent().before(row);
@@ -98,6 +98,18 @@
 					alert("접근 권한이 수정되었습니다.");
 				}
 			})
+		})
+		$('[id^=category-form-]').on('submit',function(){
+			var check = true;
+			$('.category-section-div').each(function(){
+				var sectionName = $(this).find(':input');
+				if("" == sectionName.val()){
+					alert("카테고리 값을 입력해주세요.");
+					sectionName.focus();
+					check = false;
+				}
+			})
+			return check;
 		})
 	})
 	

@@ -39,8 +39,7 @@
 			</div>
 			<div class="container-content">
 			    <label for="REMARK"><b>비고</b></label>
-			    <textarea name="REMARK" class="textContent"></textarea>
-				
+			    <textarea name="REMARK" class="summernote"></textarea>
 			</div>
 			<div class="container-footer">
 		    	<button type="submit" class="btn success">등록</button>

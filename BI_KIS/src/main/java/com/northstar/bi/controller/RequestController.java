@@ -98,16 +98,10 @@ public class RequestController {
 	public String addRequest(@RequestParam(name="categoryName")String categoryName,
 							@RequestParam(name="pjtNo")int pjtNo,
 							@RequestParam(name="customerNo")int customerNo,
-							@RequestParam(name="receiveDate")String receiveDate,
 							@RequestParam(name="startDate", required=false,defaultValue="nodate")String startDate,
 							@RequestParam(name="endDate", required=false,defaultValue="nodate")String endDate,
-							@RequestParam(name="closeDate", required=false,defaultValue="nodate")String closeDate,
-							@RequestParam(name="flag")String flag,
-							@RequestParam(name="suggest")String suggest,
-							@RequestParam(name="handle", required=false)String handle,
-								HttpSession session)throws ParseException {
+								Request request, HttpSession session)throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Request request = new Request();
 		int requestNo = requestService.getRequestNo();
 		Project project = projectservice.getProjectByNo(pjtNo);
 		Customer customer = companyService.getCustomerByNo(customerNo);
@@ -118,20 +112,19 @@ public class RequestController {
 		request.setProject(project);
 		request.setEmp(emp);
 		request.setCategoryName(categoryName);
-		request.setSuggest(suggest);
-		request.setHandle(handle);
-		request.setReceiveDate(formatter.parse(receiveDate));
-		request.setStartDate(formatter.parse(startDate));
-		request.setEndDate(formatter.parse(endDate));
-		request.setCloseDate(formatter.parse(closeDate));
-		request.setFlag(flag);
-		if ("Y".equals(flag)) {
+		if(!startDate.equals("nodate")) {
+			request.setStartDate(formatter.parse(startDate));
+		}
+		if(!endDate.equals("nodate")) {
+			request.setEndDate(formatter.parse(endDate));
+		}
+		if ("Y".equals(request.getFlag())) {
 			request.setMsg("진행예정");
 		}
-		if ("P".equals(flag)) {
+		if ("P".equals(request.getFlag())) {
 			request.setMsg("진행중");
 		}
-		if ("N".equals(flag)) {
+		if ("N".equals(request.getFlag())) {
 			request.setMsg("종료");
 		}
 		
@@ -160,7 +153,7 @@ public class RequestController {
 								@RequestParam(name="receiveDate")String receiveDate,
 								@RequestParam(name="startDate", required=false,defaultValue="nodate")String startDate,
 								@RequestParam(name="endDate", required=false,defaultValue="nodate")String endDate,
-								@RequestParam(name="closeDate", required=false,defaultValue="nodate")String closeDate,
+								@RequestParam(name="closeDate")String closeDate,
 								@RequestParam(name="flag")String flag,
 								@RequestParam(name="suggest")String suggest,
 								@RequestParam(name="handle", required=false)String handle)throws ParseException {
@@ -175,8 +168,12 @@ public class RequestController {
 		request.setSuggest(suggest);
 		request.setHandle(handle);
 		request.setReceiveDate(formatter.parse(receiveDate));
-		request.setStartDate(formatter.parse(startDate));
-		request.setEndDate(formatter.parse(endDate));
+		if(!startDate.equals("nodate")) {
+			request.setStartDate(formatter.parse(startDate));
+		}
+		if(!endDate.equals("nodate")) {
+			request.setEndDate(formatter.parse(endDate));
+		}
 		request.setCloseDate(formatter.parse(closeDate));
 		request.setFlag(flag);
 		if ("Y".equals(flag)) {

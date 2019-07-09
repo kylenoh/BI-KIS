@@ -43,7 +43,7 @@
 			</div>
 			<div class="container-content">
 			    <label for="content"><b>내용</b></label>
-			    <textarea name="REMARK" class="textContent">${prop.REMARK }</textarea>
+			    <textarea name="REMARK" class="summernote">${prop.REMARK }</textarea>
 				
 			</div>
 			<div class="container-footer">

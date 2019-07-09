@@ -103,6 +103,21 @@ $(function(){
 			}
 		})
 	});
+	$('#requestForm').submit(function(){
+		var receiveDate = $('#receiveDate');
+		var closeDate = $('#closeDate');
+		
+		if("" == receiveDate.val()){
+			alert("접수일을 선택해주세요.");
+			receiveDate.focus();
+			return false;
+		}
+		if("" == closeDate.val()){
+			alert("마감일을 선택해주세요.");
+			closeDate.focus();
+			return false;
+		}
+	})
 })
 </script>
 </html>
