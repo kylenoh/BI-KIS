@@ -66,16 +66,19 @@
 	</div>
 	
 	<div class="footer">
+		<c:url value="/empAdmin" var="empAdminURL">
+			<c:param name="name" value="${param.name }"/>
+		</c:url>
 		<div align="center">
 			<c:if test="${!empty empList}">
-				<c:if test="${pagination.cb gt 1 }">
-					<a href="empAdmin?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+				<c:if test="${pagination.cb > 1 }">
+					<a href="${empAdminURL}&cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 				</c:if>
 				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-					<a href="empAdmin?cp=${num}">${num }</a>
+					<a href="${empAdminURL}&cp=${num}">${num }</a>
 				</c:forEach>
-				<c:if test="${pagination.cb lt pagination.totalBlocks }">
-					<a href="empAdmin?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+				<c:if test="${pagination.cb < pagination.totalBlocks }">
+					<a href="${empAdminURL}&cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 				</c:if>
 			</c:if>
 		</div>

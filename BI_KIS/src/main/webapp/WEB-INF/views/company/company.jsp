@@ -68,16 +68,22 @@
 	</div>
 		
 		<div class="footer">
+			<c:url value="/company" var="companyURL">
+				<c:param name="name" value="${param.name }"/>
+				<c:param name="customerName" value="${param.customerName}"/>
+				<c:param name="email" value="${param.email }"/>
+				<c:param name="dept" value="${param.dept }"/>
+			</c:url>
 			<div align="center">
 				<c:if test="${!empty companyList}">
-					<c:if test="${pagination.cb gt 1 }">
-						<a href="company?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+					<c:if test="${pagination.cb > 1 }">
+						<a href="${companyURL }&cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 					</c:if>
 					<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-						<a href="company?cp=${num}">${num }</a>
+						<a href="${companyURL }&cp=${num}">${num }</a>
 					</c:forEach>
-					<c:if test="${pagination.cb lt pagination.totalBlocks }">
-						<a href="company?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+					<c:if test="${pagination.cb < pagination.totalBlocks }">
+						<a href="${companyURL }&cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 					</c:if>
 				</c:if>
 			</div>
