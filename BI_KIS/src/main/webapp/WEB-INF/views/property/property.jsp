@@ -110,16 +110,22 @@ function propertyDelete(no,flag){
 	</div>
 	
 	<div class="footer">
+		<c:url value="/property" var="propertyURL">
+			<c:param name="PROP_NAME" value="${param.PROP_NAME }"/>
+			<c:param name="PROP_NO" value="${param.PROP_NO }"/>
+			<c:param name="EMP_ID" value="${param.EMP_ID }"/>
+			<c:param name="PROP_FLAG" value="${param.PROP_FLAG }"/>
+		</c:url>
 		<div align="center">
 			<c:if test="${!empty props }">
 				<c:if test="${pagination.cb gt 1 }">
-					<a href="property?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+					<a href="${propertyURL }&cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 				</c:if>
 				<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-					<a href="property?cp=${num}">${num }</a>
+					<a href="${propertyURL }&cp=${num}">${num }</a>
 				</c:forEach>
 				<c:if test="${pagination.cb lt pagination.totalBlocks }">
-					<a href="property?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+					<a href="${propertyURL }&cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 				</c:if>
 			</c:if>
 		</div>

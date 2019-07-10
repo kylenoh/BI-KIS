@@ -25,8 +25,8 @@ function getSolutionDetail(no){
 					<form action="solution">
 						<fieldset>
 							<legend>검색라인</legend>
-							<label for="title">제목</label><input type="text" name="title" class="inputSearch">
-							<label for="writer">작성자</label><input type="text"name="writer" class="inputSearch">
+							<label for="title">제목</label><input type="text" name="title" class="inputSearch" value=${param.title }>
+							<label for="writer">작성자</label><input type="text"name="writer" class="inputSearch" value=${param.writer }>
 							<button type="submit" class="btn info">검색</button>
 						</fieldset>
 					</form>
@@ -73,16 +73,20 @@ function getSolutionDetail(no){
 			</div>
 			
 				<div class="footer">
+					<c:url value="/solution" var="solutionURL">
+						<c:param name="writer" value="${param.writer }"/>
+						<c:param name="title" value="${param.title }"/>
+					</c:url>
 					<div align="center">
 					<c:if test="${!empty solutions }">
 						<c:if test="${pagination.cb gt 1 }">
-							<a href="solution?cp=${pagination.beginPageIndex - 1}">&laquo;</a>
+							<a href="${solutionURL }&cp=${pagination.beginPageIndex - 1}">&laquo;</a>
 						</c:if>
 						<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-							<a href="solution?cp=${num}">${num }</a>
+							<a href="${solutionURL }&cp=${num}">${num }</a>
 						</c:forEach>
 						<c:if test="${pagination.cb lt pagination.totalBlocks }">
-							<a href="solution?cp=${pagination.endPageIndex + 1 }">&raquo;</a>
+							<a href="${solutionURL }&cp=${pagination.endPageIndex + 1 }">&raquo;</a>
 						</c:if>
 					</c:if>
 					</div>

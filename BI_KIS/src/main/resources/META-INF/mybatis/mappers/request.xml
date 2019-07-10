@@ -98,10 +98,10 @@
 			<if test="companyName != null &amp;&amp; companyName != ''">
 				and C.com_name like '%' || #{companyName} || '%'
 			</if>
-			<if test="flag != null &amp;&amp; flag != 'all'">
+			<if test="flag != null &amp;&amp; flag != 'all' &amp;&amp; flag != 'start'">
 				and R.req_flag = #{flag}
 			</if>
-			<if test="flag == null">
+			<if test="flag == 'start'">
 				and R.req_flag != 'N'
 			</if>
 			<if test="suggest != null &amp;&amp; suggest != ''">
@@ -170,10 +170,10 @@
 				<if test="companyName != null &amp;&amp; companyName != ''">
 					and C.com_name like '%' || #{companyName} || '%'
 				</if>
-				<if test="flag != null &amp;&amp; flag != 'all'">
+				<if test="flag != null &amp;&amp; flag != 'all' &amp;&amp; flag != 'start'">
 					and R.req_flag = #{flag}	
 				</if>
-				<if test="flag == null">
+				<if test="flag == 'start'">
 					and R.req_flag != 'N'
 				</if>
 				<if test="suggest != null &amp;&amp; suggest != ''">

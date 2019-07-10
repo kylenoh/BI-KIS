@@ -103,16 +103,24 @@
 	</div>
 	
 		<div class="footer">
+			<c:url value="/project" var="projectURL">
+				<c:param name="title" value="${param.title }"/>
+				<c:param name="companyName" value="${param.companyName }"/>
+				<c:param name="dateOpt" value="${param.dateOpt }"/>
+				<c:param name="fromDate" value="${param.fromDate }"/>
+				<c:param name="toDate" value="${param.toDate }"/>
+				<c:param name="flag" value="${param.flag }"/>
+			</c:url>
 			<div align="center"> 
 				<c:if test="${!empty pjtList}">
-					<c:if test="${pagination.cb gt 1 }">
-						<a href="project?cp=${pagination.beginPageIndex - 1}+ &flag=${param.flag}">&laquo;</a>
+					<c:if test="${pagination.cb > 1 }">
+						<a href="${projectURL }&cp=${pagination.beginPageIndex -1}">&laquo;</a>
 					</c:if>
 					<c:forEach var="num" begin="${pagination.beginPageIndex}" end="${pagination.endPageIndex }">
-						<a href="project?cp=${num} + &flag=${param.flag}">${num }</a>
+						<a href="${projectURL }&cp=${num}">${num }</a>
 					</c:forEach>
-					<c:if test="${pagination.cb lt pagination.totalBlocks }">
-						<a href="project?cp=${pagination.endPageIndex + 1 }+ &flag=${param.flag}">&raquo;</a>
+					<c:if test="${pagination.cb < pagination.totalBlocks }">
+						<a href="${projectURL }&cp=${pagination.endPageIndex + 1}">&raquo;</a>
 					</c:if>
 				</c:if>
 			</div>

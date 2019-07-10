@@ -1,7 +1,6 @@
 package com.northstar.bi.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -57,7 +56,7 @@ public class ProjectController {
 						@RequestParam(name="dateOpt", required=false,defaultValue="all")String dateOpt,
 						@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
 						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
-						@RequestParam(name="flag", required=false)String flag,
+						@RequestParam(name="flag", required=false,defaultValue = "start")String flag,
 						@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
 							Model model, Criteria criteria, HttpSession session) throws ParseException {
 		Category category = new Category();
@@ -77,6 +76,7 @@ public class ProjectController {
 		criteria.setFromDate(fromDate);
 		criteria.setToDate(toDate);
 		criteria.setFlag(flag);
+		
 		
 		int totalRows = projectService.getProjectCount(criteria);
 		Pagination pagination = new Pagination(totalRows, cp, rows);

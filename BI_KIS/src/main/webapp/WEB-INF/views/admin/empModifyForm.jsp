@@ -36,7 +36,7 @@
 	                <div>
 	                	<label for="email">이메일</label><input type="text" id="email" name="email" value="${emp.email }" class="inputTitle">
 	                </div>
-	                <div>
+	                <div style="float:right;">
 	                    <button type="submit" class="btn success">수정</button>
 	                    <button type="button" class="btn warning" onclick="location.href='${HEADER_VALUE.CATE_VALUE}'">취소</button>
 	                </div>
