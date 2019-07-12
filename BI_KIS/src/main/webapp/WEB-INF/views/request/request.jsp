@@ -40,7 +40,7 @@
                 	<div>
 	                	<label for="dateOpt">날짜기준</label>
 	                	<select id="request-date-opt" name="dateOpt">
-	                        <option value="all"></option>
+	                        <option></option>
 	                        <option value="receive" ${param.dateOpt eq 'receive' ? 'selected' : '' }>접수일</option>
 	                        <option value="start" ${param.dateOpt eq 'start' ? 'selected' : '' }>시작일</option>
 	                        <option value="end" ${param.dateOpt eq 'end' ? 'selected' : '' }>종료일</option>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="form-inline">
-                    <label for="suggest">요청내용</label><input type="text" id="suggest" name="suggest" value="${param.suggest }">
+                    <label for="title">요청명</label><input type="text" id="title" name="title" value="${param.title }">
                     <button class="btn info" type="submit">검색</button>
                 </div>
             </fieldset>
@@ -64,7 +64,7 @@
 			<thead>
 				<tr>
 					<th>분류 명</th>
-					<th>요청내용</th>
+					<th>요청명</th>
 					<th>고객사 명</th>
 					<th>프로젝트 명</th>
 					<th>담당자 명</th>
@@ -80,7 +80,7 @@
 						<c:forEach var="request" items="${requestList }">
 						<tr>
 							<td>${request.categoryName }</td>
-							<td id="request-suggest-${request.no }"><a class="no-link" href="requestDetail?requestNo=${request.no }">${request.suggest }</a></td>
+							<td id="request-suggest-${request.no }"><a class="no-link" href="requestDetail?requestNo=${request.no }">${request.title }</a></td>
 							<td>${request.project.company.name }</td>
 							<td>${request.project.title }</td>
 							<td>${request.customer.name }</td>
@@ -119,7 +119,7 @@
 				<c:param name="dateOpt" value="${param.dateOpt }"/>
 				<c:param name="fromDate" value="${param.fromDate }"/>
 				<c:param name="toDate" value="${param.toDate }"/>
-				<c:param name="suggest" value="${param.suggest }"/>
+				<c:param name="title" value="${param.title }"/>
 			</c:url>
 			<div align="center"> 
 				<c:if test="${!empty requestList}">
@@ -139,4 +139,31 @@
 </div>
 	
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#searchForm').submit(function(){
+		var dateOpt = $('#request-date-opt');
+		var fromDate = $('#fromDate');
+		var toDate = $('#toDate');
+		if("" != fromDate.val() || "" != toDate.val()){
+			if("" == dateOpt.val()){
+				alert("날짜기준을 선택해주세요.")
+				dateOpt.focus();
+				return false;
+			}
+			if("" == fromDate.val()){
+				alert("날짜범위를 선택해주세요.")
+				fromDate.focus();
+				return false;
+			}
+			if("" == toDate.val()){
+				alert("날짜범위를 선택해주세요.")
+				toDate.focus();
+				return false;
+			}
+		}
+		
+	})
+})
+</script>
 </html>

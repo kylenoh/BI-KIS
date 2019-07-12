@@ -23,6 +23,7 @@ public class Request {
 	private Date closeDate;
 	private String flag;
 	private String msg;
+	private String title;
 	
 	public Request() {}
 
@@ -130,5 +131,12 @@ public class Request {
 		this.msg = msg;
 	}
 
-	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 }

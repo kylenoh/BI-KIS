@@ -22,6 +22,10 @@
 	                <input type="text" id="categoryName" class="inputTitle" name="categoryName" value="${request.categoryName }" disabled="disabled">  
 	            </div>
 	            <div>
+		          	<label for="title">요청 명</label>
+		          	<input type="text" id="title" class="inputTitle" name="title" value="${request.title }" disabled="disabled">
+		        </div>
+	            <div>
 	        	    <label for="pjtName">프로젝트 명</label><input type="text" class="inputTitle" id="pjtName" name="pjtName" value="${request.project.title }" disabled="disabled">
 	            </div>
 	            <div>

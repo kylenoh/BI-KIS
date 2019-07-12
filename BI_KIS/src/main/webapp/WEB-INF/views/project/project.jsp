@@ -34,7 +34,7 @@
                 <div class="form-inline">
 	                	<label for="dateOpt">날짜기준</label>
 	                	<select id="project-date-opt" name="dateOpt">
-	                        <option value="all"></option>
+	                        <option></option>
 	                        <option value="start" ${param.dateOpt eq 'start' ? 'selected' : '' }>시작일</option>
 	                        <option value="end" ${param.dateOpt eq 'end' ? 'selected' :  '' }>종료일</option>
 	                    </select>
@@ -129,4 +129,31 @@
 </div>
 	
 </body>
+<script type="text/javascript">
+	$(function(){
+		$('#searchForm').submit(function(){
+			var dateOpt = $('#project-date-opt');
+			var fromDate = $('#search-fromDate');
+			var toDate = $('#search-toDate');
+			if("" != fromDate.val() || "" != toDate.val()){
+				if("" == dateOpt.val()){
+					alert("날짜기준을 선택해주세요.")
+					dateOpt.focus();
+					return false;
+				}
+				if("" == fromDate.val()){
+					alert("날짜범위를 선택해주세요.")
+					fromDate.focus();
+					return false; 
+				}
+				if("" == toDate.val()){
+					alert("날짜범위를 선택해주세요.")
+					toDate.focus();
+					return false;
+				}
+			}
+			
+		})
+	})
+</script>
 </html>

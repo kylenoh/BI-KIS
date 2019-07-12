@@ -15,6 +15,7 @@
 		<result column="req_close_date" property="closeDate"/>
 		<result column="req_flag" property="flag"/>
 		<result column="req_msg" property="msg"/>
+		<result column="req_title" property="title"/>
 		<association property="customer" column="cus_no" javaType="Customer" select="com.northstar.bi.dao.CompanyDao.getCustomerByNo"/>
 		<association property="project" column="pjt_no" javaType="Project" select="com.northstar.bi.dao.ProjectDao.getProjectByNo"/>
 		<association property="emp" column="emp_id" javaType="Emp" select="com.northstar.bi.dao.EmpDao.getEmpById" />
@@ -30,7 +31,8 @@
 				req_end_date		=	#{endDate},
 				req_close_date		=	#{closeDate},
 				req_flag			=	#{flag},
-				req_msg				=	#{msg}
+				req_msg				=	#{msg},
+				req_title			=	#{title}
 		where	req_no				=	#{no}
 	</update>
 	<delete id="deleteRequest" parameterType="int">
@@ -55,7 +57,8 @@
 					req_end_date,
 					req_close_date,
 					req_flag,
-					req_msg)
+					req_msg,
+					req_title)
 		values     (#{no},
 					#{customer.no},
 					#{project.no},
@@ -68,7 +71,8 @@
 					#{endDate},
 					#{closeDate},
 					#{flag},
-					#{msg})
+					#{msg},
+					#{title})
 	</insert>
 	<select id="getRequestByNo" parameterType="int" resultMap="getRequestResultMap">
 		select	req_no,
@@ -83,7 +87,8 @@
 				req_end_date,
 				req_close_date,
 				req_flag,
-				req_msg
+				req_msg,
+				req_title
 		from	bi_request
 		where	req_no = #{value}
 	</select>
@@ -138,14 +143,15 @@
 				pjt_no,
 				emp_id,
 				req_category_name,
-				regexp_replace(req_suggest,'(&lt;img([^>]+).)') req_suggest,
+				req_suggest,
 				req_handle,
 				req_receive_date,
 				req_start_date,
 				req_end_date,
 				req_close_date,
 				req_flag,
-				req_msg
+				req_msg,
+				req_title
 		from (
 				select	R.req_no,
 						R.cus_no,
@@ -160,6 +166,7 @@
 						R.req_close_date,
 						R.req_flag,
 						R.req_msg,
+						R.req_title,
 						row_number() over (order by req_no desc) rn
 				from	bi_request R, bi_project P, bi_company C
 				where	R.pjt_no = P.pjt_no
@@ -206,6 +213,7 @@
 				
 				)
 		where	rn >= #{beginIndex} 
-		and		rn &lt;= #{endIndex} order by req_no desc
+		and		rn &lt;= #{endIndex}
+		order by req_no desc
 	</select>
 </mapper>

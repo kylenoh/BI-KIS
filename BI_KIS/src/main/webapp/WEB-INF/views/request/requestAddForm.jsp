@@ -27,6 +27,10 @@
 	                    	</select>  
 		                </div>
 		                <div>
+		                	<label for="title">요청 명</label>
+		                	<textarea id="title" name="title" class="textContent"></textarea>
+		                </div>
+		                <div>
 		                    <label for="pjtNo">프로젝트 명</label>
 		                    <select id="pjtNo" name="pjtNo" class="inputTitle">
 		                    	<option></option>
@@ -58,6 +62,7 @@
 			            		<option value="N">종     료</option>
 			            	</select>
 		                </div>
+		                
 		                <div>
 		                	<label for="suggest">요청 내용</label>
 		                	<textarea id="suggest" name="suggest" class="summernote"></textarea>
@@ -101,10 +106,16 @@ $(function(){
 		var customer = $('#customer');
 		var receiveDate = $('#receiveDate');
 		var closeDate = $('#closeDate');
+		var title = $('#title');
 		
 		if("" == category.val()){
 			alert("분류를 선택해주세요.");
 			category.focus();
+			return false;
+		}
+		if("" == title.val()){
+			alert("요청명를 입력해주세요.");
+			title.focus();
 			return false;
 		}
 		if("" == project.val()){

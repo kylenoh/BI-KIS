@@ -53,9 +53,9 @@ public class ProjectController {
 	public String project(@RequestParam(name="cp", required=false,defaultValue="1")int cp,
 						@RequestParam(name="title", required=false)String title,
 						@RequestParam(name="companyName", required=false)String companyName,
-						@RequestParam(name="dateOpt", required=false,defaultValue="all")String dateOpt,
-						@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
-						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
+						@RequestParam(name="dateOpt", required=false)String dateOpt,
+						@RequestParam(name="fromDate", required=false)String fromDate,
+						@RequestParam(name="toDate", required=false)String toDate,
 						@RequestParam(name="flag", required=false,defaultValue = "start")String flag,
 						@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
 							Model model, Criteria criteria, HttpSession session) throws ParseException {

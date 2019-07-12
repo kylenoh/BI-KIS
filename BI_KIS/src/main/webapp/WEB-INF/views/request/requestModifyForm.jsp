@@ -27,6 +27,10 @@
 	                    	</select>   
 			            </div>
 			            <div>
+		                	<label for="title">요청 명</label>
+		                	<textarea id="title" name="title" class="textContent">${request.title }</textarea>
+		                </div>
+			            <div>
 			        	    <label for="pjtName">프로젝트 명</label>
 			        	    <input type="text" class="inputTitle" id="pjtName" name="pjtName" readonly="readonly" value="${request.project.title }">
 			        	    <input type="hidden" id="pjtNo" name="pjtNo" value="${request.project.no }">
@@ -106,7 +110,13 @@ $(function(){
 	$('#requestForm').submit(function(){
 		var receiveDate = $('#receiveDate');
 		var closeDate = $('#closeDate');
+		var title = $('title');
 		
+		if("" == title.val()){
+			alert("요청명을 입력해주세요.");
+			title.focus();
+			return false;
+		}
 		if("" == receiveDate.val()){
 			alert("접수일을 선택해주세요.");
 			receiveDate.focus();

@@ -48,7 +48,7 @@ public class RequestController {
 			  			@RequestParam(name="dateOpt", required=false, defaultValue="all")String dateOpt,
 			  			@RequestParam(name="fromDate", required=false,defaultValue="nodate")String fromDate,
 						@RequestParam(name="toDate", required=false,defaultValue="nodate")String toDate,
-			  			@RequestParam(name="suggest", required=false)String suggest,
+			  			@RequestParam(name="title", required=false)String title,
 			  			@RequestParam(name="cateNo", required = false, defaultValue = "0")int cateNo,
 			  				Model model, Criteria criteria, HttpSession session) {
 		Category category = new Category();
@@ -68,7 +68,7 @@ public class RequestController {
 		criteria.setFromDate(fromDate);
 		criteria.setToDate(toDate);
 		criteria.setFlag(flag);
-		criteria.setSuggest(suggest);
+		criteria.setTitle(title);
 		 
 		int totalRows = requestService.getRequestCount(criteria);
 		Pagination pagination = new Pagination(totalRows, cp, rows);
@@ -156,6 +156,7 @@ public class RequestController {
 								@RequestParam(name="closeDate")String closeDate,
 								@RequestParam(name="flag")String flag,
 								@RequestParam(name="suggest")String suggest,
+								@RequestParam(name="title")String title,
 								@RequestParam(name="handle", required=false)String handle)throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Request request = requestService.getRequestByNo(requestNo);
@@ -166,6 +167,7 @@ public class RequestController {
 		request.setProject(project);
 		request.setCategoryName(categoryName);
 		request.setSuggest(suggest);
+		request.setTitle(title);
 		request.setHandle(handle);
 		request.setReceiveDate(formatter.parse(receiveDate));
 		if(!startDate.equals("nodate")) {
