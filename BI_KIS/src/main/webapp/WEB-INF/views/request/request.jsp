@@ -100,7 +100,7 @@
 							</td>
 						</tr>
 						</c:forEach>
-					</c:when>
+					</c:when>g
 					<c:otherwise>
 						<tr>
 							<td colspan="9">조회된 결과가 없습니다.</td>
